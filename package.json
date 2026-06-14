@@ -1,0 +1,72 @@
+{
+  "name": "@mguttmann/hetzner-cloud-mcp",
+  "version": "0.1.1",
+  "description": "Local MCP server (stdio) covering the entire Hetzner Cloud API as 201 typed tools — read and write.",
+  "private": false,
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "hetzner-cloud-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist/",
+    "specs/cloud.spec.json",
+    "scripts/refresh-spec.ts",
+    "scripts/generate.ts",
+    "scripts/refresh-snapshot.ts",
+    "README.md",
+    "LICENSE",
+    ".env.example"
+  ],
+  "scripts": {
+    "build": "tsc && chmod +x dist/index.js",
+    "prepublishOnly": "npm run build && npm test",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:live": "RUN_LIVE_TESTS=1 vitest run tests/live-smoke.test.ts",
+    "generate": "tsx scripts/generate.ts",
+    "refresh-spec": "tsx scripts/refresh-spec.ts",
+    "refresh-snapshot": "tsx scripts/refresh-snapshot.ts",
+    "inspector": "npx @modelcontextprotocol/inspector node dist/index.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "hetzner",
+    "hetzner-cloud",
+    "claude",
+    "ai-tools",
+    "stdio",
+    "openapi"
+  ],
+  "author": "Manuel Guttmann",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mguttmann/the-real-hetzner-mcp.git"
+  },
+  "homepage": "https://github.com/mguttmann/the-real-hetzner-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/mguttmann/the-real-hetzner-mcp/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "dotenv": "^16.4.0",
+    "pino": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.0",
+    "vitest": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

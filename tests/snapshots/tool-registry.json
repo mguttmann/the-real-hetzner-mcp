@@ -1,0 +1,758 @@
+[
+  {
+    "name": "hcloud_certificate_retry_action",
+    "schemaHash": "47b2e3d998e91914"
+  },
+  {
+    "name": "hcloud_create_certificate",
+    "schemaHash": "140361675cddd3ee"
+  },
+  {
+    "name": "hcloud_create_firewall",
+    "schemaHash": "33fd22ed59d2c2f9"
+  },
+  {
+    "name": "hcloud_create_floating_ip",
+    "schemaHash": "84422185e5066c62"
+  },
+  {
+    "name": "hcloud_create_load_balancer",
+    "schemaHash": "f62585d4a6a47d7f"
+  },
+  {
+    "name": "hcloud_create_network",
+    "schemaHash": "fa6fbc719e54175d"
+  },
+  {
+    "name": "hcloud_create_placement_group",
+    "schemaHash": "33cc8bd0c04d7ef3"
+  },
+  {
+    "name": "hcloud_create_primary_ip",
+    "schemaHash": "f6827e68e9d798b9"
+  },
+  {
+    "name": "hcloud_create_server",
+    "schemaHash": "f8a30a51d31abf22"
+  },
+  {
+    "name": "hcloud_create_ssh_key",
+    "schemaHash": "ba22cb0838bb4559"
+  },
+  {
+    "name": "hcloud_create_volume",
+    "schemaHash": "84054690213e2ba8"
+  },
+  {
+    "name": "hcloud_create_zone",
+    "schemaHash": "cbe344325f996f98"
+  },
+  {
+    "name": "hcloud_delete_certificate",
+    "schemaHash": "a1af598d0e7c8ead"
+  },
+  {
+    "name": "hcloud_delete_firewall",
+    "schemaHash": "b883d576e740ce25"
+  },
+  {
+    "name": "hcloud_delete_floating_ip",
+    "schemaHash": "90178636a4879f83"
+  },
+  {
+    "name": "hcloud_delete_image",
+    "schemaHash": "fb1709ff7b87fa06"
+  },
+  {
+    "name": "hcloud_delete_load_balancer",
+    "schemaHash": "de19772b94f80976"
+  },
+  {
+    "name": "hcloud_delete_network",
+    "schemaHash": "77c85638b5e4602e"
+  },
+  {
+    "name": "hcloud_delete_placement_group",
+    "schemaHash": "628bd10a218f6b99"
+  },
+  {
+    "name": "hcloud_delete_primary_ip",
+    "schemaHash": "b088a7f1e85ece9d"
+  },
+  {
+    "name": "hcloud_delete_server",
+    "schemaHash": "3bac523151f1f0fd"
+  },
+  {
+    "name": "hcloud_delete_ssh_key",
+    "schemaHash": "95516e7108017fa2"
+  },
+  {
+    "name": "hcloud_delete_volume",
+    "schemaHash": "7b794253dd47e1b6"
+  },
+  {
+    "name": "hcloud_delete_zone",
+    "schemaHash": "d3611e3a0a7a63cd"
+  },
+  {
+    "name": "hcloud_delete_zone_rrset",
+    "schemaHash": "19aa4c49a549937e"
+  },
+  {
+    "name": "hcloud_firewall_apply_to_resources_action",
+    "schemaHash": "65d32189383390b1"
+  },
+  {
+    "name": "hcloud_firewall_remove_from_resources_action",
+    "schemaHash": "c0d9236b65e8c2e2"
+  },
+  {
+    "name": "hcloud_firewall_set_rules_action",
+    "schemaHash": "72c61610d9fe31e3"
+  },
+  {
+    "name": "hcloud_floating_ip_assign_action",
+    "schemaHash": "dd69710333f30b46"
+  },
+  {
+    "name": "hcloud_floating_ip_change_dns_ptr_action",
+    "schemaHash": "d51bc7519251fd04"
+  },
+  {
+    "name": "hcloud_floating_ip_change_protection_action",
+    "schemaHash": "db38ab46e1ba57d9"
+  },
+  {
+    "name": "hcloud_floating_ip_unassign_action",
+    "schemaHash": "5de4bd15587ee8a8"
+  },
+  {
+    "name": "hcloud_get_action",
+    "schemaHash": "2eb057a31bb5eb48"
+  },
+  {
+    "name": "hcloud_get_certificate",
+    "schemaHash": "459f65b1eb13a920"
+  },
+  {
+    "name": "hcloud_get_certificate_action",
+    "schemaHash": "349c60688e0651ac"
+  },
+  {
+    "name": "hcloud_get_certificates_actions",
+    "schemaHash": "842790fe524a3db5"
+  },
+  {
+    "name": "hcloud_get_certificates_actions_id",
+    "schemaHash": "90018b78161fa0fa"
+  },
+  {
+    "name": "hcloud_get_datacenter",
+    "schemaHash": "b73d4b6e7a2d08b7"
+  },
+  {
+    "name": "hcloud_get_firewall",
+    "schemaHash": "84c928f11b2ef04c"
+  },
+  {
+    "name": "hcloud_get_firewall_action",
+    "schemaHash": "837b6c776e4baf01"
+  },
+  {
+    "name": "hcloud_get_firewalls_actions",
+    "schemaHash": "824031e07f45f65e"
+  },
+  {
+    "name": "hcloud_get_firewalls_actions_id",
+    "schemaHash": "f54cf52b0ffaed55"
+  },
+  {
+    "name": "hcloud_get_floating_ip",
+    "schemaHash": "c00c488f1a15f217"
+  },
+  {
+    "name": "hcloud_get_floating_ip_action",
+    "schemaHash": "4f8bc088b2ca0e15"
+  },
+  {
+    "name": "hcloud_get_floating_ips_actions",
+    "schemaHash": "a30441624df95d23"
+  },
+  {
+    "name": "hcloud_get_floating_ips_actions_id",
+    "schemaHash": "7e5ea742971bdc5a"
+  },
+  {
+    "name": "hcloud_get_image",
+    "schemaHash": "ca50e2cd5f4d2d30"
+  },
+  {
+    "name": "hcloud_get_image_action",
+    "schemaHash": "cb9b311aad1b4018"
+  },
+  {
+    "name": "hcloud_get_images_actions",
+    "schemaHash": "9e9a7c5f0bc63c7e"
+  },
+  {
+    "name": "hcloud_get_images_actions_id",
+    "schemaHash": "8089eb58e74be045"
+  },
+  {
+    "name": "hcloud_get_iso",
+    "schemaHash": "bbac61d1ce293827"
+  },
+  {
+    "name": "hcloud_get_load_balancer",
+    "schemaHash": "ae90db7e4eef69f8"
+  },
+  {
+    "name": "hcloud_get_load_balancer_action",
+    "schemaHash": "3f43be79e7227d90"
+  },
+  {
+    "name": "hcloud_get_load_balancer_metrics",
+    "schemaHash": "4a5be7b6752bfb0e"
+  },
+  {
+    "name": "hcloud_get_load_balancer_type",
+    "schemaHash": "4a68f055a5586858"
+  },
+  {
+    "name": "hcloud_get_load_balancers_actions",
+    "schemaHash": "26d004f3e1366b49"
+  },
+  {
+    "name": "hcloud_get_load_balancers_actions_id",
+    "schemaHash": "129326859a3cf92c"
+  },
+  {
+    "name": "hcloud_get_location",
+    "schemaHash": "671c17b04ffefa3f"
+  },
+  {
+    "name": "hcloud_get_network",
+    "schemaHash": "13c14bcc967ab7cb"
+  },
+  {
+    "name": "hcloud_get_network_action",
+    "schemaHash": "35d3d43d2c21f436"
+  },
+  {
+    "name": "hcloud_get_networks_actions",
+    "schemaHash": "3bd7dde454abb641"
+  },
+  {
+    "name": "hcloud_get_networks_actions_id",
+    "schemaHash": "012f7724aca01139"
+  },
+  {
+    "name": "hcloud_get_placement_group",
+    "schemaHash": "56fb5a6748630236"
+  },
+  {
+    "name": "hcloud_get_pricing",
+    "schemaHash": "a343f24d704798f0"
+  },
+  {
+    "name": "hcloud_get_primary_ip",
+    "schemaHash": "8caf889784b9cb79"
+  },
+  {
+    "name": "hcloud_get_primary_ip_action",
+    "schemaHash": "04308ad3c3c23664"
+  },
+  {
+    "name": "hcloud_get_primary_ips_actions",
+    "schemaHash": "fcb481f74d11a9af"
+  },
+  {
+    "name": "hcloud_get_primary_ips_actions_id",
+    "schemaHash": "403b0f7c2dc00dc5"
+  },
+  {
+    "name": "hcloud_get_server_action",
+    "schemaHash": "dd68a1529a2c982c"
+  },
+  {
+    "name": "hcloud_get_server_metrics_raw",
+    "schemaHash": "cc6afa5c8ed4c199"
+  },
+  {
+    "name": "hcloud_get_server_raw",
+    "schemaHash": "4dab4fbbc4a433e3"
+  },
+  {
+    "name": "hcloud_get_server_type",
+    "schemaHash": "32c4fe00831d87c4"
+  },
+  {
+    "name": "hcloud_get_servers_actions",
+    "schemaHash": "da67581c5ca62a42"
+  },
+  {
+    "name": "hcloud_get_servers_actions_id",
+    "schemaHash": "66d7b5fde88038bd"
+  },
+  {
+    "name": "hcloud_get_ssh_key",
+    "schemaHash": "84aa7a09ccaa609b"
+  },
+  {
+    "name": "hcloud_get_volume",
+    "schemaHash": "68dd07070b35c343"
+  },
+  {
+    "name": "hcloud_get_volume_action",
+    "schemaHash": "aadd66956797c4f8"
+  },
+  {
+    "name": "hcloud_get_volumes_actions",
+    "schemaHash": "9fd36e1cc5f7749b"
+  },
+  {
+    "name": "hcloud_get_volumes_actions_id",
+    "schemaHash": "8b18b2526b22751d"
+  },
+  {
+    "name": "hcloud_get_zone",
+    "schemaHash": "0bdbdbedeb2c4c3d"
+  },
+  {
+    "name": "hcloud_get_zone_action",
+    "schemaHash": "a5a7650503d03d5a"
+  },
+  {
+    "name": "hcloud_get_zone_rrset",
+    "schemaHash": "d71395d7034e8b84"
+  },
+  {
+    "name": "hcloud_get_zone_rrsets",
+    "schemaHash": "3f31757ec7910996"
+  },
+  {
+    "name": "hcloud_get_zone_zonefile",
+    "schemaHash": "7efff696da89e170"
+  },
+  {
+    "name": "hcloud_get_zones_actions",
+    "schemaHash": "7ebd17ff52b399ff"
+  },
+  {
+    "name": "hcloud_get_zones_actions_id",
+    "schemaHash": "c62d5507ec0a7cc5"
+  },
+  {
+    "name": "hcloud_image_change_protection_action",
+    "schemaHash": "dd2d2d1d72d8fda2"
+  },
+  {
+    "name": "hcloud_list_actions",
+    "schemaHash": "3f57d64fddef399a"
+  },
+  {
+    "name": "hcloud_list_certificate_actions",
+    "schemaHash": "ecf3028a3f9e3b2f"
+  },
+  {
+    "name": "hcloud_list_certificates",
+    "schemaHash": "f8037007808436c9"
+  },
+  {
+    "name": "hcloud_list_datacenters",
+    "schemaHash": "9e935a162fd77533"
+  },
+  {
+    "name": "hcloud_list_firewall_actions",
+    "schemaHash": "366be97b517daa26"
+  },
+  {
+    "name": "hcloud_list_firewalls",
+    "schemaHash": "224d1ab43494c2ac"
+  },
+  {
+    "name": "hcloud_list_floating_ip_actions",
+    "schemaHash": "80d9b54057b4d154"
+  },
+  {
+    "name": "hcloud_list_floating_ips",
+    "schemaHash": "e67c9160b976f5cc"
+  },
+  {
+    "name": "hcloud_list_image_actions",
+    "schemaHash": "fb820f684ef3e791"
+  },
+  {
+    "name": "hcloud_list_images",
+    "schemaHash": "159249fd9368b51d"
+  },
+  {
+    "name": "hcloud_list_isos",
+    "schemaHash": "b00936c81b2ec4b8"
+  },
+  {
+    "name": "hcloud_list_load_balancer_actions",
+    "schemaHash": "0a22515210c13290"
+  },
+  {
+    "name": "hcloud_list_load_balancer_types",
+    "schemaHash": "91dbbba1d9ec27e9"
+  },
+  {
+    "name": "hcloud_list_load_balancers",
+    "schemaHash": "a6ad84c54e3431dc"
+  },
+  {
+    "name": "hcloud_list_locations",
+    "schemaHash": "5bc5e9f56903fc13"
+  },
+  {
+    "name": "hcloud_list_network_actions",
+    "schemaHash": "390d65589c16a9f8"
+  },
+  {
+    "name": "hcloud_list_networks",
+    "schemaHash": "980e0bc36e537e83"
+  },
+  {
+    "name": "hcloud_list_placement_groups",
+    "schemaHash": "124b623c3071e765"
+  },
+  {
+    "name": "hcloud_list_primary_ip_actions",
+    "schemaHash": "95fbd5f48917cb9e"
+  },
+  {
+    "name": "hcloud_list_primary_ips",
+    "schemaHash": "080a97f8e218d9cd"
+  },
+  {
+    "name": "hcloud_list_server_actions",
+    "schemaHash": "4ad26008539d35e1"
+  },
+  {
+    "name": "hcloud_list_server_types",
+    "schemaHash": "2a6ab29f473785a6"
+  },
+  {
+    "name": "hcloud_list_servers_raw",
+    "schemaHash": "1f197ae5cfee76ab"
+  },
+  {
+    "name": "hcloud_list_ssh_keys",
+    "schemaHash": "fca3388b0a3f3772"
+  },
+  {
+    "name": "hcloud_list_volume_actions",
+    "schemaHash": "9a748dfe97e22f0c"
+  },
+  {
+    "name": "hcloud_list_volumes",
+    "schemaHash": "eefe3e556238980e"
+  },
+  {
+    "name": "hcloud_list_zone_actions",
+    "schemaHash": "bc7d245fcbf584e7"
+  },
+  {
+    "name": "hcloud_list_zones",
+    "schemaHash": "85f092df93e555db"
+  },
+  {
+    "name": "hcloud_load_balancer_add_service_action",
+    "schemaHash": "24fd947c53a4ba99"
+  },
+  {
+    "name": "hcloud_load_balancer_add_target_action",
+    "schemaHash": "5598f32286858a32"
+  },
+  {
+    "name": "hcloud_load_balancer_attach_to_network_action",
+    "schemaHash": "bcf5523e02b14f84"
+  },
+  {
+    "name": "hcloud_load_balancer_change_algorithm_action",
+    "schemaHash": "f6bd581507b725eb"
+  },
+  {
+    "name": "hcloud_load_balancer_change_dns_ptr_action",
+    "schemaHash": "208d210b7593d10a"
+  },
+  {
+    "name": "hcloud_load_balancer_change_protection_action",
+    "schemaHash": "9d66f9889f8b74fc"
+  },
+  {
+    "name": "hcloud_load_balancer_change_type_action",
+    "schemaHash": "4a1cc57262ebff46"
+  },
+  {
+    "name": "hcloud_load_balancer_delete_service_action",
+    "schemaHash": "aebd4985edb68202"
+  },
+  {
+    "name": "hcloud_load_balancer_detach_from_network_action",
+    "schemaHash": "c62422882307aa92"
+  },
+  {
+    "name": "hcloud_load_balancer_disable_public_interface_action",
+    "schemaHash": "6971efc7a22f99a7"
+  },
+  {
+    "name": "hcloud_load_balancer_enable_public_interface_action",
+    "schemaHash": "b7406add715050f0"
+  },
+  {
+    "name": "hcloud_load_balancer_remove_target_action",
+    "schemaHash": "1788e2490fb37588"
+  },
+  {
+    "name": "hcloud_load_balancer_update_service_action",
+    "schemaHash": "6215c808c29d3481"
+  },
+  {
+    "name": "hcloud_network_add_route_action",
+    "schemaHash": "124c05f274da2100"
+  },
+  {
+    "name": "hcloud_network_add_subnet_action",
+    "schemaHash": "1744d9970cf674a1"
+  },
+  {
+    "name": "hcloud_network_change_ip_range_action",
+    "schemaHash": "d8890a5aa1c6c753"
+  },
+  {
+    "name": "hcloud_network_change_protection_action",
+    "schemaHash": "4b14453ca3ea1509"
+  },
+  {
+    "name": "hcloud_network_delete_route_action",
+    "schemaHash": "518e0c159333ad2f"
+  },
+  {
+    "name": "hcloud_network_delete_subnet_action",
+    "schemaHash": "5a1adfbfd8f183a4"
+  },
+  {
+    "name": "hcloud_post_zone_rrsets",
+    "schemaHash": "0911dc264ba85b41"
+  },
+  {
+    "name": "hcloud_primary_ip_assign_action",
+    "schemaHash": "0e2695004acce2be"
+  },
+  {
+    "name": "hcloud_primary_ip_change_dns_ptr_action",
+    "schemaHash": "10d5328c06d3ffb5"
+  },
+  {
+    "name": "hcloud_primary_ip_change_protection_action",
+    "schemaHash": "55cec3f52e344a1f"
+  },
+  {
+    "name": "hcloud_primary_ip_unassign_action",
+    "schemaHash": "02f51873f855115e"
+  },
+  {
+    "name": "hcloud_server_add_to_placement_group_action",
+    "schemaHash": "9c8930f7bdfdf630"
+  },
+  {
+    "name": "hcloud_server_attach_iso_action",
+    "schemaHash": "822a6b9dc92685fa"
+  },
+  {
+    "name": "hcloud_server_attach_to_network_action",
+    "schemaHash": "7f37a014e871ffbb"
+  },
+  {
+    "name": "hcloud_server_change_alias_ips_action",
+    "schemaHash": "7ecfc9638bacf901"
+  },
+  {
+    "name": "hcloud_server_change_dns_ptr_action",
+    "schemaHash": "befe17c560dbf5b3"
+  },
+  {
+    "name": "hcloud_server_change_protection_action",
+    "schemaHash": "74c6582addd8df24"
+  },
+  {
+    "name": "hcloud_server_change_type_action",
+    "schemaHash": "7bac90c542678e07"
+  },
+  {
+    "name": "hcloud_server_create_image_action",
+    "schemaHash": "44287765d448648d"
+  },
+  {
+    "name": "hcloud_server_detach_from_network_action",
+    "schemaHash": "f74031e0e0690755"
+  },
+  {
+    "name": "hcloud_server_detach_iso_action",
+    "schemaHash": "e3c444764736d0a3"
+  },
+  {
+    "name": "hcloud_server_disable_backup_action",
+    "schemaHash": "1b30b76a794c5bfb"
+  },
+  {
+    "name": "hcloud_server_disable_rescue_action",
+    "schemaHash": "cc17f38327ed9395"
+  },
+  {
+    "name": "hcloud_server_enable_backup_action",
+    "schemaHash": "e76b179576513bfc"
+  },
+  {
+    "name": "hcloud_server_enable_rescue_action",
+    "schemaHash": "ea3e10d4e4fb6176"
+  },
+  {
+    "name": "hcloud_server_poweroff_action",
+    "schemaHash": "aeadde04d5918c7a"
+  },
+  {
+    "name": "hcloud_server_poweron_action",
+    "schemaHash": "9b94504f577c84a2"
+  },
+  {
+    "name": "hcloud_server_reboot_action",
+    "schemaHash": "2eec70c9ab203754"
+  },
+  {
+    "name": "hcloud_server_rebuild_action",
+    "schemaHash": "e649062fd4f5f70f"
+  },
+  {
+    "name": "hcloud_server_remove_from_placement_group_action",
+    "schemaHash": "9753d65ba34c194c"
+  },
+  {
+    "name": "hcloud_server_request_console_action",
+    "schemaHash": "3dfc42a11aafa08c"
+  },
+  {
+    "name": "hcloud_server_reset_action",
+    "schemaHash": "b470e2f622336a42"
+  },
+  {
+    "name": "hcloud_server_reset_password_action",
+    "schemaHash": "1ba54ef2dce163e8"
+  },
+  {
+    "name": "hcloud_server_shutdown_action",
+    "schemaHash": "ad121499491518e1"
+  },
+  {
+    "name": "hcloud_update_certificate",
+    "schemaHash": "b3078909102caf61"
+  },
+  {
+    "name": "hcloud_update_firewall",
+    "schemaHash": "ab8da30353647a4c"
+  },
+  {
+    "name": "hcloud_update_floating_ip",
+    "schemaHash": "c00997239dded715"
+  },
+  {
+    "name": "hcloud_update_image",
+    "schemaHash": "9d92c8595f7bfb71"
+  },
+  {
+    "name": "hcloud_update_load_balancer",
+    "schemaHash": "7765a78130b410d1"
+  },
+  {
+    "name": "hcloud_update_network",
+    "schemaHash": "37e17e75665c3748"
+  },
+  {
+    "name": "hcloud_update_placement_group",
+    "schemaHash": "fc3db645171d8511"
+  },
+  {
+    "name": "hcloud_update_primary_ip",
+    "schemaHash": "322dc389cc1f5ab4"
+  },
+  {
+    "name": "hcloud_update_server",
+    "schemaHash": "99feb8c99795fe17"
+  },
+  {
+    "name": "hcloud_update_ssh_key",
+    "schemaHash": "9e8bb4802defbe20"
+  },
+  {
+    "name": "hcloud_update_volume",
+    "schemaHash": "361c8d4a977e02e5"
+  },
+  {
+    "name": "hcloud_update_zone",
+    "schemaHash": "863f495c762440e5"
+  },
+  {
+    "name": "hcloud_update_zone_rrset",
+    "schemaHash": "40096db8c5701dd2"
+  },
+  {
+    "name": "hcloud_volume_attach_action",
+    "schemaHash": "8c8cf48c55c32916"
+  },
+  {
+    "name": "hcloud_volume_change_protection_action",
+    "schemaHash": "9b9481ce0486891c"
+  },
+  {
+    "name": "hcloud_volume_detach_action",
+    "schemaHash": "2d3c3bf065e02956"
+  },
+  {
+    "name": "hcloud_volume_resize_action",
+    "schemaHash": "1385d1ef9403b993"
+  },
+  {
+    "name": "hcloud_zone_change_primary_nameservers_action",
+    "schemaHash": "5279ebed2491f0ff"
+  },
+  {
+    "name": "hcloud_zone_change_protection_action",
+    "schemaHash": "44b808e6b8b25e75"
+  },
+  {
+    "name": "hcloud_zone_change_ttl_action",
+    "schemaHash": "6b2781d70611db88"
+  },
+  {
+    "name": "hcloud_zone_import_zonefile_action",
+    "schemaHash": "c553b5f24d38a2b5"
+  },
+  {
+    "name": "hcloud_zone_rrset_add_records_action",
+    "schemaHash": "fc5a584f4a4ff747"
+  },
+  {
+    "name": "hcloud_zone_rrset_change_protection_action",
+    "schemaHash": "a0fbb6983044edc5"
+  },
+  {
+    "name": "hcloud_zone_rrset_change_ttl_action",
+    "schemaHash": "423ddedca478d336"
+  },
+  {
+    "name": "hcloud_zone_rrset_remove_records_action",
+    "schemaHash": "e9a0d17ce7a74855"
+  },
+  {
+    "name": "hcloud_zone_rrset_set_records_action",
+    "schemaHash": "a9c8a5017b630065"
+  },
+  {
+    "name": "hcloud_zone_rrset_update_records_action",
+    "schemaHash": "4080d25018fb82da"
+  }
+]
