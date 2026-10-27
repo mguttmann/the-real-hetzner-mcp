@@ -232,3 +232,114 @@ describe("buildGeneratedTools", () => {
     expect(client.request).toHaveBeenCalledTimes(1);
   });
 });
+
+describe("buildGeneratedTools - path parameter encoding (issue #54)", () => {
+  const ops: OperationDef[] = [
+    {
+      operationId: "get_server", toolName: "hcloud_get_server_raw",
+      method: "GET", path: "/servers/{id}",
+      summary: "", description: "", tags: [],
+      parameters: [{ name: "id", in: "path", required: true, schema: { type: "integer" } }],
+      returnsAction: false, isDestructive: false,
+    },
+  ];
+
+  // Encoding alone is not enough: encodeURIComponent turns the caller's "/" into
+  // "%2F", and the Hetzner API decodes "%2f" and collapses ".." before routing, so
+  // `/servers/42%2F..%2F..%2Fssh_keys` would be resolved there as `/ssh_keys`. A
+  // value that fills one path slot must therefore carry no separator at all.
+  it.each([
+    "42/../../ssh_keys#",
+    "42/actions/reset_password?",
+    "../servers/42",
+    "..\\servers",
+    "..%2Fssh_keys",
+    "..%2fssh_keys",
+    "%2e%2e%2fssh_keys",
+    "..%5cssh_keys",
+    ".",
+    "..",
+    "",
+  ])("rejects a separator/dot-segment payload %j and issues no request", async (id) => {
+    let seen = "";
+    const client = fakeClient((_m, p) => {
+      seen = p;
+      return { status: 200, headers: new Headers(), body: {} };
+    });
+    const [tool] = buildGeneratedTools(client as any, ops, { maxItems: 500, maxPages: 10 });
+    const res = await tool!.handler({ id });
+    expect(res.isError).toBe(true);
+    expect(client.request).not.toHaveBeenCalled();
+    expect(seen).toBe("");
+  });
+
+  it("still percent-encodes what it does accept, in one segment", async () => {
+    let seen = "";
+    const client = fakeClient((_m, p) => {
+      seen = p;
+      return { status: 200, headers: new Headers(), body: {} };
+    });
+    const [tool] = buildGeneratedTools(client as any, ops, { maxItems: 500, maxPages: 10 });
+    // "#", "?" and " " have no separator meaning inside a segment, but they must
+    // not survive raw either - the URL parser would truncate or rewrite the path.
+    await tool!.handler({ id: "a b#c?d" });
+    expect(seen).toBe("/servers/a%20b%23c%3Fd");
+  });
+
+  it("rejects a value whose toString() smuggles a separator", async () => {
+    // The guard runs on String(value), the same coercion the interpolation does -
+    // so an object that only reveals the separator when stringified is caught too.
+    const client = fakeClient(() => ({ status: 200, headers: new Headers(), body: {} }));
+    const [tool] = buildGeneratedTools(client as any, ops, { maxItems: 500, maxPages: 10 });
+    const res = await tool!.handler({ id: { toString: () => "1/../../ssh_keys" } });
+    expect(res.isError).toBe(true);
+    expect(client.request).not.toHaveBeenCalled();
+  });
+
+  it("leaves a valid integer id byte-identical", async () => {
+    let seen = "";
+    const client = fakeClient((_m, p) => {
+      seen = p;
+      return { status: 200, headers: new Headers(), body: {} };
+    });
+    const [tool] = buildGeneratedTools(client as any, ops, { maxItems: 500, maxPages: 10 });
+    await tool!.handler({ id: 42 });
+    expect(seen).toBe("/servers/42");
+  });
+});
+
+describe("buildGeneratedTools - array query parameters, both call shapes", () => {
+  const ops: OperationDef[] = [
+    {
+      operationId: "list_servers", toolName: "hcloud_list_servers_raw",
+      method: "GET", path: "/servers",
+      summary: "", description: "", tags: [],
+      parameters: [
+        { name: "sort", in: "query", required: false, schema: { type: "array", items: { type: "string" } } },
+      ],
+      returnsAction: false, isDestructive: false,
+    },
+  ];
+
+  function capture() {
+    let query: unknown;
+    const client = fakeClient((_m, _p, o) => {
+      query = o?.query;
+      return { status: 200, headers: new Headers(), body: { servers: [] } };
+    });
+    const [tool] = buildGeneratedTools(client as any, ops, { maxItems: 500, maxPages: 10 });
+    return { tool: tool!, get: () => query };
+  }
+
+  it("forwards a scalar `sort` unchanged (the shape callers have always sent)", async () => {
+    const { tool, get } = capture();
+    await tool.handler({ sort: "name:asc", auto_paginate: false });
+    expect(get()).toEqual({ sort: "name:asc" });
+  });
+
+  it("forwards a multi-valued `sort` as an array for the client to repeat", async () => {
+    const { tool, get } = capture();
+    await tool.handler({ sort: ["id:asc", "name"], auto_paginate: false });
+    expect(get()).toEqual({ sort: ["id:asc", "name"] });
+  });
+});

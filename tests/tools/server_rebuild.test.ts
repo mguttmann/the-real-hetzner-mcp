@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { makeServerRebuildTool } from "../../src/tools/wrappers/server_rebuild.js";
+import { INVALID_IDS, label } from "../_id-payloads.js";
 
 const pollOpts = { timeoutMs: 1000, intervalMs: 1, sleep: async () => {}, now: () => 0 };
 
@@ -70,5 +71,26 @@ describe("hcloud_server_rebuild", () => {
     expect(parsed.action.status).toBe("success");
     expect(parsed.polling_timed_out).toBe(false);
     expect(getCount).toBeGreaterThanOrEqual(2);
+  });
+});
+
+describe("server_rebuild - id guard (issue #54)", () => {
+  for (const [i, id] of INVALID_IDS.entries()) {
+    it(`rejects id ${label(id, i)} without issuing any request`, async () => {
+      const request = vi.fn();
+      const tool = makeServerRebuildTool({ client: { request } as any, actionPoll: pollOpts });
+      const res = await tool.handler({ id, image_id: 42 });
+      expect(res.isError).toBe(true);
+      expect((res.content[0] as { text: string }).text).toMatch(/Invalid `id`/);
+      expect(request).not.toHaveBeenCalled();
+    });
+  }
+
+  it("leaves a valid integer id byte-identical in the path (encoding is a no-op)", async () => {
+    const request = actionResponder();
+    const tool = makeServerRebuildTool({ client: { request } as any, actionPoll: pollOpts });
+    const res = await tool.handler({ id: 99, image_id: 42 });
+    expect(res.isError).toBeFalsy();
+    expect(request).toHaveBeenCalledWith("POST", "/servers/99/actions/rebuild", { body: { image: 42 } });
   });
 });

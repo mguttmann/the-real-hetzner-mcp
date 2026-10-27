@@ -1,0 +1,11 @@
+# gitleaks configuration: the default rule set plus documented false-positive
+# exclusions. Run: gitleaks git . (history) or gitleaks dir . (working tree).
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Example values (tokens, private key placeholders, ids) from Hetzner's public API documentation in the vendored OpenAPI spec, and the generated operations that copy its examples; both come from https://docs.hetzner.cloud/cloud.spec.json"
+paths = [
+  '''^specs/cloud\.spec\.json$''',
+  '''^src/tools/generated/operations\.ts$''',
+]

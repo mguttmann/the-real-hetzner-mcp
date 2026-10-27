@@ -2,6 +2,7 @@ import { writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { resolve } from "node:path";
 import { OPERATIONS } from "../src/tools/generated/operations.js";
+import { buildToolsContract, TOOLS_CONTRACT_PATH } from "./tools-contract.js";
 
 const SNAPSHOT_PATH = resolve(process.cwd(), "tests/snapshots/tool-registry.json");
 
@@ -24,6 +25,12 @@ async function main(): Promise<void> {
   await writeFile(SNAPSHOT_PATH, JSON.stringify(snapshot, null, 2) + "\n", "utf8");
   process.stderr.write(
     `Wrote ${SNAPSHOT_PATH} with ${snapshot.length} entries.\n`,
+  );
+
+  const contract = buildToolsContract();
+  await writeFile(TOOLS_CONTRACT_PATH, JSON.stringify(contract, null, 2) + "\n", "utf8");
+  process.stderr.write(
+    `Wrote ${TOOLS_CONTRACT_PATH} with ${contract.toolCount} tools.\n`,
   );
 }
 

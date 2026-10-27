@@ -1,5 +1,6 @@
 import type { ToolDef, ToolResult } from "../../types.js";
 import { runServerAction, type ServerActionDeps } from "./_server_action.js";
+import { invalidIdResult, isResourceId } from "../_validate.js";
 
 const VALID_OPS = ["poweron", "poweroff", "reboot", "shutdown", "reset"] as const;
 type Op = (typeof VALID_OPS)[number];
@@ -20,8 +21,9 @@ export function makeServerPowerTool(deps: ServerActionDeps): ToolDef {
       additionalProperties: false,
     },
     annotations: { readOnlyHint: false, destructiveHint: true, openWorldHint: true },
-    handler: async (input): Promise<ToolResult> => {
-      const id = input.id as number;
+    handler: async (input, ctx): Promise<ToolResult> => {
+      const id = input.id;
+      if (!isResourceId(id)) return invalidIdResult("id", id);
       const op = input.op as Op;
       if (!VALID_OPS.includes(op)) {
         return {
@@ -30,7 +32,7 @@ export function makeServerPowerTool(deps: ServerActionDeps): ToolDef {
         };
       }
       const wait = input.wait !== false;
-      return runServerAction(deps, id, op, undefined, wait);
+      return runServerAction(deps, id, op, undefined, wait, "hcloud_server_power", ctx?.signal);
     },
   };
 }

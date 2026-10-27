@@ -76,6 +76,65 @@ describe("pollAction", () => {
       sleep: async () => {},
       now: () => 0,
     });
-    expect(request).toHaveBeenCalledWith("GET", "/actions/1234");
+    expect(request.mock.calls[0]!.slice(0, 2)).toEqual(["GET", "/actions/1234"]);
+  });
+});
+
+describe("pollAction - path encoding (issue #54, layer b)", () => {
+  it("percent-encodes a hostile actionId instead of letting it reshape the path", async () => {
+    const request = vi.fn().mockResolvedValueOnce(actionResponse("success"));
+    await pollAction(request, "42/../../ssh_keys#" as unknown as number, {
+      timeoutMs: 1_000,
+      intervalMs: 100,
+      sleep: async () => {},
+      now: () => 0,
+    });
+    expect(request.mock.calls[0]![1]).toBe("/actions/42%2F..%2F..%2Fssh_keys%23");
+  });
+
+  it("percent-encodes a query/fragment truncation payload", async () => {
+    const request = vi.fn().mockResolvedValueOnce(actionResponse("success"));
+    await pollAction(request, "42?x=1" as unknown as number, {
+      timeoutMs: 1_000,
+      intervalMs: 100,
+      sleep: async () => {},
+      now: () => 0,
+    });
+    expect(request.mock.calls[0]![1]).toBe("/actions/42%3Fx%3D1");
+  });
+});
+
+describe("pollAction: wall-clock budget", () => {
+  it("counts the time spent in poll requests and clips each request to the remaining budget", async () => {
+    let t = 0;
+    const budgets: number[] = [];
+    const request = vi.fn(async (_m: string, _p: string, o?: { timeoutMs?: number }) => {
+      budgets.push(o!.timeoutMs!);
+      t += 3_000; // every poll request takes 3 s
+      return actionResponse("running");
+    });
+    const result = await pollAction(request as any, 99, {
+      timeoutMs: 10_000,
+      intervalMs: 2_000,
+      sleep: async (ms) => { t += ms; },
+      now: () => t,
+    });
+    expect(result.timedOut).toBe(true);
+    expect(t).toBeLessThanOrEqual(10_000 + 3_000);
+    expect(budgets).toEqual([10_000, 5_000]);
+  });
+
+  it("starts the budget at startedAt and returns the initial action when nothing is left", async () => {
+    const request = vi.fn();
+    const initial = actionResponse("running", 7).body.action;
+    const result = await pollAction(request, 7, {
+      timeoutMs: 5_000,
+      intervalMs: 1_000,
+      sleep: async () => {},
+      now: () => 6_000,
+      startedAt: 0,
+    }, initial as any);
+    expect(request).not.toHaveBeenCalled();
+    expect(result).toEqual({ action: initial, timedOut: true });
   });
 });

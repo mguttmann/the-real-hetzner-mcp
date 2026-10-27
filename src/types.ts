@@ -15,7 +15,13 @@ export type ToolResult = {
   isError?: boolean;
 };
 
-export type ToolHandler = (input: Record<string, unknown>) => Promise<ToolResult>;
+/** Per-call context from the MCP request: the caller's cancellation signal. */
+export type CallContext = { signal?: AbortSignal };
+
+export type ToolHandler = (
+  input: Record<string, unknown>,
+  ctx?: CallContext,
+) => Promise<ToolResult>;
 
 export type ToolDef = {
   name: string;

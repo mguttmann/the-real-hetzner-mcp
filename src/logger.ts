@@ -1,7 +1,8 @@
-import pino, { type Logger, type LoggerOptions } from "pino";
+import pino, { type DestinationStream, type Logger, type LoggerOptions } from "pino";
 import type { LogLevel } from "./config.js";
 
-export function createLogger(level: LogLevel): Logger {
+/** The destination defaults to stderr; tests pass a stream to read the output. */
+export function createLogger(level: LogLevel, destination?: DestinationStream): Logger {
   const opts: LoggerOptions = {
     level,
     redact: {
@@ -9,5 +10,5 @@ export function createLogger(level: LogLevel): Logger {
       remove: true,
     },
   };
-  return pino(opts, pino.destination(2));
+  return pino(opts, destination ?? pino.destination(2));
 }

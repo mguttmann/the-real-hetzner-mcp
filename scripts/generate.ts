@@ -11,14 +11,48 @@ const WRAPPER_COLLISIONS = new Set([
   "hcloud_get_server_metrics",
 ]);
 
-const DANGEROUS_ACTIONS = new Set([
-  "poweroff",
-  "reset",
-  "rebuild",
-  "request_console",
+// MCP destructiveHint: false means "performs only additive updates". Every write
+// is destructive unless it creates a resource (POST without an actions segment)
+// or is one of these actions, which only add an association or a copy, or start
+// a stopped server. Explicit tool names, so a new action is destructive until
+// someone decides otherwise.
+const ADDITIVE_ACTIONS = new Set([
+  "hcloud_certificate_retry_action",
+  "hcloud_load_balancer_add_service_action",
+  "hcloud_load_balancer_add_target_action",
+  "hcloud_load_balancer_attach_to_network_action",
+  "hcloud_network_add_route_action",
+  "hcloud_network_add_subnet_action",
+  "hcloud_server_add_to_placement_group_action",
+  "hcloud_server_attach_to_network_action",
+  "hcloud_server_create_image_action",
+  "hcloud_server_enable_backup_action",
+  "hcloud_server_poweron_action",
+  "hcloud_volume_attach_action",
+  "hcloud_zone_rrset_add_records_action",
 ]);
 
 const SINGLETON_PATHS = new Set(["pricing"]);
+
+// Tool contract: a spec refresh must not make a field of an existing tool
+// required. These keep the body `required` list the tool had before the
+// refresh that tightened it; the API stays the authority and rejects a call
+// that lacks the field (B-017, spec of 2026-10).
+const PINNED_BODY_REQUIRED: Record<string, string[]> = {
+  hcloud_floating_ip_change_dns_ptr_action: ["ip"],
+  hcloud_load_balancer_change_dns_ptr_action: ["ip"],
+  hcloud_primary_ip_change_dns_ptr_action: ["ip"],
+  hcloud_server_change_dns_ptr_action: ["ip"],
+};
+
+function pinBodyRequired(
+  toolName: string,
+  schema: Record<string, unknown> | undefined,
+): Record<string, unknown> | undefined {
+  const pinned = PINNED_BODY_REQUIRED[toolName];
+  if (!schema || !pinned) return schema;
+  return { ...schema, required: [...pinned] };
+}
 
 type SpecParam = {
   name: string;
@@ -161,13 +195,34 @@ function detectReturnsAction(op: SpecOperation): boolean {
 
 function detectIsDestructive(
   method: Method,
+  path: string,
   toolName: string,
 ): boolean {
-  if (method === "delete") return true;
-  for (const action of DANGEROUS_ACTIONS) {
-    if (toolName.endsWith(`_${action}_action`)) return true;
+  if (method === "get") return false;
+  const isCreate = method === "post" && !path.split("/").includes("actions");
+  if (isCreate) return false;
+  return !ADDITIVE_ACTIONS.has(toolName);
+}
+
+const PROSE_KEYS = new Set(["summary", "description", "title"]);
+
+/**
+ * Replaces em and en dashes with "-" in prose (summary, description, title at
+ * any depth). Values such as enum, pattern or example are left as they are.
+ */
+function plainDashes<T>(value: T, key?: string): T {
+  if (typeof value === "string") {
+    return (key !== undefined && PROSE_KEYS.has(key)
+      ? value.replace(/[\u2014\u2013]/g, "-")
+      : value) as T;
   }
-  return false;
+  if (Array.isArray(value)) return value.map((v) => plainDashes(v)) as T;
+  if (value !== null && typeof value === "object") {
+    return Object.fromEntries(
+      Object.entries(value as Record<string, unknown>).map(([k, v]) => [k, plainDashes(v, k)]),
+    ) as T;
+  }
+  return value;
 }
 
 export function buildOperations(spec: Spec): OperationDef[] {
@@ -185,8 +240,10 @@ export function buildOperations(spec: Spec): OperationDef[] {
         schema: p.schema ?? {},
         ...(p.description ? { description: p.description } : {}),
       }));
-      const requestBodySchema =
-        op.requestBody?.content?.["application/json"]?.schema;
+      const requestBodySchema = pinBodyRequired(
+        toolName,
+        op.requestBody?.content?.["application/json"]?.schema,
+      );
       const requestBodyRequired = !!op.requestBody?.required;
       const okResponse = ["200", "201", "202", "204"]
         .map((s) => op.responses?.[s]?.content?.["application/json"]?.schema)
@@ -204,12 +261,12 @@ export function buildOperations(spec: Spec): OperationDef[] {
         ...(requestBodySchema ? { requestBodyRequired } : {}),
         ...(okResponse ? { responseSchema: okResponse } : {}),
         returnsAction: detectReturnsAction(op),
-        isDestructive: detectIsDestructive(m, toolName),
+        isDestructive: detectIsDestructive(m, path, toolName),
       });
     }
   }
   ops.sort((a, b) => a.toolName.localeCompare(b.toolName));
-  return ops;
+  return ops.map((op) => plainDashes(op));
 }
 
 function emitTypeScript(operations: OperationDef[]): string {

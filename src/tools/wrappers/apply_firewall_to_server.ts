@@ -2,6 +2,7 @@ import type { ToolDef, ToolResult } from "../../types.js";
 import type { HetznerHttpClient } from "../../http/client.js";
 import type { PollOptions } from "../../http/action-polling.js";
 import { asToolError } from "../_error.js";
+import { invalidIdResult, isResourceId } from "../_validate.js";
 
 export type ApplyFirewallDeps = {
   client: HetznerHttpClient;
@@ -23,9 +24,14 @@ export function makeApplyFirewallToServerTool(deps: ApplyFirewallDeps): ToolDef 
       required: ["server_id"],
       additionalProperties: false,
     },
-    annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: true },
-    handler: async (input): Promise<ToolResult> => {
-      const serverId = input.server_id as number;
+    annotations: { readOnlyHint: false, destructiveHint: true, openWorldHint: true },
+    handler: async (input, ctx): Promise<ToolResult> => {
+      const signal = ctx?.signal ? { signal: ctx.signal } : {};
+      // Own guard instead of relying on the central schema layer alone: this is a
+      // write path, and the point of the wrapper-level check is not to depend on
+      // a single layer (refs #54 QA).
+      if (!isResourceId(input.server_id)) return invalidIdResult("server_id", input.server_id);
+      const serverId = input.server_id;
       const hasId = typeof input.firewall_id === "number";
       const hasName = typeof input.firewall_name === "string";
       if (hasId === hasName) {
@@ -38,7 +44,7 @@ export function makeApplyFirewallToServerTool(deps: ApplyFirewallDeps): ToolDef 
         const lookup = await deps.client.request<{ firewalls: Array<{ id: number }> }>(
           "GET",
           "/firewalls",
-          { query: { name: input.firewall_name as string } },
+          { query: { name: input.firewall_name as string }, ...signal },
         );
         const lookupErr = asToolError(lookup);
         if (lookupErr) return lookupErr;
@@ -50,8 +56,8 @@ export function makeApplyFirewallToServerTool(deps: ApplyFirewallDeps): ToolDef 
       }
       const res = await deps.client.request(
         "POST",
-        `/firewalls/${fwId}/actions/apply_to_resources`,
-        { body: { apply_to: [{ type: "server", server: { id: serverId } }] } },
+        `/firewalls/${encodeURIComponent(String(fwId))}/actions/apply_to_resources`,
+        { body: { apply_to: [{ type: "server", server: { id: serverId } }] }, ...signal },
       );
       const errResult = asToolError(res);
       if (errResult) return errResult;

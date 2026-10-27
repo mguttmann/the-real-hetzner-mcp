@@ -1,5 +1,6 @@
 import type { ToolDef, ToolResult } from "../../types.js";
 import { runServerAction, type ServerActionDeps } from "./_server_action.js";
+import { invalidIdResult, isResourceId } from "../_validate.js";
 
 export function makeServerRebuildTool(deps: ServerActionDeps): ToolDef {
   return {
@@ -18,8 +19,9 @@ export function makeServerRebuildTool(deps: ServerActionDeps): ToolDef {
       additionalProperties: false,
     },
     annotations: { readOnlyHint: false, destructiveHint: true, openWorldHint: true },
-    handler: async (input): Promise<ToolResult> => {
-      const id = input.id as number;
+    handler: async (input, ctx): Promise<ToolResult> => {
+      const id = input.id;
+      if (!isResourceId(id)) return invalidIdResult("id", id);
       const hasId = typeof input.image_id === "number";
       const hasName = typeof input.image_name === "string";
       if (hasId === hasName) {
@@ -30,7 +32,7 @@ export function makeServerRebuildTool(deps: ServerActionDeps): ToolDef {
       }
       const image = hasId ? (input.image_id as number) : (input.image_name as string);
       const wait = input.wait !== false;
-      return runServerAction(deps, id, "rebuild", { image }, wait);
+      return runServerAction(deps, id, "rebuild", { image }, wait, "hcloud_server_rebuild", ctx?.signal);
     },
   };
 }

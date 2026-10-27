@@ -69,10 +69,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -108,8 +110,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -260,8 +264,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "certificate": {
               "description": "Certificate and chain in PEM format, in order so that each record directly certifies the one preceding.",
-              "type": "string",
-              "nullable": true,
+              "type": [
+                "string",
+                "null"
+              ],
               "example": "-----BEGIN CERTIFICATE-----\n..."
             },
             "created": {
@@ -272,16 +278,20 @@ export const OPERATIONS: OperationDef[] = [
             },
             "not_valid_before": {
               "description": "Point in time when the Certificate becomes valid (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "nullable": true,
               "example": "2019-01-08T10:00:00Z"
             },
             "not_valid_after": {
               "description": "Point in time when the Certificate stops being valid (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).\n",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "nullable": true,
               "example": "2019-07-08T09:59:59Z"
             },
             "domain_names": {
@@ -298,14 +308,18 @@ export const OPERATIONS: OperationDef[] = [
             },
             "fingerprint": {
               "description": "SHA256 fingerprint of the Certificate.",
-              "type": "string",
-              "nullable": true,
+              "type": [
+                "string",
+                "null"
+              ],
               "example": "03:c7:55:9b:2a:d1:04:17:09:f6:d0:7f:18:34:63:d4:3e:5f"
             },
             "status": {
               "description": "Current status of a type `managed` Certificate, always *null* for type `uploaded` Certificates.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "issuance": {
                   "description": "Status of the issuance process of the Certificate.",
@@ -330,8 +344,10 @@ export const OPERATIONS: OperationDef[] = [
                 },
                 "error": {
                   "description": "If issuance or renewal reports `failed`, this property contains information about what happened.",
-                  "type": "object",
-                  "nullable": true,
+                  "type": [
+                    "object",
+                    "null"
+                  ],
                   "properties": {
                     "code": {
                       "type": "string"
@@ -384,7 +400,10 @@ export const OPERATIONS: OperationDef[] = [
         },
         "action": {
           "title": "ActionNullable",
-          "type": "object",
+          "type": [
+            "object",
+            "null"
+          ],
           "properties": {
             "id": {
               "description": "ID of the [Action](#description/actions).",
@@ -416,10 +435,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -455,8 +476,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -484,8 +507,7 @@ export const OPERATIONS: OperationDef[] = [
             "finished",
             "resources",
             "error"
-          ],
-          "nullable": true
+          ]
         }
       },
       "required": [
@@ -511,8 +533,10 @@ export const OPERATIONS: OperationDef[] = [
       "type": "object",
       "properties": {
         "name": {
-          "description": "Name of the [Firewall](#tag/firewalls).\n\nLimited to a maximum of 128 characters.\n\nMust be unique per Project.\n",
+          "description": "Name of the [Firewall](#tag/firewalls).\n\nMust be unique per Project.\n",
           "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
           "example": "new-name"
         },
         "labels": {
@@ -536,8 +560,10 @@ export const OPERATIONS: OperationDef[] = [
             "properties": {
               "description": {
                 "description": "Description of the rule.",
-                "type": "string",
-                "nullable": true,
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "maxLength": 255
               },
               "direction": {
@@ -586,6 +612,7 @@ export const OPERATIONS: OperationDef[] = [
                 "example": "80"
               }
             },
+            "additionalProperties": false,
             "required": [
               "direction",
               "protocol"
@@ -629,6 +656,7 @@ export const OPERATIONS: OperationDef[] = [
                     "format": "int64"
                   }
                 },
+                "additionalProperties": false,
                 "required": [
                   "id"
                 ]
@@ -643,17 +671,20 @@ export const OPERATIONS: OperationDef[] = [
                     "example": "env=prod"
                   }
                 },
+                "additionalProperties": false,
                 "required": [
                   "selector"
                 ]
               }
             },
+            "additionalProperties": false,
             "required": [
               "type"
             ]
           }
         }
       },
+      "additionalProperties": false,
       "required": [
         "name"
       ]
@@ -676,8 +707,10 @@ export const OPERATIONS: OperationDef[] = [
               "example": 42
             },
             "name": {
-              "description": "Name of the [Firewall](#tag/firewalls).\n\nLimited to a maximum of 128 characters.\n\nMust be unique per Project.\n",
+              "description": "Name of the [Firewall](#tag/firewalls).\n\nMust be unique per Project.\n",
               "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
               "example": "new-name"
             },
             "labels": {
@@ -706,8 +739,10 @@ export const OPERATIONS: OperationDef[] = [
                 "properties": {
                   "description": {
                     "description": "Description of the rule.",
-                    "type": "string",
-                    "nullable": true,
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "maxLength": 255
                   },
                   "direction": {
@@ -752,11 +787,14 @@ export const OPERATIONS: OperationDef[] = [
                   },
                   "port": {
                     "description": "Port or port range to apply the rule for.\n\nOnly applicable for protocols `tcp` and `udp`.\n\nA port range can be specified by separating lower and upper bounds with a dash. `1024-5000` will include\nall ports starting from 1024 up to port 5000.\n",
-                    "type": "string",
-                    "example": "80",
-                    "nullable": true
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": "80"
                   }
                 },
+                "additionalProperties": false,
                 "required": [
                   "direction",
                   "protocol",
@@ -793,6 +831,7 @@ export const OPERATIONS: OperationDef[] = [
                         "example": 42
                       }
                     },
+                    "additionalProperties": false,
                     "required": [
                       "id"
                     ]
@@ -807,6 +846,7 @@ export const OPERATIONS: OperationDef[] = [
                         "example": "env=prod"
                       }
                     },
+                    "additionalProperties": false,
                     "required": [
                       "selector"
                     ]
@@ -838,20 +878,24 @@ export const OPERATIONS: OperationDef[] = [
                               "example": 42
                             }
                           },
+                          "additionalProperties": false,
                           "required": [
                             "id"
                           ]
                         }
-                      }
+                      },
+                      "additionalProperties": false
                     }
                   }
                 },
+                "additionalProperties": false,
                 "required": [
                   "type"
                 ]
               }
             }
           },
+          "additionalProperties": false,
           "required": [
             "id",
             "name",
@@ -896,10 +940,12 @@ export const OPERATIONS: OperationDef[] = [
               },
               "finished": {
                 "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "example": "2016-01-30T23:55:00Z",
-                "nullable": true
+                "example": "2016-01-30T23:55:00Z"
               },
               "progress": {
                 "description": "Progress of the Action in percent.",
@@ -935,8 +981,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "error": {
                 "description": "Error message for the Action if an error occurred, otherwise null.",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "code": {
                     "description": "Fixed error code for machines.",
@@ -1009,7 +1057,8 @@ export const OPERATIONS: OperationDef[] = [
             }
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "returnsAction": false,
     "isDestructive": false
@@ -1040,9 +1089,11 @@ export const OPERATIONS: OperationDef[] = [
         },
         "server": {
           "description": "[Server](#tag/servers) the [Floating IP](#tag/floating-ips) is assigned to.\n\n`null` if not assigned.\n",
-          "type": "integer",
+          "type": [
+            "integer",
+            "null"
+          ],
           "format": "int64",
-          "nullable": true,
           "example": 42
         },
         "home_location": {
@@ -1065,12 +1116,16 @@ export const OPERATIONS: OperationDef[] = [
         },
         "description": {
           "description": "Description of the Resource.",
-          "type": "string",
-          "nullable": true,
+          "type": [
+            "string",
+            "null"
+          ],
           "example": "This describes my resource"
         },
         "name": {
-          "description": "Name of the Resource. Must be unique per Project.",
+          "description": "Name of the Resource. Must be unique per Project.\n\nA name will be generated if none is given.\n",
+          "minLength": 1,
+          "maxLength": 255,
           "type": "string",
           "example": "my-resource"
         },
@@ -1087,6 +1142,7 @@ export const OPERATIONS: OperationDef[] = [
           }
         }
       },
+      "additionalProperties": false,
       "required": [
         "type"
       ]
@@ -1107,14 +1163,18 @@ export const OPERATIONS: OperationDef[] = [
               "example": 42
             },
             "name": {
+              "minLength": 1,
+              "maxLength": 255,
               "description": "Name of the Resource. Must be unique per Project.",
               "type": "string",
               "example": "my-resource"
             },
             "description": {
               "description": "Description of the Resource.",
-              "type": "string",
-              "nullable": true,
+              "type": [
+                "string",
+                "null"
+              ],
               "example": "This describes my resource"
             },
             "ip": {
@@ -1133,9 +1193,11 @@ export const OPERATIONS: OperationDef[] = [
             },
             "server": {
               "description": "[Server](#tag/servers) the [Floating IP](#tag/floating-ips) is assigned to.\n\n`null` if not assigned.\n",
-              "type": "integer",
+              "type": [
+                "integer",
+                "null"
+              ],
               "format": "int64",
-              "nullable": true,
               "example": 42
             },
             "dns_ptr": {
@@ -1162,6 +1224,7 @@ export const OPERATIONS: OperationDef[] = [
               }
             },
             "home_location": {
+              "description": "[Location](#tag/locations) the for the [Floating IP](#tag/floating-ips) is located at.\n\nRouting is optimized for this [Location](#tag/locations).\n",
               "type": "object",
               "properties": {
                 "id": {
@@ -1261,6 +1324,7 @@ export const OPERATIONS: OperationDef[] = [
               "example": "2016-01-30T23:55:00Z"
             }
           },
+          "additionalProperties": false,
           "required": [
             "id",
             "name",
@@ -1277,8 +1341,12 @@ export const OPERATIONS: OperationDef[] = [
           ]
         },
         "action": {
-          "title": "Action",
-          "type": "object",
+          "description": "Action will only be returned if the [Floating IP](#tag/floating-ips) is getting assigned.\n",
+          "title": "ActionNullable",
+          "type": [
+            "object",
+            "null"
+          ],
           "properties": {
             "id": {
               "description": "ID of the [Action](#description/actions).",
@@ -1310,10 +1378,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -1349,8 +1419,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -1381,6 +1453,7 @@ export const OPERATIONS: OperationDef[] = [
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "floating_ip"
       ]
@@ -1394,7 +1467,7 @@ export const OPERATIONS: OperationDef[] = [
     "method": "POST",
     "path": "/load_balancers",
     "summary": "Create a Load Balancer",
-    "description": "Creates a Load Balancer.\n\n#### Operation specific errors\n\n| Status | Code | Description |\n| --- | --- | --- |\n| `412` | `source_port_already_used` | The source port you are trying to add is already in use |\n| `422` | `ip_not_owned` | The IP is not owned by the owner of the project of the Load Balancer |\n| `422` | `load_balancer_not_attached_to_network` | The Load Balancer is not attached to a network |\n| `422` | `resolve_cloud_private_targets_error` | The server you are trying to add as a target is not attached to the same network as the Load Balancer |\n| `422` | `resolve_cloud_public_targets_error` | The server that you are trying to add as a public target does not have a public IPv4 address |\n| `422` | `target_already_defined` | The Load Balancer target you are trying to define is already defined |\n",
+    "description": "Creates a Load Balancer.\n\n#### Operation specific errors\n\n| Status | Code | Description |\n| --- | --- | --- |\n| `412` | `source_port_already_used` | The source port you are trying to add is already in use |\n| `412` | `primary_ip_version_mismatch` | The specified Primary IP has the wrong IP version |\n| `422` | `ip_not_owned` | The IP is not owned by the owner of the project of the Load Balancer |\n| `422` | `load_balancer_not_attached_to_network` | The Load Balancer is not attached to a network |\n| `422` | `resolve_cloud_private_targets_error` | The server you are trying to add as a target is not attached to the same network as the Load Balancer |\n| `422` | `resolve_cloud_public_targets_error` | The server that you are trying to add as a public target does not have a public IPv4 address |\n| `422` | `target_already_defined` | The Load Balancer target you are trying to define is already defined |\n| `422` | `primary_ip_assigned` | The specified Primary IP is already assigned to a resource |\n| `422` | `primary_ip_blocked` | The specified Primary IP is blocked |\n| `422` | `primary_ip_location_mismatch` | The specified Primary IP is bound to a different Location than the Load Balancer |\n",
     "tags": [
       "Load Balancers"
     ],
@@ -1519,8 +1592,10 @@ export const OPERATIONS: OperationDef[] = [
                             "properties": {
                               "domain": {
                                 "description": "Host header to send in the HTTP request. May not contain spaces, percent or backslash symbols. Can be null, in that case no host header is sent.",
-                                "type": "string",
-                                "nullable": true,
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
                                 "maxLength": 128,
                                 "example": "example.com"
                               },
@@ -1674,8 +1749,10 @@ export const OPERATIONS: OperationDef[] = [
                             "properties": {
                               "domain": {
                                 "description": "Host header to send in the HTTP request. May not contain spaces, percent or backslash symbols. Can be null, in that case no host header is sent.",
-                                "type": "string",
-                                "nullable": true,
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
                                 "maxLength": 128,
                                 "example": "example.com"
                               },
@@ -1774,6 +1851,8 @@ export const OPERATIONS: OperationDef[] = [
                             "description": "Idle timeout in seconds for the client and server side.",
                             "type": "integer",
                             "default": 50,
+                            "minimum": 30,
+                            "maximum": 300,
                             "example": 50
                           },
                           "sticky_sessions": {
@@ -1873,8 +1952,10 @@ export const OPERATIONS: OperationDef[] = [
                             "properties": {
                               "domain": {
                                 "description": "Host header to send in the HTTP request. May not contain spaces, percent or backslash symbols. Can be null, in that case no host header is sent.",
-                                "type": "string",
-                                "nullable": true,
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
                                 "maxLength": 128,
                                 "example": "example.com"
                               },
@@ -1973,6 +2054,8 @@ export const OPERATIONS: OperationDef[] = [
                             "description": "Idle timeout in seconds for the client and server side.",
                             "type": "integer",
                             "default": 50,
+                            "minimum": 30,
+                            "maximum": 300,
                             "example": 50
                           },
                           "certificates": {
@@ -2055,6 +2138,11 @@ export const OPERATIONS: OperationDef[] = [
                         "type": "integer",
                         "format": "int64",
                         "example": 80
+                      },
+                      "ip": {
+                        "description": "Optional public IP of the Server to use as target.\nMust be the Primary IPv4 of the Server, or an IPv6 host address within IPv6 /64 subnet of the Server. If omitted, the Primary IPv4 of the Server is used. Must not be a private IP and is only valid for public targets.",
+                        "type": "string",
+                        "example": "2001:db8::1"
                       }
                     },
                     "additionalProperties": false,
@@ -2130,6 +2218,35 @@ export const OPERATIONS: OperationDef[] = [
           "type": "boolean",
           "example": true
         },
+        "public_net": {
+          "title": "LoadBalancerCreatePublicNet",
+          "description": "Public network options of the Load Balancer.\n\nOnly allowed if the public interface is enabled.\n",
+          "type": "object",
+          "properties": {
+            "ipv4": {
+              "description": "ID of an existing [Primary IP](#tag/primary-ips) of type `ipv4` to assign to the Load Balancer.\n\nThe [Primary IP](#tag/primary-ips) must be unassigned, must not be blocked and must be bound to the\nsame Location as the Load Balancer.\n\nOmit or set to `null` to get a system managed IP address instead. System managed IP addresses are\nnot [Primary IPs](#tag/primary-ips) and are created and deleted together with the Load Balancer.\n",
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 9007199254740991,
+              "example": 42
+            },
+            "ipv6": {
+              "description": "ID of an existing [Primary IP](#tag/primary-ips) of type `ipv6` to assign to the Load Balancer.\n\nThe [Primary IP](#tag/primary-ips) must be unassigned, must not be blocked and must be bound to the\nsame Location as the Load Balancer.\n\nOmit or set to `null` to get a system managed IP address instead. System managed IP addresses are\nnot [Primary IPs](#tag/primary-ips) and are created and deleted together with the Load Balancer.\n",
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 9007199254740991,
+              "example": 42
+            }
+          }
+        },
         "network": {
           "description": "ID of the network the Load Balancer should be attached to on creation.",
           "type": "integer",
@@ -2184,21 +2301,43 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "IP address (v4).",
                   "type": "object",
                   "properties": {
+                    "id": {
+                      "description": "ID of the [Primary IP](#tag/primary-ips) assigned to this Load Balancer.\n\n`null` if the IP address is still managed by the system and is not a [Primary IP](#tag/primary-ips) yet.\n",
+                      "type": [
+                        "integer",
+                        "null"
+                      ],
+                      "format": "int64",
+                      "minimum": 1,
+                      "maximum": 9007199254740991,
+                      "example": 42
+                    },
                     "ip": {
                       "description": "IP address (v4) of this Load Balancer.",
-                      "type": "string",
-                      "nullable": true,
+                      "type": [
+                        "string",
+                        "null"
+                      ],
                       "example": "1.2.3.4"
+                    },
+                    "blocked": {
+                      "description": "Whether the IP is blocked by our abuse department.",
+                      "type": "boolean",
+                      "example": false
                     },
                     "dns_ptr": {
                       "description": "Reverse DNS PTR entry for the IPv4 address of this Load Balancer.",
-                      "type": "string",
-                      "nullable": true,
+                      "type": [
+                        "string",
+                        "null"
+                      ],
                       "example": "lb1.example.com"
                     }
                   },
                   "required": [
+                    "id",
                     "ip",
+                    "blocked",
                     "dns_ptr"
                   ]
                 },
@@ -2206,21 +2345,43 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "IP address (v6).",
                   "type": "object",
                   "properties": {
+                    "id": {
+                      "description": "ID of the [Primary IP](#tag/primary-ips) assigned to this Load Balancer.\n\n`null` if the IP address is still managed by the system and is not a [Primary IP](#tag/primary-ips) yet.\n",
+                      "type": [
+                        "integer",
+                        "null"
+                      ],
+                      "format": "int64",
+                      "minimum": 1,
+                      "maximum": 9007199254740991,
+                      "example": 42
+                    },
                     "ip": {
                       "description": "IP address (v6) of this Load Balancer.",
-                      "type": "string",
-                      "nullable": true,
+                      "type": [
+                        "string",
+                        "null"
+                      ],
                       "example": "2001:db8::1"
+                    },
+                    "blocked": {
+                      "description": "Whether the IP is blocked by our abuse department.",
+                      "type": "boolean",
+                      "example": false
                     },
                     "dns_ptr": {
                       "description": "Reverse DNS PTR entry for the IPv6 address of this Load Balancer.",
-                      "type": "string",
-                      "nullable": true,
+                      "type": [
+                        "string",
+                        "null"
+                      ],
                       "example": "lb1.example.com"
                     }
                   },
                   "required": [
+                    "id",
                     "ip",
+                    "blocked",
                     "dns_ptr"
                   ]
                 }
@@ -2361,11 +2522,40 @@ export const OPERATIONS: OperationDef[] = [
                   "example": 10
                 },
                 "deprecated": {
-                  "description": "Point in time when the Load Balancer type is deprecated (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).",
-                  "type": "string",
+                  "deprecated": true,
+                  "description": "**Deprecated:** This field is deprecated. Use the `deprecation` object instead.\n\nPoint in time when the Load Balancer type is deprecated (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).\n",
+                  "type": [
+                    "string",
+                    "null"
+                  ],
                   "format": "date-time",
-                  "nullable": true,
                   "example": "2016-01-30T23:50:00Z"
+                },
+                "deprecation": {
+                  "title": "DeprecationInfo",
+                  "description": "Describes if, when and how the resource is deprecated. If this field is\nset to `null` the resource is not deprecated. If a value is set, it is\nconsidered deprecated.\n",
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "properties": {
+                    "unavailable_after": {
+                      "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2023-09-01T00:00:00Z"
+                    },
+                    "announced": {
+                      "description": "Date of the deprecation announcement.\n",
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2023-06-01T00:00:00Z"
+                    }
+                  },
+                  "required": [
+                    "unavailable_after",
+                    "announced"
+                  ]
                 },
                 "prices": {
                   "description": "Price per [Location](#tag/locations).",
@@ -2470,6 +2660,7 @@ export const OPERATIONS: OperationDef[] = [
                 "max_targets",
                 "max_assigned_certificates",
                 "deprecated",
+                "deprecation",
                 "prices"
               ]
             },
@@ -2587,8 +2778,10 @@ export const OPERATIONS: OperationDef[] = [
                                 "properties": {
                                   "domain": {
                                     "description": "Host header to send in the HTTP request. May not contain spaces, percent or backslash symbols. Can be null, in that case no host header is sent.",
-                                    "type": "string",
-                                    "nullable": true,
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
                                     "maxLength": 128,
                                     "example": "example.com"
                                   },
@@ -2742,8 +2935,10 @@ export const OPERATIONS: OperationDef[] = [
                                 "properties": {
                                   "domain": {
                                     "description": "Host header to send in the HTTP request. May not contain spaces, percent or backslash symbols. Can be null, in that case no host header is sent.",
-                                    "type": "string",
-                                    "nullable": true,
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
                                     "maxLength": 128,
                                     "example": "example.com"
                                   },
@@ -2842,6 +3037,8 @@ export const OPERATIONS: OperationDef[] = [
                                 "description": "Idle timeout in seconds for the client and server side.",
                                 "type": "integer",
                                 "default": 50,
+                                "minimum": 30,
+                                "maximum": 300,
                                 "example": 50
                               },
                               "sticky_sessions": {
@@ -2941,8 +3138,10 @@ export const OPERATIONS: OperationDef[] = [
                                 "properties": {
                                   "domain": {
                                     "description": "Host header to send in the HTTP request. May not contain spaces, percent or backslash symbols. Can be null, in that case no host header is sent.",
-                                    "type": "string",
-                                    "nullable": true,
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
                                     "maxLength": 128,
                                     "example": "example.com"
                                   },
@@ -3041,6 +3240,8 @@ export const OPERATIONS: OperationDef[] = [
                                 "description": "Idle timeout in seconds for the client and server side.",
                                 "type": "integer",
                                 "default": 50,
+                                "minimum": 30,
+                                "maximum": 300,
                                 "example": 50
                               },
                               "certificates": {
@@ -3140,10 +3341,16 @@ export const OPERATIONS: OperationDef[] = [
                                 "type": "integer",
                                 "format": "int64",
                                 "example": 80
+                              },
+                              "ip": {
+                                "description": "IP of the Server that the traffic is routed to. Either the Server's primary IPv4 or, if an IPv6 was specified when adding the target, an IPv6 within the Server's /64 subnet.",
+                                "type": "string",
+                                "example": "2001:db8::1"
                               }
                             },
                             "required": [
-                              "id"
+                              "id",
+                              "ip"
                             ]
                           },
                           "health_status": {
@@ -3165,6 +3372,24 @@ export const OPERATIONS: OperationDef[] = [
                                     "unknown"
                                   ],
                                   "example": "healthy"
+                                },
+                                "detail": {
+                                  "description": "Additional details about why the health check failed. Only present when `status` is `unhealthy`.",
+                                  "type": "string",
+                                  "enum": [
+                                    "unspecified",
+                                    "layer4_no_connection",
+                                    "layer4_timeout",
+                                    "layer7_timeout",
+                                    "unexpected_http_status",
+                                    "unexpected_http_content"
+                                  ],
+                                  "example": "unexpected_http_status"
+                                },
+                                "http_status_code": {
+                                  "description": "HTTP status code returned by the target during the last health check. Only present when `status` is `unhealthy` and `detail` is `unexpected_http_status`.",
+                                  "type": "integer",
+                                  "example": 503
                                 }
                               },
                               "required": [
@@ -3257,10 +3482,16 @@ export const OPERATIONS: OperationDef[] = [
                                       "type": "integer",
                                       "format": "int64",
                                       "example": 80
+                                    },
+                                    "ip": {
+                                      "description": "IP of the Server that the traffic is routed to. Either the Server's primary IPv4 or, if an IPv6 was specified when adding the target, an IPv6 within the Server's /64 subnet.",
+                                      "type": "string",
+                                      "example": "2001:db8::1"
                                     }
                                   },
                                   "required": [
-                                    "id"
+                                    "id",
+                                    "ip"
                                   ]
                                 },
                                 "health_status": {
@@ -3282,6 +3513,24 @@ export const OPERATIONS: OperationDef[] = [
                                           "unknown"
                                         ],
                                         "example": "healthy"
+                                      },
+                                      "detail": {
+                                        "description": "Additional details about why the health check failed. Only present when `status` is `unhealthy`.",
+                                        "type": "string",
+                                        "enum": [
+                                          "unspecified",
+                                          "layer4_no_connection",
+                                          "layer4_timeout",
+                                          "layer7_timeout",
+                                          "unexpected_http_status",
+                                          "unexpected_http_content"
+                                        ],
+                                        "example": "unexpected_http_status"
+                                      },
+                                      "http_status_code": {
+                                        "description": "HTTP status code returned by the target during the last health check. Only present when `status` is `unhealthy` and `detail` is `unexpected_http_status`.",
+                                        "type": "integer",
+                                        "example": 503
                                       }
                                     },
                                     "required": [
@@ -3384,6 +3633,24 @@ export const OPERATIONS: OperationDef[] = [
                                     "unknown"
                                   ],
                                   "example": "healthy"
+                                },
+                                "detail": {
+                                  "description": "Additional details about why the health check failed. Only present when `status` is `unhealthy`.",
+                                  "type": "string",
+                                  "enum": [
+                                    "unspecified",
+                                    "layer4_no_connection",
+                                    "layer4_timeout",
+                                    "layer7_timeout",
+                                    "unexpected_http_status",
+                                    "unexpected_http_content"
+                                  ],
+                                  "example": "unexpected_http_status"
+                                },
+                                "http_status_code": {
+                                  "description": "HTTP status code returned by the target during the last health check. Only present when `status` is `unhealthy` and `detail` is `unexpected_http_status`.",
+                                  "type": "integer",
+                                  "example": 503
                                 }
                               },
                               "required": [
@@ -3430,15 +3697,19 @@ export const OPERATIONS: OperationDef[] = [
             },
             "outgoing_traffic": {
               "description": "Outbound Traffic for the current billing period in bytes.",
-              "type": "integer",
-              "format": "int64",
-              "nullable": true
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "int64"
             },
             "ingoing_traffic": {
               "description": "Inbound Traffic for the current billing period in bytes.",
-              "type": "integer",
-              "format": "int64",
-              "nullable": true
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "int64"
             },
             "included_traffic": {
               "description": "Free Traffic for the current billing period in bytes.",
@@ -3499,10 +3770,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -3538,8 +3811,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -3596,6 +3871,8 @@ export const OPERATIONS: OperationDef[] = [
         "name": {
           "description": "Name of the [Network](#tag/networks).",
           "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
           "example": "mynet"
         },
         "ip_range": {
@@ -3652,6 +3929,7 @@ export const OPERATIONS: OperationDef[] = [
                 "example": 1000
               }
             },
+            "additionalProperties": false,
             "required": [
               "type",
               "network_zone"
@@ -3675,6 +3953,7 @@ export const OPERATIONS: OperationDef[] = [
                 "example": "10.0.1.1"
               }
             },
+            "additionalProperties": false,
             "required": [
               "destination",
               "gateway"
@@ -3687,6 +3966,7 @@ export const OPERATIONS: OperationDef[] = [
           "example": false
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "ip_range"
@@ -3708,6 +3988,8 @@ export const OPERATIONS: OperationDef[] = [
             "name": {
               "description": "Name of the [Network](#tag/networks).",
               "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
               "example": "mynet"
             },
             "ip_range": {
@@ -3752,12 +4034,15 @@ export const OPERATIONS: OperationDef[] = [
                   },
                   "vswitch_id": {
                     "description": "ID of the robot vSwitch if the subnet is of type `vswitch`.",
-                    "type": "integer",
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
                     "format": "int64",
-                    "nullable": true,
                     "example": 1000
                   }
                 },
+                "additionalProperties": false,
                 "required": [
                   "type",
                   "network_zone",
@@ -3782,6 +4067,7 @@ export const OPERATIONS: OperationDef[] = [
                     "example": "10.0.1.1"
                   }
                 },
+                "additionalProperties": false,
                 "required": [
                   "destination",
                   "gateway"
@@ -3848,6 +4134,7 @@ export const OPERATIONS: OperationDef[] = [
               "example": false
             }
           },
+          "additionalProperties": false,
           "required": [
             "id",
             "name",
@@ -3861,7 +4148,8 @@ export const OPERATIONS: OperationDef[] = [
             "expose_routes_to_vswitch"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "returnsAction": false,
     "isDestructive": false
@@ -3983,7 +4271,10 @@ export const OPERATIONS: OperationDef[] = [
         },
         "action": {
           "title": "ActionNullable",
-          "type": "object",
+          "type": [
+            "object",
+            "null"
+          ],
           "properties": {
             "id": {
               "description": "ID of the [Action](#description/actions).",
@@ -4015,10 +4306,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -4054,8 +4347,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -4083,8 +4378,7 @@ export const OPERATIONS: OperationDef[] = [
             "finished",
             "resources",
             "error"
-          ],
-          "nullable": true
+          ]
         }
       },
       "required": [
@@ -4100,7 +4394,7 @@ export const OPERATIONS: OperationDef[] = [
     "method": "POST",
     "path": "/primary_ips",
     "summary": "Create a Primary IP",
-    "description": "Create a new [Primary IP](#tag/primary-ips).\n\nCan optionally be assigned to a resource by providing an `assignee_id` and `assignee_type`.\n\nIf not assigned to a resource the `location` key needs to be provided. This can be either the ID or the name of the [Location](#tag/locations) this [Primary IP](#tag/primary-ips) shall be created in.\n\nA [Primary IP](#tag/primary-ips) can only be assigned to resource in the same [Location](#tag/locations) later on.\n\nThe `datacenter` key is deprecated in favor of `location` and will be removed after 01 July 2026.\n\n#### Operation specific errors\n\n| Status | Code | Description |\n| --- | --- | --- |\n| `422` | `server_not_stopped` | The specified [Server](#tag/servers) is running, but needs to be powered off |\n| `422` | `server_has_ipv4` | The [Server](#tag/servers) already has an ipv4 address |\n| `422` | `server_has_ipv6` | The [Server](#tag/servers) already has an ipv6 address |\n",
+    "description": "Create a new [Primary IP](#tag/primary-ips).\n\nCan optionally be assigned to a resource by providing an `assignee_id` and `assignee_type`.\n\nIf not assigned to a resource the `location` key needs to be provided. This can be either the ID or the name of the [Location](#tag/locations) this [Primary IP](#tag/primary-ips) shall be created in.\n\nA [Primary IP](#tag/primary-ips) can only be assigned to resource in the same [Location](#tag/locations) later on.\n\n#### Operation specific errors\n\n| Status | Code | Description |\n| --- | --- | --- |\n| `422` | `server_not_stopped` | The specified [Server](#tag/servers) is running, but needs to be powered off |\n| `422` | `server_has_ipv4` | The [Server](#tag/servers) already has an ipv4 address |\n| `422` | `server_has_ipv6` | The [Server](#tag/servers) already has an ipv6 address |\n",
     "tags": [
       "Primary IPs"
     ],
@@ -4110,6 +4404,8 @@ export const OPERATIONS: OperationDef[] = [
       "type": "object",
       "properties": {
         "name": {
+          "minLength": 1,
+          "maxLength": 255,
           "description": "Name of the Resource. Must be unique per Project.",
           "type": "string",
           "example": "my-resource"
@@ -4135,25 +4431,6 @@ export const OPERATIONS: OperationDef[] = [
           ],
           "example": "ipv6"
         },
-        "datacenter": {
-          "deprecated": true,
-          "description": "**Deprecated**: This property is deprecated and will be removed after 1 July 2026.\nUse the `location` key instead.\n\n[Data Center](#tag/data-centers) ID or name.\n\nThe [Primary IP](#tag/primary-ips) will be bound to this [Data Center](#tag/data-centers).\nOmit if `assignee_id`/`assignee_type` or `location` are provided.\n",
-          "oneOf": [
-            {
-              "description": "**Deprecated**: This property is deprecated and will be removed after 1 July 2026.\nUse the `location` key instead.\n\n[Data Center](#tag/data-centers) ID or name.\n\nThe [Primary IP](#tag/primary-ips) will be bound to this [Data Center](#tag/data-centers).\nOmit if `assignee_id`/`assignee_type` or `location` are provided.\n",
-              "type": "string",
-              "example": "fsn1-dc8"
-            },
-            {
-              "description": "**Deprecated**: This property is deprecated and will be removed after 1 July 2026.\nUse the `location` key instead.\n\n[Data Center](#tag/data-centers) ID or name.\n\nThe [Primary IP](#tag/primary-ips) will be bound to this [Data Center](#tag/data-centers).\nOmit if `assignee_id`/`assignee_type` or `location` are provided.\n",
-              "type": "integer",
-              "format": "int64",
-              "minimum": 1,
-              "maximum": 9007199254740991,
-              "example": 42
-            }
-          ]
-        },
         "location": {
           "description": "[Location](#tag/locations) ID or name the [Primary IP](#tag/primary-ips) will be bound to.\n\nOmit if `assignee_id`/`assignee_type` or `datacenter` are provided.\n",
           "oneOf": [
@@ -4173,18 +4450,21 @@ export const OPERATIONS: OperationDef[] = [
           ]
         },
         "assignee_type": {
-          "description": "Type of resource the [Primary IP](#tag/primary-ips) can get assigned to.\n\nCurrently [Primary IPs](#tag/primary-ips) can only be assigned to [Servers](#tag/servers),\ntherefore this field must be set to `server`.\n",
+          "description": "Type of resource to assign the [Primary IP](#tag/primary-ips) to.\n\nOmitted if the [Primary IP](#tag/primary-ips) should not get assigned.\n",
           "type": "string",
           "enum": [
-            "server"
+            "server",
+            "unassigned"
           ],
           "example": "server"
         },
         "assignee_id": {
           "description": "ID of resource to assign the [Primary IP](#tag/primary-ips) to.\n\nOmitted if the [Primary IP](#tag/primary-ips) should not get assigned.\n",
-          "type": "integer",
+          "type": [
+            "integer",
+            "null"
+          ],
           "format": "int64",
-          "nullable": true,
           "example": 17
         },
         "auto_delete": {
@@ -4194,10 +4474,10 @@ export const OPERATIONS: OperationDef[] = [
           "default": false
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
-        "type",
-        "assignee_type"
+        "type"
       ]
     },
     "requestBodyRequired": true,
@@ -4218,6 +4498,8 @@ export const OPERATIONS: OperationDef[] = [
               "example": 42
             },
             "name": {
+              "minLength": 1,
+              "maxLength": 255,
               "description": "Name of the Resource. Must be unique per Project.",
               "type": "string",
               "example": "my-resource"
@@ -4244,156 +4526,6 @@ export const OPERATIONS: OperationDef[] = [
               "description": "Blocked state of the [Primary IP](#tag/primary-ips).",
               "type": "boolean",
               "example": false
-            },
-            "datacenter": {
-              "deprecated": true,
-              "description": "**Deprecated**: This property is deprecated and will be removed after the 1 July 2026.\nUse the `location` property instead.\n\n[Data Center](#tag/data-centers) of the [Primary IP](#tag/primary-ips).\n",
-              "type": "object",
-              "properties": {
-                "id": {
-                  "description": "ID of the [Data Center](#tag/data-centers).",
-                  "type": "integer",
-                  "format": "int64",
-                  "minimum": 1,
-                  "maximum": 9007199254740991,
-                  "example": 42
-                },
-                "name": {
-                  "description": "Unique name for the [Data Center](#tag/data-centers).\n\nMay be used as a more descriptive identifier.\n",
-                  "type": "string",
-                  "pattern": "^[a-z0-9]+(-?[a-z0-9]*)*$",
-                  "example": "fsn1-dc8"
-                },
-                "description": {
-                  "description": "Descriptive name for the [Data Center](#tag/data-centers).\n\nDesired to be easy to understand for humans. May change for cosmetic reasons. Must not be used as an identifier.\n",
-                  "type": "string",
-                  "example": "Falkenstein DC Park 8"
-                },
-                "location": {
-                  "description": "[Location](#tag/locations) the [Data Center](#tag/data-centers) is located at.\n",
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "description": "ID of the [Location](#tag/locations).",
-                      "type": "integer",
-                      "format": "int64",
-                      "minimum": 1,
-                      "maximum": 9007199254740991,
-                      "example": 42
-                    },
-                    "name": {
-                      "description": "Unique identifier of the [Location](#tag/locations).",
-                      "type": "string",
-                      "pattern": "^[a-z0-9]+(-?[a-z0-9]*)*$",
-                      "example": "fsn1"
-                    },
-                    "description": {
-                      "description": "Human readable description of the [Location](#tag/locations).",
-                      "type": "string",
-                      "example": "Falkenstein DC Park 1"
-                    },
-                    "country": {
-                      "description": "Country the [Location](#tag/locations) resides in.\n\nISO 3166-1 alpha-2 code of the country.\n",
-                      "type": "string",
-                      "example": "DE"
-                    },
-                    "city": {
-                      "description": "Name of the closest city to the [Location](#tag/locations).\n\nCity name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.\n",
-                      "type": "string",
-                      "example": "Falkenstein"
-                    },
-                    "latitude": {
-                      "description": "Latitude of the city closest to the [Location](#tag/locations).",
-                      "type": "number",
-                      "format": "double",
-                      "example": 50.47612
-                    },
-                    "longitude": {
-                      "description": "Longitude of the city closest to the [Location](#tag/locations).",
-                      "type": "number",
-                      "format": "double",
-                      "example": 12.370071
-                    },
-                    "network_zone": {
-                      "description": "Name of the Network Zone this [Location](#tag/locations) resides in.",
-                      "type": "string",
-                      "pattern": "^[a-z0-9]+(-?[a-z0-9]*)*$",
-                      "example": "eu-central"
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "name",
-                    "description",
-                    "country",
-                    "city",
-                    "latitude",
-                    "longitude",
-                    "network_zone"
-                  ]
-                },
-                "server_types": {
-                  "deprecated": true,
-                  "description": "This field is deprecated, as all of it's properties are deprecated.\n\n[Server Types](#tag/server-types) supported and available in this [Data Center](#tag/data-centers).\n",
-                  "type": "object",
-                  "properties": {
-                    "supported": {
-                      "deprecated": true,
-                      "description": "This field is deprecated. Use the [Server Type](#tag/server-types) `locations` field instead.\n\nList of [Server Types](#tag/server-types) supported in this [Data Center](#tag/data-centers).\n\nThese [Server Types](#tag/server-types) are generally available in this Data Center, but may be\ntemporarily out of stock.\n",
-                      "type": "array",
-                      "items": {
-                        "type": "integer",
-                        "format": "int64"
-                      },
-                      "example": [
-                        1,
-                        2,
-                        3
-                      ]
-                    },
-                    "available": {
-                      "deprecated": true,
-                      "description": "This field is deprecated. Use the `available` flag in the [Server Type](#tag/server-types) `locations` field instead (`server_type.locations[].available`).\n\n[Server Types](#tag/server-types) currently available in this [Data Center](#tag/data-centers).\n\nThese [Server Types](#tag/server-types) can currently be purchased. Types that are temporarily unavailable\nbut are supported in this [Data Center](#tag/data-centers) are listed as `supported`.\n",
-                      "type": "array",
-                      "items": {
-                        "type": "integer",
-                        "format": "int64"
-                      },
-                      "example": [
-                        1,
-                        2,
-                        3
-                      ]
-                    },
-                    "available_for_migration": {
-                      "deprecated": true,
-                      "description": "This field is deprecated. Use the `available` flag in the [Server Type](#tag/server-types) `locations` field instead (`server_type.locations[].available`).\n\n[Server Types](#tag/server-types) available to migrate to in this [Data Center](#tag/data-centers).\n\nExisting [Servers](#tag/servers) can be migrated to these [Server Types](#tag/server-types).\n",
-                      "type": "array",
-                      "items": {
-                        "type": "integer",
-                        "format": "int64"
-                      },
-                      "example": [
-                        1,
-                        2,
-                        3
-                      ]
-                    }
-                  },
-                  "required": [
-                    "supported",
-                    "available",
-                    "available_for_migration"
-                  ]
-                }
-              },
-              "required": [
-                "id",
-                "name",
-                "description",
-                "location",
-                "server_types"
-              ]
             },
             "location": {
               "description": "[Location](#tag/locations) of the [Primary IP](#tag/primary-ips).\n",
@@ -4516,21 +4648,25 @@ export const OPERATIONS: OperationDef[] = [
               "example": true
             },
             "assignee_type": {
-              "description": "Type of resource the [Primary IP](#tag/primary-ips) can get assigned to.\n",
+              "description": "Type of resource the [Primary IP](#tag/primary-ips) is assigned to.\n\nAs of 23 September 2026 `unassigned` is returned if the [Primary IP](#tag/primary-ips) is not assigned.\n",
               "type": "string",
               "enum": [
-                "server"
+                "server",
+                "unassigned"
               ],
               "example": "server"
             },
             "assignee_id": {
               "description": "ID of resource the [Primary IP](#tag/primary-ips) is assigned to.\n\n`null` if the [Primary IP](#tag/primary-ips) is not assigned.\n",
-              "type": "integer",
+              "type": [
+                "integer",
+                "null"
+              ],
               "format": "int64",
-              "nullable": true,
               "example": 17
             }
           },
+          "additionalProperties": false,
           "required": [
             "id",
             "name",
@@ -4538,7 +4674,6 @@ export const OPERATIONS: OperationDef[] = [
             "created",
             "blocked",
             "location",
-            "datacenter",
             "ip",
             "dns_ptr",
             "protection",
@@ -4549,8 +4684,12 @@ export const OPERATIONS: OperationDef[] = [
           ]
         },
         "action": {
-          "title": "Action",
-          "type": "object",
+          "description": "Action will only be returned if the [Primary IP](#tag/primary-ips) is getting assigned.\n",
+          "title": "ActionNullable",
+          "type": [
+            "object",
+            "null"
+          ],
           "properties": {
             "id": {
               "description": "ID of the [Action](#description/actions).",
@@ -4582,10 +4721,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -4621,8 +4762,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -4653,6 +4796,7 @@ export const OPERATIONS: OperationDef[] = [
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "primary_ip"
       ]
@@ -4666,7 +4810,7 @@ export const OPERATIONS: OperationDef[] = [
     "method": "POST",
     "path": "/servers",
     "summary": "Create a Server",
-    "description": "Creates a new Server. Returns preliminary information about the Server as well as an Action that covers progress of creation.\n\n#### Operation specific errors\n\n| Status | Code | Description |\n| --- | --- | --- |\n| `412` | `primary_ip_version_mismatch` | The specified Primary IP has the wrong IP Version |\n| `422` | `placement_error` | An error during the placement occurred |\n| `422` | `primary_ip_assigned` | The specified Primary IP is already assigned to a server |\n| `422` | `primary_ip_datacenter_mismatch` | he specified Primary IP is in a different datacenter |\n",
+    "description": "Creates a new Server. Returns preliminary information about the Server as well as an Action that covers progress of creation.\n\n#### Operation specific errors\n\n| Status | Code | Description |\n| --- | --- | --- |\n| `412` | `primary_ip_version_mismatch` | The specified Primary IP has the wrong IP Version |\n| `422` | `placement_error` | An error during the placement occurred |\n| `422` | `primary_ip_assigned` | The specified Primary IP is already assigned to a server |\n| `422` | `primary_ip_datacenter_mismatch` | The specified Primary IP is in a different location |\n",
     "tags": [
       "Servers"
     ],
@@ -4681,15 +4825,9 @@ export const OPERATIONS: OperationDef[] = [
           "example": "my-server"
         },
         "location": {
-          "description": "ID or name of the Location to create the Server in (must not be used together with `datacenter`).",
+          "description": "ID or name of the Location to create the Server in.",
           "type": "string",
           "example": "nbg1"
-        },
-        "datacenter": {
-          "deprecated": true,
-          "description": "**Deprecated**: This property is deprecated and will be removed after the 1 July 2026.\nUse the `location` property instead.\n\nID or name of the Data Center to create Server in (must not be used together with `location`).\n",
-          "type": "string",
-          "example": "nbg1-dc3"
         },
         "server_type": {
           "description": "ID or name of the Server type this Server should be created with.",
@@ -4805,13 +4943,17 @@ export const OPERATIONS: OperationDef[] = [
             },
             "ipv4": {
               "description": "ID of the ipv4 Primary IP to use. If omitted and enable_ipv4 is true, a new ipv4 Primary IP will automatically be created.",
-              "type": "integer",
-              "nullable": true
+              "type": [
+                "integer",
+                "null"
+              ]
             },
             "ipv6": {
               "description": "ID of the ipv6 Primary IP to use. If omitted and enable_ipv6 is true, a new ipv6 Primary IP will automatically be created.",
-              "type": "integer",
-              "nullable": true
+              "type": [
+                "integer",
+                "null"
+              ]
             }
           }
         }
@@ -4870,8 +5012,10 @@ export const OPERATIONS: OperationDef[] = [
               "properties": {
                 "ipv4": {
                   "description": "IP address (v4) and its reverse DNS entry of this Server.",
-                  "type": "object",
-                  "nullable": true,
+                  "type": [
+                    "object",
+                    "null"
+                  ],
                   "properties": {
                     "id": {
                       "description": "ID of the [Primary IP](#tag/primary-ips).",
@@ -4887,7 +5031,7 @@ export const OPERATIONS: OperationDef[] = [
                       "example": "1.2.3.4"
                     },
                     "blocked": {
-                      "description": "If the IP is blocked by our anti abuse dept.",
+                      "description": "Whether the IP is blocked by our abuse department.",
                       "type": "boolean",
                       "example": false
                     },
@@ -4905,8 +5049,10 @@ export const OPERATIONS: OperationDef[] = [
                 },
                 "ipv6": {
                   "description": "IPv6 network assigned to this Server and its reverse DNS entry.",
-                  "type": "object",
-                  "nullable": true,
+                  "type": [
+                    "object",
+                    "null"
+                  ],
                   "properties": {
                     "id": {
                       "description": "ID of the [Primary IP](#tag/primary-ips).",
@@ -4922,14 +5068,16 @@ export const OPERATIONS: OperationDef[] = [
                       "example": "2001:db8::/64"
                     },
                     "blocked": {
-                      "description": "If the IP is blocked by our anti abuse dept.",
+                      "description": "Whether the IP is blocked by our abuse department.",
                       "type": "boolean",
                       "example": false
                     },
                     "dns_ptr": {
                       "description": "Reverse DNS PTR entries for the IPv6 addresses of this Server.",
-                      "type": "array",
-                      "nullable": true,
+                      "type": [
+                        "array",
+                        "null"
+                      ],
                       "items": {
                         "type": "object",
                         "properties": {
@@ -5205,8 +5353,10 @@ export const OPERATIONS: OperationDef[] = [
                   "deprecated": true,
                   "description": "This field is deprecated.\n\nUse the `deprecation` object in the `locations` field instead (`.locations[].deprecation`).\n",
                   "title": "DeprecationInfo",
-                  "type": "object",
-                  "nullable": true,
+                  "type": [
+                    "object",
+                    "null"
+                  ],
                   "properties": {
                     "unavailable_after": {
                       "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
@@ -5249,8 +5399,10 @@ export const OPERATIONS: OperationDef[] = [
                       "deprecation": {
                         "title": "DeprecationInfo",
                         "description": "Describes if, when and how the resource is deprecated. If this field is\nset to `null` the resource is not deprecated. If a value is set, it is\nconsidered deprecated.\n",
-                        "type": "object",
-                        "nullable": true,
+                        "type": [
+                          "object",
+                          "null"
+                        ],
                         "properties": {
                           "unavailable_after": {
                             "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
@@ -5304,156 +5456,6 @@ export const OPERATIONS: OperationDef[] = [
                 "cpu_type",
                 "architecture",
                 "locations"
-              ]
-            },
-            "datacenter": {
-              "deprecated": true,
-              "description": "**Deprecated**: This property is deprecated and will be removed after the 1 July 2026.\nUse the `location` property instead.\n\nData Center this Resource is located at.\n",
-              "type": "object",
-              "properties": {
-                "id": {
-                  "description": "ID of the [Data Center](#tag/data-centers).",
-                  "type": "integer",
-                  "format": "int64",
-                  "minimum": 1,
-                  "maximum": 9007199254740991,
-                  "example": 42
-                },
-                "name": {
-                  "description": "Unique name for the [Data Center](#tag/data-centers).\n\nMay be used as a more descriptive identifier.\n",
-                  "type": "string",
-                  "pattern": "^[a-z0-9]+(-?[a-z0-9]*)*$",
-                  "example": "fsn1-dc8"
-                },
-                "description": {
-                  "description": "Descriptive name for the [Data Center](#tag/data-centers).\n\nDesired to be easy to understand for humans. May change for cosmetic reasons. Must not be used as an identifier.\n",
-                  "type": "string",
-                  "example": "Falkenstein DC Park 8"
-                },
-                "location": {
-                  "description": "[Location](#tag/locations) the [Data Center](#tag/data-centers) is located at.\n",
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "description": "ID of the [Location](#tag/locations).",
-                      "type": "integer",
-                      "format": "int64",
-                      "minimum": 1,
-                      "maximum": 9007199254740991,
-                      "example": 42
-                    },
-                    "name": {
-                      "description": "Unique identifier of the [Location](#tag/locations).",
-                      "type": "string",
-                      "pattern": "^[a-z0-9]+(-?[a-z0-9]*)*$",
-                      "example": "fsn1"
-                    },
-                    "description": {
-                      "description": "Human readable description of the [Location](#tag/locations).",
-                      "type": "string",
-                      "example": "Falkenstein DC Park 1"
-                    },
-                    "country": {
-                      "description": "Country the [Location](#tag/locations) resides in.\n\nISO 3166-1 alpha-2 code of the country.\n",
-                      "type": "string",
-                      "example": "DE"
-                    },
-                    "city": {
-                      "description": "Name of the closest city to the [Location](#tag/locations).\n\nCity name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.\n",
-                      "type": "string",
-                      "example": "Falkenstein"
-                    },
-                    "latitude": {
-                      "description": "Latitude of the city closest to the [Location](#tag/locations).",
-                      "type": "number",
-                      "format": "double",
-                      "example": 50.47612
-                    },
-                    "longitude": {
-                      "description": "Longitude of the city closest to the [Location](#tag/locations).",
-                      "type": "number",
-                      "format": "double",
-                      "example": 12.370071
-                    },
-                    "network_zone": {
-                      "description": "Name of the Network Zone this [Location](#tag/locations) resides in.",
-                      "type": "string",
-                      "pattern": "^[a-z0-9]+(-?[a-z0-9]*)*$",
-                      "example": "eu-central"
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "name",
-                    "description",
-                    "country",
-                    "city",
-                    "latitude",
-                    "longitude",
-                    "network_zone"
-                  ]
-                },
-                "server_types": {
-                  "deprecated": true,
-                  "description": "This field is deprecated, as all of it's properties are deprecated.\n\n[Server Types](#tag/server-types) supported and available in this [Data Center](#tag/data-centers).\n",
-                  "type": "object",
-                  "properties": {
-                    "supported": {
-                      "deprecated": true,
-                      "description": "This field is deprecated. Use the [Server Type](#tag/server-types) `locations` field instead.\n\nList of [Server Types](#tag/server-types) supported in this [Data Center](#tag/data-centers).\n\nThese [Server Types](#tag/server-types) are generally available in this Data Center, but may be\ntemporarily out of stock.\n",
-                      "type": "array",
-                      "items": {
-                        "type": "integer",
-                        "format": "int64"
-                      },
-                      "example": [
-                        1,
-                        2,
-                        3
-                      ]
-                    },
-                    "available": {
-                      "deprecated": true,
-                      "description": "This field is deprecated. Use the `available` flag in the [Server Type](#tag/server-types) `locations` field instead (`server_type.locations[].available`).\n\n[Server Types](#tag/server-types) currently available in this [Data Center](#tag/data-centers).\n\nThese [Server Types](#tag/server-types) can currently be purchased. Types that are temporarily unavailable\nbut are supported in this [Data Center](#tag/data-centers) are listed as `supported`.\n",
-                      "type": "array",
-                      "items": {
-                        "type": "integer",
-                        "format": "int64"
-                      },
-                      "example": [
-                        1,
-                        2,
-                        3
-                      ]
-                    },
-                    "available_for_migration": {
-                      "deprecated": true,
-                      "description": "This field is deprecated. Use the `available` flag in the [Server Type](#tag/server-types) `locations` field instead (`server_type.locations[].available`).\n\n[Server Types](#tag/server-types) available to migrate to in this [Data Center](#tag/data-centers).\n\nExisting [Servers](#tag/servers) can be migrated to these [Server Types](#tag/server-types).\n",
-                      "type": "array",
-                      "items": {
-                        "type": "integer",
-                        "format": "int64"
-                      },
-                      "example": [
-                        1,
-                        2,
-                        3
-                      ]
-                    }
-                  },
-                  "required": [
-                    "supported",
-                    "available",
-                    "available_for_migration"
-                  ]
-                }
-              },
-              "required": [
-                "id",
-                "name",
-                "description",
-                "location",
-                "server_types"
               ]
             },
             "location": {
@@ -5521,7 +5523,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "image": {
               "description": "Image the server is based on.",
-              "type": "object",
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "id": {
                   "description": "ID of the [Image](#tag/images).",
@@ -5554,8 +5559,10 @@ export const OPERATIONS: OperationDef[] = [
                 },
                 "name": {
                   "description": "Unique identifier of the Image. This value is only set for system Images.",
-                  "type": "string",
-                  "nullable": true,
+                  "type": [
+                    "string",
+                    "null"
+                  ],
                   "example": "ubuntu-24.04"
                 },
                 "description": {
@@ -5565,8 +5572,10 @@ export const OPERATIONS: OperationDef[] = [
                 },
                 "image_size": {
                   "description": "Size of the Image file in our storage in GB. For snapshot Images this is the value relevant for calculating costs for the Image.",
-                  "type": "number",
-                  "nullable": true,
+                  "type": [
+                    "number",
+                    "null"
+                  ],
                   "example": 2.3
                 },
                 "disk_size": {
@@ -5582,8 +5591,10 @@ export const OPERATIONS: OperationDef[] = [
                 },
                 "created_from": {
                   "description": "Information about the Server the Image was created from.",
-                  "type": "object",
-                  "nullable": true,
+                  "type": [
+                    "object",
+                    "null"
+                  ],
                   "properties": {
                     "id": {
                       "description": "ID of the Server the Image was created from.",
@@ -5604,9 +5615,11 @@ export const OPERATIONS: OperationDef[] = [
                 },
                 "bound_to": {
                   "description": "ID of Server the Image is bound to. Only set for Images of type `backup`.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": null
                 },
                 "os_flavor": {
@@ -5626,8 +5639,10 @@ export const OPERATIONS: OperationDef[] = [
                 },
                 "os_version": {
                   "description": "Operating system version.",
-                  "type": "string",
-                  "nullable": true,
+                  "type": [
+                    "string",
+                    "null"
+                  ],
                   "example": "24.04"
                 },
                 "rapid_deploy": {
@@ -5650,16 +5665,47 @@ export const OPERATIONS: OperationDef[] = [
                   ]
                 },
                 "deprecated": {
-                  "description": "Point in time when the Image is considered to be deprecated (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).",
-                  "type": "string",
+                  "deprecated": true,
+                  "description": "**Deprecated:** This field is deprecated, use the deprecation object instead.\n\nPoint in time when the Image is considered to be deprecated (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).\n",
+                  "type": [
+                    "string",
+                    "null"
+                  ],
                   "format": "date-time",
-                  "nullable": true,
                   "example": "2018-02-28T00:00:00Z"
+                },
+                "deprecation": {
+                  "title": "DeprecationInfo",
+                  "description": "Describes if, when and how the resource is deprecated. If this field is\nset to `null` the resource is not deprecated. If a value is set, it is\nconsidered deprecated.\n",
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "properties": {
+                    "unavailable_after": {
+                      "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2023-09-01T00:00:00Z"
+                    },
+                    "announced": {
+                      "description": "Date of the deprecation announcement.\n",
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2023-06-01T00:00:00Z"
+                    }
+                  },
+                  "required": [
+                    "unavailable_after",
+                    "announced"
+                  ]
                 },
                 "deleted": {
                   "description": "Point in time where the Image was deleted (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).",
-                  "type": "string",
-                  "nullable": true,
+                  "type": [
+                    "string",
+                    "null"
+                  ],
                   "example": null
                 },
                 "labels": {
@@ -5699,15 +5745,18 @@ export const OPERATIONS: OperationDef[] = [
                 "os_version",
                 "protection",
                 "deprecated",
+                "deprecation",
                 "deleted",
                 "labels",
                 "architecture"
-              ],
-              "nullable": true
+              ]
             },
             "iso": {
               "description": "ISO Image that is attached to this Server. Null if no ISO is attached.",
-              "type": "object",
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "id": {
                   "description": "ID of the [ISO](#tag/isos).",
@@ -5719,8 +5768,10 @@ export const OPERATIONS: OperationDef[] = [
                 },
                 "name": {
                   "description": "Unique identifier of the ISO. Only set for public ISOs.",
-                  "type": "string",
-                  "nullable": true,
+                  "type": [
+                    "string",
+                    "null"
+                  ],
                   "example": "FreeBSD-11.0-RELEASE-amd64-dvd1"
                 },
                 "description": {
@@ -5730,18 +5781,22 @@ export const OPERATIONS: OperationDef[] = [
                 },
                 "type": {
                   "description": "Type of the ISO.",
-                  "type": "string",
+                  "type": [
+                    "string",
+                    "null"
+                  ],
                   "enum": [
                     "public",
                     "private"
-                  ],
-                  "nullable": true
+                  ]
                 },
                 "deprecation": {
                   "title": "DeprecationInfo",
                   "description": "Describes if, when and how the resource is deprecated. If this field is\nset to `null` the resource is not deprecated. If a value is set, it is\nconsidered deprecated.\n",
-                  "type": "object",
-                  "nullable": true,
+                  "type": [
+                    "object",
+                    "null"
+                  ],
                   "properties": {
                     "unavailable_after": {
                       "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
@@ -5763,13 +5818,15 @@ export const OPERATIONS: OperationDef[] = [
                 },
                 "architecture": {
                   "description": "CPU architecture compatible with the ISO.\n\nNull indicates no restriction on the architecture (wildcard).\n",
-                  "type": "string",
+                  "type": [
+                    "string",
+                    "null"
+                  ],
                   "enum": [
                     "x86",
                     "arm"
                   ],
-                  "example": "x86",
-                  "nullable": true
+                  "example": "x86"
                 }
               },
               "required": [
@@ -5779,8 +5836,7 @@ export const OPERATIONS: OperationDef[] = [
                 "type",
                 "deprecation",
                 "architecture"
-              ],
-              "nullable": true
+              ]
             },
             "rescue_enabled": {
               "description": "True if rescue mode is enabled. Server will then boot into rescue system on next reboot.",
@@ -5794,29 +5850,37 @@ export const OPERATIONS: OperationDef[] = [
             },
             "backup_window": {
               "description": "Time window (UTC) in which the backup will run, or null if the backups are not enabled.",
-              "type": "string",
-              "nullable": true,
+              "type": [
+                "string",
+                "null"
+              ],
               "example": "22-02"
             },
             "outgoing_traffic": {
               "description": "Outbound Traffic for the current billing period in bytes.",
-              "type": "integer",
+              "type": [
+                "integer",
+                "null"
+              ],
               "format": "int64",
-              "nullable": true,
               "example": 123456
             },
             "ingoing_traffic": {
               "description": "Inbound Traffic for the current billing period in bytes.",
-              "type": "integer",
+              "type": [
+                "integer",
+                "null"
+              ],
               "format": "int64",
-              "nullable": true,
               "example": 123456
             },
             "included_traffic": {
               "description": "Free Traffic for the current billing period in bytes.",
-              "type": "integer",
+              "type": [
+                "integer",
+                "null"
+              ],
               "format": "int64",
-              "nullable": true,
               "example": 654321
             },
             "protection": {
@@ -5875,7 +5939,10 @@ export const OPERATIONS: OperationDef[] = [
             "placement_group": {
               "description": "The placement group the server is assigned to.",
               "title": "PlacementGroupNullable",
-              "type": "object",
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "id": {
                   "description": "ID of the [Placement Group](#tag/placement-groups).",
@@ -5935,8 +6002,7 @@ export const OPERATIONS: OperationDef[] = [
                 "type",
                 "created",
                 "servers"
-              ],
-              "nullable": true
+              ]
             }
           },
           "required": [
@@ -5948,7 +6014,6 @@ export const OPERATIONS: OperationDef[] = [
             "private_net",
             "server_type",
             "location",
-            "datacenter",
             "image",
             "iso",
             "rescue_enabled",
@@ -5996,10 +6061,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -6035,8 +6102,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -6102,10 +6171,12 @@ export const OPERATIONS: OperationDef[] = [
               },
               "finished": {
                 "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "example": "2016-01-30T23:55:00Z",
-                "nullable": true
+                "example": "2016-01-30T23:55:00Z"
               },
               "progress": {
                 "description": "Progress of the Action in percent.",
@@ -6141,8 +6212,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "error": {
                 "description": "Error message for the Action if an error occurred, otherwise null.",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "code": {
                     "description": "Fixed error code for machines.",
@@ -6175,8 +6248,10 @@ export const OPERATIONS: OperationDef[] = [
         },
         "root_password": {
           "description": "Root password when no SSH keys have been specified.",
-          "type": "string",
-          "nullable": true,
+          "type": [
+            "string",
+            "null"
+          ],
           "example": "YItygq1v3GYjjMomLaKc"
         }
       },
@@ -6389,9 +6464,11 @@ export const OPERATIONS: OperationDef[] = [
             },
             "server": {
               "description": "ID of the Server the Volume is attached to, null if it is not attached at all.",
-              "type": "integer",
+              "type": [
+                "integer",
+                "null"
+              ],
               "format": "int64",
-              "nullable": true,
               "example": 12
             },
             "location": {
@@ -6504,8 +6581,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "format": {
               "description": "Filesystem of the Volume if formatted on creation, null if not formatted on creation.",
-              "type": "string",
-              "nullable": true,
+              "type": [
+                "string",
+                "null"
+              ],
               "example": "xfs"
             }
           },
@@ -6557,10 +6636,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -6596,8 +6677,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -6663,10 +6746,12 @@ export const OPERATIONS: OperationDef[] = [
               },
               "finished": {
                 "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "example": "2016-01-30T23:55:00Z",
-                "nullable": true
+                "example": "2016-01-30T23:55:00Z"
               },
               "progress": {
                 "description": "Progress of the Action in percent.",
@@ -6702,8 +6787,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "error": {
                 "description": "Error message for the Action if an error occurred, otherwise null.",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "code": {
                     "description": "Fixed error code for machines.",
@@ -6801,7 +6888,7 @@ export const OPERATIONS: OperationDef[] = [
             "type": "object",
             "properties": {
               "address": {
-                "description": "Public IPv4 or IPv6 address of the primary nameserver.",
+                "description": "Public IPv4 or IPv6 address of the primary nameserver.\n\nMust be unique across all primary nameservers of this zone.\n",
                 "type": "string",
                 "example": "198.51.100.1"
               },
@@ -6825,6 +6912,7 @@ export const OPERATIONS: OperationDef[] = [
                 ]
               }
             },
+            "additionalProperties": false,
             "required": [
               "address"
             ]
@@ -6876,8 +6964,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "ttl": {
                 "description": "Time To Live (TTL) of the [RRSet](#tag/zone-rrsets).\n\nMust be in between 60s and 2147483647s.\n\nIf not set, the [Zone's](#tag/zones) Default TTL is used.\n",
-                "type": "integer",
-                "nullable": true,
+                "type": [
+                  "integer",
+                  "null"
+                ],
                 "minimum": 60,
                 "maximum": 2147483647,
                 "example": 3600
@@ -6901,6 +6991,7 @@ export const OPERATIONS: OperationDef[] = [
                       "example": "My web server at Hetzner Cloud."
                     }
                   },
+                  "additionalProperties": false,
                   "required": [
                     "value"
                   ]
@@ -6919,6 +7010,7 @@ export const OPERATIONS: OperationDef[] = [
                 }
               }
             },
+            "additionalProperties": false,
             "required": [
               "name",
               "type",
@@ -6932,6 +7024,7 @@ export const OPERATIONS: OperationDef[] = [
           "example": "$ORIGIN\texample.com.\n$TTL\t3600\n\n@\tIN\tSOA\thydrogen.ns.hetzner.com. dns.hetzner.com. 2024010100 86400 10800 3600000 3600\n\n@\tIN\t10800\tNS\thydrogen.ns.hetzner.com. ; Some comment.\n@\tIN\t10800\tNS\toxygen.ns.hetzner.com.\n@\tIN\t10800\tNS\thelium.ns.hetzner.de.\n"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "mode"
@@ -6978,7 +7071,7 @@ export const OPERATIONS: OperationDef[] = [
                         "type": "object",
                         "properties": {
                           "address": {
-                            "description": "Public IPv4 or IPv6 address of the primary nameserver.",
+                            "description": "Public IPv4 or IPv6 address of the primary nameserver.\n\nMust be unique across all primary nameservers of this zone.\n",
                             "type": "string",
                             "example": "198.51.100.1"
                           },
@@ -7002,6 +7095,7 @@ export const OPERATIONS: OperationDef[] = [
                             ]
                           }
                         },
+                        "additionalProperties": false,
                         "required": [
                           "address"
                         ]
@@ -7098,10 +7192,12 @@ export const OPERATIONS: OperationDef[] = [
                         },
                         "delegation_last_check": {
                           "description": "Point in time (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format) when the DNS zone delegation was last checked.\n",
-                          "type": "string",
+                          "type": [
+                            "string",
+                            "null"
+                          ],
                           "format": "date-time",
-                          "example": "2016-01-30T23:55:00Z",
-                          "nullable": true
+                          "example": "2016-01-30T23:55:00Z"
                         },
                         "delegation_status": {
                           "description": "Status of the delegation.\n",
@@ -7124,6 +7220,7 @@ export const OPERATIONS: OperationDef[] = [
                           }
                         }
                       },
+                      "additionalProperties": false,
                       "required": [
                         "assigned",
                         "delegated",
@@ -7205,7 +7302,7 @@ export const OPERATIONS: OperationDef[] = [
                         "type": "object",
                         "properties": {
                           "address": {
-                            "description": "Public IPv4 or IPv6 address of the primary nameserver.",
+                            "description": "Public IPv4 or IPv6 address of the primary nameserver.\n\nMust be unique across all primary nameservers of this zone.\n",
                             "type": "string",
                             "example": "198.51.100.1"
                           },
@@ -7229,6 +7326,7 @@ export const OPERATIONS: OperationDef[] = [
                             ]
                           }
                         },
+                        "additionalProperties": false,
                         "required": [
                           "address"
                         ]
@@ -7325,10 +7423,12 @@ export const OPERATIONS: OperationDef[] = [
                         },
                         "delegation_last_check": {
                           "description": "Point in time (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format) when the DNS zone delegation was last checked.\n",
-                          "type": "string",
+                          "type": [
+                            "string",
+                            "null"
+                          ],
                           "format": "date-time",
-                          "example": "2016-01-30T23:55:00Z",
-                          "nullable": true
+                          "example": "2016-01-30T23:55:00Z"
                         },
                         "delegation_status": {
                           "description": "Status of the delegation.\n",
@@ -7351,6 +7451,7 @@ export const OPERATIONS: OperationDef[] = [
                           }
                         }
                       },
+                      "additionalProperties": false,
                       "required": [
                         "assigned",
                         "delegated",
@@ -7441,10 +7542,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -7480,8 +7583,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -7512,6 +7617,7 @@ export const OPERATIONS: OperationDef[] = [
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "zone",
         "action"
@@ -7662,7 +7768,123 @@ export const OPERATIONS: OperationDef[] = [
         "description": "ID of the Load Balancer."
       }
     ],
-    "returnsAction": false,
+    "responseSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "title": "Action",
+          "type": "object",
+          "properties": {
+            "id": {
+              "description": "ID of the [Action](#description/actions).",
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 9007199254740991,
+              "example": 42
+            },
+            "command": {
+              "description": "Command executed in the Action.",
+              "type": "string",
+              "example": "start_resource"
+            },
+            "status": {
+              "description": "Status of the Action.",
+              "type": "string",
+              "enum": [
+                "running",
+                "success",
+                "error"
+              ]
+            },
+            "started": {
+              "description": "Point in time when the Action was started (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).",
+              "type": "string",
+              "format": "date-time",
+              "example": "2016-01-30T23:55:00Z"
+            },
+            "finished": {
+              "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "date-time",
+              "example": "2016-01-30T23:55:00Z"
+            },
+            "progress": {
+              "description": "Progress of the Action in percent.",
+              "type": "integer",
+              "format": "int32",
+              "example": 100
+            },
+            "resources": {
+              "description": "Resources the Action relates to.",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "description": "ID of the Resource.",
+                    "type": "integer",
+                    "format": "int64",
+                    "minimum": 1,
+                    "maximum": 9007199254740991,
+                    "example": 42
+                  },
+                  "type": {
+                    "description": "Type of the Resource.",
+                    "type": "string",
+                    "example": "server"
+                  }
+                },
+                "required": [
+                  "id",
+                  "type"
+                ]
+              }
+            },
+            "error": {
+              "description": "Error message for the Action if an error occurred, otherwise null.",
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "code": {
+                  "description": "Fixed error code for machines.",
+                  "type": "string",
+                  "example": "action_failed"
+                },
+                "message": {
+                  "description": "Error message for humans.",
+                  "type": "string",
+                  "example": "Action failed"
+                }
+              },
+              "required": [
+                "code",
+                "message"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "command",
+            "status",
+            "progress",
+            "started",
+            "finished",
+            "resources",
+            "error"
+          ]
+        }
+      },
+      "required": [
+        "action"
+      ]
+    },
+    "returnsAction": true,
     "isDestructive": true
   },
   {
@@ -7815,10 +8037,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -7854,8 +8078,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -8008,10 +8234,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -8047,8 +8275,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -8184,10 +8414,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -8223,8 +8455,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -8317,6 +8551,7 @@ export const OPERATIONS: OperationDef[] = [
                     "format": "int64"
                   }
                 },
+                "additionalProperties": false,
                 "required": [
                   "id"
                 ]
@@ -8331,17 +8566,20 @@ export const OPERATIONS: OperationDef[] = [
                     "example": "env=prod"
                   }
                 },
+                "additionalProperties": false,
                 "required": [
                   "selector"
                 ]
               }
             },
+            "additionalProperties": false,
             "required": [
               "type"
             ]
           }
         }
       },
+      "additionalProperties": false,
       "required": [
         "apply_to"
       ]
@@ -8387,10 +8625,12 @@ export const OPERATIONS: OperationDef[] = [
               },
               "finished": {
                 "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "example": "2016-01-30T23:55:00Z",
-                "nullable": true
+                "example": "2016-01-30T23:55:00Z"
               },
               "progress": {
                 "description": "Progress of the Action in percent.",
@@ -8426,8 +8666,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "error": {
                 "description": "Error message for the Action if an error occurred, otherwise null.",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "code": {
                     "description": "Fixed error code for machines.",
@@ -8464,7 +8706,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": false,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "remove_firewall_from_resources",
@@ -8521,6 +8763,7 @@ export const OPERATIONS: OperationDef[] = [
                     "format": "int64"
                   }
                 },
+                "additionalProperties": false,
                 "required": [
                   "id"
                 ]
@@ -8535,17 +8778,20 @@ export const OPERATIONS: OperationDef[] = [
                     "example": "env=prod"
                   }
                 },
+                "additionalProperties": false,
                 "required": [
                   "selector"
                 ]
               }
             },
+            "additionalProperties": false,
             "required": [
               "type"
             ]
           }
         }
       },
+      "additionalProperties": false,
       "required": [
         "remove_from"
       ]
@@ -8591,10 +8837,12 @@ export const OPERATIONS: OperationDef[] = [
               },
               "finished": {
                 "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "example": "2016-01-30T23:55:00Z",
-                "nullable": true
+                "example": "2016-01-30T23:55:00Z"
               },
               "progress": {
                 "description": "Progress of the Action in percent.",
@@ -8630,8 +8878,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "error": {
                 "description": "Error message for the Action if an error occurred, otherwise null.",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "code": {
                     "description": "Fixed error code for machines.",
@@ -8668,7 +8918,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": false,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "set_firewall_rules",
@@ -8709,8 +8959,10 @@ export const OPERATIONS: OperationDef[] = [
             "properties": {
               "description": {
                 "description": "Description of the rule.",
-                "type": "string",
-                "nullable": true,
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "maxLength": 255
               },
               "direction": {
@@ -8759,6 +9011,7 @@ export const OPERATIONS: OperationDef[] = [
                 "example": "80"
               }
             },
+            "additionalProperties": false,
             "required": [
               "direction",
               "protocol"
@@ -8767,6 +9020,7 @@ export const OPERATIONS: OperationDef[] = [
           "maxItems": 50
         }
       },
+      "additionalProperties": false,
       "required": [
         "rules"
       ]
@@ -8812,10 +9066,12 @@ export const OPERATIONS: OperationDef[] = [
               },
               "finished": {
                 "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "example": "2016-01-30T23:55:00Z",
-                "nullable": true
+                "example": "2016-01-30T23:55:00Z"
               },
               "progress": {
                 "description": "Progress of the Action in percent.",
@@ -8851,8 +9107,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "error": {
                 "description": "Error message for the Action if an error occurred, otherwise null.",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "code": {
                     "description": "Fixed error code for machines.",
@@ -8889,7 +9147,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": false,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "assign_floating_ip",
@@ -8923,12 +9181,15 @@ export const OPERATIONS: OperationDef[] = [
       "properties": {
         "server": {
           "description": "[Server](#tag/servers) the [Floating IP](#tag/floating-ips) is assigned to.\n\n`null` if not assigned.\n",
-          "type": "integer",
+          "type": [
+            "integer",
+            "null"
+          ],
           "format": "int64",
-          "nullable": true,
           "example": 42
         }
       },
+      "additionalProperties": false,
       "required": [
         "server"
       ]
@@ -8973,10 +9234,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -9012,8 +9275,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -9049,7 +9314,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "change_floating_ip_dns_ptr",
@@ -9078,6 +9343,7 @@ export const OPERATIONS: OperationDef[] = [
       }
     ],
     "requestBodySchema": {
+      "title": "FloatingIPActionsChangeDNSPtrRequest",
       "type": "object",
       "properties": {
         "ip": {
@@ -9087,8 +9353,10 @@ export const OPERATIONS: OperationDef[] = [
         },
         "dns_ptr": {
           "description": "Domain Name to point to.\n\nPTR record content used for reverse DNS. Set to null to reset (IPv4) to the default value or remove (IPv6) the record.\n",
-          "type": "string",
-          "nullable": true,
+          "type": [
+            "string",
+            "null"
+          ],
           "example": "server.example.com"
         }
       },
@@ -9136,10 +9404,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -9175,8 +9445,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -9212,7 +9484,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "change_floating_ip_protection",
@@ -9241,6 +9513,7 @@ export const OPERATIONS: OperationDef[] = [
       }
     ],
     "requestBodySchema": {
+      "title": "FloatingIPActionsChangeProtectionRequest",
       "description": "Protection configuration for the Resource.",
       "type": "object",
       "properties": {
@@ -9294,10 +9567,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -9333,8 +9608,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -9370,7 +9647,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "unassign_floating_ip",
@@ -9437,10 +9714,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -9476,8 +9755,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -9513,7 +9794,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "get_action",
@@ -9579,10 +9860,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -9618,8 +9901,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -9727,8 +10012,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "certificate": {
               "description": "Certificate and chain in PEM format, in order so that each record directly certifies the one preceding.",
-              "type": "string",
-              "nullable": true,
+              "type": [
+                "string",
+                "null"
+              ],
               "example": "-----BEGIN CERTIFICATE-----\n..."
             },
             "created": {
@@ -9739,16 +10026,20 @@ export const OPERATIONS: OperationDef[] = [
             },
             "not_valid_before": {
               "description": "Point in time when the Certificate becomes valid (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "nullable": true,
               "example": "2019-01-08T10:00:00Z"
             },
             "not_valid_after": {
               "description": "Point in time when the Certificate stops being valid (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).\n",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "nullable": true,
               "example": "2019-07-08T09:59:59Z"
             },
             "domain_names": {
@@ -9765,14 +10056,18 @@ export const OPERATIONS: OperationDef[] = [
             },
             "fingerprint": {
               "description": "SHA256 fingerprint of the Certificate.",
-              "type": "string",
-              "nullable": true,
+              "type": [
+                "string",
+                "null"
+              ],
               "example": "03:c7:55:9b:2a:d1:04:17:09:f6:d0:7f:18:34:63:d4:3e:5f"
             },
             "status": {
               "description": "Current status of a type `managed` Certificate, always *null* for type `uploaded` Certificates.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "issuance": {
                   "description": "Status of the issuance process of the Certificate.",
@@ -9797,8 +10092,10 @@ export const OPERATIONS: OperationDef[] = [
                 },
                 "error": {
                   "description": "If issuance or renewal reports `failed`, this property contains information about what happened.",
-                  "type": "object",
-                  "nullable": true,
+                  "type": [
+                    "object",
+                    "null"
+                  ],
                   "properties": {
                     "code": {
                       "type": "string"
@@ -9935,10 +10232,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -9974,8 +10273,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -10096,6 +10397,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -10108,6 +10410,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -10153,10 +10457,12 @@ export const OPERATIONS: OperationDef[] = [
               },
               "finished": {
                 "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "example": "2016-01-30T23:55:00Z",
-                "nullable": true
+                "example": "2016-01-30T23:55:00Z"
               },
               "progress": {
                 "description": "Progress of the Action in percent.",
@@ -10192,8 +10498,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "error": {
                 "description": "Error message for the Action if an error occurred, otherwise null.",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "code": {
                     "description": "Fixed error code for machines.",
@@ -10236,40 +10544,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -10360,10 +10681,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -10399,8 +10722,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -10444,7 +10769,7 @@ export const OPERATIONS: OperationDef[] = [
     "method": "GET",
     "path": "/datacenters/{id}",
     "summary": "Get a Data Center",
-    "description": "Returns a single [Data Center](#tag/data-centers).\n",
+    "description": "**Deprecated:** This endpoint is deprecated as of 01 June 2026 and will be removed after 01 October 2026.\n\nReturns a single [Data Center](#tag/data-centers).\n",
     "tags": [
       "Data Centers"
     ],
@@ -10600,6 +10925,7 @@ export const OPERATIONS: OperationDef[] = [
                   ]
                 }
               },
+              "additionalProperties": false,
               "required": [
                 "supported",
                 "available",
@@ -10607,6 +10933,7 @@ export const OPERATIONS: OperationDef[] = [
               ]
             }
           },
+          "additionalProperties": false,
           "required": [
             "id",
             "name",
@@ -10616,6 +10943,7 @@ export const OPERATIONS: OperationDef[] = [
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "datacenter"
       ]
@@ -10666,8 +10994,10 @@ export const OPERATIONS: OperationDef[] = [
               "example": 42
             },
             "name": {
-              "description": "Name of the [Firewall](#tag/firewalls).\n\nLimited to a maximum of 128 characters.\n\nMust be unique per Project.\n",
+              "description": "Name of the [Firewall](#tag/firewalls).\n\nMust be unique per Project.\n",
               "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
               "example": "new-name"
             },
             "labels": {
@@ -10696,8 +11026,10 @@ export const OPERATIONS: OperationDef[] = [
                 "properties": {
                   "description": {
                     "description": "Description of the rule.",
-                    "type": "string",
-                    "nullable": true,
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "maxLength": 255
                   },
                   "direction": {
@@ -10742,11 +11074,14 @@ export const OPERATIONS: OperationDef[] = [
                   },
                   "port": {
                     "description": "Port or port range to apply the rule for.\n\nOnly applicable for protocols `tcp` and `udp`.\n\nA port range can be specified by separating lower and upper bounds with a dash. `1024-5000` will include\nall ports starting from 1024 up to port 5000.\n",
-                    "type": "string",
-                    "example": "80",
-                    "nullable": true
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": "80"
                   }
                 },
+                "additionalProperties": false,
                 "required": [
                   "direction",
                   "protocol",
@@ -10783,6 +11118,7 @@ export const OPERATIONS: OperationDef[] = [
                         "example": 42
                       }
                     },
+                    "additionalProperties": false,
                     "required": [
                       "id"
                     ]
@@ -10797,6 +11133,7 @@ export const OPERATIONS: OperationDef[] = [
                         "example": "env=prod"
                       }
                     },
+                    "additionalProperties": false,
                     "required": [
                       "selector"
                     ]
@@ -10828,20 +11165,24 @@ export const OPERATIONS: OperationDef[] = [
                               "example": 42
                             }
                           },
+                          "additionalProperties": false,
                           "required": [
                             "id"
                           ]
                         }
-                      }
+                      },
+                      "additionalProperties": false
                     }
                   }
                 },
+                "additionalProperties": false,
                 "required": [
                   "type"
                 ]
               }
             }
           },
+          "additionalProperties": false,
           "required": [
             "id",
             "name",
@@ -10851,6 +11192,7 @@ export const OPERATIONS: OperationDef[] = [
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "firewall"
       ]
@@ -10936,10 +11278,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -10975,8 +11319,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -11097,6 +11443,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -11109,6 +11456,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -11154,10 +11503,12 @@ export const OPERATIONS: OperationDef[] = [
               },
               "finished": {
                 "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "example": "2016-01-30T23:55:00Z",
-                "nullable": true
+                "example": "2016-01-30T23:55:00Z"
               },
               "progress": {
                 "description": "Progress of the Action in percent.",
@@ -11193,8 +11544,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "error": {
                 "description": "Error message for the Action if an error occurred, otherwise null.",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "code": {
                     "description": "Fixed error code for machines.",
@@ -11237,40 +11590,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -11361,10 +11727,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -11400,8 +11768,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -11480,14 +11850,18 @@ export const OPERATIONS: OperationDef[] = [
               "example": 42
             },
             "name": {
+              "minLength": 1,
+              "maxLength": 255,
               "description": "Name of the Resource. Must be unique per Project.",
               "type": "string",
               "example": "my-resource"
             },
             "description": {
               "description": "Description of the Resource.",
-              "type": "string",
-              "nullable": true,
+              "type": [
+                "string",
+                "null"
+              ],
               "example": "This describes my resource"
             },
             "ip": {
@@ -11506,9 +11880,11 @@ export const OPERATIONS: OperationDef[] = [
             },
             "server": {
               "description": "[Server](#tag/servers) the [Floating IP](#tag/floating-ips) is assigned to.\n\n`null` if not assigned.\n",
-              "type": "integer",
+              "type": [
+                "integer",
+                "null"
+              ],
               "format": "int64",
-              "nullable": true,
               "example": 42
             },
             "dns_ptr": {
@@ -11535,6 +11911,7 @@ export const OPERATIONS: OperationDef[] = [
               }
             },
             "home_location": {
+              "description": "[Location](#tag/locations) the for the [Floating IP](#tag/floating-ips) is located at.\n\nRouting is optimized for this [Location](#tag/locations).\n",
               "type": "object",
               "properties": {
                 "id": {
@@ -11634,6 +12011,7 @@ export const OPERATIONS: OperationDef[] = [
               "example": "2016-01-30T23:55:00Z"
             }
           },
+          "additionalProperties": false,
           "required": [
             "id",
             "name",
@@ -11650,6 +12028,7 @@ export const OPERATIONS: OperationDef[] = [
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "floating_ip"
       ]
@@ -11735,10 +12114,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -11774,8 +12155,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -11896,6 +12279,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -11908,6 +12292,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -11953,10 +12339,12 @@ export const OPERATIONS: OperationDef[] = [
               },
               "finished": {
                 "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "example": "2016-01-30T23:55:00Z",
-                "nullable": true
+                "example": "2016-01-30T23:55:00Z"
               },
               "progress": {
                 "description": "Progress of the Action in percent.",
@@ -11992,8 +12380,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "error": {
                 "description": "Error message for the Action if an error occurred, otherwise null.",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "code": {
                     "description": "Fixed error code for machines.",
@@ -12036,40 +12426,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -12160,10 +12563,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -12199,8 +12604,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -12301,8 +12708,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "name": {
               "description": "Unique identifier of the Image. This value is only set for system Images.",
-              "type": "string",
-              "nullable": true,
+              "type": [
+                "string",
+                "null"
+              ],
               "example": "ubuntu-24.04"
             },
             "description": {
@@ -12312,8 +12721,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "image_size": {
               "description": "Size of the Image file in our storage in GB. For snapshot Images this is the value relevant for calculating costs for the Image.",
-              "type": "number",
-              "nullable": true,
+              "type": [
+                "number",
+                "null"
+              ],
               "example": 2.3
             },
             "disk_size": {
@@ -12329,8 +12740,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "created_from": {
               "description": "Information about the Server the Image was created from.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "id": {
                   "description": "ID of the Server the Image was created from.",
@@ -12351,9 +12764,11 @@ export const OPERATIONS: OperationDef[] = [
             },
             "bound_to": {
               "description": "ID of Server the Image is bound to. Only set for Images of type `backup`.",
-              "type": "integer",
+              "type": [
+                "integer",
+                "null"
+              ],
               "format": "int64",
-              "nullable": true,
               "example": null
             },
             "os_flavor": {
@@ -12373,8 +12788,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "os_version": {
               "description": "Operating system version.",
-              "type": "string",
-              "nullable": true,
+              "type": [
+                "string",
+                "null"
+              ],
               "example": "24.04"
             },
             "rapid_deploy": {
@@ -12397,16 +12814,47 @@ export const OPERATIONS: OperationDef[] = [
               ]
             },
             "deprecated": {
-              "description": "Point in time when the Image is considered to be deprecated (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).",
-              "type": "string",
+              "deprecated": true,
+              "description": "**Deprecated:** This field is deprecated, use the deprecation object instead.\n\nPoint in time when the Image is considered to be deprecated (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).\n",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "nullable": true,
               "example": "2018-02-28T00:00:00Z"
+            },
+            "deprecation": {
+              "title": "DeprecationInfo",
+              "description": "Describes if, when and how the resource is deprecated. If this field is\nset to `null` the resource is not deprecated. If a value is set, it is\nconsidered deprecated.\n",
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "unavailable_after": {
+                  "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
+                  "type": "string",
+                  "format": "date-time",
+                  "example": "2023-09-01T00:00:00Z"
+                },
+                "announced": {
+                  "description": "Date of the deprecation announcement.\n",
+                  "type": "string",
+                  "format": "date-time",
+                  "example": "2023-06-01T00:00:00Z"
+                }
+              },
+              "required": [
+                "unavailable_after",
+                "announced"
+              ]
             },
             "deleted": {
               "description": "Point in time where the Image was deleted (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).",
-              "type": "string",
-              "nullable": true,
+              "type": [
+                "string",
+                "null"
+              ],
               "example": null
             },
             "labels": {
@@ -12446,6 +12894,7 @@ export const OPERATIONS: OperationDef[] = [
             "os_version",
             "protection",
             "deprecated",
+            "deprecation",
             "deleted",
             "labels",
             "architecture"
@@ -12534,10 +12983,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -12573,8 +13024,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -12695,6 +13148,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -12707,6 +13161,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -12752,10 +13208,12 @@ export const OPERATIONS: OperationDef[] = [
               },
               "finished": {
                 "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "example": "2016-01-30T23:55:00Z",
-                "nullable": true
+                "example": "2016-01-30T23:55:00Z"
               },
               "progress": {
                 "description": "Progress of the Action in percent.",
@@ -12791,8 +13249,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "error": {
                 "description": "Error message for the Action if an error occurred, otherwise null.",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "code": {
                     "description": "Fixed error code for machines.",
@@ -12835,40 +13295,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -12959,10 +13432,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -12998,8 +13473,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -13079,8 +13556,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "name": {
               "description": "Unique identifier of the ISO. Only set for public ISOs.",
-              "type": "string",
-              "nullable": true,
+              "type": [
+                "string",
+                "null"
+              ],
               "example": "FreeBSD-11.0-RELEASE-amd64-dvd1"
             },
             "description": {
@@ -13090,18 +13569,22 @@ export const OPERATIONS: OperationDef[] = [
             },
             "type": {
               "description": "Type of the ISO.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "enum": [
                 "public",
                 "private"
-              ],
-              "nullable": true
+              ]
             },
             "deprecation": {
               "title": "DeprecationInfo",
               "description": "Describes if, when and how the resource is deprecated. If this field is\nset to `null` the resource is not deprecated. If a value is set, it is\nconsidered deprecated.\n",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "unavailable_after": {
                   "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
@@ -13123,13 +13606,15 @@ export const OPERATIONS: OperationDef[] = [
             },
             "architecture": {
               "description": "CPU architecture compatible with the ISO.\n\nNull indicates no restriction on the architecture (wildcard).\n",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "enum": [
                 "x86",
                 "arm"
               ],
-              "example": "x86",
-              "nullable": true
+              "example": "x86"
             }
           },
           "required": [
@@ -13206,21 +13691,43 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "IP address (v4).",
                   "type": "object",
                   "properties": {
+                    "id": {
+                      "description": "ID of the [Primary IP](#tag/primary-ips) assigned to this Load Balancer.\n\n`null` if the IP address is still managed by the system and is not a [Primary IP](#tag/primary-ips) yet.\n",
+                      "type": [
+                        "integer",
+                        "null"
+                      ],
+                      "format": "int64",
+                      "minimum": 1,
+                      "maximum": 9007199254740991,
+                      "example": 42
+                    },
                     "ip": {
                       "description": "IP address (v4) of this Load Balancer.",
-                      "type": "string",
-                      "nullable": true,
+                      "type": [
+                        "string",
+                        "null"
+                      ],
                       "example": "1.2.3.4"
+                    },
+                    "blocked": {
+                      "description": "Whether the IP is blocked by our abuse department.",
+                      "type": "boolean",
+                      "example": false
                     },
                     "dns_ptr": {
                       "description": "Reverse DNS PTR entry for the IPv4 address of this Load Balancer.",
-                      "type": "string",
-                      "nullable": true,
+                      "type": [
+                        "string",
+                        "null"
+                      ],
                       "example": "lb1.example.com"
                     }
                   },
                   "required": [
+                    "id",
                     "ip",
+                    "blocked",
                     "dns_ptr"
                   ]
                 },
@@ -13228,21 +13735,43 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "IP address (v6).",
                   "type": "object",
                   "properties": {
+                    "id": {
+                      "description": "ID of the [Primary IP](#tag/primary-ips) assigned to this Load Balancer.\n\n`null` if the IP address is still managed by the system and is not a [Primary IP](#tag/primary-ips) yet.\n",
+                      "type": [
+                        "integer",
+                        "null"
+                      ],
+                      "format": "int64",
+                      "minimum": 1,
+                      "maximum": 9007199254740991,
+                      "example": 42
+                    },
                     "ip": {
                       "description": "IP address (v6) of this Load Balancer.",
-                      "type": "string",
-                      "nullable": true,
+                      "type": [
+                        "string",
+                        "null"
+                      ],
                       "example": "2001:db8::1"
+                    },
+                    "blocked": {
+                      "description": "Whether the IP is blocked by our abuse department.",
+                      "type": "boolean",
+                      "example": false
                     },
                     "dns_ptr": {
                       "description": "Reverse DNS PTR entry for the IPv6 address of this Load Balancer.",
-                      "type": "string",
-                      "nullable": true,
+                      "type": [
+                        "string",
+                        "null"
+                      ],
                       "example": "lb1.example.com"
                     }
                   },
                   "required": [
+                    "id",
                     "ip",
+                    "blocked",
                     "dns_ptr"
                   ]
                 }
@@ -13383,11 +13912,40 @@ export const OPERATIONS: OperationDef[] = [
                   "example": 10
                 },
                 "deprecated": {
-                  "description": "Point in time when the Load Balancer type is deprecated (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).",
-                  "type": "string",
+                  "deprecated": true,
+                  "description": "**Deprecated:** This field is deprecated. Use the `deprecation` object instead.\n\nPoint in time when the Load Balancer type is deprecated (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).\n",
+                  "type": [
+                    "string",
+                    "null"
+                  ],
                   "format": "date-time",
-                  "nullable": true,
                   "example": "2016-01-30T23:50:00Z"
+                },
+                "deprecation": {
+                  "title": "DeprecationInfo",
+                  "description": "Describes if, when and how the resource is deprecated. If this field is\nset to `null` the resource is not deprecated. If a value is set, it is\nconsidered deprecated.\n",
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "properties": {
+                    "unavailable_after": {
+                      "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2023-09-01T00:00:00Z"
+                    },
+                    "announced": {
+                      "description": "Date of the deprecation announcement.\n",
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2023-06-01T00:00:00Z"
+                    }
+                  },
+                  "required": [
+                    "unavailable_after",
+                    "announced"
+                  ]
                 },
                 "prices": {
                   "description": "Price per [Location](#tag/locations).",
@@ -13492,6 +14050,7 @@ export const OPERATIONS: OperationDef[] = [
                 "max_targets",
                 "max_assigned_certificates",
                 "deprecated",
+                "deprecation",
                 "prices"
               ]
             },
@@ -13609,8 +14168,10 @@ export const OPERATIONS: OperationDef[] = [
                                 "properties": {
                                   "domain": {
                                     "description": "Host header to send in the HTTP request. May not contain spaces, percent or backslash symbols. Can be null, in that case no host header is sent.",
-                                    "type": "string",
-                                    "nullable": true,
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
                                     "maxLength": 128,
                                     "example": "example.com"
                                   },
@@ -13764,8 +14325,10 @@ export const OPERATIONS: OperationDef[] = [
                                 "properties": {
                                   "domain": {
                                     "description": "Host header to send in the HTTP request. May not contain spaces, percent or backslash symbols. Can be null, in that case no host header is sent.",
-                                    "type": "string",
-                                    "nullable": true,
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
                                     "maxLength": 128,
                                     "example": "example.com"
                                   },
@@ -13864,6 +14427,8 @@ export const OPERATIONS: OperationDef[] = [
                                 "description": "Idle timeout in seconds for the client and server side.",
                                 "type": "integer",
                                 "default": 50,
+                                "minimum": 30,
+                                "maximum": 300,
                                 "example": 50
                               },
                               "sticky_sessions": {
@@ -13963,8 +14528,10 @@ export const OPERATIONS: OperationDef[] = [
                                 "properties": {
                                   "domain": {
                                     "description": "Host header to send in the HTTP request. May not contain spaces, percent or backslash symbols. Can be null, in that case no host header is sent.",
-                                    "type": "string",
-                                    "nullable": true,
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
                                     "maxLength": 128,
                                     "example": "example.com"
                                   },
@@ -14063,6 +14630,8 @@ export const OPERATIONS: OperationDef[] = [
                                 "description": "Idle timeout in seconds for the client and server side.",
                                 "type": "integer",
                                 "default": 50,
+                                "minimum": 30,
+                                "maximum": 300,
                                 "example": 50
                               },
                               "certificates": {
@@ -14162,10 +14731,16 @@ export const OPERATIONS: OperationDef[] = [
                                 "type": "integer",
                                 "format": "int64",
                                 "example": 80
+                              },
+                              "ip": {
+                                "description": "IP of the Server that the traffic is routed to. Either the Server's primary IPv4 or, if an IPv6 was specified when adding the target, an IPv6 within the Server's /64 subnet.",
+                                "type": "string",
+                                "example": "2001:db8::1"
                               }
                             },
                             "required": [
-                              "id"
+                              "id",
+                              "ip"
                             ]
                           },
                           "health_status": {
@@ -14187,6 +14762,24 @@ export const OPERATIONS: OperationDef[] = [
                                     "unknown"
                                   ],
                                   "example": "healthy"
+                                },
+                                "detail": {
+                                  "description": "Additional details about why the health check failed. Only present when `status` is `unhealthy`.",
+                                  "type": "string",
+                                  "enum": [
+                                    "unspecified",
+                                    "layer4_no_connection",
+                                    "layer4_timeout",
+                                    "layer7_timeout",
+                                    "unexpected_http_status",
+                                    "unexpected_http_content"
+                                  ],
+                                  "example": "unexpected_http_status"
+                                },
+                                "http_status_code": {
+                                  "description": "HTTP status code returned by the target during the last health check. Only present when `status` is `unhealthy` and `detail` is `unexpected_http_status`.",
+                                  "type": "integer",
+                                  "example": 503
                                 }
                               },
                               "required": [
@@ -14279,10 +14872,16 @@ export const OPERATIONS: OperationDef[] = [
                                       "type": "integer",
                                       "format": "int64",
                                       "example": 80
+                                    },
+                                    "ip": {
+                                      "description": "IP of the Server that the traffic is routed to. Either the Server's primary IPv4 or, if an IPv6 was specified when adding the target, an IPv6 within the Server's /64 subnet.",
+                                      "type": "string",
+                                      "example": "2001:db8::1"
                                     }
                                   },
                                   "required": [
-                                    "id"
+                                    "id",
+                                    "ip"
                                   ]
                                 },
                                 "health_status": {
@@ -14304,6 +14903,24 @@ export const OPERATIONS: OperationDef[] = [
                                           "unknown"
                                         ],
                                         "example": "healthy"
+                                      },
+                                      "detail": {
+                                        "description": "Additional details about why the health check failed. Only present when `status` is `unhealthy`.",
+                                        "type": "string",
+                                        "enum": [
+                                          "unspecified",
+                                          "layer4_no_connection",
+                                          "layer4_timeout",
+                                          "layer7_timeout",
+                                          "unexpected_http_status",
+                                          "unexpected_http_content"
+                                        ],
+                                        "example": "unexpected_http_status"
+                                      },
+                                      "http_status_code": {
+                                        "description": "HTTP status code returned by the target during the last health check. Only present when `status` is `unhealthy` and `detail` is `unexpected_http_status`.",
+                                        "type": "integer",
+                                        "example": 503
                                       }
                                     },
                                     "required": [
@@ -14406,6 +15023,24 @@ export const OPERATIONS: OperationDef[] = [
                                     "unknown"
                                   ],
                                   "example": "healthy"
+                                },
+                                "detail": {
+                                  "description": "Additional details about why the health check failed. Only present when `status` is `unhealthy`.",
+                                  "type": "string",
+                                  "enum": [
+                                    "unspecified",
+                                    "layer4_no_connection",
+                                    "layer4_timeout",
+                                    "layer7_timeout",
+                                    "unexpected_http_status",
+                                    "unexpected_http_content"
+                                  ],
+                                  "example": "unexpected_http_status"
+                                },
+                                "http_status_code": {
+                                  "description": "HTTP status code returned by the target during the last health check. Only present when `status` is `unhealthy` and `detail` is `unexpected_http_status`.",
+                                  "type": "integer",
+                                  "example": 503
                                 }
                               },
                               "required": [
@@ -14452,15 +15087,19 @@ export const OPERATIONS: OperationDef[] = [
             },
             "outgoing_traffic": {
               "description": "Outbound Traffic for the current billing period in bytes.",
-              "type": "integer",
-              "format": "int64",
-              "nullable": true
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "int64"
             },
             "ingoing_traffic": {
               "description": "Inbound Traffic for the current billing period in bytes.",
-              "type": "integer",
-              "format": "int64",
-              "nullable": true
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "int64"
             },
             "included_traffic": {
               "description": "Free Traffic for the current billing period in bytes.",
@@ -14573,10 +15212,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -14612,8 +15253,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -14752,21 +15395,23 @@ export const OPERATIONS: OperationDef[] = [
                 "type": "object",
                 "properties": {
                   "values": {
+                    "description": "Metrics timestamps with values.",
                     "type": "array",
                     "items": {
                       "type": "array",
-                      "items": {
-                        "oneOf": [
-                          {
-                            "type": "number"
-                          },
-                          {
-                            "type": "string"
-                          }
-                        ]
-                      }
-                    },
-                    "description": "Metrics Timestamps with values."
+                      "prefixItems": [
+                        {
+                          "type": "number",
+                          "description": "Timestamp."
+                        },
+                        {
+                          "type": "string",
+                          "description": "Value."
+                        }
+                      ],
+                      "maxItems": 2,
+                      "minItems": 2
+                    }
                   }
                 },
                 "required": [
@@ -14877,11 +15522,40 @@ export const OPERATIONS: OperationDef[] = [
               "example": 10
             },
             "deprecated": {
-              "description": "Point in time when the Load Balancer type is deprecated (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).",
-              "type": "string",
+              "deprecated": true,
+              "description": "**Deprecated:** This field is deprecated. Use the `deprecation` object instead.\n\nPoint in time when the Load Balancer type is deprecated (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).\n",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "nullable": true,
               "example": "2016-01-30T23:50:00Z"
+            },
+            "deprecation": {
+              "title": "DeprecationInfo",
+              "description": "Describes if, when and how the resource is deprecated. If this field is\nset to `null` the resource is not deprecated. If a value is set, it is\nconsidered deprecated.\n",
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "unavailable_after": {
+                  "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
+                  "type": "string",
+                  "format": "date-time",
+                  "example": "2023-09-01T00:00:00Z"
+                },
+                "announced": {
+                  "description": "Date of the deprecation announcement.\n",
+                  "type": "string",
+                  "format": "date-time",
+                  "example": "2023-06-01T00:00:00Z"
+                }
+              },
+              "required": [
+                "unavailable_after",
+                "announced"
+              ]
             },
             "prices": {
               "description": "Price per [Location](#tag/locations).",
@@ -14986,6 +15660,7 @@ export const OPERATIONS: OperationDef[] = [
             "max_targets",
             "max_assigned_certificates",
             "deprecated",
+            "deprecation",
             "prices"
           ]
         }
@@ -15080,6 +15755,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -15092,6 +15768,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -15137,10 +15815,12 @@ export const OPERATIONS: OperationDef[] = [
               },
               "finished": {
                 "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "example": "2016-01-30T23:55:00Z",
-                "nullable": true
+                "example": "2016-01-30T23:55:00Z"
               },
               "progress": {
                 "description": "Progress of the Action in percent.",
@@ -15176,8 +15856,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "error": {
                 "description": "Error message for the Action if an error occurred, otherwise null.",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "code": {
                     "description": "Fixed error code for machines.",
@@ -15220,40 +15902,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -15344,10 +16039,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -15383,8 +16080,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -15514,6 +16213,7 @@ export const OPERATIONS: OperationDef[] = [
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "location"
       ]
@@ -15562,6 +16262,8 @@ export const OPERATIONS: OperationDef[] = [
             "name": {
               "description": "Name of the [Network](#tag/networks).",
               "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
               "example": "mynet"
             },
             "ip_range": {
@@ -15606,12 +16308,15 @@ export const OPERATIONS: OperationDef[] = [
                   },
                   "vswitch_id": {
                     "description": "ID of the robot vSwitch if the subnet is of type `vswitch`.",
-                    "type": "integer",
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
                     "format": "int64",
-                    "nullable": true,
                     "example": 1000
                   }
                 },
+                "additionalProperties": false,
                 "required": [
                   "type",
                   "network_zone",
@@ -15636,6 +16341,7 @@ export const OPERATIONS: OperationDef[] = [
                     "example": "10.0.1.1"
                   }
                 },
+                "additionalProperties": false,
                 "required": [
                   "destination",
                   "gateway"
@@ -15702,6 +16408,7 @@ export const OPERATIONS: OperationDef[] = [
               "example": false
             }
           },
+          "additionalProperties": false,
           "required": [
             "id",
             "name",
@@ -15715,7 +16422,8 @@ export const OPERATIONS: OperationDef[] = [
             "expose_routes_to_vswitch"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "returnsAction": false,
     "isDestructive": false
@@ -15798,10 +16506,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -15837,8 +16547,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -15874,6 +16586,312 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
+    "isDestructive": false
+  },
+  {
+    "operationId": "list_network_members",
+    "toolName": "hcloud_get_network_members",
+    "method": "GET",
+    "path": "/networks/{id}/members",
+    "summary": "List Members of a Network",
+    "description": "List the resources attached to a specific [Network](#tag/networks).\n\nUse the provided URI parameters to modify the result.\n",
+    "tags": [
+      "Networks"
+    ],
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "description": "ID of the [Network](#tag/networks).",
+          "type": "integer",
+          "format": "int64",
+          "minimum": 1,
+          "maximum": 9007199254740991,
+          "example": 42
+        },
+        "description": "ID of the Network."
+      },
+      {
+        "name": "type",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "description": "Type of the resource attached to the [Network](#tag/networks).\n",
+            "type": "string",
+            "enum": [
+              "server",
+              "load_balancer"
+            ],
+            "x-enumDescriptions": {
+              "server": "The member is a [Server](#tag/servers).",
+              "load_balancer": "The member is a [Load Balancer](#tag/load-balancers)."
+            }
+          }
+        },
+        "description": "Filter members by type. May be used multiple times.\n\nThe response will only contain members matching the specified types.\n"
+      },
+      {
+        "name": "subnet",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "10.0.1.0/24"
+          }
+        },
+        "description": "Filter members by the subnet they are attached to. May be used multiple times.\n\nThe response will only contain members attached to the subnets with the\nspecified IP ranges. Uses CIDR notation.\n"
+      },
+      {
+        "name": "status",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "description": "Status of the resource within the [Network](#tag/networks).\n",
+            "type": "string",
+            "enum": [
+              "ok",
+              "attaching",
+              "detaching",
+              "updating",
+              "error"
+            ],
+            "x-enumDescriptions": {
+              "ok": "The resource is attached and its network configuration is up to date.",
+              "attaching": "The resource is being attached to the [Network](#tag/networks).",
+              "detaching": "The resource is being detached from the [Network](#tag/networks).",
+              "updating": "The resource network configuration is being updated.",
+              "error": "The last operation on this member failed. Its network configuration might be out of date, and the resource might not be reachable within the [Network](#tag/networks) as expected."
+            }
+          }
+        },
+        "description": "Filter members by status. May be used multiple times.\n\nThe response will only contain members matching the specified statuses.\n"
+      },
+      {
+        "name": "sort",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "id",
+              "id:asc",
+              "id:desc",
+              "type",
+              "type:asc",
+              "type:desc",
+              "status",
+              "status:asc",
+              "status:desc",
+              "ip",
+              "ip:asc",
+              "ip:desc"
+            ]
+          }
+        },
+        "description": "Sort resources by field and direction. May be used multiple times.\n\nFor more information, see \"[Sorting](#description/sorting)\".\n"
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int64",
+          "default": 1,
+          "minimum": 1,
+          "example": 1
+        },
+        "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
+      },
+      {
+        "name": "per_page",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int64",
+          "default": 25,
+          "minimum": 1,
+          "maximum": 50,
+          "example": 25
+        },
+        "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
+      }
+    ],
+    "responseSchema": {
+      "type": "object",
+      "properties": {
+        "members": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "description": "Type of the resource attached to the [Network](#tag/networks).\n",
+                "type": "string",
+                "enum": [
+                  "server",
+                  "load_balancer"
+                ],
+                "x-enumDescriptions": {
+                  "server": "The member is a [Server](#tag/servers).",
+                  "load_balancer": "The member is a [Load Balancer](#tag/load-balancers)."
+                }
+              },
+              "id": {
+                "description": "ID of the attached resource.",
+                "type": "integer",
+                "format": "int64",
+                "minimum": 1,
+                "maximum": 9007199254740991,
+                "example": 42
+              },
+              "ip": {
+                "description": "IP address of the resource within the [Network](#tag/networks).",
+                "type": "string",
+                "format": "ipv4",
+                "example": "10.0.1.2"
+              },
+              "status": {
+                "description": "Status of the resource within the [Network](#tag/networks).\n",
+                "type": "string",
+                "enum": [
+                  "ok",
+                  "attaching",
+                  "detaching",
+                  "updating",
+                  "error"
+                ],
+                "x-enumDescriptions": {
+                  "ok": "The resource is attached and its network configuration is up to date.",
+                  "attaching": "The resource is being attached to the [Network](#tag/networks).",
+                  "detaching": "The resource is being detached from the [Network](#tag/networks).",
+                  "updating": "The resource network configuration is being updated.",
+                  "error": "The last operation on this member failed. Its network configuration might be out of date, and the resource might not be reachable within the [Network](#tag/networks) as expected."
+                }
+              },
+              "alias_ips": {
+                "description": "Additional IP addresses of the resource within the [Network](#tag/networks).",
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "ipv4"
+                },
+                "example": [
+                  "10.0.1.20"
+                ]
+              },
+              "subnet": {
+                "description": "IP range of the subnet the resource is attached to.\n\nUses CIDR notation.\n",
+                "type": "string",
+                "example": "10.0.1.0/24"
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "type",
+              "id",
+              "ip",
+              "status",
+              "alias_ips",
+              "subnet"
+            ]
+          }
+        },
+        "meta": {
+          "title": "ListMeta",
+          "type": "object",
+          "properties": {
+            "pagination": {
+              "description": "See \"[Pagination](#description/pagination)\" for more information.",
+              "type": "object",
+              "properties": {
+                "page": {
+                  "description": "Current page number.",
+                  "type": "integer",
+                  "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
+                  "example": 3
+                },
+                "per_page": {
+                  "description": "Maximum number of entries returned per page.",
+                  "type": "integer",
+                  "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
+                  "example": 25
+                },
+                "previous_page": {
+                  "description": "Page number of the previous page. Can be null if the current page is the first one.",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "format": "int64",
+                  "example": 2
+                },
+                "next_page": {
+                  "description": "Page number of the next page. Can be null if the current page is the last one.",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "format": "int64",
+                  "example": 4
+                },
+                "last_page": {
+                  "description": "Page number of the last page available. Can be null if the current page is the last one.",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "format": "int64",
+                  "example": 4
+                },
+                "total_entries": {
+                  "description": "Total number of entries that exist for this query. Can be null if unknown.",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "format": "int64",
+                  "example": 100
+                }
+              },
+              "required": [
+                "page",
+                "per_page",
+                "previous_page",
+                "next_page",
+                "last_page",
+                "total_entries"
+              ]
+            }
+          },
+          "required": [
+            "pagination"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "members",
+        "meta"
+      ]
+    },
+    "returnsAction": false,
     "isDestructive": false
   },
   {
@@ -15959,6 +16977,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -15971,6 +16990,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -16016,10 +17037,12 @@ export const OPERATIONS: OperationDef[] = [
               },
               "finished": {
                 "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "example": "2016-01-30T23:55:00Z",
-                "nullable": true
+                "example": "2016-01-30T23:55:00Z"
               },
               "progress": {
                 "description": "Progress of the Action in percent.",
@@ -16055,8 +17078,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "error": {
                 "description": "Error message for the Action if an error occurred, otherwise null.",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "code": {
                     "description": "Fixed error code for machines.",
@@ -16099,40 +17124,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -16223,10 +17261,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -16262,8 +17302,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -16988,6 +18030,8 @@ export const OPERATIONS: OperationDef[] = [
               "example": 42
             },
             "name": {
+              "minLength": 1,
+              "maxLength": 255,
               "description": "Name of the Resource. Must be unique per Project.",
               "type": "string",
               "example": "my-resource"
@@ -17014,156 +18058,6 @@ export const OPERATIONS: OperationDef[] = [
               "description": "Blocked state of the [Primary IP](#tag/primary-ips).",
               "type": "boolean",
               "example": false
-            },
-            "datacenter": {
-              "deprecated": true,
-              "description": "**Deprecated**: This property is deprecated and will be removed after the 1 July 2026.\nUse the `location` property instead.\n\n[Data Center](#tag/data-centers) of the [Primary IP](#tag/primary-ips).\n",
-              "type": "object",
-              "properties": {
-                "id": {
-                  "description": "ID of the [Data Center](#tag/data-centers).",
-                  "type": "integer",
-                  "format": "int64",
-                  "minimum": 1,
-                  "maximum": 9007199254740991,
-                  "example": 42
-                },
-                "name": {
-                  "description": "Unique name for the [Data Center](#tag/data-centers).\n\nMay be used as a more descriptive identifier.\n",
-                  "type": "string",
-                  "pattern": "^[a-z0-9]+(-?[a-z0-9]*)*$",
-                  "example": "fsn1-dc8"
-                },
-                "description": {
-                  "description": "Descriptive name for the [Data Center](#tag/data-centers).\n\nDesired to be easy to understand for humans. May change for cosmetic reasons. Must not be used as an identifier.\n",
-                  "type": "string",
-                  "example": "Falkenstein DC Park 8"
-                },
-                "location": {
-                  "description": "[Location](#tag/locations) the [Data Center](#tag/data-centers) is located at.\n",
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "description": "ID of the [Location](#tag/locations).",
-                      "type": "integer",
-                      "format": "int64",
-                      "minimum": 1,
-                      "maximum": 9007199254740991,
-                      "example": 42
-                    },
-                    "name": {
-                      "description": "Unique identifier of the [Location](#tag/locations).",
-                      "type": "string",
-                      "pattern": "^[a-z0-9]+(-?[a-z0-9]*)*$",
-                      "example": "fsn1"
-                    },
-                    "description": {
-                      "description": "Human readable description of the [Location](#tag/locations).",
-                      "type": "string",
-                      "example": "Falkenstein DC Park 1"
-                    },
-                    "country": {
-                      "description": "Country the [Location](#tag/locations) resides in.\n\nISO 3166-1 alpha-2 code of the country.\n",
-                      "type": "string",
-                      "example": "DE"
-                    },
-                    "city": {
-                      "description": "Name of the closest city to the [Location](#tag/locations).\n\nCity name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.\n",
-                      "type": "string",
-                      "example": "Falkenstein"
-                    },
-                    "latitude": {
-                      "description": "Latitude of the city closest to the [Location](#tag/locations).",
-                      "type": "number",
-                      "format": "double",
-                      "example": 50.47612
-                    },
-                    "longitude": {
-                      "description": "Longitude of the city closest to the [Location](#tag/locations).",
-                      "type": "number",
-                      "format": "double",
-                      "example": 12.370071
-                    },
-                    "network_zone": {
-                      "description": "Name of the Network Zone this [Location](#tag/locations) resides in.",
-                      "type": "string",
-                      "pattern": "^[a-z0-9]+(-?[a-z0-9]*)*$",
-                      "example": "eu-central"
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "name",
-                    "description",
-                    "country",
-                    "city",
-                    "latitude",
-                    "longitude",
-                    "network_zone"
-                  ]
-                },
-                "server_types": {
-                  "deprecated": true,
-                  "description": "This field is deprecated, as all of it's properties are deprecated.\n\n[Server Types](#tag/server-types) supported and available in this [Data Center](#tag/data-centers).\n",
-                  "type": "object",
-                  "properties": {
-                    "supported": {
-                      "deprecated": true,
-                      "description": "This field is deprecated. Use the [Server Type](#tag/server-types) `locations` field instead.\n\nList of [Server Types](#tag/server-types) supported in this [Data Center](#tag/data-centers).\n\nThese [Server Types](#tag/server-types) are generally available in this Data Center, but may be\ntemporarily out of stock.\n",
-                      "type": "array",
-                      "items": {
-                        "type": "integer",
-                        "format": "int64"
-                      },
-                      "example": [
-                        1,
-                        2,
-                        3
-                      ]
-                    },
-                    "available": {
-                      "deprecated": true,
-                      "description": "This field is deprecated. Use the `available` flag in the [Server Type](#tag/server-types) `locations` field instead (`server_type.locations[].available`).\n\n[Server Types](#tag/server-types) currently available in this [Data Center](#tag/data-centers).\n\nThese [Server Types](#tag/server-types) can currently be purchased. Types that are temporarily unavailable\nbut are supported in this [Data Center](#tag/data-centers) are listed as `supported`.\n",
-                      "type": "array",
-                      "items": {
-                        "type": "integer",
-                        "format": "int64"
-                      },
-                      "example": [
-                        1,
-                        2,
-                        3
-                      ]
-                    },
-                    "available_for_migration": {
-                      "deprecated": true,
-                      "description": "This field is deprecated. Use the `available` flag in the [Server Type](#tag/server-types) `locations` field instead (`server_type.locations[].available`).\n\n[Server Types](#tag/server-types) available to migrate to in this [Data Center](#tag/data-centers).\n\nExisting [Servers](#tag/servers) can be migrated to these [Server Types](#tag/server-types).\n",
-                      "type": "array",
-                      "items": {
-                        "type": "integer",
-                        "format": "int64"
-                      },
-                      "example": [
-                        1,
-                        2,
-                        3
-                      ]
-                    }
-                  },
-                  "required": [
-                    "supported",
-                    "available",
-                    "available_for_migration"
-                  ]
-                }
-              },
-              "required": [
-                "id",
-                "name",
-                "description",
-                "location",
-                "server_types"
-              ]
             },
             "location": {
               "description": "[Location](#tag/locations) of the [Primary IP](#tag/primary-ips).\n",
@@ -17286,21 +18180,25 @@ export const OPERATIONS: OperationDef[] = [
               "example": true
             },
             "assignee_type": {
-              "description": "Type of resource the [Primary IP](#tag/primary-ips) can get assigned to.\n",
+              "description": "Type of resource the [Primary IP](#tag/primary-ips) is assigned to.\n\nAs of 23 September 2026 `unassigned` is returned if the [Primary IP](#tag/primary-ips) is not assigned.\n",
               "type": "string",
               "enum": [
-                "server"
+                "server",
+                "unassigned"
               ],
               "example": "server"
             },
             "assignee_id": {
               "description": "ID of resource the [Primary IP](#tag/primary-ips) is assigned to.\n\n`null` if the [Primary IP](#tag/primary-ips) is not assigned.\n",
-              "type": "integer",
+              "type": [
+                "integer",
+                "null"
+              ],
               "format": "int64",
-              "nullable": true,
               "example": 17
             }
           },
+          "additionalProperties": false,
           "required": [
             "id",
             "name",
@@ -17308,7 +18206,6 @@ export const OPERATIONS: OperationDef[] = [
             "created",
             "blocked",
             "location",
-            "datacenter",
             "ip",
             "dns_ptr",
             "protection",
@@ -17319,6 +18216,7 @@ export const OPERATIONS: OperationDef[] = [
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "primary_ip"
       ]
@@ -17404,10 +18302,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -17443,8 +18343,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -17565,6 +18467,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -17577,6 +18480,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -17622,10 +18527,12 @@ export const OPERATIONS: OperationDef[] = [
               },
               "finished": {
                 "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "example": "2016-01-30T23:55:00Z",
-                "nullable": true
+                "example": "2016-01-30T23:55:00Z"
               },
               "progress": {
                 "description": "Progress of the Action in percent.",
@@ -17661,8 +18568,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "error": {
                 "description": "Error message for the Action if an error occurred, otherwise null.",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "code": {
                     "description": "Fixed error code for machines.",
@@ -17705,40 +18614,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -17829,10 +18751,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -17868,8 +18792,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -17985,10 +18911,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -18024,8 +18952,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -18069,7 +18999,7 @@ export const OPERATIONS: OperationDef[] = [
     "method": "GET",
     "path": "/servers/{id}/metrics",
     "summary": "Get Metrics for a Server",
-    "description": "Get Metrics for specified Server.\n\nYou must specify the type of metric to get: cpu, disk or network. You can also specify more than one type by comma separation, e.g. cpu,disk.\n\nDepending on the type you will get different time series data\n\n| Type    | Timeseries              | Unit      | Description                                          |\n|---------|-------------------------|-----------|------------------------------------------------------|\n| cpu     | cpu                     | percent   | Percent CPU usage                                    |\n| disk    | disk.0.iops.read        | iop/s     | Number of read IO operations per second              |\n|         | disk.0.iops.write       | iop/s     | Number of write IO operations per second             |\n|         | disk.0.bandwidth.read   | bytes/s   | Bytes read per second                                |\n|         | disk.0.bandwidth.write  | bytes/s   | Bytes written per second                             |\n| network | network.0.pps.in        | packets/s | Public Network interface packets per second received |\n|         | network.0.pps.out       | packets/s | Public Network interface packets per second sent     |\n|         | network.0.bandwidth.in  | bytes/s   | Public Network interface bytes/s received            |\n|         | network.0.bandwidth.out | bytes/s   | Public Network interface bytes/s sent                |\n\nMetrics are available for the last 30 days only.\n\nIf you do not provide the step argument we will automatically adjust it so that a maximum of 200 samples are returned.\n\nWe limit the number of samples returned to a maximum of 500 and will adjust the step parameter accordingly.\n",
+    "description": "Get Metrics for specified Server.\n\nYou must specify the type of metric to get: cpu, disk or network. You can also specify more than one type by comma separation, e.g. cpu,disk.\n\nDepending on the type you will get different time series data\n\n| Type    | Timeseries              | Unit      | Description                                          |\n|---------|-------------------------|-----------|------------------------------------------------------|\n| cpu     | cpu                     | percent   | Percent CPU usage                                    |\n| disk    | disk.0.iops.read        | iop/s     | Number of read IO operations per second              |\n|         | disk.0.iops.write       | iop/s     | Number of write IO operations per second             |\n|         | disk.0.bandwidth.read   | bytes/s   | Bytes read per second                                |\n|         | disk.0.bandwidth.write  | bytes/s   | Bytes written per second                             |\n| network | network.0.pps.in        | packets/s | Public Network interface packets per second received |\n|         | network.0.pps.out       | packets/s | Public Network interface packets per second sent     |\n|         | network.0.bandwidth.in  | bytes/s   | Public Network interface bytes/s received            |\n|         | network.0.bandwidth.out | bytes/s   | Public Network interface bytes/s sent                |\n\nNote that the CPU value is not normalized to a fixed 0-100% scale. It is calculated per vCPU: a value of 100 represents full utilization on a 1-vCPU server, and 25% utilization on a 4-vCPU server. To calculate the overall CPU usage, divide the metric value by the number of vCPUs.\n\nMetrics are available for the last 30 days only.\n\nIf you do not provide the step argument we will automatically adjust it so that a maximum of 200 samples are returned.\n\nWe limit the number of samples returned to a maximum of 500 and will adjust the step parameter accordingly.\n",
     "tags": [
       "Servers"
     ],
@@ -18163,21 +19093,23 @@ export const OPERATIONS: OperationDef[] = [
                 "type": "object",
                 "properties": {
                   "values": {
+                    "description": "Metrics timestamps with values.",
                     "type": "array",
                     "items": {
                       "type": "array",
-                      "items": {
-                        "oneOf": [
-                          {
-                            "type": "number"
-                          },
-                          {
-                            "type": "string"
-                          }
-                        ]
-                      }
-                    },
-                    "description": "Metrics Timestamps with values."
+                      "prefixItems": [
+                        {
+                          "type": "number",
+                          "description": "Timestamp."
+                        },
+                        {
+                          "type": "string",
+                          "description": "Value."
+                        }
+                      ],
+                      "maxItems": 2,
+                      "minItems": 2
+                    }
                   }
                 },
                 "required": [
@@ -18287,8 +19219,10 @@ export const OPERATIONS: OperationDef[] = [
               "properties": {
                 "ipv4": {
                   "description": "IP address (v4) and its reverse DNS entry of this Server.",
-                  "type": "object",
-                  "nullable": true,
+                  "type": [
+                    "object",
+                    "null"
+                  ],
                   "properties": {
                     "id": {
                       "description": "ID of the [Primary IP](#tag/primary-ips).",
@@ -18304,7 +19238,7 @@ export const OPERATIONS: OperationDef[] = [
                       "example": "1.2.3.4"
                     },
                     "blocked": {
-                      "description": "If the IP is blocked by our anti abuse dept.",
+                      "description": "Whether the IP is blocked by our abuse department.",
                       "type": "boolean",
                       "example": false
                     },
@@ -18322,8 +19256,10 @@ export const OPERATIONS: OperationDef[] = [
                 },
                 "ipv6": {
                   "description": "IPv6 network assigned to this Server and its reverse DNS entry.",
-                  "type": "object",
-                  "nullable": true,
+                  "type": [
+                    "object",
+                    "null"
+                  ],
                   "properties": {
                     "id": {
                       "description": "ID of the [Primary IP](#tag/primary-ips).",
@@ -18339,14 +19275,16 @@ export const OPERATIONS: OperationDef[] = [
                       "example": "2001:db8::/64"
                     },
                     "blocked": {
-                      "description": "If the IP is blocked by our anti abuse dept.",
+                      "description": "Whether the IP is blocked by our abuse department.",
                       "type": "boolean",
                       "example": false
                     },
                     "dns_ptr": {
                       "description": "Reverse DNS PTR entries for the IPv6 addresses of this Server.",
-                      "type": "array",
-                      "nullable": true,
+                      "type": [
+                        "array",
+                        "null"
+                      ],
                       "items": {
                         "type": "object",
                         "properties": {
@@ -18622,8 +19560,10 @@ export const OPERATIONS: OperationDef[] = [
                   "deprecated": true,
                   "description": "This field is deprecated.\n\nUse the `deprecation` object in the `locations` field instead (`.locations[].deprecation`).\n",
                   "title": "DeprecationInfo",
-                  "type": "object",
-                  "nullable": true,
+                  "type": [
+                    "object",
+                    "null"
+                  ],
                   "properties": {
                     "unavailable_after": {
                       "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
@@ -18666,8 +19606,10 @@ export const OPERATIONS: OperationDef[] = [
                       "deprecation": {
                         "title": "DeprecationInfo",
                         "description": "Describes if, when and how the resource is deprecated. If this field is\nset to `null` the resource is not deprecated. If a value is set, it is\nconsidered deprecated.\n",
-                        "type": "object",
-                        "nullable": true,
+                        "type": [
+                          "object",
+                          "null"
+                        ],
                         "properties": {
                           "unavailable_after": {
                             "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
@@ -18721,156 +19663,6 @@ export const OPERATIONS: OperationDef[] = [
                 "cpu_type",
                 "architecture",
                 "locations"
-              ]
-            },
-            "datacenter": {
-              "deprecated": true,
-              "description": "**Deprecated**: This property is deprecated and will be removed after the 1 July 2026.\nUse the `location` property instead.\n\nData Center this Resource is located at.\n",
-              "type": "object",
-              "properties": {
-                "id": {
-                  "description": "ID of the [Data Center](#tag/data-centers).",
-                  "type": "integer",
-                  "format": "int64",
-                  "minimum": 1,
-                  "maximum": 9007199254740991,
-                  "example": 42
-                },
-                "name": {
-                  "description": "Unique name for the [Data Center](#tag/data-centers).\n\nMay be used as a more descriptive identifier.\n",
-                  "type": "string",
-                  "pattern": "^[a-z0-9]+(-?[a-z0-9]*)*$",
-                  "example": "fsn1-dc8"
-                },
-                "description": {
-                  "description": "Descriptive name for the [Data Center](#tag/data-centers).\n\nDesired to be easy to understand for humans. May change for cosmetic reasons. Must not be used as an identifier.\n",
-                  "type": "string",
-                  "example": "Falkenstein DC Park 8"
-                },
-                "location": {
-                  "description": "[Location](#tag/locations) the [Data Center](#tag/data-centers) is located at.\n",
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "description": "ID of the [Location](#tag/locations).",
-                      "type": "integer",
-                      "format": "int64",
-                      "minimum": 1,
-                      "maximum": 9007199254740991,
-                      "example": 42
-                    },
-                    "name": {
-                      "description": "Unique identifier of the [Location](#tag/locations).",
-                      "type": "string",
-                      "pattern": "^[a-z0-9]+(-?[a-z0-9]*)*$",
-                      "example": "fsn1"
-                    },
-                    "description": {
-                      "description": "Human readable description of the [Location](#tag/locations).",
-                      "type": "string",
-                      "example": "Falkenstein DC Park 1"
-                    },
-                    "country": {
-                      "description": "Country the [Location](#tag/locations) resides in.\n\nISO 3166-1 alpha-2 code of the country.\n",
-                      "type": "string",
-                      "example": "DE"
-                    },
-                    "city": {
-                      "description": "Name of the closest city to the [Location](#tag/locations).\n\nCity name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.\n",
-                      "type": "string",
-                      "example": "Falkenstein"
-                    },
-                    "latitude": {
-                      "description": "Latitude of the city closest to the [Location](#tag/locations).",
-                      "type": "number",
-                      "format": "double",
-                      "example": 50.47612
-                    },
-                    "longitude": {
-                      "description": "Longitude of the city closest to the [Location](#tag/locations).",
-                      "type": "number",
-                      "format": "double",
-                      "example": 12.370071
-                    },
-                    "network_zone": {
-                      "description": "Name of the Network Zone this [Location](#tag/locations) resides in.",
-                      "type": "string",
-                      "pattern": "^[a-z0-9]+(-?[a-z0-9]*)*$",
-                      "example": "eu-central"
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "name",
-                    "description",
-                    "country",
-                    "city",
-                    "latitude",
-                    "longitude",
-                    "network_zone"
-                  ]
-                },
-                "server_types": {
-                  "deprecated": true,
-                  "description": "This field is deprecated, as all of it's properties are deprecated.\n\n[Server Types](#tag/server-types) supported and available in this [Data Center](#tag/data-centers).\n",
-                  "type": "object",
-                  "properties": {
-                    "supported": {
-                      "deprecated": true,
-                      "description": "This field is deprecated. Use the [Server Type](#tag/server-types) `locations` field instead.\n\nList of [Server Types](#tag/server-types) supported in this [Data Center](#tag/data-centers).\n\nThese [Server Types](#tag/server-types) are generally available in this Data Center, but may be\ntemporarily out of stock.\n",
-                      "type": "array",
-                      "items": {
-                        "type": "integer",
-                        "format": "int64"
-                      },
-                      "example": [
-                        1,
-                        2,
-                        3
-                      ]
-                    },
-                    "available": {
-                      "deprecated": true,
-                      "description": "This field is deprecated. Use the `available` flag in the [Server Type](#tag/server-types) `locations` field instead (`server_type.locations[].available`).\n\n[Server Types](#tag/server-types) currently available in this [Data Center](#tag/data-centers).\n\nThese [Server Types](#tag/server-types) can currently be purchased. Types that are temporarily unavailable\nbut are supported in this [Data Center](#tag/data-centers) are listed as `supported`.\n",
-                      "type": "array",
-                      "items": {
-                        "type": "integer",
-                        "format": "int64"
-                      },
-                      "example": [
-                        1,
-                        2,
-                        3
-                      ]
-                    },
-                    "available_for_migration": {
-                      "deprecated": true,
-                      "description": "This field is deprecated. Use the `available` flag in the [Server Type](#tag/server-types) `locations` field instead (`server_type.locations[].available`).\n\n[Server Types](#tag/server-types) available to migrate to in this [Data Center](#tag/data-centers).\n\nExisting [Servers](#tag/servers) can be migrated to these [Server Types](#tag/server-types).\n",
-                      "type": "array",
-                      "items": {
-                        "type": "integer",
-                        "format": "int64"
-                      },
-                      "example": [
-                        1,
-                        2,
-                        3
-                      ]
-                    }
-                  },
-                  "required": [
-                    "supported",
-                    "available",
-                    "available_for_migration"
-                  ]
-                }
-              },
-              "required": [
-                "id",
-                "name",
-                "description",
-                "location",
-                "server_types"
               ]
             },
             "location": {
@@ -18938,7 +19730,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "image": {
               "description": "Image the server is based on.",
-              "type": "object",
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "id": {
                   "description": "ID of the [Image](#tag/images).",
@@ -18971,8 +19766,10 @@ export const OPERATIONS: OperationDef[] = [
                 },
                 "name": {
                   "description": "Unique identifier of the Image. This value is only set for system Images.",
-                  "type": "string",
-                  "nullable": true,
+                  "type": [
+                    "string",
+                    "null"
+                  ],
                   "example": "ubuntu-24.04"
                 },
                 "description": {
@@ -18982,8 +19779,10 @@ export const OPERATIONS: OperationDef[] = [
                 },
                 "image_size": {
                   "description": "Size of the Image file in our storage in GB. For snapshot Images this is the value relevant for calculating costs for the Image.",
-                  "type": "number",
-                  "nullable": true,
+                  "type": [
+                    "number",
+                    "null"
+                  ],
                   "example": 2.3
                 },
                 "disk_size": {
@@ -18999,8 +19798,10 @@ export const OPERATIONS: OperationDef[] = [
                 },
                 "created_from": {
                   "description": "Information about the Server the Image was created from.",
-                  "type": "object",
-                  "nullable": true,
+                  "type": [
+                    "object",
+                    "null"
+                  ],
                   "properties": {
                     "id": {
                       "description": "ID of the Server the Image was created from.",
@@ -19021,9 +19822,11 @@ export const OPERATIONS: OperationDef[] = [
                 },
                 "bound_to": {
                   "description": "ID of Server the Image is bound to. Only set for Images of type `backup`.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": null
                 },
                 "os_flavor": {
@@ -19043,8 +19846,10 @@ export const OPERATIONS: OperationDef[] = [
                 },
                 "os_version": {
                   "description": "Operating system version.",
-                  "type": "string",
-                  "nullable": true,
+                  "type": [
+                    "string",
+                    "null"
+                  ],
                   "example": "24.04"
                 },
                 "rapid_deploy": {
@@ -19067,16 +19872,47 @@ export const OPERATIONS: OperationDef[] = [
                   ]
                 },
                 "deprecated": {
-                  "description": "Point in time when the Image is considered to be deprecated (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).",
-                  "type": "string",
+                  "deprecated": true,
+                  "description": "**Deprecated:** This field is deprecated, use the deprecation object instead.\n\nPoint in time when the Image is considered to be deprecated (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).\n",
+                  "type": [
+                    "string",
+                    "null"
+                  ],
                   "format": "date-time",
-                  "nullable": true,
                   "example": "2018-02-28T00:00:00Z"
+                },
+                "deprecation": {
+                  "title": "DeprecationInfo",
+                  "description": "Describes if, when and how the resource is deprecated. If this field is\nset to `null` the resource is not deprecated. If a value is set, it is\nconsidered deprecated.\n",
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "properties": {
+                    "unavailable_after": {
+                      "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2023-09-01T00:00:00Z"
+                    },
+                    "announced": {
+                      "description": "Date of the deprecation announcement.\n",
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2023-06-01T00:00:00Z"
+                    }
+                  },
+                  "required": [
+                    "unavailable_after",
+                    "announced"
+                  ]
                 },
                 "deleted": {
                   "description": "Point in time where the Image was deleted (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).",
-                  "type": "string",
-                  "nullable": true,
+                  "type": [
+                    "string",
+                    "null"
+                  ],
                   "example": null
                 },
                 "labels": {
@@ -19116,15 +19952,18 @@ export const OPERATIONS: OperationDef[] = [
                 "os_version",
                 "protection",
                 "deprecated",
+                "deprecation",
                 "deleted",
                 "labels",
                 "architecture"
-              ],
-              "nullable": true
+              ]
             },
             "iso": {
               "description": "ISO Image that is attached to this Server. Null if no ISO is attached.",
-              "type": "object",
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "id": {
                   "description": "ID of the [ISO](#tag/isos).",
@@ -19136,8 +19975,10 @@ export const OPERATIONS: OperationDef[] = [
                 },
                 "name": {
                   "description": "Unique identifier of the ISO. Only set for public ISOs.",
-                  "type": "string",
-                  "nullable": true,
+                  "type": [
+                    "string",
+                    "null"
+                  ],
                   "example": "FreeBSD-11.0-RELEASE-amd64-dvd1"
                 },
                 "description": {
@@ -19147,18 +19988,22 @@ export const OPERATIONS: OperationDef[] = [
                 },
                 "type": {
                   "description": "Type of the ISO.",
-                  "type": "string",
+                  "type": [
+                    "string",
+                    "null"
+                  ],
                   "enum": [
                     "public",
                     "private"
-                  ],
-                  "nullable": true
+                  ]
                 },
                 "deprecation": {
                   "title": "DeprecationInfo",
                   "description": "Describes if, when and how the resource is deprecated. If this field is\nset to `null` the resource is not deprecated. If a value is set, it is\nconsidered deprecated.\n",
-                  "type": "object",
-                  "nullable": true,
+                  "type": [
+                    "object",
+                    "null"
+                  ],
                   "properties": {
                     "unavailable_after": {
                       "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
@@ -19180,13 +20025,15 @@ export const OPERATIONS: OperationDef[] = [
                 },
                 "architecture": {
                   "description": "CPU architecture compatible with the ISO.\n\nNull indicates no restriction on the architecture (wildcard).\n",
-                  "type": "string",
+                  "type": [
+                    "string",
+                    "null"
+                  ],
                   "enum": [
                     "x86",
                     "arm"
                   ],
-                  "example": "x86",
-                  "nullable": true
+                  "example": "x86"
                 }
               },
               "required": [
@@ -19196,8 +20043,7 @@ export const OPERATIONS: OperationDef[] = [
                 "type",
                 "deprecation",
                 "architecture"
-              ],
-              "nullable": true
+              ]
             },
             "rescue_enabled": {
               "description": "True if rescue mode is enabled. Server will then boot into rescue system on next reboot.",
@@ -19211,29 +20057,37 @@ export const OPERATIONS: OperationDef[] = [
             },
             "backup_window": {
               "description": "Time window (UTC) in which the backup will run, or null if the backups are not enabled.",
-              "type": "string",
-              "nullable": true,
+              "type": [
+                "string",
+                "null"
+              ],
               "example": "22-02"
             },
             "outgoing_traffic": {
               "description": "Outbound Traffic for the current billing period in bytes.",
-              "type": "integer",
+              "type": [
+                "integer",
+                "null"
+              ],
               "format": "int64",
-              "nullable": true,
               "example": 123456
             },
             "ingoing_traffic": {
               "description": "Inbound Traffic for the current billing period in bytes.",
-              "type": "integer",
+              "type": [
+                "integer",
+                "null"
+              ],
               "format": "int64",
-              "nullable": true,
               "example": 123456
             },
             "included_traffic": {
               "description": "Free Traffic for the current billing period in bytes.",
-              "type": "integer",
+              "type": [
+                "integer",
+                "null"
+              ],
               "format": "int64",
-              "nullable": true,
               "example": 654321
             },
             "protection": {
@@ -19292,7 +20146,10 @@ export const OPERATIONS: OperationDef[] = [
             "placement_group": {
               "description": "The placement group the server is assigned to.",
               "title": "PlacementGroupNullable",
-              "type": "object",
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "id": {
                   "description": "ID of the [Placement Group](#tag/placement-groups).",
@@ -19352,8 +20209,7 @@ export const OPERATIONS: OperationDef[] = [
                 "type",
                 "created",
                 "servers"
-              ],
-              "nullable": true
+              ]
             }
           },
           "required": [
@@ -19365,7 +20221,6 @@ export const OPERATIONS: OperationDef[] = [
             "private_net",
             "server_type",
             "location",
-            "datacenter",
             "image",
             "iso",
             "rescue_enabled",
@@ -19580,8 +20435,10 @@ export const OPERATIONS: OperationDef[] = [
               "deprecated": true,
               "description": "This field is deprecated.\n\nUse the `deprecation` object in the `locations` field instead (`.locations[].deprecation`).\n",
               "title": "DeprecationInfo",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "unavailable_after": {
                   "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
@@ -19624,8 +20481,10 @@ export const OPERATIONS: OperationDef[] = [
                   "deprecation": {
                     "title": "DeprecationInfo",
                     "description": "Describes if, when and how the resource is deprecated. If this field is\nset to `null` the resource is not deprecated. If a value is set, it is\nconsidered deprecated.\n",
-                    "type": "object",
-                    "nullable": true,
+                    "type": [
+                      "object",
+                      "null"
+                    ],
                     "properties": {
                       "unavailable_after": {
                         "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
@@ -19772,6 +20631,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -19784,6 +20644,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -19829,10 +20691,12 @@ export const OPERATIONS: OperationDef[] = [
               },
               "finished": {
                 "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "example": "2016-01-30T23:55:00Z",
-                "nullable": true
+                "example": "2016-01-30T23:55:00Z"
               },
               "progress": {
                 "description": "Progress of the Action in percent.",
@@ -19868,8 +20732,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "error": {
                 "description": "Error message for the Action if an error occurred, otherwise null.",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "code": {
                     "description": "Fixed error code for machines.",
@@ -19912,40 +20778,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -20036,10 +20915,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -20075,8 +20956,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -20258,9 +21141,11 @@ export const OPERATIONS: OperationDef[] = [
             },
             "server": {
               "description": "ID of the Server the Volume is attached to, null if it is not attached at all.",
-              "type": "integer",
+              "type": [
+                "integer",
+                "null"
+              ],
               "format": "int64",
-              "nullable": true,
               "example": 12
             },
             "location": {
@@ -20373,8 +21258,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "format": {
               "description": "Filesystem of the Volume if formatted on creation, null if not formatted on creation.",
-              "type": "string",
-              "nullable": true,
+              "type": [
+                "string",
+                "null"
+              ],
               "example": "xfs"
             }
           },
@@ -20478,10 +21365,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -20517,8 +21406,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -20639,6 +21530,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -20651,6 +21543,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -20696,10 +21590,12 @@ export const OPERATIONS: OperationDef[] = [
               },
               "finished": {
                 "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "example": "2016-01-30T23:55:00Z",
-                "nullable": true
+                "example": "2016-01-30T23:55:00Z"
               },
               "progress": {
                 "description": "Progress of the Action in percent.",
@@ -20735,8 +21631,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "error": {
                 "description": "Error message for the Action if an error occurred, otherwise null.",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "code": {
                     "description": "Fixed error code for machines.",
@@ -20779,40 +21677,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -20903,10 +21814,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -20942,8 +21855,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -21043,7 +21958,7 @@ export const OPERATIONS: OperationDef[] = [
                         "type": "object",
                         "properties": {
                           "address": {
-                            "description": "Public IPv4 or IPv6 address of the primary nameserver.",
+                            "description": "Public IPv4 or IPv6 address of the primary nameserver.\n\nMust be unique across all primary nameservers of this zone.\n",
                             "type": "string",
                             "example": "198.51.100.1"
                           },
@@ -21067,6 +21982,7 @@ export const OPERATIONS: OperationDef[] = [
                             ]
                           }
                         },
+                        "additionalProperties": false,
                         "required": [
                           "address"
                         ]
@@ -21163,10 +22079,12 @@ export const OPERATIONS: OperationDef[] = [
                         },
                         "delegation_last_check": {
                           "description": "Point in time (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format) when the DNS zone delegation was last checked.\n",
-                          "type": "string",
+                          "type": [
+                            "string",
+                            "null"
+                          ],
                           "format": "date-time",
-                          "example": "2016-01-30T23:55:00Z",
-                          "nullable": true
+                          "example": "2016-01-30T23:55:00Z"
                         },
                         "delegation_status": {
                           "description": "Status of the delegation.\n",
@@ -21189,6 +22107,7 @@ export const OPERATIONS: OperationDef[] = [
                           }
                         }
                       },
+                      "additionalProperties": false,
                       "required": [
                         "assigned",
                         "delegated",
@@ -21270,7 +22189,7 @@ export const OPERATIONS: OperationDef[] = [
                         "type": "object",
                         "properties": {
                           "address": {
-                            "description": "Public IPv4 or IPv6 address of the primary nameserver.",
+                            "description": "Public IPv4 or IPv6 address of the primary nameserver.\n\nMust be unique across all primary nameservers of this zone.\n",
                             "type": "string",
                             "example": "198.51.100.1"
                           },
@@ -21294,6 +22213,7 @@ export const OPERATIONS: OperationDef[] = [
                             ]
                           }
                         },
+                        "additionalProperties": false,
                         "required": [
                           "address"
                         ]
@@ -21390,10 +22310,12 @@ export const OPERATIONS: OperationDef[] = [
                         },
                         "delegation_last_check": {
                           "description": "Point in time (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format) when the DNS zone delegation was last checked.\n",
-                          "type": "string",
+                          "type": [
+                            "string",
+                            "null"
+                          ],
                           "format": "date-time",
-                          "example": "2016-01-30T23:55:00Z",
-                          "nullable": true
+                          "example": "2016-01-30T23:55:00Z"
                         },
                         "delegation_status": {
                           "description": "Status of the delegation.\n",
@@ -21416,6 +22338,7 @@ export const OPERATIONS: OperationDef[] = [
                           }
                         }
                       },
+                      "additionalProperties": false,
                       "required": [
                         "assigned",
                         "delegated",
@@ -21473,6 +22396,7 @@ export const OPERATIONS: OperationDef[] = [
           }
         }
       },
+      "additionalProperties": false,
       "required": [
         "zone"
       ]
@@ -21554,10 +22478,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -21593,8 +22519,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -21733,8 +22661,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "ttl": {
               "description": "Time To Live (TTL) of the [RRSet](#tag/zone-rrsets).\n\nMust be in between 60s and 2147483647s.\n\nIf not set, the [Zone's](#tag/zones) Default TTL is used.\n",
-              "type": "integer",
-              "nullable": true,
+              "type": [
+                "integer",
+                "null"
+              ],
               "minimum": 60,
               "maximum": 2147483647,
               "example": 3600
@@ -21761,6 +22691,7 @@ export const OPERATIONS: OperationDef[] = [
                   "example": false
                 }
               },
+              "additionalProperties": false,
               "required": [
                 "change"
               ]
@@ -21784,6 +22715,7 @@ export const OPERATIONS: OperationDef[] = [
                     "example": "My web server at Hetzner Cloud."
                   }
                 },
+                "additionalProperties": false,
                 "required": [
                   "value"
                 ]
@@ -21798,6 +22730,7 @@ export const OPERATIONS: OperationDef[] = [
               "example": 42
             }
           },
+          "additionalProperties": false,
           "required": [
             "id",
             "name",
@@ -21810,6 +22743,7 @@ export const OPERATIONS: OperationDef[] = [
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "rrset"
       ]
@@ -21823,7 +22757,7 @@ export const OPERATIONS: OperationDef[] = [
     "method": "GET",
     "path": "/zones/{id_or_name}/rrsets",
     "summary": "List RRSets",
-    "description": "Returns all [RRSets](#tag/zone-rrsets) in the [Zone](#tag/zones).\n\nUse the provided URI parameters to modify the result.\n\nThe maximum value for `per_page` on this endpoint is `100` instead of `50`.\n\nOnly applicable for [Zones](#tag/zones) in primary mode.\n\n#### Operation specific errors\n\n| Status | Code | Description |\n| --- | --- | --- |\n| `422` | `incorrect_zone_mode` | This operation is not supported for this Zone's `mode`. |\n",
+    "description": "Returns all [RRSets](#tag/zone-rrsets) in the [Zone](#tag/zones).\n\nUse the provided URI parameters to modify the result.\n\nOnly applicable for [Zones](#tag/zones) in primary mode.\n\n#### Operation specific errors\n\n| Status | Code | Description |\n| --- | --- | --- |\n| `422` | `incorrect_zone_mode` | This operation is not supported for this Zone's `mode`. |\n",
     "tags": [
       "Zone RRSets"
     ],
@@ -21919,6 +22853,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -21931,6 +22866,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -21979,8 +22916,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "ttl": {
                 "description": "Time To Live (TTL) of the [RRSet](#tag/zone-rrsets).\n\nMust be in between 60s and 2147483647s.\n\nIf not set, the [Zone's](#tag/zones) Default TTL is used.\n",
-                "type": "integer",
-                "nullable": true,
+                "type": [
+                  "integer",
+                  "null"
+                ],
                 "minimum": 60,
                 "maximum": 2147483647,
                 "example": 3600
@@ -22007,6 +22946,7 @@ export const OPERATIONS: OperationDef[] = [
                     "example": false
                   }
                 },
+                "additionalProperties": false,
                 "required": [
                   "change"
                 ]
@@ -22030,6 +22970,7 @@ export const OPERATIONS: OperationDef[] = [
                       "example": "My web server at Hetzner Cloud."
                     }
                   },
+                  "additionalProperties": false,
                   "required": [
                     "value"
                   ]
@@ -22044,6 +22985,7 @@ export const OPERATIONS: OperationDef[] = [
                 "example": 42
               }
             },
+            "additionalProperties": false,
             "required": [
               "id",
               "name",
@@ -22057,7 +22999,7 @@ export const OPERATIONS: OperationDef[] = [
           }
         },
         "meta": {
-          "title": "ListMeta",
+          "title": "ListMeta100",
           "type": "object",
           "properties": {
             "pagination": {
@@ -22068,40 +23010,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 100,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -22120,6 +23075,7 @@ export const OPERATIONS: OperationDef[] = [
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "rrsets",
         "meta"
@@ -22159,6 +23115,7 @@ export const OPERATIONS: OperationDef[] = [
           "example": "$ORIGIN\texample.com.\n$TTL\t3600\n\n@\tIN\tSOA\thydrogen.ns.hetzner.com. dns.hetzner.com. 2024010100 86400 10800 3600000 3600\n\n@\tIN\t10800\tNS\thydrogen.ns.hetzner.com. ; Some comment.\n@\tIN\t10800\tNS\toxygen.ns.hetzner.com.\n@\tIN\t10800\tNS\thelium.ns.hetzner.de.\n"
         }
       },
+      "additionalProperties": false,
       "required": [
         "zonefile"
       ]
@@ -22249,6 +23206,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -22261,6 +23219,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -22306,10 +23266,12 @@ export const OPERATIONS: OperationDef[] = [
               },
               "finished": {
                 "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "example": "2016-01-30T23:55:00Z",
-                "nullable": true
+                "example": "2016-01-30T23:55:00Z"
               },
               "progress": {
                 "description": "Progress of the Action in percent.",
@@ -22345,8 +23307,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "error": {
                 "description": "Error message for the Action if an error occurred, otherwise null.",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "code": {
                     "description": "Fixed error code for machines.",
@@ -22389,40 +23353,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -22513,10 +23490,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -22552,8 +23531,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -22667,10 +23648,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -22706,8 +23689,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -22743,7 +23728,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "get_actions",
@@ -22814,10 +23799,12 @@ export const OPERATIONS: OperationDef[] = [
               },
               "finished": {
                 "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "example": "2016-01-30T23:55:00Z",
-                "nullable": true
+                "example": "2016-01-30T23:55:00Z"
               },
               "progress": {
                 "description": "Progress of the Action in percent.",
@@ -22853,8 +23840,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "error": {
                 "description": "Error message for the Action if an error occurred, otherwise null.",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "code": {
                     "description": "Fixed error code for machines.",
@@ -22973,6 +23962,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -22985,6 +23975,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -23030,10 +24022,12 @@ export const OPERATIONS: OperationDef[] = [
               },
               "finished": {
                 "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "example": "2016-01-30T23:55:00Z",
-                "nullable": true
+                "example": "2016-01-30T23:55:00Z"
               },
               "progress": {
                 "description": "Progress of the Action in percent.",
@@ -23069,8 +24063,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "error": {
                 "description": "Error message for the Action if an error occurred, otherwise null.",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "code": {
                     "description": "Fixed error code for machines.",
@@ -23113,40 +24109,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -23251,6 +24260,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -23263,6 +24273,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -23314,8 +24326,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "certificate": {
                 "description": "Certificate and chain in PEM format, in order so that each record directly certifies the one preceding.",
-                "type": "string",
-                "nullable": true,
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "example": "-----BEGIN CERTIFICATE-----\n..."
               },
               "created": {
@@ -23326,16 +24340,20 @@ export const OPERATIONS: OperationDef[] = [
               },
               "not_valid_before": {
                 "description": "Point in time when the Certificate becomes valid (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "nullable": true,
                 "example": "2019-01-08T10:00:00Z"
               },
               "not_valid_after": {
                 "description": "Point in time when the Certificate stops being valid (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).\n",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "nullable": true,
                 "example": "2019-07-08T09:59:59Z"
               },
               "domain_names": {
@@ -23352,14 +24370,18 @@ export const OPERATIONS: OperationDef[] = [
               },
               "fingerprint": {
                 "description": "SHA256 fingerprint of the Certificate.",
-                "type": "string",
-                "nullable": true,
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "example": "03:c7:55:9b:2a:d1:04:17:09:f6:d0:7f:18:34:63:d4:3e:5f"
               },
               "status": {
                 "description": "Current status of a type `managed` Certificate, always *null* for type `uploaded` Certificates.",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "issuance": {
                     "description": "Status of the issuance process of the Certificate.",
@@ -23384,8 +24406,10 @@ export const OPERATIONS: OperationDef[] = [
                   },
                   "error": {
                     "description": "If issuance or renewal reports `failed`, this property contains information about what happened.",
-                    "type": "object",
-                    "nullable": true,
+                    "type": [
+                      "object",
+                      "null"
+                    ],
                     "properties": {
                       "code": {
                         "type": "string"
@@ -23449,40 +24473,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -23515,7 +24552,7 @@ export const OPERATIONS: OperationDef[] = [
     "method": "GET",
     "path": "/datacenters",
     "summary": "List Data Centers",
-    "description": "Returns all [Data Centers](#tag/data-centers).\n",
+    "description": "**Deprecated:** This endpoint is deprecated as of 01 June 2026 and will be removed after 01 October 2026.\n\nReturns all [Data Centers](#tag/data-centers).\n",
     "tags": [
       "Data Centers"
     ],
@@ -23557,6 +24594,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -23569,6 +24607,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -23713,6 +24753,7 @@ export const OPERATIONS: OperationDef[] = [
                     ]
                   }
                 },
+                "additionalProperties": false,
                 "required": [
                   "supported",
                   "available",
@@ -23720,6 +24761,7 @@ export const OPERATIONS: OperationDef[] = [
                 ]
               }
             },
+            "additionalProperties": false,
             "required": [
               "id",
               "name",
@@ -23748,40 +24790,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -23800,6 +24855,7 @@ export const OPERATIONS: OperationDef[] = [
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "datacenters",
         "recommendation",
@@ -23889,6 +24945,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -23901,6 +24958,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -23946,10 +25005,12 @@ export const OPERATIONS: OperationDef[] = [
               },
               "finished": {
                 "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "example": "2016-01-30T23:55:00Z",
-                "nullable": true
+                "example": "2016-01-30T23:55:00Z"
               },
               "progress": {
                 "description": "Progress of the Action in percent.",
@@ -23985,8 +25046,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "error": {
                 "description": "Error message for the Action if an error occurred, otherwise null.",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "code": {
                     "description": "Fixed error code for machines.",
@@ -24029,40 +25092,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -24149,6 +25225,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -24161,6 +25238,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -24185,8 +25264,10 @@ export const OPERATIONS: OperationDef[] = [
                 "example": 42
               },
               "name": {
-                "description": "Name of the [Firewall](#tag/firewalls).\n\nLimited to a maximum of 128 characters.\n\nMust be unique per Project.\n",
+                "description": "Name of the [Firewall](#tag/firewalls).\n\nMust be unique per Project.\n",
                 "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
                 "example": "new-name"
               },
               "labels": {
@@ -24215,8 +25296,10 @@ export const OPERATIONS: OperationDef[] = [
                   "properties": {
                     "description": {
                       "description": "Description of the rule.",
-                      "type": "string",
-                      "nullable": true,
+                      "type": [
+                        "string",
+                        "null"
+                      ],
                       "maxLength": 255
                     },
                     "direction": {
@@ -24261,11 +25344,14 @@ export const OPERATIONS: OperationDef[] = [
                     },
                     "port": {
                       "description": "Port or port range to apply the rule for.\n\nOnly applicable for protocols `tcp` and `udp`.\n\nA port range can be specified by separating lower and upper bounds with a dash. `1024-5000` will include\nall ports starting from 1024 up to port 5000.\n",
-                      "type": "string",
-                      "example": "80",
-                      "nullable": true
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "example": "80"
                     }
                   },
+                  "additionalProperties": false,
                   "required": [
                     "direction",
                     "protocol",
@@ -24302,6 +25388,7 @@ export const OPERATIONS: OperationDef[] = [
                           "example": 42
                         }
                       },
+                      "additionalProperties": false,
                       "required": [
                         "id"
                       ]
@@ -24316,6 +25403,7 @@ export const OPERATIONS: OperationDef[] = [
                           "example": "env=prod"
                         }
                       },
+                      "additionalProperties": false,
                       "required": [
                         "selector"
                       ]
@@ -24347,20 +25435,24 @@ export const OPERATIONS: OperationDef[] = [
                                 "example": 42
                               }
                             },
+                            "additionalProperties": false,
                             "required": [
                               "id"
                             ]
                           }
-                        }
+                        },
+                        "additionalProperties": false
                       }
                     }
                   },
+                  "additionalProperties": false,
                   "required": [
                     "type"
                   ]
                 }
               }
             },
+            "additionalProperties": false,
             "required": [
               "id",
               "name",
@@ -24382,40 +25474,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -24434,6 +25539,7 @@ export const OPERATIONS: OperationDef[] = [
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "firewalls",
         "meta"
@@ -24522,6 +25628,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -24534,6 +25641,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -24578,10 +25687,12 @@ export const OPERATIONS: OperationDef[] = [
               },
               "finished": {
                 "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "example": "2016-01-30T23:55:00Z",
-                "nullable": true
+                "example": "2016-01-30T23:55:00Z"
               },
               "progress": {
                 "description": "Progress of the Action in percent.",
@@ -24617,8 +25728,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "error": {
                 "description": "Error message for the Action if an error occurred, otherwise null.",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "code": {
                     "description": "Fixed error code for machines.",
@@ -24661,40 +25774,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -24713,6 +25839,7 @@ export const OPERATIONS: OperationDef[] = [
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "actions",
         "meta"
@@ -24778,6 +25905,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -24790,6 +25918,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -24812,14 +25942,18 @@ export const OPERATIONS: OperationDef[] = [
                 "example": 42
               },
               "name": {
+                "minLength": 1,
+                "maxLength": 255,
                 "description": "Name of the Resource. Must be unique per Project.",
                 "type": "string",
                 "example": "my-resource"
               },
               "description": {
                 "description": "Description of the Resource.",
-                "type": "string",
-                "nullable": true,
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "example": "This describes my resource"
               },
               "ip": {
@@ -24838,9 +25972,11 @@ export const OPERATIONS: OperationDef[] = [
               },
               "server": {
                 "description": "[Server](#tag/servers) the [Floating IP](#tag/floating-ips) is assigned to.\n\n`null` if not assigned.\n",
-                "type": "integer",
+                "type": [
+                  "integer",
+                  "null"
+                ],
                 "format": "int64",
-                "nullable": true,
                 "example": 42
               },
               "dns_ptr": {
@@ -24867,6 +26003,7 @@ export const OPERATIONS: OperationDef[] = [
                 }
               },
               "home_location": {
+                "description": "[Location](#tag/locations) the for the [Floating IP](#tag/floating-ips) is located at.\n\nRouting is optimized for this [Location](#tag/locations).\n",
                 "type": "object",
                 "properties": {
                   "id": {
@@ -24966,6 +26103,7 @@ export const OPERATIONS: OperationDef[] = [
                 "example": "2016-01-30T23:55:00Z"
               }
             },
+            "additionalProperties": false,
             "required": [
               "id",
               "name",
@@ -24994,40 +26132,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -25046,6 +26197,7 @@ export const OPERATIONS: OperationDef[] = [
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "floating_ips",
         "meta"
@@ -25134,6 +26286,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -25146,6 +26299,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -25191,10 +26346,12 @@ export const OPERATIONS: OperationDef[] = [
               },
               "finished": {
                 "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "example": "2016-01-30T23:55:00Z",
-                "nullable": true
+                "example": "2016-01-30T23:55:00Z"
               },
               "progress": {
                 "description": "Progress of the Action in percent.",
@@ -25230,8 +26387,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "error": {
                 "description": "Error message for the Action if an error occurred, otherwise null.",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "code": {
                     "description": "Fixed error code for machines.",
@@ -25274,40 +26433,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -25469,6 +26641,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -25481,6 +26654,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -25525,8 +26700,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "name": {
                 "description": "Unique identifier of the Image. This value is only set for system Images.",
-                "type": "string",
-                "nullable": true,
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "example": "ubuntu-24.04"
               },
               "description": {
@@ -25536,8 +26713,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "image_size": {
                 "description": "Size of the Image file in our storage in GB. For snapshot Images this is the value relevant for calculating costs for the Image.",
-                "type": "number",
-                "nullable": true,
+                "type": [
+                  "number",
+                  "null"
+                ],
                 "example": 2.3
               },
               "disk_size": {
@@ -25553,8 +26732,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "created_from": {
                 "description": "Information about the Server the Image was created from.",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "id": {
                     "description": "ID of the Server the Image was created from.",
@@ -25575,9 +26756,11 @@ export const OPERATIONS: OperationDef[] = [
               },
               "bound_to": {
                 "description": "ID of Server the Image is bound to. Only set for Images of type `backup`.",
-                "type": "integer",
+                "type": [
+                  "integer",
+                  "null"
+                ],
                 "format": "int64",
-                "nullable": true,
                 "example": null
               },
               "os_flavor": {
@@ -25597,8 +26780,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "os_version": {
                 "description": "Operating system version.",
-                "type": "string",
-                "nullable": true,
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "example": "24.04"
               },
               "rapid_deploy": {
@@ -25621,16 +26806,47 @@ export const OPERATIONS: OperationDef[] = [
                 ]
               },
               "deprecated": {
-                "description": "Point in time when the Image is considered to be deprecated (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).",
-                "type": "string",
+                "deprecated": true,
+                "description": "**Deprecated:** This field is deprecated, use the deprecation object instead.\n\nPoint in time when the Image is considered to be deprecated (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).\n",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "nullable": true,
                 "example": "2018-02-28T00:00:00Z"
+              },
+              "deprecation": {
+                "title": "DeprecationInfo",
+                "description": "Describes if, when and how the resource is deprecated. If this field is\nset to `null` the resource is not deprecated. If a value is set, it is\nconsidered deprecated.\n",
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "unavailable_after": {
+                    "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2023-09-01T00:00:00Z"
+                  },
+                  "announced": {
+                    "description": "Date of the deprecation announcement.\n",
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2023-06-01T00:00:00Z"
+                  }
+                },
+                "required": [
+                  "unavailable_after",
+                  "announced"
+                ]
               },
               "deleted": {
                 "description": "Point in time where the Image was deleted (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).",
-                "type": "string",
-                "nullable": true,
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "example": null
               },
               "labels": {
@@ -25670,6 +26886,7 @@ export const OPERATIONS: OperationDef[] = [
               "os_version",
               "protection",
               "deprecated",
+              "deprecation",
               "deleted",
               "labels",
               "architecture"
@@ -25688,40 +26905,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -25800,6 +27030,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -25812,6 +27043,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -25835,8 +27068,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "name": {
                 "description": "Unique identifier of the ISO. Only set for public ISOs.",
-                "type": "string",
-                "nullable": true,
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "example": "FreeBSD-11.0-RELEASE-amd64-dvd1"
               },
               "description": {
@@ -25846,18 +27081,22 @@ export const OPERATIONS: OperationDef[] = [
               },
               "type": {
                 "description": "Type of the ISO.",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "enum": [
                   "public",
                   "private"
-                ],
-                "nullable": true
+                ]
               },
               "deprecation": {
                 "title": "DeprecationInfo",
                 "description": "Describes if, when and how the resource is deprecated. If this field is\nset to `null` the resource is not deprecated. If a value is set, it is\nconsidered deprecated.\n",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "unavailable_after": {
                     "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
@@ -25879,13 +27118,15 @@ export const OPERATIONS: OperationDef[] = [
               },
               "architecture": {
                 "description": "CPU architecture compatible with the ISO.\n\nNull indicates no restriction on the architecture (wildcard).\n",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "enum": [
                   "x86",
                   "arm"
                 ],
-                "example": "x86",
-                "nullable": true
+                "example": "x86"
               }
             },
             "required": [
@@ -25910,40 +27151,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -26050,6 +27304,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -26062,6 +27317,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -26107,10 +27364,12 @@ export const OPERATIONS: OperationDef[] = [
               },
               "finished": {
                 "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "example": "2016-01-30T23:55:00Z",
-                "nullable": true
+                "example": "2016-01-30T23:55:00Z"
               },
               "progress": {
                 "description": "Progress of the Action in percent.",
@@ -26146,8 +27405,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "error": {
                 "description": "Error message for the Action if an error occurred, otherwise null.",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "code": {
                     "description": "Fixed error code for machines.",
@@ -26190,40 +27451,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -26278,6 +27552,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -26290,6 +27565,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -26344,11 +27621,40 @@ export const OPERATIONS: OperationDef[] = [
                 "example": 10
               },
               "deprecated": {
-                "description": "Point in time when the Load Balancer type is deprecated (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).",
-                "type": "string",
+                "deprecated": true,
+                "description": "**Deprecated:** This field is deprecated. Use the `deprecation` object instead.\n\nPoint in time when the Load Balancer type is deprecated (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).\n",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "nullable": true,
                 "example": "2016-01-30T23:50:00Z"
+              },
+              "deprecation": {
+                "title": "DeprecationInfo",
+                "description": "Describes if, when and how the resource is deprecated. If this field is\nset to `null` the resource is not deprecated. If a value is set, it is\nconsidered deprecated.\n",
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "unavailable_after": {
+                    "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2023-09-01T00:00:00Z"
+                  },
+                  "announced": {
+                    "description": "Date of the deprecation announcement.\n",
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2023-06-01T00:00:00Z"
+                  }
+                },
+                "required": [
+                  "unavailable_after",
+                  "announced"
+                ]
               },
               "prices": {
                 "description": "Price per [Location](#tag/locations).",
@@ -26453,6 +27759,7 @@ export const OPERATIONS: OperationDef[] = [
               "max_targets",
               "max_assigned_certificates",
               "deprecated",
+              "deprecation",
               "prices"
             ]
           }
@@ -26469,40 +27776,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -26589,6 +27909,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -26601,6 +27922,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -26639,21 +27962,43 @@ export const OPERATIONS: OperationDef[] = [
                     "description": "IP address (v4).",
                     "type": "object",
                     "properties": {
+                      "id": {
+                        "description": "ID of the [Primary IP](#tag/primary-ips) assigned to this Load Balancer.\n\n`null` if the IP address is still managed by the system and is not a [Primary IP](#tag/primary-ips) yet.\n",
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "int64",
+                        "minimum": 1,
+                        "maximum": 9007199254740991,
+                        "example": 42
+                      },
                       "ip": {
                         "description": "IP address (v4) of this Load Balancer.",
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                          "string",
+                          "null"
+                        ],
                         "example": "1.2.3.4"
+                      },
+                      "blocked": {
+                        "description": "Whether the IP is blocked by our abuse department.",
+                        "type": "boolean",
+                        "example": false
                       },
                       "dns_ptr": {
                         "description": "Reverse DNS PTR entry for the IPv4 address of this Load Balancer.",
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                          "string",
+                          "null"
+                        ],
                         "example": "lb1.example.com"
                       }
                     },
                     "required": [
+                      "id",
                       "ip",
+                      "blocked",
                       "dns_ptr"
                     ]
                   },
@@ -26661,21 +28006,43 @@ export const OPERATIONS: OperationDef[] = [
                     "description": "IP address (v6).",
                     "type": "object",
                     "properties": {
+                      "id": {
+                        "description": "ID of the [Primary IP](#tag/primary-ips) assigned to this Load Balancer.\n\n`null` if the IP address is still managed by the system and is not a [Primary IP](#tag/primary-ips) yet.\n",
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "int64",
+                        "minimum": 1,
+                        "maximum": 9007199254740991,
+                        "example": 42
+                      },
                       "ip": {
                         "description": "IP address (v6) of this Load Balancer.",
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                          "string",
+                          "null"
+                        ],
                         "example": "2001:db8::1"
+                      },
+                      "blocked": {
+                        "description": "Whether the IP is blocked by our abuse department.",
+                        "type": "boolean",
+                        "example": false
                       },
                       "dns_ptr": {
                         "description": "Reverse DNS PTR entry for the IPv6 address of this Load Balancer.",
-                        "type": "string",
-                        "nullable": true,
+                        "type": [
+                          "string",
+                          "null"
+                        ],
                         "example": "lb1.example.com"
                       }
                     },
                     "required": [
+                      "id",
                       "ip",
+                      "blocked",
                       "dns_ptr"
                     ]
                   }
@@ -26816,11 +28183,40 @@ export const OPERATIONS: OperationDef[] = [
                     "example": 10
                   },
                   "deprecated": {
-                    "description": "Point in time when the Load Balancer type is deprecated (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).",
-                    "type": "string",
+                    "deprecated": true,
+                    "description": "**Deprecated:** This field is deprecated. Use the `deprecation` object instead.\n\nPoint in time when the Load Balancer type is deprecated (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).\n",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "format": "date-time",
-                    "nullable": true,
                     "example": "2016-01-30T23:50:00Z"
+                  },
+                  "deprecation": {
+                    "title": "DeprecationInfo",
+                    "description": "Describes if, when and how the resource is deprecated. If this field is\nset to `null` the resource is not deprecated. If a value is set, it is\nconsidered deprecated.\n",
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "properties": {
+                      "unavailable_after": {
+                        "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-09-01T00:00:00Z"
+                      },
+                      "announced": {
+                        "description": "Date of the deprecation announcement.\n",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-06-01T00:00:00Z"
+                      }
+                    },
+                    "required": [
+                      "unavailable_after",
+                      "announced"
+                    ]
                   },
                   "prices": {
                     "description": "Price per [Location](#tag/locations).",
@@ -26925,6 +28321,7 @@ export const OPERATIONS: OperationDef[] = [
                   "max_targets",
                   "max_assigned_certificates",
                   "deprecated",
+                  "deprecation",
                   "prices"
                 ]
               },
@@ -27042,8 +28439,10 @@ export const OPERATIONS: OperationDef[] = [
                                   "properties": {
                                     "domain": {
                                       "description": "Host header to send in the HTTP request. May not contain spaces, percent or backslash symbols. Can be null, in that case no host header is sent.",
-                                      "type": "string",
-                                      "nullable": true,
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
                                       "maxLength": 128,
                                       "example": "example.com"
                                     },
@@ -27197,8 +28596,10 @@ export const OPERATIONS: OperationDef[] = [
                                   "properties": {
                                     "domain": {
                                       "description": "Host header to send in the HTTP request. May not contain spaces, percent or backslash symbols. Can be null, in that case no host header is sent.",
-                                      "type": "string",
-                                      "nullable": true,
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
                                       "maxLength": 128,
                                       "example": "example.com"
                                     },
@@ -27297,6 +28698,8 @@ export const OPERATIONS: OperationDef[] = [
                                   "description": "Idle timeout in seconds for the client and server side.",
                                   "type": "integer",
                                   "default": 50,
+                                  "minimum": 30,
+                                  "maximum": 300,
                                   "example": 50
                                 },
                                 "sticky_sessions": {
@@ -27396,8 +28799,10 @@ export const OPERATIONS: OperationDef[] = [
                                   "properties": {
                                     "domain": {
                                       "description": "Host header to send in the HTTP request. May not contain spaces, percent or backslash symbols. Can be null, in that case no host header is sent.",
-                                      "type": "string",
-                                      "nullable": true,
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
                                       "maxLength": 128,
                                       "example": "example.com"
                                     },
@@ -27496,6 +28901,8 @@ export const OPERATIONS: OperationDef[] = [
                                   "description": "Idle timeout in seconds for the client and server side.",
                                   "type": "integer",
                                   "default": 50,
+                                  "minimum": 30,
+                                  "maximum": 300,
                                   "example": 50
                                 },
                                 "certificates": {
@@ -27595,10 +29002,16 @@ export const OPERATIONS: OperationDef[] = [
                                   "type": "integer",
                                   "format": "int64",
                                   "example": 80
+                                },
+                                "ip": {
+                                  "description": "IP of the Server that the traffic is routed to. Either the Server's primary IPv4 or, if an IPv6 was specified when adding the target, an IPv6 within the Server's /64 subnet.",
+                                  "type": "string",
+                                  "example": "2001:db8::1"
                                 }
                               },
                               "required": [
-                                "id"
+                                "id",
+                                "ip"
                               ]
                             },
                             "health_status": {
@@ -27620,6 +29033,24 @@ export const OPERATIONS: OperationDef[] = [
                                       "unknown"
                                     ],
                                     "example": "healthy"
+                                  },
+                                  "detail": {
+                                    "description": "Additional details about why the health check failed. Only present when `status` is `unhealthy`.",
+                                    "type": "string",
+                                    "enum": [
+                                      "unspecified",
+                                      "layer4_no_connection",
+                                      "layer4_timeout",
+                                      "layer7_timeout",
+                                      "unexpected_http_status",
+                                      "unexpected_http_content"
+                                    ],
+                                    "example": "unexpected_http_status"
+                                  },
+                                  "http_status_code": {
+                                    "description": "HTTP status code returned by the target during the last health check. Only present when `status` is `unhealthy` and `detail` is `unexpected_http_status`.",
+                                    "type": "integer",
+                                    "example": 503
                                   }
                                 },
                                 "required": [
@@ -27712,10 +29143,16 @@ export const OPERATIONS: OperationDef[] = [
                                         "type": "integer",
                                         "format": "int64",
                                         "example": 80
+                                      },
+                                      "ip": {
+                                        "description": "IP of the Server that the traffic is routed to. Either the Server's primary IPv4 or, if an IPv6 was specified when adding the target, an IPv6 within the Server's /64 subnet.",
+                                        "type": "string",
+                                        "example": "2001:db8::1"
                                       }
                                     },
                                     "required": [
-                                      "id"
+                                      "id",
+                                      "ip"
                                     ]
                                   },
                                   "health_status": {
@@ -27737,6 +29174,24 @@ export const OPERATIONS: OperationDef[] = [
                                             "unknown"
                                           ],
                                           "example": "healthy"
+                                        },
+                                        "detail": {
+                                          "description": "Additional details about why the health check failed. Only present when `status` is `unhealthy`.",
+                                          "type": "string",
+                                          "enum": [
+                                            "unspecified",
+                                            "layer4_no_connection",
+                                            "layer4_timeout",
+                                            "layer7_timeout",
+                                            "unexpected_http_status",
+                                            "unexpected_http_content"
+                                          ],
+                                          "example": "unexpected_http_status"
+                                        },
+                                        "http_status_code": {
+                                          "description": "HTTP status code returned by the target during the last health check. Only present when `status` is `unhealthy` and `detail` is `unexpected_http_status`.",
+                                          "type": "integer",
+                                          "example": 503
                                         }
                                       },
                                       "required": [
@@ -27839,6 +29294,24 @@ export const OPERATIONS: OperationDef[] = [
                                       "unknown"
                                     ],
                                     "example": "healthy"
+                                  },
+                                  "detail": {
+                                    "description": "Additional details about why the health check failed. Only present when `status` is `unhealthy`.",
+                                    "type": "string",
+                                    "enum": [
+                                      "unspecified",
+                                      "layer4_no_connection",
+                                      "layer4_timeout",
+                                      "layer7_timeout",
+                                      "unexpected_http_status",
+                                      "unexpected_http_content"
+                                    ],
+                                    "example": "unexpected_http_status"
+                                  },
+                                  "http_status_code": {
+                                    "description": "HTTP status code returned by the target during the last health check. Only present when `status` is `unhealthy` and `detail` is `unexpected_http_status`.",
+                                    "type": "integer",
+                                    "example": 503
                                   }
                                 },
                                 "required": [
@@ -27885,15 +29358,19 @@ export const OPERATIONS: OperationDef[] = [
               },
               "outgoing_traffic": {
                 "description": "Outbound Traffic for the current billing period in bytes.",
-                "type": "integer",
-                "format": "int64",
-                "nullable": true
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "format": "int64"
               },
               "ingoing_traffic": {
                 "description": "Inbound Traffic for the current billing period in bytes.",
-                "type": "integer",
-                "format": "int64",
-                "nullable": true
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "format": "int64"
               },
               "included_traffic": {
                 "description": "Free Traffic for the current billing period in bytes.",
@@ -27933,40 +29410,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -28041,6 +29531,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -28053,6 +29544,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -28139,40 +29632,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -28191,6 +29697,7 @@ export const OPERATIONS: OperationDef[] = [
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "locations",
         "meta"
@@ -28279,6 +29786,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -28291,6 +29799,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -28336,10 +29846,12 @@ export const OPERATIONS: OperationDef[] = [
               },
               "finished": {
                 "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "example": "2016-01-30T23:55:00Z",
-                "nullable": true
+                "example": "2016-01-30T23:55:00Z"
               },
               "progress": {
                 "description": "Progress of the Action in percent.",
@@ -28375,8 +29887,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "error": {
                 "description": "Error message for the Action if an error occurred, otherwise null.",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "code": {
                     "description": "Fixed error code for machines.",
@@ -28419,40 +29933,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -28539,6 +30066,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -28551,6 +30079,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -28573,6 +30103,8 @@ export const OPERATIONS: OperationDef[] = [
               "name": {
                 "description": "Name of the [Network](#tag/networks).",
                 "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
                 "example": "mynet"
               },
               "ip_range": {
@@ -28617,12 +30149,15 @@ export const OPERATIONS: OperationDef[] = [
                     },
                     "vswitch_id": {
                       "description": "ID of the robot vSwitch if the subnet is of type `vswitch`.",
-                      "type": "integer",
+                      "type": [
+                        "integer",
+                        "null"
+                      ],
                       "format": "int64",
-                      "nullable": true,
                       "example": 1000
                     }
                   },
+                  "additionalProperties": false,
                   "required": [
                     "type",
                     "network_zone",
@@ -28647,6 +30182,7 @@ export const OPERATIONS: OperationDef[] = [
                       "example": "10.0.1.1"
                     }
                   },
+                  "additionalProperties": false,
                   "required": [
                     "destination",
                     "gateway"
@@ -28713,6 +30249,7 @@ export const OPERATIONS: OperationDef[] = [
                 "example": false
               }
             },
+            "additionalProperties": false,
             "required": [
               "id",
               "name",
@@ -28739,40 +30276,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -28791,6 +30341,7 @@ export const OPERATIONS: OperationDef[] = [
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "networks",
         "meta"
@@ -28876,6 +30427,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -28888,6 +30440,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -28976,40 +30530,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -29116,6 +30683,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -29128,6 +30696,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -29173,10 +30743,12 @@ export const OPERATIONS: OperationDef[] = [
               },
               "finished": {
                 "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "example": "2016-01-30T23:55:00Z",
-                "nullable": true
+                "example": "2016-01-30T23:55:00Z"
               },
               "progress": {
                 "description": "Progress of the Action in percent.",
@@ -29212,8 +30784,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "error": {
                 "description": "Error message for the Action if an error occurred, otherwise null.",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "code": {
                     "description": "Fixed error code for machines.",
@@ -29256,40 +30830,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -29362,6 +30949,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -29374,6 +30962,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -29418,6 +31008,8 @@ export const OPERATIONS: OperationDef[] = [
                 "example": 42
               },
               "name": {
+                "minLength": 1,
+                "maxLength": 255,
                 "description": "Name of the Resource. Must be unique per Project.",
                 "type": "string",
                 "example": "my-resource"
@@ -29444,156 +31036,6 @@ export const OPERATIONS: OperationDef[] = [
                 "description": "Blocked state of the [Primary IP](#tag/primary-ips).",
                 "type": "boolean",
                 "example": false
-              },
-              "datacenter": {
-                "deprecated": true,
-                "description": "**Deprecated**: This property is deprecated and will be removed after the 1 July 2026.\nUse the `location` property instead.\n\n[Data Center](#tag/data-centers) of the [Primary IP](#tag/primary-ips).\n",
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "description": "ID of the [Data Center](#tag/data-centers).",
-                    "type": "integer",
-                    "format": "int64",
-                    "minimum": 1,
-                    "maximum": 9007199254740991,
-                    "example": 42
-                  },
-                  "name": {
-                    "description": "Unique name for the [Data Center](#tag/data-centers).\n\nMay be used as a more descriptive identifier.\n",
-                    "type": "string",
-                    "pattern": "^[a-z0-9]+(-?[a-z0-9]*)*$",
-                    "example": "fsn1-dc8"
-                  },
-                  "description": {
-                    "description": "Descriptive name for the [Data Center](#tag/data-centers).\n\nDesired to be easy to understand for humans. May change for cosmetic reasons. Must not be used as an identifier.\n",
-                    "type": "string",
-                    "example": "Falkenstein DC Park 8"
-                  },
-                  "location": {
-                    "description": "[Location](#tag/locations) the [Data Center](#tag/data-centers) is located at.\n",
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "description": "ID of the [Location](#tag/locations).",
-                        "type": "integer",
-                        "format": "int64",
-                        "minimum": 1,
-                        "maximum": 9007199254740991,
-                        "example": 42
-                      },
-                      "name": {
-                        "description": "Unique identifier of the [Location](#tag/locations).",
-                        "type": "string",
-                        "pattern": "^[a-z0-9]+(-?[a-z0-9]*)*$",
-                        "example": "fsn1"
-                      },
-                      "description": {
-                        "description": "Human readable description of the [Location](#tag/locations).",
-                        "type": "string",
-                        "example": "Falkenstein DC Park 1"
-                      },
-                      "country": {
-                        "description": "Country the [Location](#tag/locations) resides in.\n\nISO 3166-1 alpha-2 code of the country.\n",
-                        "type": "string",
-                        "example": "DE"
-                      },
-                      "city": {
-                        "description": "Name of the closest city to the [Location](#tag/locations).\n\nCity name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.\n",
-                        "type": "string",
-                        "example": "Falkenstein"
-                      },
-                      "latitude": {
-                        "description": "Latitude of the city closest to the [Location](#tag/locations).",
-                        "type": "number",
-                        "format": "double",
-                        "example": 50.47612
-                      },
-                      "longitude": {
-                        "description": "Longitude of the city closest to the [Location](#tag/locations).",
-                        "type": "number",
-                        "format": "double",
-                        "example": 12.370071
-                      },
-                      "network_zone": {
-                        "description": "Name of the Network Zone this [Location](#tag/locations) resides in.",
-                        "type": "string",
-                        "pattern": "^[a-z0-9]+(-?[a-z0-9]*)*$",
-                        "example": "eu-central"
-                      }
-                    },
-                    "required": [
-                      "id",
-                      "name",
-                      "description",
-                      "country",
-                      "city",
-                      "latitude",
-                      "longitude",
-                      "network_zone"
-                    ]
-                  },
-                  "server_types": {
-                    "deprecated": true,
-                    "description": "This field is deprecated, as all of it's properties are deprecated.\n\n[Server Types](#tag/server-types) supported and available in this [Data Center](#tag/data-centers).\n",
-                    "type": "object",
-                    "properties": {
-                      "supported": {
-                        "deprecated": true,
-                        "description": "This field is deprecated. Use the [Server Type](#tag/server-types) `locations` field instead.\n\nList of [Server Types](#tag/server-types) supported in this [Data Center](#tag/data-centers).\n\nThese [Server Types](#tag/server-types) are generally available in this Data Center, but may be\ntemporarily out of stock.\n",
-                        "type": "array",
-                        "items": {
-                          "type": "integer",
-                          "format": "int64"
-                        },
-                        "example": [
-                          1,
-                          2,
-                          3
-                        ]
-                      },
-                      "available": {
-                        "deprecated": true,
-                        "description": "This field is deprecated. Use the `available` flag in the [Server Type](#tag/server-types) `locations` field instead (`server_type.locations[].available`).\n\n[Server Types](#tag/server-types) currently available in this [Data Center](#tag/data-centers).\n\nThese [Server Types](#tag/server-types) can currently be purchased. Types that are temporarily unavailable\nbut are supported in this [Data Center](#tag/data-centers) are listed as `supported`.\n",
-                        "type": "array",
-                        "items": {
-                          "type": "integer",
-                          "format": "int64"
-                        },
-                        "example": [
-                          1,
-                          2,
-                          3
-                        ]
-                      },
-                      "available_for_migration": {
-                        "deprecated": true,
-                        "description": "This field is deprecated. Use the `available` flag in the [Server Type](#tag/server-types) `locations` field instead (`server_type.locations[].available`).\n\n[Server Types](#tag/server-types) available to migrate to in this [Data Center](#tag/data-centers).\n\nExisting [Servers](#tag/servers) can be migrated to these [Server Types](#tag/server-types).\n",
-                        "type": "array",
-                        "items": {
-                          "type": "integer",
-                          "format": "int64"
-                        },
-                        "example": [
-                          1,
-                          2,
-                          3
-                        ]
-                      }
-                    },
-                    "required": [
-                      "supported",
-                      "available",
-                      "available_for_migration"
-                    ]
-                  }
-                },
-                "required": [
-                  "id",
-                  "name",
-                  "description",
-                  "location",
-                  "server_types"
-                ]
               },
               "location": {
                 "description": "[Location](#tag/locations) of the [Primary IP](#tag/primary-ips).\n",
@@ -29716,21 +31158,25 @@ export const OPERATIONS: OperationDef[] = [
                 "example": true
               },
               "assignee_type": {
-                "description": "Type of resource the [Primary IP](#tag/primary-ips) can get assigned to.\n",
+                "description": "Type of resource the [Primary IP](#tag/primary-ips) is assigned to.\n\nAs of 23 September 2026 `unassigned` is returned if the [Primary IP](#tag/primary-ips) is not assigned.\n",
                 "type": "string",
                 "enum": [
-                  "server"
+                  "server",
+                  "unassigned"
                 ],
                 "example": "server"
               },
               "assignee_id": {
                 "description": "ID of resource the [Primary IP](#tag/primary-ips) is assigned to.\n\n`null` if the [Primary IP](#tag/primary-ips) is not assigned.\n",
-                "type": "integer",
+                "type": [
+                  "integer",
+                  "null"
+                ],
                 "format": "int64",
-                "nullable": true,
                 "example": 17
               }
             },
+            "additionalProperties": false,
             "required": [
               "id",
               "name",
@@ -29738,7 +31184,6 @@ export const OPERATIONS: OperationDef[] = [
               "created",
               "blocked",
               "location",
-              "datacenter",
               "ip",
               "dns_ptr",
               "protection",
@@ -29761,40 +31206,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -29813,6 +31271,7 @@ export const OPERATIONS: OperationDef[] = [
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "primary_ips",
         "meta"
@@ -29901,6 +31360,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -29913,6 +31373,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -29958,10 +31420,12 @@ export const OPERATIONS: OperationDef[] = [
               },
               "finished": {
                 "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "example": "2016-01-30T23:55:00Z",
-                "nullable": true
+                "example": "2016-01-30T23:55:00Z"
               },
               "progress": {
                 "description": "Progress of the Action in percent.",
@@ -29997,8 +31461,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "error": {
                 "description": "Error message for the Action if an error occurred, otherwise null.",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "code": {
                     "description": "Fixed error code for machines.",
@@ -30041,40 +31507,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -30129,6 +31608,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -30141,6 +31621,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -30318,8 +31800,10 @@ export const OPERATIONS: OperationDef[] = [
                 "deprecated": true,
                 "description": "This field is deprecated.\n\nUse the `deprecation` object in the `locations` field instead (`.locations[].deprecation`).\n",
                 "title": "DeprecationInfo",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "unavailable_after": {
                     "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
@@ -30362,8 +31846,10 @@ export const OPERATIONS: OperationDef[] = [
                     "deprecation": {
                       "title": "DeprecationInfo",
                       "description": "Describes if, when and how the resource is deprecated. If this field is\nset to `null` the resource is not deprecated. If a value is set, it is\nconsidered deprecated.\n",
-                      "type": "object",
-                      "nullable": true,
+                      "type": [
+                        "object",
+                        "null"
+                      ],
                       "properties": {
                         "unavailable_after": {
                           "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
@@ -30432,40 +31918,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -30576,6 +32075,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -30588,6 +32088,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -30641,8 +32143,10 @@ export const OPERATIONS: OperationDef[] = [
                 "properties": {
                   "ipv4": {
                     "description": "IP address (v4) and its reverse DNS entry of this Server.",
-                    "type": "object",
-                    "nullable": true,
+                    "type": [
+                      "object",
+                      "null"
+                    ],
                     "properties": {
                       "id": {
                         "description": "ID of the [Primary IP](#tag/primary-ips).",
@@ -30658,7 +32162,7 @@ export const OPERATIONS: OperationDef[] = [
                         "example": "1.2.3.4"
                       },
                       "blocked": {
-                        "description": "If the IP is blocked by our anti abuse dept.",
+                        "description": "Whether the IP is blocked by our abuse department.",
                         "type": "boolean",
                         "example": false
                       },
@@ -30676,8 +32180,10 @@ export const OPERATIONS: OperationDef[] = [
                   },
                   "ipv6": {
                     "description": "IPv6 network assigned to this Server and its reverse DNS entry.",
-                    "type": "object",
-                    "nullable": true,
+                    "type": [
+                      "object",
+                      "null"
+                    ],
                     "properties": {
                       "id": {
                         "description": "ID of the [Primary IP](#tag/primary-ips).",
@@ -30693,14 +32199,16 @@ export const OPERATIONS: OperationDef[] = [
                         "example": "2001:db8::/64"
                       },
                       "blocked": {
-                        "description": "If the IP is blocked by our anti abuse dept.",
+                        "description": "Whether the IP is blocked by our abuse department.",
                         "type": "boolean",
                         "example": false
                       },
                       "dns_ptr": {
                         "description": "Reverse DNS PTR entries for the IPv6 addresses of this Server.",
-                        "type": "array",
-                        "nullable": true,
+                        "type": [
+                          "array",
+                          "null"
+                        ],
                         "items": {
                           "type": "object",
                           "properties": {
@@ -30976,8 +32484,10 @@ export const OPERATIONS: OperationDef[] = [
                     "deprecated": true,
                     "description": "This field is deprecated.\n\nUse the `deprecation` object in the `locations` field instead (`.locations[].deprecation`).\n",
                     "title": "DeprecationInfo",
-                    "type": "object",
-                    "nullable": true,
+                    "type": [
+                      "object",
+                      "null"
+                    ],
                     "properties": {
                       "unavailable_after": {
                         "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
@@ -31020,8 +32530,10 @@ export const OPERATIONS: OperationDef[] = [
                         "deprecation": {
                           "title": "DeprecationInfo",
                           "description": "Describes if, when and how the resource is deprecated. If this field is\nset to `null` the resource is not deprecated. If a value is set, it is\nconsidered deprecated.\n",
-                          "type": "object",
-                          "nullable": true,
+                          "type": [
+                            "object",
+                            "null"
+                          ],
                           "properties": {
                             "unavailable_after": {
                               "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
@@ -31075,156 +32587,6 @@ export const OPERATIONS: OperationDef[] = [
                   "cpu_type",
                   "architecture",
                   "locations"
-                ]
-              },
-              "datacenter": {
-                "deprecated": true,
-                "description": "**Deprecated**: This property is deprecated and will be removed after the 1 July 2026.\nUse the `location` property instead.\n\nData Center this Resource is located at.\n",
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "description": "ID of the [Data Center](#tag/data-centers).",
-                    "type": "integer",
-                    "format": "int64",
-                    "minimum": 1,
-                    "maximum": 9007199254740991,
-                    "example": 42
-                  },
-                  "name": {
-                    "description": "Unique name for the [Data Center](#tag/data-centers).\n\nMay be used as a more descriptive identifier.\n",
-                    "type": "string",
-                    "pattern": "^[a-z0-9]+(-?[a-z0-9]*)*$",
-                    "example": "fsn1-dc8"
-                  },
-                  "description": {
-                    "description": "Descriptive name for the [Data Center](#tag/data-centers).\n\nDesired to be easy to understand for humans. May change for cosmetic reasons. Must not be used as an identifier.\n",
-                    "type": "string",
-                    "example": "Falkenstein DC Park 8"
-                  },
-                  "location": {
-                    "description": "[Location](#tag/locations) the [Data Center](#tag/data-centers) is located at.\n",
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "description": "ID of the [Location](#tag/locations).",
-                        "type": "integer",
-                        "format": "int64",
-                        "minimum": 1,
-                        "maximum": 9007199254740991,
-                        "example": 42
-                      },
-                      "name": {
-                        "description": "Unique identifier of the [Location](#tag/locations).",
-                        "type": "string",
-                        "pattern": "^[a-z0-9]+(-?[a-z0-9]*)*$",
-                        "example": "fsn1"
-                      },
-                      "description": {
-                        "description": "Human readable description of the [Location](#tag/locations).",
-                        "type": "string",
-                        "example": "Falkenstein DC Park 1"
-                      },
-                      "country": {
-                        "description": "Country the [Location](#tag/locations) resides in.\n\nISO 3166-1 alpha-2 code of the country.\n",
-                        "type": "string",
-                        "example": "DE"
-                      },
-                      "city": {
-                        "description": "Name of the closest city to the [Location](#tag/locations).\n\nCity name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.\n",
-                        "type": "string",
-                        "example": "Falkenstein"
-                      },
-                      "latitude": {
-                        "description": "Latitude of the city closest to the [Location](#tag/locations).",
-                        "type": "number",
-                        "format": "double",
-                        "example": 50.47612
-                      },
-                      "longitude": {
-                        "description": "Longitude of the city closest to the [Location](#tag/locations).",
-                        "type": "number",
-                        "format": "double",
-                        "example": 12.370071
-                      },
-                      "network_zone": {
-                        "description": "Name of the Network Zone this [Location](#tag/locations) resides in.",
-                        "type": "string",
-                        "pattern": "^[a-z0-9]+(-?[a-z0-9]*)*$",
-                        "example": "eu-central"
-                      }
-                    },
-                    "required": [
-                      "id",
-                      "name",
-                      "description",
-                      "country",
-                      "city",
-                      "latitude",
-                      "longitude",
-                      "network_zone"
-                    ]
-                  },
-                  "server_types": {
-                    "deprecated": true,
-                    "description": "This field is deprecated, as all of it's properties are deprecated.\n\n[Server Types](#tag/server-types) supported and available in this [Data Center](#tag/data-centers).\n",
-                    "type": "object",
-                    "properties": {
-                      "supported": {
-                        "deprecated": true,
-                        "description": "This field is deprecated. Use the [Server Type](#tag/server-types) `locations` field instead.\n\nList of [Server Types](#tag/server-types) supported in this [Data Center](#tag/data-centers).\n\nThese [Server Types](#tag/server-types) are generally available in this Data Center, but may be\ntemporarily out of stock.\n",
-                        "type": "array",
-                        "items": {
-                          "type": "integer",
-                          "format": "int64"
-                        },
-                        "example": [
-                          1,
-                          2,
-                          3
-                        ]
-                      },
-                      "available": {
-                        "deprecated": true,
-                        "description": "This field is deprecated. Use the `available` flag in the [Server Type](#tag/server-types) `locations` field instead (`server_type.locations[].available`).\n\n[Server Types](#tag/server-types) currently available in this [Data Center](#tag/data-centers).\n\nThese [Server Types](#tag/server-types) can currently be purchased. Types that are temporarily unavailable\nbut are supported in this [Data Center](#tag/data-centers) are listed as `supported`.\n",
-                        "type": "array",
-                        "items": {
-                          "type": "integer",
-                          "format": "int64"
-                        },
-                        "example": [
-                          1,
-                          2,
-                          3
-                        ]
-                      },
-                      "available_for_migration": {
-                        "deprecated": true,
-                        "description": "This field is deprecated. Use the `available` flag in the [Server Type](#tag/server-types) `locations` field instead (`server_type.locations[].available`).\n\n[Server Types](#tag/server-types) available to migrate to in this [Data Center](#tag/data-centers).\n\nExisting [Servers](#tag/servers) can be migrated to these [Server Types](#tag/server-types).\n",
-                        "type": "array",
-                        "items": {
-                          "type": "integer",
-                          "format": "int64"
-                        },
-                        "example": [
-                          1,
-                          2,
-                          3
-                        ]
-                      }
-                    },
-                    "required": [
-                      "supported",
-                      "available",
-                      "available_for_migration"
-                    ]
-                  }
-                },
-                "required": [
-                  "id",
-                  "name",
-                  "description",
-                  "location",
-                  "server_types"
                 ]
               },
               "location": {
@@ -31292,7 +32654,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "image": {
                 "description": "Image the server is based on.",
-                "type": "object",
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "id": {
                     "description": "ID of the [Image](#tag/images).",
@@ -31325,8 +32690,10 @@ export const OPERATIONS: OperationDef[] = [
                   },
                   "name": {
                     "description": "Unique identifier of the Image. This value is only set for system Images.",
-                    "type": "string",
-                    "nullable": true,
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "example": "ubuntu-24.04"
                   },
                   "description": {
@@ -31336,8 +32703,10 @@ export const OPERATIONS: OperationDef[] = [
                   },
                   "image_size": {
                     "description": "Size of the Image file in our storage in GB. For snapshot Images this is the value relevant for calculating costs for the Image.",
-                    "type": "number",
-                    "nullable": true,
+                    "type": [
+                      "number",
+                      "null"
+                    ],
                     "example": 2.3
                   },
                   "disk_size": {
@@ -31353,8 +32722,10 @@ export const OPERATIONS: OperationDef[] = [
                   },
                   "created_from": {
                     "description": "Information about the Server the Image was created from.",
-                    "type": "object",
-                    "nullable": true,
+                    "type": [
+                      "object",
+                      "null"
+                    ],
                     "properties": {
                       "id": {
                         "description": "ID of the Server the Image was created from.",
@@ -31375,9 +32746,11 @@ export const OPERATIONS: OperationDef[] = [
                   },
                   "bound_to": {
                     "description": "ID of Server the Image is bound to. Only set for Images of type `backup`.",
-                    "type": "integer",
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
                     "format": "int64",
-                    "nullable": true,
                     "example": null
                   },
                   "os_flavor": {
@@ -31397,8 +32770,10 @@ export const OPERATIONS: OperationDef[] = [
                   },
                   "os_version": {
                     "description": "Operating system version.",
-                    "type": "string",
-                    "nullable": true,
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "example": "24.04"
                   },
                   "rapid_deploy": {
@@ -31421,16 +32796,47 @@ export const OPERATIONS: OperationDef[] = [
                     ]
                   },
                   "deprecated": {
-                    "description": "Point in time when the Image is considered to be deprecated (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).",
-                    "type": "string",
+                    "deprecated": true,
+                    "description": "**Deprecated:** This field is deprecated, use the deprecation object instead.\n\nPoint in time when the Image is considered to be deprecated (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).\n",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "format": "date-time",
-                    "nullable": true,
                     "example": "2018-02-28T00:00:00Z"
+                  },
+                  "deprecation": {
+                    "title": "DeprecationInfo",
+                    "description": "Describes if, when and how the resource is deprecated. If this field is\nset to `null` the resource is not deprecated. If a value is set, it is\nconsidered deprecated.\n",
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "properties": {
+                      "unavailable_after": {
+                        "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-09-01T00:00:00Z"
+                      },
+                      "announced": {
+                        "description": "Date of the deprecation announcement.\n",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-06-01T00:00:00Z"
+                      }
+                    },
+                    "required": [
+                      "unavailable_after",
+                      "announced"
+                    ]
                   },
                   "deleted": {
                     "description": "Point in time where the Image was deleted (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).",
-                    "type": "string",
-                    "nullable": true,
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "example": null
                   },
                   "labels": {
@@ -31470,15 +32876,18 @@ export const OPERATIONS: OperationDef[] = [
                   "os_version",
                   "protection",
                   "deprecated",
+                  "deprecation",
                   "deleted",
                   "labels",
                   "architecture"
-                ],
-                "nullable": true
+                ]
               },
               "iso": {
                 "description": "ISO Image that is attached to this Server. Null if no ISO is attached.",
-                "type": "object",
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "id": {
                     "description": "ID of the [ISO](#tag/isos).",
@@ -31490,8 +32899,10 @@ export const OPERATIONS: OperationDef[] = [
                   },
                   "name": {
                     "description": "Unique identifier of the ISO. Only set for public ISOs.",
-                    "type": "string",
-                    "nullable": true,
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "example": "FreeBSD-11.0-RELEASE-amd64-dvd1"
                   },
                   "description": {
@@ -31501,18 +32912,22 @@ export const OPERATIONS: OperationDef[] = [
                   },
                   "type": {
                     "description": "Type of the ISO.",
-                    "type": "string",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "enum": [
                       "public",
                       "private"
-                    ],
-                    "nullable": true
+                    ]
                   },
                   "deprecation": {
                     "title": "DeprecationInfo",
                     "description": "Describes if, when and how the resource is deprecated. If this field is\nset to `null` the resource is not deprecated. If a value is set, it is\nconsidered deprecated.\n",
-                    "type": "object",
-                    "nullable": true,
+                    "type": [
+                      "object",
+                      "null"
+                    ],
                     "properties": {
                       "unavailable_after": {
                         "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
@@ -31534,13 +32949,15 @@ export const OPERATIONS: OperationDef[] = [
                   },
                   "architecture": {
                     "description": "CPU architecture compatible with the ISO.\n\nNull indicates no restriction on the architecture (wildcard).\n",
-                    "type": "string",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "enum": [
                       "x86",
                       "arm"
                     ],
-                    "example": "x86",
-                    "nullable": true
+                    "example": "x86"
                   }
                 },
                 "required": [
@@ -31550,8 +32967,7 @@ export const OPERATIONS: OperationDef[] = [
                   "type",
                   "deprecation",
                   "architecture"
-                ],
-                "nullable": true
+                ]
               },
               "rescue_enabled": {
                 "description": "True if rescue mode is enabled. Server will then boot into rescue system on next reboot.",
@@ -31565,29 +32981,37 @@ export const OPERATIONS: OperationDef[] = [
               },
               "backup_window": {
                 "description": "Time window (UTC) in which the backup will run, or null if the backups are not enabled.",
-                "type": "string",
-                "nullable": true,
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "example": "22-02"
               },
               "outgoing_traffic": {
                 "description": "Outbound Traffic for the current billing period in bytes.",
-                "type": "integer",
+                "type": [
+                  "integer",
+                  "null"
+                ],
                 "format": "int64",
-                "nullable": true,
                 "example": 123456
               },
               "ingoing_traffic": {
                 "description": "Inbound Traffic for the current billing period in bytes.",
-                "type": "integer",
+                "type": [
+                  "integer",
+                  "null"
+                ],
                 "format": "int64",
-                "nullable": true,
                 "example": 123456
               },
               "included_traffic": {
                 "description": "Free Traffic for the current billing period in bytes.",
-                "type": "integer",
+                "type": [
+                  "integer",
+                  "null"
+                ],
                 "format": "int64",
-                "nullable": true,
                 "example": 654321
               },
               "protection": {
@@ -31646,7 +33070,10 @@ export const OPERATIONS: OperationDef[] = [
               "placement_group": {
                 "description": "The placement group the server is assigned to.",
                 "title": "PlacementGroupNullable",
-                "type": "object",
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "id": {
                     "description": "ID of the [Placement Group](#tag/placement-groups).",
@@ -31706,8 +33133,7 @@ export const OPERATIONS: OperationDef[] = [
                   "type",
                   "created",
                   "servers"
-                ],
-                "nullable": true
+                ]
               }
             },
             "required": [
@@ -31719,7 +33145,6 @@ export const OPERATIONS: OperationDef[] = [
               "private_net",
               "server_type",
               "location",
-              "datacenter",
               "image",
               "iso",
               "rescue_enabled",
@@ -31746,40 +33171,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -31872,6 +33310,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -31884,6 +33323,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -31961,40 +33402,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -32101,6 +33555,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -32113,6 +33568,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -32158,10 +33615,12 @@ export const OPERATIONS: OperationDef[] = [
               },
               "finished": {
                 "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "example": "2016-01-30T23:55:00Z",
-                "nullable": true
+                "example": "2016-01-30T23:55:00Z"
               },
               "progress": {
                 "description": "Progress of the Action in percent.",
@@ -32197,8 +33656,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "error": {
                 "description": "Error message for the Action if an error occurred, otherwise null.",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "code": {
                     "description": "Fixed error code for machines.",
@@ -32241,40 +33702,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -32379,6 +33853,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -32391,6 +33866,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -32425,9 +33902,11 @@ export const OPERATIONS: OperationDef[] = [
               },
               "server": {
                 "description": "ID of the Server the Volume is attached to, null if it is not attached at all.",
-                "type": "integer",
+                "type": [
+                  "integer",
+                  "null"
+                ],
                 "format": "int64",
-                "nullable": true,
                 "example": 12
               },
               "location": {
@@ -32540,8 +34019,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "format": {
                 "description": "Filesystem of the Volume if formatted on creation, null if not formatted on creation.",
-                "type": "string",
-                "nullable": true,
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "example": "xfs"
               }
             },
@@ -32572,40 +34053,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -32708,6 +34202,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -32720,6 +34215,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -32765,10 +34262,12 @@ export const OPERATIONS: OperationDef[] = [
               },
               "finished": {
                 "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-                "type": "string",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "format": "date-time",
-                "example": "2016-01-30T23:55:00Z",
-                "nullable": true
+                "example": "2016-01-30T23:55:00Z"
               },
               "progress": {
                 "description": "Progress of the Action in percent.",
@@ -32804,8 +34303,10 @@ export const OPERATIONS: OperationDef[] = [
               },
               "error": {
                 "description": "Error message for the Action if an error occurred, otherwise null.",
-                "type": "object",
-                "nullable": true,
+                "type": [
+                  "object",
+                  "null"
+                ],
                 "properties": {
                   "code": {
                     "description": "Fixed error code for machines.",
@@ -32848,40 +34349,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -32983,6 +34497,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 1,
+          "minimum": 1,
           "example": 1
         },
         "description": "Page number to return. For more information, see \"[Pagination](#description/pagination)\"."
@@ -32995,6 +34510,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "integer",
           "format": "int64",
           "default": 25,
+          "minimum": 1,
+          "maximum": 50,
           "example": 25
         },
         "description": "Maximum number of entries returned per page. For more information, see \"[Pagination](#description/pagination)\"."
@@ -33042,7 +34559,7 @@ export const OPERATIONS: OperationDef[] = [
                           "type": "object",
                           "properties": {
                             "address": {
-                              "description": "Public IPv4 or IPv6 address of the primary nameserver.",
+                              "description": "Public IPv4 or IPv6 address of the primary nameserver.\n\nMust be unique across all primary nameservers of this zone.\n",
                               "type": "string",
                               "example": "198.51.100.1"
                             },
@@ -33066,6 +34583,7 @@ export const OPERATIONS: OperationDef[] = [
                               ]
                             }
                           },
+                          "additionalProperties": false,
                           "required": [
                             "address"
                           ]
@@ -33162,10 +34680,12 @@ export const OPERATIONS: OperationDef[] = [
                           },
                           "delegation_last_check": {
                             "description": "Point in time (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format) when the DNS zone delegation was last checked.\n",
-                            "type": "string",
+                            "type": [
+                              "string",
+                              "null"
+                            ],
                             "format": "date-time",
-                            "example": "2016-01-30T23:55:00Z",
-                            "nullable": true
+                            "example": "2016-01-30T23:55:00Z"
                           },
                           "delegation_status": {
                             "description": "Status of the delegation.\n",
@@ -33188,6 +34708,7 @@ export const OPERATIONS: OperationDef[] = [
                             }
                           }
                         },
+                        "additionalProperties": false,
                         "required": [
                           "assigned",
                           "delegated",
@@ -33269,7 +34790,7 @@ export const OPERATIONS: OperationDef[] = [
                           "type": "object",
                           "properties": {
                             "address": {
-                              "description": "Public IPv4 or IPv6 address of the primary nameserver.",
+                              "description": "Public IPv4 or IPv6 address of the primary nameserver.\n\nMust be unique across all primary nameservers of this zone.\n",
                               "type": "string",
                               "example": "198.51.100.1"
                             },
@@ -33293,6 +34814,7 @@ export const OPERATIONS: OperationDef[] = [
                               ]
                             }
                           },
+                          "additionalProperties": false,
                           "required": [
                             "address"
                           ]
@@ -33389,10 +34911,12 @@ export const OPERATIONS: OperationDef[] = [
                           },
                           "delegation_last_check": {
                             "description": "Point in time (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format) when the DNS zone delegation was last checked.\n",
-                            "type": "string",
+                            "type": [
+                              "string",
+                              "null"
+                            ],
                             "format": "date-time",
-                            "example": "2016-01-30T23:55:00Z",
-                            "nullable": true
+                            "example": "2016-01-30T23:55:00Z"
                           },
                           "delegation_status": {
                             "description": "Status of the delegation.\n",
@@ -33415,6 +34939,7 @@ export const OPERATIONS: OperationDef[] = [
                             }
                           }
                         },
+                        "additionalProperties": false,
                         "required": [
                           "assigned",
                           "delegated",
@@ -33484,40 +35009,53 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "Current page number.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 1,
+                  "minimum": 1,
                   "example": 3
                 },
                 "per_page": {
                   "description": "Maximum number of entries returned per page.",
                   "type": "integer",
                   "format": "int64",
+                  "default": 25,
+                  "minimum": 1,
+                  "maximum": 50,
                   "example": 25
                 },
                 "previous_page": {
                   "description": "Page number of the previous page. Can be null if the current page is the first one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 2
                 },
                 "next_page": {
                   "description": "Page number of the next page. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "last_page": {
                   "description": "Page number of the last page available. Can be null if the current page is the last one.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 4
                 },
                 "total_entries": {
                   "description": "Total number of entries that exist for this query. Can be null if unknown.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": 100
                 }
               },
@@ -33536,6 +35074,7 @@ export const OPERATIONS: OperationDef[] = [
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "zones",
         "meta"
@@ -33649,8 +35188,10 @@ export const OPERATIONS: OperationDef[] = [
                       "properties": {
                         "domain": {
                           "description": "Host header to send in the HTTP request. May not contain spaces, percent or backslash symbols. Can be null, in that case no host header is sent.",
-                          "type": "string",
-                          "nullable": true,
+                          "type": [
+                            "string",
+                            "null"
+                          ],
                           "maxLength": 128,
                           "example": "example.com"
                         },
@@ -33813,10 +35354,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -33852,8 +35395,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -33897,7 +35442,7 @@ export const OPERATIONS: OperationDef[] = [
     "method": "POST",
     "path": "/load_balancers/{id}/actions/add_target",
     "summary": "Add Target",
-    "description": "Adds a target to a Load Balancer.\n\n#### Operation specific errors\n\n| Status | Code | Description |\n| --- | --- | --- |\n| `422` | `ip_not_in_vswitch_subnet` | The IP you are trying to add does not belong to the vswitch subnet of the attached network |\n| `422` | `ip_not_owned` | The IP you are trying to add as a target is not owned by the Project owner |\n| `422` | `load_balancer_public_interface_disabled` | The Load Balancer's public network interface is disabled |\n| `422` | `load_balancer_not_attached_to_network` | The Load Balancer is not attached to a network |\n| `422` | `network_has_no_vswitch_subnet` | The given IP is private but attached network does not have a vswitch subnet |\n| `422` | `resolve_cloud_private_targets_error` | The server you are trying to add as a target is not attached to the same network as the Load Balancer |\n| `422` | `resolve_cloud_public_targets_error` | The server that you are trying to add as a public target does not have a public IPv4 address |\n| `422` | `target_already_defined` | The Load Balancer target you are trying to define is already defined |\n",
+    "description": "Adds a target to a Load Balancer.\n\n#### Operation specific errors\n\n| Status | Code | Description |\n| --- | --- | --- |\n| `422` | `ip_not_in_vswitch_subnet` | The IP you are trying to add does not belong to the vswitch subnet of the attached network |\n| `422` | `ip_not_owned` | The IP you are trying to add as a target is not owned by the Project owner |\n| `422` | `ip_not_assigned_to_server` | The specified IP is neither the Primary IPv4 address nor in the IPv6 subnet of the given Server |\n| `422` | `load_balancer_public_interface_disabled` | The Load Balancer's public network interface is disabled |\n| `422` | `load_balancer_not_attached_to_network` | The Load Balancer is not attached to a network |\n| `422` | `network_has_no_vswitch_subnet` | The given IP is private but attached network does not have a vswitch subnet |\n| `422` | `resolve_cloud_private_targets_error` | The server you are trying to add as a target is not attached to the same network as the Load Balancer |\n| `422` | `resolve_cloud_public_targets_error` | The server that you are trying to add as a public target does not have a public IPv4 address |\n| `422` | `target_already_defined` | The Load Balancer target you are trying to define is already defined |\n",
     "tags": [
       "Load Balancer Actions"
     ],
@@ -33943,6 +35488,11 @@ export const OPERATIONS: OperationDef[] = [
                   "type": "integer",
                   "format": "int64",
                   "example": 80
+                },
+                "ip": {
+                  "description": "Optional public IP of the Server to use as target.\nMust be the Primary IPv4 of the Server, or an IPv6 host address within IPv6 /64 subnet of the Server. If omitted, the Primary IPv4 of the Server is used. Must not be a private IP and is only valid for public targets.",
+                  "type": "string",
+                  "example": "2001:db8::1"
                 }
               },
               "additionalProperties": false,
@@ -34040,10 +35590,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -34079,8 +35631,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -34208,10 +35762,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -34247,8 +35803,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -34373,10 +35931,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -34412,8 +35972,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -34449,7 +36011,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "change_load_balancer_dns_ptr",
@@ -34478,6 +36040,7 @@ export const OPERATIONS: OperationDef[] = [
       }
     ],
     "requestBodySchema": {
+      "title": "ChangeLoadbalancerDnsPtrRequest",
       "type": "object",
       "properties": {
         "ip": {
@@ -34487,8 +36050,10 @@ export const OPERATIONS: OperationDef[] = [
         },
         "dns_ptr": {
           "description": "Domain Name to point to.\n\nPTR record content used for reverse DNS. Set to null to reset (IPv4) to the default value or remove (IPv6) the record.\n",
-          "type": "string",
-          "nullable": true,
+          "type": [
+            "string",
+            "null"
+          ],
           "example": "server.example.com"
         }
       },
@@ -34536,10 +36101,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -34575,8 +36142,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -34612,7 +36181,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "change_load_balancer_protection",
@@ -34690,10 +36259,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -34729,8 +36300,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -34766,7 +36339,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "change_load_balancer_type",
@@ -34848,10 +36421,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -34887,8 +36462,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -34924,7 +36501,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "delete_load_balancer_service",
@@ -35005,10 +36582,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -35044,8 +36623,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -35081,7 +36662,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "detach_load_balancer_from_network",
@@ -35163,10 +36744,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -35202,8 +36785,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -35239,7 +36824,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "disable_load_balancer_public_interface",
@@ -35306,10 +36891,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -35345,8 +36932,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -35382,7 +36971,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "enable_load_balancer_public_interface",
@@ -35449,10 +37038,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -35488,8 +37079,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -35525,7 +37118,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "remove_load_balancer_target",
@@ -35554,7 +37147,7 @@ export const OPERATIONS: OperationDef[] = [
       }
     ],
     "requestBodySchema": {
-      "title": "LoadBalancerTarget",
+      "title": "RemoveTargetRequest",
       "description": "Configuration of a Load Balancer target.",
       "type": "object",
       "properties": {
@@ -35577,6 +37170,11 @@ export const OPERATIONS: OperationDef[] = [
               "type": "integer",
               "format": "int64",
               "example": 80
+            },
+            "ip": {
+              "description": "Optional public IP of the Server to use as target.\nMust be the Primary IPv4 of the Server, or an IPv6 host address within IPv6 /64 subnet of the Server. If omitted, the Primary IPv4 of the Server is used. Must not be a private IP and is only valid for public targets.",
+              "type": "string",
+              "example": "2001:db8::1"
             }
           },
           "additionalProperties": false,
@@ -35661,10 +37259,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -35700,8 +37300,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -35737,7 +37339,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "update_load_balancer_service",
@@ -35845,8 +37447,10 @@ export const OPERATIONS: OperationDef[] = [
                       "properties": {
                         "domain": {
                           "description": "Host header to send in the HTTP request. May not contain spaces, percent or backslash symbols. Can be null, in that case no host header is sent.",
-                          "type": "string",
-                          "nullable": true,
+                          "type": [
+                            "string",
+                            "null"
+                          ],
                           "maxLength": 128,
                           "example": "example.com"
                         },
@@ -35908,7 +37512,7 @@ export const OPERATIONS: OperationDef[] = [
           "type": "object",
           "properties": {
             "health_check": {
-              "title": "LoadBalancerServiceHealthCheck",
+              "title": "UpdateLoadBalancerServiceHealthCheck",
               "description": "Service health check.",
               "type": "object",
               "properties": {
@@ -35953,8 +37557,10 @@ export const OPERATIONS: OperationDef[] = [
                   "properties": {
                     "domain": {
                       "description": "Host header to send in the HTTP request. May not contain spaces, percent or backslash symbols. Can be null, in that case no host header is sent.",
-                      "type": "string",
-                      "nullable": true,
+                      "type": [
+                        "string",
+                        "null"
+                      ],
                       "maxLength": 128,
                       "example": "example.com"
                     },
@@ -36094,10 +37700,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -36133,8 +37741,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -36170,7 +37780,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "add_network_route",
@@ -36213,6 +37823,7 @@ export const OPERATIONS: OperationDef[] = [
           "example": "10.0.1.1"
         }
       },
+      "additionalProperties": false,
       "required": [
         "destination",
         "gateway"
@@ -36258,10 +37869,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -36297,8 +37910,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -36397,6 +38012,7 @@ export const OPERATIONS: OperationDef[] = [
           "example": 1000
         }
       },
+      "additionalProperties": false,
       "required": [
         "type",
         "network_zone"
@@ -36442,10 +38058,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -36481,8 +38099,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -36556,6 +38176,7 @@ export const OPERATIONS: OperationDef[] = [
           "example": "10.0.0.0/16"
         }
       },
+      "additionalProperties": false,
       "required": [
         "ip_range"
       ]
@@ -36600,10 +38221,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -36639,8 +38262,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -36676,7 +38301,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "change_network_protection",
@@ -36713,7 +38338,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "boolean",
           "example": true
         }
-      }
+      },
+      "additionalProperties": false
     },
     "requestBodyRequired": true,
     "responseSchema": {
@@ -36755,10 +38381,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -36794,8 +38422,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -36831,7 +38461,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "delete_network_route",
@@ -36874,6 +38504,7 @@ export const OPERATIONS: OperationDef[] = [
           "example": "10.0.1.1"
         }
       },
+      "additionalProperties": false,
       "required": [
         "destination",
         "gateway"
@@ -36919,10 +38550,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -36958,8 +38591,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -36995,7 +38630,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "delete_network_subnet",
@@ -37033,6 +38668,7 @@ export const OPERATIONS: OperationDef[] = [
           "example": "10.0.1.0/24"
         }
       },
+      "additionalProperties": false,
       "required": [
         "ip_range"
       ]
@@ -37077,10 +38713,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -37116,8 +38754,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -37153,7 +38793,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "create_zone_rrset",
@@ -37210,8 +38850,10 @@ export const OPERATIONS: OperationDef[] = [
         },
         "ttl": {
           "description": "Time To Live (TTL) of the [RRSet](#tag/zone-rrsets).\n\nMust be in between 60s and 2147483647s.\n\nIf not set, the [Zone's](#tag/zones) Default TTL is used.\n",
-          "type": "integer",
-          "nullable": true,
+          "type": [
+            "integer",
+            "null"
+          ],
           "minimum": 60,
           "maximum": 2147483647,
           "example": 3600
@@ -37235,6 +38877,7 @@ export const OPERATIONS: OperationDef[] = [
                 "example": "My web server at Hetzner Cloud."
               }
             },
+            "additionalProperties": false,
             "required": [
               "value"
             ]
@@ -37253,6 +38896,7 @@ export const OPERATIONS: OperationDef[] = [
           }
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type",
@@ -37301,8 +38945,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "ttl": {
               "description": "Time To Live (TTL) of the [RRSet](#tag/zone-rrsets).\n\nMust be in between 60s and 2147483647s.\n\nIf not set, the [Zone's](#tag/zones) Default TTL is used.\n",
-              "type": "integer",
-              "nullable": true,
+              "type": [
+                "integer",
+                "null"
+              ],
               "minimum": 60,
               "maximum": 2147483647,
               "example": 3600
@@ -37329,6 +38975,7 @@ export const OPERATIONS: OperationDef[] = [
                   "example": false
                 }
               },
+              "additionalProperties": false,
               "required": [
                 "change"
               ]
@@ -37352,6 +38999,7 @@ export const OPERATIONS: OperationDef[] = [
                     "example": "My web server at Hetzner Cloud."
                   }
                 },
+                "additionalProperties": false,
                 "required": [
                   "value"
                 ]
@@ -37366,6 +39014,7 @@ export const OPERATIONS: OperationDef[] = [
               "example": 42
             }
           },
+          "additionalProperties": false,
           "required": [
             "id",
             "name",
@@ -37411,10 +39060,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -37450,8 +39101,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -37482,6 +39135,7 @@ export const OPERATIONS: OperationDef[] = [
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "rrset",
         "action"
@@ -37535,6 +39189,7 @@ export const OPERATIONS: OperationDef[] = [
           "example": 4711
         }
       },
+      "additionalProperties": false,
       "required": [
         "assignee_type",
         "assignee_id"
@@ -37580,10 +39235,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -37619,8 +39276,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -37656,7 +39315,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "change_primary_ip_dns_ptr",
@@ -37685,6 +39344,7 @@ export const OPERATIONS: OperationDef[] = [
       }
     ],
     "requestBodySchema": {
+      "title": "PrimaryIPActionsChangeDNSPtrRequest",
       "type": "object",
       "properties": {
         "ip": {
@@ -37694,8 +39354,10 @@ export const OPERATIONS: OperationDef[] = [
         },
         "dns_ptr": {
           "description": "Domain Name to point to.\n\nPTR record content used for reverse DNS. Set to null to reset (IPv4) to the default value or remove (IPv6) the record.\n",
-          "type": "string",
-          "nullable": true,
+          "type": [
+            "string",
+            "null"
+          ],
           "example": "server.example.com"
         }
       },
@@ -37743,10 +39405,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -37782,8 +39446,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -37819,7 +39485,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "change_primary_ip_protection",
@@ -37848,6 +39514,7 @@ export const OPERATIONS: OperationDef[] = [
       }
     ],
     "requestBodySchema": {
+      "title": "PrimaryIPActionsChangeProtectionRequest",
       "description": "Protection configuration for the Resource.",
       "type": "object",
       "properties": {
@@ -37901,10 +39568,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -37940,8 +39609,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -37977,7 +39648,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "unassign_primary_ip",
@@ -38044,10 +39715,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -38083,8 +39756,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -38120,7 +39795,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "add_server_to_placement_group",
@@ -38203,10 +39878,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -38242,8 +39919,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -38360,10 +40039,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -38399,8 +40080,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -38436,7 +40119,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "attach_server_to_network",
@@ -38539,10 +40222,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -38578,8 +40263,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -38708,10 +40395,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -38747,8 +40436,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -38784,7 +40475,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "change_server_dns_ptr",
@@ -38813,6 +40504,7 @@ export const OPERATIONS: OperationDef[] = [
       }
     ],
     "requestBodySchema": {
+      "title": "ServerChangeDnsPtrRequest",
       "type": "object",
       "properties": {
         "ip": {
@@ -38822,8 +40514,10 @@ export const OPERATIONS: OperationDef[] = [
         },
         "dns_ptr": {
           "description": "Domain Name to point to.\n\nPTR record content used for reverse DNS. Set to null to reset (IPv4) to the default value or remove (IPv6) the record.\n",
-          "type": "string",
-          "nullable": true,
+          "type": [
+            "string",
+            "null"
+          ],
           "example": "server.example.com"
         }
       },
@@ -38871,10 +40565,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -38910,8 +40606,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -38947,7 +40645,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "change_server_protection",
@@ -39030,10 +40728,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -39069,8 +40769,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -39106,7 +40808,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "change_server_type",
@@ -39193,10 +40895,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -39232,8 +40936,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -39269,7 +40975,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "create_server_image",
@@ -39368,8 +41074,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "name": {
               "description": "Unique identifier of the Image. This value is only set for system Images.",
-              "type": "string",
-              "nullable": true,
+              "type": [
+                "string",
+                "null"
+              ],
               "example": "ubuntu-24.04"
             },
             "description": {
@@ -39379,8 +41087,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "image_size": {
               "description": "Size of the Image file in our storage in GB. For snapshot Images this is the value relevant for calculating costs for the Image.",
-              "type": "number",
-              "nullable": true,
+              "type": [
+                "number",
+                "null"
+              ],
               "example": 2.3
             },
             "disk_size": {
@@ -39396,8 +41106,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "created_from": {
               "description": "Information about the Server the Image was created from.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "id": {
                   "description": "ID of the Server the Image was created from.",
@@ -39418,9 +41130,11 @@ export const OPERATIONS: OperationDef[] = [
             },
             "bound_to": {
               "description": "ID of Server the Image is bound to. Only set for Images of type `backup`.",
-              "type": "integer",
+              "type": [
+                "integer",
+                "null"
+              ],
               "format": "int64",
-              "nullable": true,
               "example": null
             },
             "os_flavor": {
@@ -39440,8 +41154,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "os_version": {
               "description": "Operating system version.",
-              "type": "string",
-              "nullable": true,
+              "type": [
+                "string",
+                "null"
+              ],
               "example": "24.04"
             },
             "rapid_deploy": {
@@ -39464,16 +41180,47 @@ export const OPERATIONS: OperationDef[] = [
               ]
             },
             "deprecated": {
-              "description": "Point in time when the Image is considered to be deprecated (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).",
-              "type": "string",
+              "deprecated": true,
+              "description": "**Deprecated:** This field is deprecated, use the deprecation object instead.\n\nPoint in time when the Image is considered to be deprecated (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).\n",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "nullable": true,
               "example": "2018-02-28T00:00:00Z"
+            },
+            "deprecation": {
+              "title": "DeprecationInfo",
+              "description": "Describes if, when and how the resource is deprecated. If this field is\nset to `null` the resource is not deprecated. If a value is set, it is\nconsidered deprecated.\n",
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "unavailable_after": {
+                  "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
+                  "type": "string",
+                  "format": "date-time",
+                  "example": "2023-09-01T00:00:00Z"
+                },
+                "announced": {
+                  "description": "Date of the deprecation announcement.\n",
+                  "type": "string",
+                  "format": "date-time",
+                  "example": "2023-06-01T00:00:00Z"
+                }
+              },
+              "required": [
+                "unavailable_after",
+                "announced"
+              ]
             },
             "deleted": {
               "description": "Point in time where the Image was deleted (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).",
-              "type": "string",
-              "nullable": true,
+              "type": [
+                "string",
+                "null"
+              ],
               "example": null
             },
             "labels": {
@@ -39513,6 +41260,7 @@ export const OPERATIONS: OperationDef[] = [
             "os_version",
             "protection",
             "deprecated",
+            "deprecation",
             "deleted",
             "labels",
             "architecture"
@@ -39552,10 +41300,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -39591,8 +41341,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -39708,10 +41460,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -39747,8 +41501,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -39784,7 +41540,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "detach_server_iso",
@@ -39851,10 +41607,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -39890,8 +41648,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -39927,7 +41687,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "disable_server_backup",
@@ -39994,10 +41754,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -40033,8 +41795,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -40070,7 +41834,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "disable_server_rescue",
@@ -40078,7 +41842,7 @@ export const OPERATIONS: OperationDef[] = [
     "method": "POST",
     "path": "/servers/{id}/actions/disable_rescue",
     "summary": "Disable Rescue Mode for a Server",
-    "description": "Disables the Hetzner Rescue System for a Server. This makes a Server start from its disks on next reboot.\n\nRescue Mode is automatically disabled when you first boot into it or if you do not use it for 60 minutes.\n\nDisabling rescue mode will not reboot your Server — you will have to do this yourself.\n",
+    "description": "Disables the Hetzner Rescue System for a Server. This makes a Server start from its disks on next reboot.\n\nRescue Mode is automatically disabled when you first boot into it or if you do not use it for 60 minutes.\n\nDisabling rescue mode will not reboot your Server - you will have to do this yourself.\n",
     "tags": [
       "Server Actions"
     ],
@@ -40137,10 +41901,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -40176,8 +41942,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -40213,7 +41981,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "enable_server_backup",
@@ -40280,10 +42048,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -40319,8 +42089,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -40364,7 +42136,7 @@ export const OPERATIONS: OperationDef[] = [
     "method": "POST",
     "path": "/servers/{id}/actions/enable_rescue",
     "summary": "Enable Rescue Mode for a Server",
-    "description": "Enable the Hetzner Rescue System for this Server. The next time a Server with enabled rescue mode boots it will start a special minimal Linux distribution designed for repair and reinstall.\n\nIn case a Server cannot boot on its own you can use this to access a Server’s disks.\n\nRescue Mode is automatically disabled when you first boot into it or if you do not use it for 60 minutes.\n\nEnabling rescue mode will not [reboot](https://docs.hetzner.cloud/#server-actions-soft-reboot-a-server) your Server — you will have to do this yourself.\n",
+    "description": "Enable the Hetzner Rescue System for this Server. The next time a Server with enabled rescue mode boots it will start a special minimal Linux distribution designed for repair and reinstall.\n\nIn case a Server cannot boot on its own you can use this to access a Server’s disks.\n\nRescue Mode is automatically disabled when you first boot into it or if you do not use it for 60 minutes.\n\nEnabling rescue mode will not [reboot](https://docs.hetzner.cloud/#server-actions-soft-reboot-a-server) your Server - you will have to do this yourself.\n",
     "tags": [
       "Server Actions"
     ],
@@ -40452,10 +42224,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -40491,8 +42265,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -40525,7 +42301,7 @@ export const OPERATIONS: OperationDef[] = [
       }
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "poweroff_server",
@@ -40592,10 +42368,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -40631,8 +42409,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -40735,10 +42515,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -40774,8 +42556,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -40878,10 +42662,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -40917,8 +42703,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -40954,7 +42742,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "rebuild_server",
@@ -41007,8 +42795,10 @@ export const OPERATIONS: OperationDef[] = [
       "properties": {
         "root_password": {
           "description": "New root password when not using SSH keys.",
-          "type": "string",
-          "nullable": true
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "action": {
           "title": "Action",
@@ -41044,10 +42834,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -41083,8 +42875,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -41184,10 +42978,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -41223,8 +43019,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -41260,7 +43058,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "request_server_console",
@@ -41335,10 +43133,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -41374,8 +43174,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -41480,10 +43282,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -41519,8 +43323,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -41627,10 +43433,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -41666,8 +43474,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -41700,7 +43510,7 @@ export const OPERATIONS: OperationDef[] = [
       }
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "shutdown_server",
@@ -41767,10 +43577,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -41806,8 +43618,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -41843,7 +43657,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "update_certificate",
@@ -41939,8 +43753,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "certificate": {
               "description": "Certificate and chain in PEM format, in order so that each record directly certifies the one preceding.",
-              "type": "string",
-              "nullable": true,
+              "type": [
+                "string",
+                "null"
+              ],
               "example": "-----BEGIN CERTIFICATE-----\n..."
             },
             "created": {
@@ -41951,16 +43767,20 @@ export const OPERATIONS: OperationDef[] = [
             },
             "not_valid_before": {
               "description": "Point in time when the Certificate becomes valid (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "nullable": true,
               "example": "2019-01-08T10:00:00Z"
             },
             "not_valid_after": {
               "description": "Point in time when the Certificate stops being valid (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).\n",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "nullable": true,
               "example": "2019-07-08T09:59:59Z"
             },
             "domain_names": {
@@ -41977,14 +43797,18 @@ export const OPERATIONS: OperationDef[] = [
             },
             "fingerprint": {
               "description": "SHA256 fingerprint of the Certificate.",
-              "type": "string",
-              "nullable": true,
+              "type": [
+                "string",
+                "null"
+              ],
               "example": "03:c7:55:9b:2a:d1:04:17:09:f6:d0:7f:18:34:63:d4:3e:5f"
             },
             "status": {
               "description": "Current status of a type `managed` Certificate, always *null* for type `uploaded` Certificates.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "issuance": {
                   "description": "Status of the issuance process of the Certificate.",
@@ -42009,8 +43833,10 @@ export const OPERATIONS: OperationDef[] = [
                 },
                 "error": {
                   "description": "If issuance or renewal reports `failed`, this property contains information about what happened.",
-                  "type": "object",
-                  "nullable": true,
+                  "type": [
+                    "object",
+                    "null"
+                  ],
                   "properties": {
                     "code": {
                       "type": "string"
@@ -42067,7 +43893,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": false,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "update_firewall",
@@ -42100,8 +43926,10 @@ export const OPERATIONS: OperationDef[] = [
       "type": "object",
       "properties": {
         "name": {
-          "description": "Name of the [Firewall](#tag/firewalls).\n\nLimited to a maximum of 128 characters.\n\nMust be unique per Project.\n",
+          "description": "Name of the [Firewall](#tag/firewalls).\n\nMust be unique per Project.\n",
           "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
           "example": "new-name"
         },
         "labels": {
@@ -42116,7 +43944,8 @@ export const OPERATIONS: OperationDef[] = [
             "just-a-key": ""
           }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "requestBodyRequired": true,
     "responseSchema": {
@@ -42136,8 +43965,10 @@ export const OPERATIONS: OperationDef[] = [
               "example": 42
             },
             "name": {
-              "description": "Name of the [Firewall](#tag/firewalls).\n\nLimited to a maximum of 128 characters.\n\nMust be unique per Project.\n",
+              "description": "Name of the [Firewall](#tag/firewalls).\n\nMust be unique per Project.\n",
               "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
               "example": "new-name"
             },
             "labels": {
@@ -42166,8 +43997,10 @@ export const OPERATIONS: OperationDef[] = [
                 "properties": {
                   "description": {
                     "description": "Description of the rule.",
-                    "type": "string",
-                    "nullable": true,
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "maxLength": 255
                   },
                   "direction": {
@@ -42212,11 +44045,14 @@ export const OPERATIONS: OperationDef[] = [
                   },
                   "port": {
                     "description": "Port or port range to apply the rule for.\n\nOnly applicable for protocols `tcp` and `udp`.\n\nA port range can be specified by separating lower and upper bounds with a dash. `1024-5000` will include\nall ports starting from 1024 up to port 5000.\n",
-                    "type": "string",
-                    "example": "80",
-                    "nullable": true
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": "80"
                   }
                 },
+                "additionalProperties": false,
                 "required": [
                   "direction",
                   "protocol",
@@ -42253,6 +44089,7 @@ export const OPERATIONS: OperationDef[] = [
                         "example": 42
                       }
                     },
+                    "additionalProperties": false,
                     "required": [
                       "id"
                     ]
@@ -42267,6 +44104,7 @@ export const OPERATIONS: OperationDef[] = [
                         "example": "env=prod"
                       }
                     },
+                    "additionalProperties": false,
                     "required": [
                       "selector"
                     ]
@@ -42298,20 +44136,24 @@ export const OPERATIONS: OperationDef[] = [
                               "example": 42
                             }
                           },
+                          "additionalProperties": false,
                           "required": [
                             "id"
                           ]
                         }
-                      }
+                      },
+                      "additionalProperties": false
                     }
                   }
                 },
+                "additionalProperties": false,
                 "required": [
                   "type"
                 ]
               }
             }
           },
+          "additionalProperties": false,
           "required": [
             "id",
             "name",
@@ -42321,12 +44163,13 @@ export const OPERATIONS: OperationDef[] = [
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "firewall"
       ]
     },
     "returnsAction": false,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "update_floating_ip",
@@ -42360,11 +44203,15 @@ export const OPERATIONS: OperationDef[] = [
       "properties": {
         "description": {
           "description": "Description of the Resource.",
-          "type": "string",
-          "nullable": true,
+          "type": [
+            "string",
+            "null"
+          ],
           "example": "This describes my resource"
         },
         "name": {
+          "minLength": 1,
+          "maxLength": 255,
           "description": "Name of the Resource. Must be unique per Project.",
           "type": "string",
           "example": "my-resource"
@@ -42381,7 +44228,8 @@ export const OPERATIONS: OperationDef[] = [
             "just-a-key": ""
           }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "requestBodyRequired": true,
     "responseSchema": {
@@ -42399,14 +44247,18 @@ export const OPERATIONS: OperationDef[] = [
               "example": 42
             },
             "name": {
+              "minLength": 1,
+              "maxLength": 255,
               "description": "Name of the Resource. Must be unique per Project.",
               "type": "string",
               "example": "my-resource"
             },
             "description": {
               "description": "Description of the Resource.",
-              "type": "string",
-              "nullable": true,
+              "type": [
+                "string",
+                "null"
+              ],
               "example": "This describes my resource"
             },
             "ip": {
@@ -42425,9 +44277,11 @@ export const OPERATIONS: OperationDef[] = [
             },
             "server": {
               "description": "[Server](#tag/servers) the [Floating IP](#tag/floating-ips) is assigned to.\n\n`null` if not assigned.\n",
-              "type": "integer",
+              "type": [
+                "integer",
+                "null"
+              ],
               "format": "int64",
-              "nullable": true,
               "example": 42
             },
             "dns_ptr": {
@@ -42454,6 +44308,7 @@ export const OPERATIONS: OperationDef[] = [
               }
             },
             "home_location": {
+              "description": "[Location](#tag/locations) the for the [Floating IP](#tag/floating-ips) is located at.\n\nRouting is optimized for this [Location](#tag/locations).\n",
               "type": "object",
               "properties": {
                 "id": {
@@ -42553,6 +44408,7 @@ export const OPERATIONS: OperationDef[] = [
               "example": "2016-01-30T23:55:00Z"
             }
           },
+          "additionalProperties": false,
           "required": [
             "id",
             "name",
@@ -42569,12 +44425,13 @@ export const OPERATIONS: OperationDef[] = [
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "floating_ip"
       ]
     },
     "returnsAction": false,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "update_image",
@@ -42670,8 +44527,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "name": {
               "description": "Unique identifier of the Image. This value is only set for system Images.",
-              "type": "string",
-              "nullable": true,
+              "type": [
+                "string",
+                "null"
+              ],
               "example": "ubuntu-24.04"
             },
             "description": {
@@ -42681,8 +44540,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "image_size": {
               "description": "Size of the Image file in our storage in GB. For snapshot Images this is the value relevant for calculating costs for the Image.",
-              "type": "number",
-              "nullable": true,
+              "type": [
+                "number",
+                "null"
+              ],
               "example": 2.3
             },
             "disk_size": {
@@ -42698,8 +44559,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "created_from": {
               "description": "Information about the Server the Image was created from.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "id": {
                   "description": "ID of the Server the Image was created from.",
@@ -42720,9 +44583,11 @@ export const OPERATIONS: OperationDef[] = [
             },
             "bound_to": {
               "description": "ID of Server the Image is bound to. Only set for Images of type `backup`.",
-              "type": "integer",
+              "type": [
+                "integer",
+                "null"
+              ],
               "format": "int64",
-              "nullable": true,
               "example": null
             },
             "os_flavor": {
@@ -42742,8 +44607,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "os_version": {
               "description": "Operating system version.",
-              "type": "string",
-              "nullable": true,
+              "type": [
+                "string",
+                "null"
+              ],
               "example": "24.04"
             },
             "rapid_deploy": {
@@ -42766,16 +44633,47 @@ export const OPERATIONS: OperationDef[] = [
               ]
             },
             "deprecated": {
-              "description": "Point in time when the Image is considered to be deprecated (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).",
-              "type": "string",
+              "deprecated": true,
+              "description": "**Deprecated:** This field is deprecated, use the deprecation object instead.\n\nPoint in time when the Image is considered to be deprecated (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).\n",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "nullable": true,
               "example": "2018-02-28T00:00:00Z"
+            },
+            "deprecation": {
+              "title": "DeprecationInfo",
+              "description": "Describes if, when and how the resource is deprecated. If this field is\nset to `null` the resource is not deprecated. If a value is set, it is\nconsidered deprecated.\n",
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "unavailable_after": {
+                  "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
+                  "type": "string",
+                  "format": "date-time",
+                  "example": "2023-09-01T00:00:00Z"
+                },
+                "announced": {
+                  "description": "Date of the deprecation announcement.\n",
+                  "type": "string",
+                  "format": "date-time",
+                  "example": "2023-06-01T00:00:00Z"
+                }
+              },
+              "required": [
+                "unavailable_after",
+                "announced"
+              ]
             },
             "deleted": {
               "description": "Point in time where the Image was deleted (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).",
-              "type": "string",
-              "nullable": true,
+              "type": [
+                "string",
+                "null"
+              ],
               "example": null
             },
             "labels": {
@@ -42815,6 +44713,7 @@ export const OPERATIONS: OperationDef[] = [
             "os_version",
             "protection",
             "deprecated",
+            "deprecation",
             "deleted",
             "labels",
             "architecture"
@@ -42823,7 +44722,7 @@ export const OPERATIONS: OperationDef[] = [
       }
     },
     "returnsAction": false,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "update_load_balancer",
@@ -42908,21 +44807,43 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "IP address (v4).",
                   "type": "object",
                   "properties": {
+                    "id": {
+                      "description": "ID of the [Primary IP](#tag/primary-ips) assigned to this Load Balancer.\n\n`null` if the IP address is still managed by the system and is not a [Primary IP](#tag/primary-ips) yet.\n",
+                      "type": [
+                        "integer",
+                        "null"
+                      ],
+                      "format": "int64",
+                      "minimum": 1,
+                      "maximum": 9007199254740991,
+                      "example": 42
+                    },
                     "ip": {
                       "description": "IP address (v4) of this Load Balancer.",
-                      "type": "string",
-                      "nullable": true,
+                      "type": [
+                        "string",
+                        "null"
+                      ],
                       "example": "1.2.3.4"
+                    },
+                    "blocked": {
+                      "description": "Whether the IP is blocked by our abuse department.",
+                      "type": "boolean",
+                      "example": false
                     },
                     "dns_ptr": {
                       "description": "Reverse DNS PTR entry for the IPv4 address of this Load Balancer.",
-                      "type": "string",
-                      "nullable": true,
+                      "type": [
+                        "string",
+                        "null"
+                      ],
                       "example": "lb1.example.com"
                     }
                   },
                   "required": [
+                    "id",
                     "ip",
+                    "blocked",
                     "dns_ptr"
                   ]
                 },
@@ -42930,21 +44851,43 @@ export const OPERATIONS: OperationDef[] = [
                   "description": "IP address (v6).",
                   "type": "object",
                   "properties": {
+                    "id": {
+                      "description": "ID of the [Primary IP](#tag/primary-ips) assigned to this Load Balancer.\n\n`null` if the IP address is still managed by the system and is not a [Primary IP](#tag/primary-ips) yet.\n",
+                      "type": [
+                        "integer",
+                        "null"
+                      ],
+                      "format": "int64",
+                      "minimum": 1,
+                      "maximum": 9007199254740991,
+                      "example": 42
+                    },
                     "ip": {
                       "description": "IP address (v6) of this Load Balancer.",
-                      "type": "string",
-                      "nullable": true,
+                      "type": [
+                        "string",
+                        "null"
+                      ],
                       "example": "2001:db8::1"
+                    },
+                    "blocked": {
+                      "description": "Whether the IP is blocked by our abuse department.",
+                      "type": "boolean",
+                      "example": false
                     },
                     "dns_ptr": {
                       "description": "Reverse DNS PTR entry for the IPv6 address of this Load Balancer.",
-                      "type": "string",
-                      "nullable": true,
+                      "type": [
+                        "string",
+                        "null"
+                      ],
                       "example": "lb1.example.com"
                     }
                   },
                   "required": [
+                    "id",
                     "ip",
+                    "blocked",
                     "dns_ptr"
                   ]
                 }
@@ -43085,11 +45028,40 @@ export const OPERATIONS: OperationDef[] = [
                   "example": 10
                 },
                 "deprecated": {
-                  "description": "Point in time when the Load Balancer type is deprecated (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).",
-                  "type": "string",
+                  "deprecated": true,
+                  "description": "**Deprecated:** This field is deprecated. Use the `deprecation` object instead.\n\nPoint in time when the Load Balancer type is deprecated (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).\n",
+                  "type": [
+                    "string",
+                    "null"
+                  ],
                   "format": "date-time",
-                  "nullable": true,
                   "example": "2016-01-30T23:50:00Z"
+                },
+                "deprecation": {
+                  "title": "DeprecationInfo",
+                  "description": "Describes if, when and how the resource is deprecated. If this field is\nset to `null` the resource is not deprecated. If a value is set, it is\nconsidered deprecated.\n",
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "properties": {
+                    "unavailable_after": {
+                      "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2023-09-01T00:00:00Z"
+                    },
+                    "announced": {
+                      "description": "Date of the deprecation announcement.\n",
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2023-06-01T00:00:00Z"
+                    }
+                  },
+                  "required": [
+                    "unavailable_after",
+                    "announced"
+                  ]
                 },
                 "prices": {
                   "description": "Price per [Location](#tag/locations).",
@@ -43194,6 +45166,7 @@ export const OPERATIONS: OperationDef[] = [
                 "max_targets",
                 "max_assigned_certificates",
                 "deprecated",
+                "deprecation",
                 "prices"
               ]
             },
@@ -43311,8 +45284,10 @@ export const OPERATIONS: OperationDef[] = [
                                 "properties": {
                                   "domain": {
                                     "description": "Host header to send in the HTTP request. May not contain spaces, percent or backslash symbols. Can be null, in that case no host header is sent.",
-                                    "type": "string",
-                                    "nullable": true,
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
                                     "maxLength": 128,
                                     "example": "example.com"
                                   },
@@ -43466,8 +45441,10 @@ export const OPERATIONS: OperationDef[] = [
                                 "properties": {
                                   "domain": {
                                     "description": "Host header to send in the HTTP request. May not contain spaces, percent or backslash symbols. Can be null, in that case no host header is sent.",
-                                    "type": "string",
-                                    "nullable": true,
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
                                     "maxLength": 128,
                                     "example": "example.com"
                                   },
@@ -43566,6 +45543,8 @@ export const OPERATIONS: OperationDef[] = [
                                 "description": "Idle timeout in seconds for the client and server side.",
                                 "type": "integer",
                                 "default": 50,
+                                "minimum": 30,
+                                "maximum": 300,
                                 "example": 50
                               },
                               "sticky_sessions": {
@@ -43665,8 +45644,10 @@ export const OPERATIONS: OperationDef[] = [
                                 "properties": {
                                   "domain": {
                                     "description": "Host header to send in the HTTP request. May not contain spaces, percent or backslash symbols. Can be null, in that case no host header is sent.",
-                                    "type": "string",
-                                    "nullable": true,
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
                                     "maxLength": 128,
                                     "example": "example.com"
                                   },
@@ -43765,6 +45746,8 @@ export const OPERATIONS: OperationDef[] = [
                                 "description": "Idle timeout in seconds for the client and server side.",
                                 "type": "integer",
                                 "default": 50,
+                                "minimum": 30,
+                                "maximum": 300,
                                 "example": 50
                               },
                               "certificates": {
@@ -43864,10 +45847,16 @@ export const OPERATIONS: OperationDef[] = [
                                 "type": "integer",
                                 "format": "int64",
                                 "example": 80
+                              },
+                              "ip": {
+                                "description": "IP of the Server that the traffic is routed to. Either the Server's primary IPv4 or, if an IPv6 was specified when adding the target, an IPv6 within the Server's /64 subnet.",
+                                "type": "string",
+                                "example": "2001:db8::1"
                               }
                             },
                             "required": [
-                              "id"
+                              "id",
+                              "ip"
                             ]
                           },
                           "health_status": {
@@ -43889,6 +45878,24 @@ export const OPERATIONS: OperationDef[] = [
                                     "unknown"
                                   ],
                                   "example": "healthy"
+                                },
+                                "detail": {
+                                  "description": "Additional details about why the health check failed. Only present when `status` is `unhealthy`.",
+                                  "type": "string",
+                                  "enum": [
+                                    "unspecified",
+                                    "layer4_no_connection",
+                                    "layer4_timeout",
+                                    "layer7_timeout",
+                                    "unexpected_http_status",
+                                    "unexpected_http_content"
+                                  ],
+                                  "example": "unexpected_http_status"
+                                },
+                                "http_status_code": {
+                                  "description": "HTTP status code returned by the target during the last health check. Only present when `status` is `unhealthy` and `detail` is `unexpected_http_status`.",
+                                  "type": "integer",
+                                  "example": 503
                                 }
                               },
                               "required": [
@@ -43981,10 +45988,16 @@ export const OPERATIONS: OperationDef[] = [
                                       "type": "integer",
                                       "format": "int64",
                                       "example": 80
+                                    },
+                                    "ip": {
+                                      "description": "IP of the Server that the traffic is routed to. Either the Server's primary IPv4 or, if an IPv6 was specified when adding the target, an IPv6 within the Server's /64 subnet.",
+                                      "type": "string",
+                                      "example": "2001:db8::1"
                                     }
                                   },
                                   "required": [
-                                    "id"
+                                    "id",
+                                    "ip"
                                   ]
                                 },
                                 "health_status": {
@@ -44006,6 +46019,24 @@ export const OPERATIONS: OperationDef[] = [
                                           "unknown"
                                         ],
                                         "example": "healthy"
+                                      },
+                                      "detail": {
+                                        "description": "Additional details about why the health check failed. Only present when `status` is `unhealthy`.",
+                                        "type": "string",
+                                        "enum": [
+                                          "unspecified",
+                                          "layer4_no_connection",
+                                          "layer4_timeout",
+                                          "layer7_timeout",
+                                          "unexpected_http_status",
+                                          "unexpected_http_content"
+                                        ],
+                                        "example": "unexpected_http_status"
+                                      },
+                                      "http_status_code": {
+                                        "description": "HTTP status code returned by the target during the last health check. Only present when `status` is `unhealthy` and `detail` is `unexpected_http_status`.",
+                                        "type": "integer",
+                                        "example": 503
                                       }
                                     },
                                     "required": [
@@ -44108,6 +46139,24 @@ export const OPERATIONS: OperationDef[] = [
                                     "unknown"
                                   ],
                                   "example": "healthy"
+                                },
+                                "detail": {
+                                  "description": "Additional details about why the health check failed. Only present when `status` is `unhealthy`.",
+                                  "type": "string",
+                                  "enum": [
+                                    "unspecified",
+                                    "layer4_no_connection",
+                                    "layer4_timeout",
+                                    "layer7_timeout",
+                                    "unexpected_http_status",
+                                    "unexpected_http_content"
+                                  ],
+                                  "example": "unexpected_http_status"
+                                },
+                                "http_status_code": {
+                                  "description": "HTTP status code returned by the target during the last health check. Only present when `status` is `unhealthy` and `detail` is `unexpected_http_status`.",
+                                  "type": "integer",
+                                  "example": 503
                                 }
                               },
                               "required": [
@@ -44154,15 +46203,19 @@ export const OPERATIONS: OperationDef[] = [
             },
             "outgoing_traffic": {
               "description": "Outbound Traffic for the current billing period in bytes.",
-              "type": "integer",
-              "format": "int64",
-              "nullable": true
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "int64"
             },
             "ingoing_traffic": {
               "description": "Inbound Traffic for the current billing period in bytes.",
-              "type": "integer",
-              "format": "int64",
-              "nullable": true
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "int64"
             },
             "included_traffic": {
               "description": "Free Traffic for the current billing period in bytes.",
@@ -44195,7 +46248,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": false,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "update_network",
@@ -44249,7 +46302,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "boolean",
           "example": false
         }
-      }
+      },
+      "additionalProperties": false
     },
     "requestBodyRequired": true,
     "responseSchema": {
@@ -44267,6 +46321,8 @@ export const OPERATIONS: OperationDef[] = [
             "name": {
               "description": "Name of the [Network](#tag/networks).",
               "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
               "example": "mynet"
             },
             "ip_range": {
@@ -44311,12 +46367,15 @@ export const OPERATIONS: OperationDef[] = [
                   },
                   "vswitch_id": {
                     "description": "ID of the robot vSwitch if the subnet is of type `vswitch`.",
-                    "type": "integer",
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
                     "format": "int64",
-                    "nullable": true,
                     "example": 1000
                   }
                 },
+                "additionalProperties": false,
                 "required": [
                   "type",
                   "network_zone",
@@ -44341,6 +46400,7 @@ export const OPERATIONS: OperationDef[] = [
                     "example": "10.0.1.1"
                   }
                 },
+                "additionalProperties": false,
                 "required": [
                   "destination",
                   "gateway"
@@ -44407,6 +46467,7 @@ export const OPERATIONS: OperationDef[] = [
               "example": false
             }
           },
+          "additionalProperties": false,
           "required": [
             "id",
             "name",
@@ -44420,10 +46481,11 @@ export const OPERATIONS: OperationDef[] = [
             "expose_routes_to_vswitch"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "returnsAction": false,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "update_placement_group",
@@ -44549,7 +46611,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": false,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "update_primary_ip",
@@ -44582,6 +46644,8 @@ export const OPERATIONS: OperationDef[] = [
       "type": "object",
       "properties": {
         "name": {
+          "minLength": 1,
+          "maxLength": 255,
           "description": "Name of the Resource. Must be unique per Project.",
           "type": "string",
           "example": "my-resource"
@@ -44604,7 +46668,8 @@ export const OPERATIONS: OperationDef[] = [
           "default": false,
           "example": true
         }
-      }
+      },
+      "additionalProperties": false
     },
     "requestBodyRequired": true,
     "responseSchema": {
@@ -44624,6 +46689,8 @@ export const OPERATIONS: OperationDef[] = [
               "example": 42
             },
             "name": {
+              "minLength": 1,
+              "maxLength": 255,
               "description": "Name of the Resource. Must be unique per Project.",
               "type": "string",
               "example": "my-resource"
@@ -44650,156 +46717,6 @@ export const OPERATIONS: OperationDef[] = [
               "description": "Blocked state of the [Primary IP](#tag/primary-ips).",
               "type": "boolean",
               "example": false
-            },
-            "datacenter": {
-              "deprecated": true,
-              "description": "**Deprecated**: This property is deprecated and will be removed after the 1 July 2026.\nUse the `location` property instead.\n\n[Data Center](#tag/data-centers) of the [Primary IP](#tag/primary-ips).\n",
-              "type": "object",
-              "properties": {
-                "id": {
-                  "description": "ID of the [Data Center](#tag/data-centers).",
-                  "type": "integer",
-                  "format": "int64",
-                  "minimum": 1,
-                  "maximum": 9007199254740991,
-                  "example": 42
-                },
-                "name": {
-                  "description": "Unique name for the [Data Center](#tag/data-centers).\n\nMay be used as a more descriptive identifier.\n",
-                  "type": "string",
-                  "pattern": "^[a-z0-9]+(-?[a-z0-9]*)*$",
-                  "example": "fsn1-dc8"
-                },
-                "description": {
-                  "description": "Descriptive name for the [Data Center](#tag/data-centers).\n\nDesired to be easy to understand for humans. May change for cosmetic reasons. Must not be used as an identifier.\n",
-                  "type": "string",
-                  "example": "Falkenstein DC Park 8"
-                },
-                "location": {
-                  "description": "[Location](#tag/locations) the [Data Center](#tag/data-centers) is located at.\n",
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "description": "ID of the [Location](#tag/locations).",
-                      "type": "integer",
-                      "format": "int64",
-                      "minimum": 1,
-                      "maximum": 9007199254740991,
-                      "example": 42
-                    },
-                    "name": {
-                      "description": "Unique identifier of the [Location](#tag/locations).",
-                      "type": "string",
-                      "pattern": "^[a-z0-9]+(-?[a-z0-9]*)*$",
-                      "example": "fsn1"
-                    },
-                    "description": {
-                      "description": "Human readable description of the [Location](#tag/locations).",
-                      "type": "string",
-                      "example": "Falkenstein DC Park 1"
-                    },
-                    "country": {
-                      "description": "Country the [Location](#tag/locations) resides in.\n\nISO 3166-1 alpha-2 code of the country.\n",
-                      "type": "string",
-                      "example": "DE"
-                    },
-                    "city": {
-                      "description": "Name of the closest city to the [Location](#tag/locations).\n\nCity name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.\n",
-                      "type": "string",
-                      "example": "Falkenstein"
-                    },
-                    "latitude": {
-                      "description": "Latitude of the city closest to the [Location](#tag/locations).",
-                      "type": "number",
-                      "format": "double",
-                      "example": 50.47612
-                    },
-                    "longitude": {
-                      "description": "Longitude of the city closest to the [Location](#tag/locations).",
-                      "type": "number",
-                      "format": "double",
-                      "example": 12.370071
-                    },
-                    "network_zone": {
-                      "description": "Name of the Network Zone this [Location](#tag/locations) resides in.",
-                      "type": "string",
-                      "pattern": "^[a-z0-9]+(-?[a-z0-9]*)*$",
-                      "example": "eu-central"
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "name",
-                    "description",
-                    "country",
-                    "city",
-                    "latitude",
-                    "longitude",
-                    "network_zone"
-                  ]
-                },
-                "server_types": {
-                  "deprecated": true,
-                  "description": "This field is deprecated, as all of it's properties are deprecated.\n\n[Server Types](#tag/server-types) supported and available in this [Data Center](#tag/data-centers).\n",
-                  "type": "object",
-                  "properties": {
-                    "supported": {
-                      "deprecated": true,
-                      "description": "This field is deprecated. Use the [Server Type](#tag/server-types) `locations` field instead.\n\nList of [Server Types](#tag/server-types) supported in this [Data Center](#tag/data-centers).\n\nThese [Server Types](#tag/server-types) are generally available in this Data Center, but may be\ntemporarily out of stock.\n",
-                      "type": "array",
-                      "items": {
-                        "type": "integer",
-                        "format": "int64"
-                      },
-                      "example": [
-                        1,
-                        2,
-                        3
-                      ]
-                    },
-                    "available": {
-                      "deprecated": true,
-                      "description": "This field is deprecated. Use the `available` flag in the [Server Type](#tag/server-types) `locations` field instead (`server_type.locations[].available`).\n\n[Server Types](#tag/server-types) currently available in this [Data Center](#tag/data-centers).\n\nThese [Server Types](#tag/server-types) can currently be purchased. Types that are temporarily unavailable\nbut are supported in this [Data Center](#tag/data-centers) are listed as `supported`.\n",
-                      "type": "array",
-                      "items": {
-                        "type": "integer",
-                        "format": "int64"
-                      },
-                      "example": [
-                        1,
-                        2,
-                        3
-                      ]
-                    },
-                    "available_for_migration": {
-                      "deprecated": true,
-                      "description": "This field is deprecated. Use the `available` flag in the [Server Type](#tag/server-types) `locations` field instead (`server_type.locations[].available`).\n\n[Server Types](#tag/server-types) available to migrate to in this [Data Center](#tag/data-centers).\n\nExisting [Servers](#tag/servers) can be migrated to these [Server Types](#tag/server-types).\n",
-                      "type": "array",
-                      "items": {
-                        "type": "integer",
-                        "format": "int64"
-                      },
-                      "example": [
-                        1,
-                        2,
-                        3
-                      ]
-                    }
-                  },
-                  "required": [
-                    "supported",
-                    "available",
-                    "available_for_migration"
-                  ]
-                }
-              },
-              "required": [
-                "id",
-                "name",
-                "description",
-                "location",
-                "server_types"
-              ]
             },
             "location": {
               "description": "[Location](#tag/locations) of the [Primary IP](#tag/primary-ips).\n",
@@ -44922,21 +46839,25 @@ export const OPERATIONS: OperationDef[] = [
               "example": true
             },
             "assignee_type": {
-              "description": "Type of resource the [Primary IP](#tag/primary-ips) can get assigned to.\n",
+              "description": "Type of resource the [Primary IP](#tag/primary-ips) is assigned to.\n\nAs of 23 September 2026 `unassigned` is returned if the [Primary IP](#tag/primary-ips) is not assigned.\n",
               "type": "string",
               "enum": [
-                "server"
+                "server",
+                "unassigned"
               ],
               "example": "server"
             },
             "assignee_id": {
               "description": "ID of resource the [Primary IP](#tag/primary-ips) is assigned to.\n\n`null` if the [Primary IP](#tag/primary-ips) is not assigned.\n",
-              "type": "integer",
+              "type": [
+                "integer",
+                "null"
+              ],
               "format": "int64",
-              "nullable": true,
               "example": 17
             }
           },
+          "additionalProperties": false,
           "required": [
             "id",
             "name",
@@ -44944,7 +46865,6 @@ export const OPERATIONS: OperationDef[] = [
             "created",
             "blocked",
             "location",
-            "datacenter",
             "ip",
             "dns_ptr",
             "protection",
@@ -44955,12 +46875,13 @@ export const OPERATIONS: OperationDef[] = [
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "primary_ip"
       ]
     },
     "returnsAction": false,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "update_server",
@@ -45058,8 +46979,10 @@ export const OPERATIONS: OperationDef[] = [
               "properties": {
                 "ipv4": {
                   "description": "IP address (v4) and its reverse DNS entry of this Server.",
-                  "type": "object",
-                  "nullable": true,
+                  "type": [
+                    "object",
+                    "null"
+                  ],
                   "properties": {
                     "id": {
                       "description": "ID of the [Primary IP](#tag/primary-ips).",
@@ -45075,7 +46998,7 @@ export const OPERATIONS: OperationDef[] = [
                       "example": "1.2.3.4"
                     },
                     "blocked": {
-                      "description": "If the IP is blocked by our anti abuse dept.",
+                      "description": "Whether the IP is blocked by our abuse department.",
                       "type": "boolean",
                       "example": false
                     },
@@ -45093,8 +47016,10 @@ export const OPERATIONS: OperationDef[] = [
                 },
                 "ipv6": {
                   "description": "IPv6 network assigned to this Server and its reverse DNS entry.",
-                  "type": "object",
-                  "nullable": true,
+                  "type": [
+                    "object",
+                    "null"
+                  ],
                   "properties": {
                     "id": {
                       "description": "ID of the [Primary IP](#tag/primary-ips).",
@@ -45110,14 +47035,16 @@ export const OPERATIONS: OperationDef[] = [
                       "example": "2001:db8::/64"
                     },
                     "blocked": {
-                      "description": "If the IP is blocked by our anti abuse dept.",
+                      "description": "Whether the IP is blocked by our abuse department.",
                       "type": "boolean",
                       "example": false
                     },
                     "dns_ptr": {
                       "description": "Reverse DNS PTR entries for the IPv6 addresses of this Server.",
-                      "type": "array",
-                      "nullable": true,
+                      "type": [
+                        "array",
+                        "null"
+                      ],
                       "items": {
                         "type": "object",
                         "properties": {
@@ -45393,8 +47320,10 @@ export const OPERATIONS: OperationDef[] = [
                   "deprecated": true,
                   "description": "This field is deprecated.\n\nUse the `deprecation` object in the `locations` field instead (`.locations[].deprecation`).\n",
                   "title": "DeprecationInfo",
-                  "type": "object",
-                  "nullable": true,
+                  "type": [
+                    "object",
+                    "null"
+                  ],
                   "properties": {
                     "unavailable_after": {
                       "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
@@ -45437,8 +47366,10 @@ export const OPERATIONS: OperationDef[] = [
                       "deprecation": {
                         "title": "DeprecationInfo",
                         "description": "Describes if, when and how the resource is deprecated. If this field is\nset to `null` the resource is not deprecated. If a value is set, it is\nconsidered deprecated.\n",
-                        "type": "object",
-                        "nullable": true,
+                        "type": [
+                          "object",
+                          "null"
+                        ],
                         "properties": {
                           "unavailable_after": {
                             "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
@@ -45492,156 +47423,6 @@ export const OPERATIONS: OperationDef[] = [
                 "cpu_type",
                 "architecture",
                 "locations"
-              ]
-            },
-            "datacenter": {
-              "deprecated": true,
-              "description": "**Deprecated**: This property is deprecated and will be removed after the 1 July 2026.\nUse the `location` property instead.\n\nData Center this Resource is located at.\n",
-              "type": "object",
-              "properties": {
-                "id": {
-                  "description": "ID of the [Data Center](#tag/data-centers).",
-                  "type": "integer",
-                  "format": "int64",
-                  "minimum": 1,
-                  "maximum": 9007199254740991,
-                  "example": 42
-                },
-                "name": {
-                  "description": "Unique name for the [Data Center](#tag/data-centers).\n\nMay be used as a more descriptive identifier.\n",
-                  "type": "string",
-                  "pattern": "^[a-z0-9]+(-?[a-z0-9]*)*$",
-                  "example": "fsn1-dc8"
-                },
-                "description": {
-                  "description": "Descriptive name for the [Data Center](#tag/data-centers).\n\nDesired to be easy to understand for humans. May change for cosmetic reasons. Must not be used as an identifier.\n",
-                  "type": "string",
-                  "example": "Falkenstein DC Park 8"
-                },
-                "location": {
-                  "description": "[Location](#tag/locations) the [Data Center](#tag/data-centers) is located at.\n",
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "description": "ID of the [Location](#tag/locations).",
-                      "type": "integer",
-                      "format": "int64",
-                      "minimum": 1,
-                      "maximum": 9007199254740991,
-                      "example": 42
-                    },
-                    "name": {
-                      "description": "Unique identifier of the [Location](#tag/locations).",
-                      "type": "string",
-                      "pattern": "^[a-z0-9]+(-?[a-z0-9]*)*$",
-                      "example": "fsn1"
-                    },
-                    "description": {
-                      "description": "Human readable description of the [Location](#tag/locations).",
-                      "type": "string",
-                      "example": "Falkenstein DC Park 1"
-                    },
-                    "country": {
-                      "description": "Country the [Location](#tag/locations) resides in.\n\nISO 3166-1 alpha-2 code of the country.\n",
-                      "type": "string",
-                      "example": "DE"
-                    },
-                    "city": {
-                      "description": "Name of the closest city to the [Location](#tag/locations).\n\nCity name or city name and state in short form. E.g. `Falkenstein` or `Ashburn, VA`.\n",
-                      "type": "string",
-                      "example": "Falkenstein"
-                    },
-                    "latitude": {
-                      "description": "Latitude of the city closest to the [Location](#tag/locations).",
-                      "type": "number",
-                      "format": "double",
-                      "example": 50.47612
-                    },
-                    "longitude": {
-                      "description": "Longitude of the city closest to the [Location](#tag/locations).",
-                      "type": "number",
-                      "format": "double",
-                      "example": 12.370071
-                    },
-                    "network_zone": {
-                      "description": "Name of the Network Zone this [Location](#tag/locations) resides in.",
-                      "type": "string",
-                      "pattern": "^[a-z0-9]+(-?[a-z0-9]*)*$",
-                      "example": "eu-central"
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "name",
-                    "description",
-                    "country",
-                    "city",
-                    "latitude",
-                    "longitude",
-                    "network_zone"
-                  ]
-                },
-                "server_types": {
-                  "deprecated": true,
-                  "description": "This field is deprecated, as all of it's properties are deprecated.\n\n[Server Types](#tag/server-types) supported and available in this [Data Center](#tag/data-centers).\n",
-                  "type": "object",
-                  "properties": {
-                    "supported": {
-                      "deprecated": true,
-                      "description": "This field is deprecated. Use the [Server Type](#tag/server-types) `locations` field instead.\n\nList of [Server Types](#tag/server-types) supported in this [Data Center](#tag/data-centers).\n\nThese [Server Types](#tag/server-types) are generally available in this Data Center, but may be\ntemporarily out of stock.\n",
-                      "type": "array",
-                      "items": {
-                        "type": "integer",
-                        "format": "int64"
-                      },
-                      "example": [
-                        1,
-                        2,
-                        3
-                      ]
-                    },
-                    "available": {
-                      "deprecated": true,
-                      "description": "This field is deprecated. Use the `available` flag in the [Server Type](#tag/server-types) `locations` field instead (`server_type.locations[].available`).\n\n[Server Types](#tag/server-types) currently available in this [Data Center](#tag/data-centers).\n\nThese [Server Types](#tag/server-types) can currently be purchased. Types that are temporarily unavailable\nbut are supported in this [Data Center](#tag/data-centers) are listed as `supported`.\n",
-                      "type": "array",
-                      "items": {
-                        "type": "integer",
-                        "format": "int64"
-                      },
-                      "example": [
-                        1,
-                        2,
-                        3
-                      ]
-                    },
-                    "available_for_migration": {
-                      "deprecated": true,
-                      "description": "This field is deprecated. Use the `available` flag in the [Server Type](#tag/server-types) `locations` field instead (`server_type.locations[].available`).\n\n[Server Types](#tag/server-types) available to migrate to in this [Data Center](#tag/data-centers).\n\nExisting [Servers](#tag/servers) can be migrated to these [Server Types](#tag/server-types).\n",
-                      "type": "array",
-                      "items": {
-                        "type": "integer",
-                        "format": "int64"
-                      },
-                      "example": [
-                        1,
-                        2,
-                        3
-                      ]
-                    }
-                  },
-                  "required": [
-                    "supported",
-                    "available",
-                    "available_for_migration"
-                  ]
-                }
-              },
-              "required": [
-                "id",
-                "name",
-                "description",
-                "location",
-                "server_types"
               ]
             },
             "location": {
@@ -45709,7 +47490,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "image": {
               "description": "Image the server is based on.",
-              "type": "object",
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "id": {
                   "description": "ID of the [Image](#tag/images).",
@@ -45742,8 +47526,10 @@ export const OPERATIONS: OperationDef[] = [
                 },
                 "name": {
                   "description": "Unique identifier of the Image. This value is only set for system Images.",
-                  "type": "string",
-                  "nullable": true,
+                  "type": [
+                    "string",
+                    "null"
+                  ],
                   "example": "ubuntu-24.04"
                 },
                 "description": {
@@ -45753,8 +47539,10 @@ export const OPERATIONS: OperationDef[] = [
                 },
                 "image_size": {
                   "description": "Size of the Image file in our storage in GB. For snapshot Images this is the value relevant for calculating costs for the Image.",
-                  "type": "number",
-                  "nullable": true,
+                  "type": [
+                    "number",
+                    "null"
+                  ],
                   "example": 2.3
                 },
                 "disk_size": {
@@ -45770,8 +47558,10 @@ export const OPERATIONS: OperationDef[] = [
                 },
                 "created_from": {
                   "description": "Information about the Server the Image was created from.",
-                  "type": "object",
-                  "nullable": true,
+                  "type": [
+                    "object",
+                    "null"
+                  ],
                   "properties": {
                     "id": {
                       "description": "ID of the Server the Image was created from.",
@@ -45792,9 +47582,11 @@ export const OPERATIONS: OperationDef[] = [
                 },
                 "bound_to": {
                   "description": "ID of Server the Image is bound to. Only set for Images of type `backup`.",
-                  "type": "integer",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
                   "format": "int64",
-                  "nullable": true,
                   "example": null
                 },
                 "os_flavor": {
@@ -45814,8 +47606,10 @@ export const OPERATIONS: OperationDef[] = [
                 },
                 "os_version": {
                   "description": "Operating system version.",
-                  "type": "string",
-                  "nullable": true,
+                  "type": [
+                    "string",
+                    "null"
+                  ],
                   "example": "24.04"
                 },
                 "rapid_deploy": {
@@ -45838,16 +47632,47 @@ export const OPERATIONS: OperationDef[] = [
                   ]
                 },
                 "deprecated": {
-                  "description": "Point in time when the Image is considered to be deprecated (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).",
-                  "type": "string",
+                  "deprecated": true,
+                  "description": "**Deprecated:** This field is deprecated, use the deprecation object instead.\n\nPoint in time when the Image is considered to be deprecated (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).\n",
+                  "type": [
+                    "string",
+                    "null"
+                  ],
                   "format": "date-time",
-                  "nullable": true,
                   "example": "2018-02-28T00:00:00Z"
+                },
+                "deprecation": {
+                  "title": "DeprecationInfo",
+                  "description": "Describes if, when and how the resource is deprecated. If this field is\nset to `null` the resource is not deprecated. If a value is set, it is\nconsidered deprecated.\n",
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "properties": {
+                    "unavailable_after": {
+                      "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2023-09-01T00:00:00Z"
+                    },
+                    "announced": {
+                      "description": "Date of the deprecation announcement.\n",
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2023-06-01T00:00:00Z"
+                    }
+                  },
+                  "required": [
+                    "unavailable_after",
+                    "announced"
+                  ]
                 },
                 "deleted": {
                   "description": "Point in time where the Image was deleted (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format).",
-                  "type": "string",
-                  "nullable": true,
+                  "type": [
+                    "string",
+                    "null"
+                  ],
                   "example": null
                 },
                 "labels": {
@@ -45887,15 +47712,18 @@ export const OPERATIONS: OperationDef[] = [
                 "os_version",
                 "protection",
                 "deprecated",
+                "deprecation",
                 "deleted",
                 "labels",
                 "architecture"
-              ],
-              "nullable": true
+              ]
             },
             "iso": {
               "description": "ISO Image that is attached to this Server. Null if no ISO is attached.",
-              "type": "object",
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "id": {
                   "description": "ID of the [ISO](#tag/isos).",
@@ -45907,8 +47735,10 @@ export const OPERATIONS: OperationDef[] = [
                 },
                 "name": {
                   "description": "Unique identifier of the ISO. Only set for public ISOs.",
-                  "type": "string",
-                  "nullable": true,
+                  "type": [
+                    "string",
+                    "null"
+                  ],
                   "example": "FreeBSD-11.0-RELEASE-amd64-dvd1"
                 },
                 "description": {
@@ -45918,18 +47748,22 @@ export const OPERATIONS: OperationDef[] = [
                 },
                 "type": {
                   "description": "Type of the ISO.",
-                  "type": "string",
+                  "type": [
+                    "string",
+                    "null"
+                  ],
                   "enum": [
                     "public",
                     "private"
-                  ],
-                  "nullable": true
+                  ]
                 },
                 "deprecation": {
                   "title": "DeprecationInfo",
                   "description": "Describes if, when and how the resource is deprecated. If this field is\nset to `null` the resource is not deprecated. If a value is set, it is\nconsidered deprecated.\n",
-                  "type": "object",
-                  "nullable": true,
+                  "type": [
+                    "object",
+                    "null"
+                  ],
                   "properties": {
                     "unavailable_after": {
                       "description": "Date of the deprecated resource removal.\n\nOnce this date is reached, the resource will not be returned\nby resource type \"list\" endpoint, and the resource can not be\nused to create new resources. For example, if this is an\nimage, you can not create new servers with this image after\nthe mentioned date.\n",
@@ -45951,13 +47785,15 @@ export const OPERATIONS: OperationDef[] = [
                 },
                 "architecture": {
                   "description": "CPU architecture compatible with the ISO.\n\nNull indicates no restriction on the architecture (wildcard).\n",
-                  "type": "string",
+                  "type": [
+                    "string",
+                    "null"
+                  ],
                   "enum": [
                     "x86",
                     "arm"
                   ],
-                  "example": "x86",
-                  "nullable": true
+                  "example": "x86"
                 }
               },
               "required": [
@@ -45967,8 +47803,7 @@ export const OPERATIONS: OperationDef[] = [
                 "type",
                 "deprecation",
                 "architecture"
-              ],
-              "nullable": true
+              ]
             },
             "rescue_enabled": {
               "description": "True if rescue mode is enabled. Server will then boot into rescue system on next reboot.",
@@ -45982,29 +47817,37 @@ export const OPERATIONS: OperationDef[] = [
             },
             "backup_window": {
               "description": "Time window (UTC) in which the backup will run, or null if the backups are not enabled.",
-              "type": "string",
-              "nullable": true,
+              "type": [
+                "string",
+                "null"
+              ],
               "example": "22-02"
             },
             "outgoing_traffic": {
               "description": "Outbound Traffic for the current billing period in bytes.",
-              "type": "integer",
+              "type": [
+                "integer",
+                "null"
+              ],
               "format": "int64",
-              "nullable": true,
               "example": 123456
             },
             "ingoing_traffic": {
               "description": "Inbound Traffic for the current billing period in bytes.",
-              "type": "integer",
+              "type": [
+                "integer",
+                "null"
+              ],
               "format": "int64",
-              "nullable": true,
               "example": 123456
             },
             "included_traffic": {
               "description": "Free Traffic for the current billing period in bytes.",
-              "type": "integer",
+              "type": [
+                "integer",
+                "null"
+              ],
               "format": "int64",
-              "nullable": true,
               "example": 654321
             },
             "protection": {
@@ -46063,7 +47906,10 @@ export const OPERATIONS: OperationDef[] = [
             "placement_group": {
               "description": "The placement group the server is assigned to.",
               "title": "PlacementGroupNullable",
-              "type": "object",
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "id": {
                   "description": "ID of the [Placement Group](#tag/placement-groups).",
@@ -46123,8 +47969,7 @@ export const OPERATIONS: OperationDef[] = [
                 "type",
                 "created",
                 "servers"
-              ],
-              "nullable": true
+              ]
             }
           },
           "required": [
@@ -46136,7 +47981,6 @@ export const OPERATIONS: OperationDef[] = [
             "private_net",
             "server_type",
             "location",
-            "datacenter",
             "image",
             "iso",
             "rescue_enabled",
@@ -46153,7 +47997,7 @@ export const OPERATIONS: OperationDef[] = [
       }
     },
     "returnsAction": false,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "update_ssh_key",
@@ -46267,7 +48111,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": false,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "update_volume",
@@ -46346,9 +48190,11 @@ export const OPERATIONS: OperationDef[] = [
             },
             "server": {
               "description": "ID of the Server the Volume is attached to, null if it is not attached at all.",
-              "type": "integer",
+              "type": [
+                "integer",
+                "null"
+              ],
               "format": "int64",
-              "nullable": true,
               "example": 12
             },
             "location": {
@@ -46461,8 +48307,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "format": {
               "description": "Filesystem of the Volume if formatted on creation, null if not formatted on creation.",
-              "type": "string",
-              "nullable": true,
+              "type": [
+                "string",
+                "null"
+              ],
               "example": "xfs"
             }
           },
@@ -46486,7 +48334,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": false,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "update_zone",
@@ -46526,7 +48374,8 @@ export const OPERATIONS: OperationDef[] = [
             "just-a-key": ""
           }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "requestBodyRequired": true,
     "responseSchema": {
@@ -46569,7 +48418,7 @@ export const OPERATIONS: OperationDef[] = [
                         "type": "object",
                         "properties": {
                           "address": {
-                            "description": "Public IPv4 or IPv6 address of the primary nameserver.",
+                            "description": "Public IPv4 or IPv6 address of the primary nameserver.\n\nMust be unique across all primary nameservers of this zone.\n",
                             "type": "string",
                             "example": "198.51.100.1"
                           },
@@ -46593,6 +48442,7 @@ export const OPERATIONS: OperationDef[] = [
                             ]
                           }
                         },
+                        "additionalProperties": false,
                         "required": [
                           "address"
                         ]
@@ -46689,10 +48539,12 @@ export const OPERATIONS: OperationDef[] = [
                         },
                         "delegation_last_check": {
                           "description": "Point in time (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format) when the DNS zone delegation was last checked.\n",
-                          "type": "string",
+                          "type": [
+                            "string",
+                            "null"
+                          ],
                           "format": "date-time",
-                          "example": "2016-01-30T23:55:00Z",
-                          "nullable": true
+                          "example": "2016-01-30T23:55:00Z"
                         },
                         "delegation_status": {
                           "description": "Status of the delegation.\n",
@@ -46715,6 +48567,7 @@ export const OPERATIONS: OperationDef[] = [
                           }
                         }
                       },
+                      "additionalProperties": false,
                       "required": [
                         "assigned",
                         "delegated",
@@ -46796,7 +48649,7 @@ export const OPERATIONS: OperationDef[] = [
                         "type": "object",
                         "properties": {
                           "address": {
-                            "description": "Public IPv4 or IPv6 address of the primary nameserver.",
+                            "description": "Public IPv4 or IPv6 address of the primary nameserver.\n\nMust be unique across all primary nameservers of this zone.\n",
                             "type": "string",
                             "example": "198.51.100.1"
                           },
@@ -46820,6 +48673,7 @@ export const OPERATIONS: OperationDef[] = [
                             ]
                           }
                         },
+                        "additionalProperties": false,
                         "required": [
                           "address"
                         ]
@@ -46916,10 +48770,12 @@ export const OPERATIONS: OperationDef[] = [
                         },
                         "delegation_last_check": {
                           "description": "Point in time (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format) when the DNS zone delegation was last checked.\n",
-                          "type": "string",
+                          "type": [
+                            "string",
+                            "null"
+                          ],
                           "format": "date-time",
-                          "example": "2016-01-30T23:55:00Z",
-                          "nullable": true
+                          "example": "2016-01-30T23:55:00Z"
                         },
                         "delegation_status": {
                           "description": "Status of the delegation.\n",
@@ -46942,6 +48798,7 @@ export const OPERATIONS: OperationDef[] = [
                           }
                         }
                       },
+                      "additionalProperties": false,
                       "required": [
                         "assigned",
                         "delegated",
@@ -46999,12 +48856,13 @@ export const OPERATIONS: OperationDef[] = [
           }
         }
       },
+      "additionalProperties": false,
       "required": [
         "zone"
       ]
     },
     "returnsAction": false,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "update_zone_rrset",
@@ -47081,7 +48939,8 @@ export const OPERATIONS: OperationDef[] = [
             "just-a-key": ""
           }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "requestBodyRequired": true,
     "responseSchema": {
@@ -47125,8 +48984,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "ttl": {
               "description": "Time To Live (TTL) of the [RRSet](#tag/zone-rrsets).\n\nMust be in between 60s and 2147483647s.\n\nIf not set, the [Zone's](#tag/zones) Default TTL is used.\n",
-              "type": "integer",
-              "nullable": true,
+              "type": [
+                "integer",
+                "null"
+              ],
               "minimum": 60,
               "maximum": 2147483647,
               "example": 3600
@@ -47153,6 +49014,7 @@ export const OPERATIONS: OperationDef[] = [
                   "example": false
                 }
               },
+              "additionalProperties": false,
               "required": [
                 "change"
               ]
@@ -47176,6 +49038,7 @@ export const OPERATIONS: OperationDef[] = [
                     "example": "My web server at Hetzner Cloud."
                   }
                 },
+                "additionalProperties": false,
                 "required": [
                   "value"
                 ]
@@ -47190,6 +49053,7 @@ export const OPERATIONS: OperationDef[] = [
               "example": 42
             }
           },
+          "additionalProperties": false,
           "required": [
             "id",
             "name",
@@ -47202,12 +49066,13 @@ export const OPERATIONS: OperationDef[] = [
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "rrset"
       ]
     },
     "returnsAction": false,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "attach_volume",
@@ -47295,10 +49160,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -47334,8 +49201,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -47449,10 +49318,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -47488,8 +49359,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -47525,7 +49398,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "detach_volume",
@@ -47592,10 +49465,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -47631,8 +49506,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -47668,7 +49545,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "resize_volume",
@@ -47749,10 +49626,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -47788,8 +49667,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -47825,7 +49706,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "change_zone_primary_nameservers",
@@ -47860,7 +49741,7 @@ export const OPERATIONS: OperationDef[] = [
             "type": "object",
             "properties": {
               "address": {
-                "description": "Public IPv4 or IPv6 address of the primary nameserver.",
+                "description": "Public IPv4 or IPv6 address of the primary nameserver.\n\nMust be unique across all primary nameservers of this zone.\n",
                 "type": "string",
                 "example": "198.51.100.1"
               },
@@ -47884,6 +49765,7 @@ export const OPERATIONS: OperationDef[] = [
                 ]
               }
             },
+            "additionalProperties": false,
             "required": [
               "address"
             ]
@@ -47900,6 +49782,7 @@ export const OPERATIONS: OperationDef[] = [
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "primary_nameservers"
       ]
@@ -47944,10 +49827,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -47983,8 +49868,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -48020,7 +49907,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "change_zone_protection",
@@ -48052,7 +49939,8 @@ export const OPERATIONS: OperationDef[] = [
           "type": "boolean",
           "example": false
         }
-      }
+      },
+      "additionalProperties": false
     },
     "requestBodyRequired": true,
     "responseSchema": {
@@ -48094,10 +49982,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -48133,8 +50023,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -48170,7 +50062,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "change_zone_ttl",
@@ -48206,6 +50098,7 @@ export const OPERATIONS: OperationDef[] = [
           "example": 10800
         }
       },
+      "additionalProperties": false,
       "required": [
         "ttl"
       ]
@@ -48250,10 +50143,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -48289,8 +50184,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -48326,7 +50223,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "import_zone_zonefile",
@@ -48359,6 +50256,7 @@ export const OPERATIONS: OperationDef[] = [
           "example": "$ORIGIN\texample.com.\n$TTL\t3600\n\n@\tIN\tSOA\thydrogen.ns.hetzner.com. dns.hetzner.com. 2024010100 86400 10800 3600000 3600\n\n@\tIN\t10800\tNS\thydrogen.ns.hetzner.com. ; Some comment.\n@\tIN\t10800\tNS\toxygen.ns.hetzner.com.\n@\tIN\t10800\tNS\thelium.ns.hetzner.de.\n"
         }
       },
+      "additionalProperties": false,
       "required": [
         "zonefile"
       ]
@@ -48403,10 +50301,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -48442,8 +50342,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -48479,7 +50381,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "add_zone_rrset_records",
@@ -48546,8 +50448,10 @@ export const OPERATIONS: OperationDef[] = [
       "properties": {
         "ttl": {
           "description": "Time To Live (TTL) of the [RRSet](#tag/zone-rrsets).\n\nIf not set, the [Zone's](#tag/zones) Default TTL is used.\nIf set, and the RRSet being updated already has a TTL, the values must be the same.\n",
-          "type": "integer",
-          "nullable": true,
+          "type": [
+            "integer",
+            "null"
+          ],
           "minimum": 60,
           "maximum": 2147483647,
           "example": 3600
@@ -48573,12 +50477,14 @@ export const OPERATIONS: OperationDef[] = [
                 "example": "My web server at Hetzner Cloud."
               }
             },
+            "additionalProperties": false,
             "required": [
               "value"
             ]
           }
         }
       },
+      "additionalProperties": false,
       "required": [
         "records"
       ]
@@ -48623,10 +50529,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -48662,8 +50570,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -48771,6 +50681,7 @@ export const OPERATIONS: OperationDef[] = [
           "example": false
         }
       },
+      "additionalProperties": false,
       "required": [
         "change"
       ]
@@ -48815,10 +50726,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -48854,8 +50767,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -48891,7 +50806,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "change_zone_rrset_ttl",
@@ -48958,13 +50873,16 @@ export const OPERATIONS: OperationDef[] = [
       "properties": {
         "ttl": {
           "description": "Time To Live (TTL) of the [RRSet](#tag/zone-rrsets).\n\nMust be in between 60s and 2147483647s.\n\nIf not set, the [Zone's](#tag/zones) Default TTL is used.\n",
-          "type": "integer",
-          "nullable": true,
+          "type": [
+            "integer",
+            "null"
+          ],
           "minimum": 60,
           "maximum": 2147483647,
           "example": 3600
         }
       },
+      "additionalProperties": false,
       "required": [
         "ttl"
       ]
@@ -49009,10 +50927,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -49048,8 +50968,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -49085,7 +51007,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "remove_zone_rrset_records",
@@ -49171,12 +51093,14 @@ export const OPERATIONS: OperationDef[] = [
                 "example": "My web server at Hetzner Cloud."
               }
             },
+            "additionalProperties": false,
             "required": [
               "value"
             ]
           }
         }
       },
+      "additionalProperties": false,
       "required": [
         "records"
       ]
@@ -49221,10 +51145,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -49260,8 +51186,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -49297,7 +51225,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "set_zone_rrset_records",
@@ -49383,12 +51311,14 @@ export const OPERATIONS: OperationDef[] = [
                 "example": "My web server at Hetzner Cloud."
               }
             },
+            "additionalProperties": false,
             "required": [
               "value"
             ]
           }
         }
       },
+      "additionalProperties": false,
       "required": [
         "records"
       ]
@@ -49433,10 +51363,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -49472,8 +51404,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -49509,7 +51443,7 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   },
   {
     "operationId": "update_zone_rrset_records",
@@ -49595,6 +51529,7 @@ export const OPERATIONS: OperationDef[] = [
                 "example": "My web server at Hetzner Cloud."
               }
             },
+            "additionalProperties": false,
             "required": [
               "value",
               "comment"
@@ -49602,6 +51537,7 @@ export const OPERATIONS: OperationDef[] = [
           }
         }
       },
+      "additionalProperties": false,
       "required": [
         "records"
       ]
@@ -49646,10 +51582,12 @@ export const OPERATIONS: OperationDef[] = [
             },
             "finished": {
               "description": "Point in time when the Action was finished (in [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) format). Only set if the Action is finished otherwise null.",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "format": "date-time",
-              "example": "2016-01-30T23:55:00Z",
-              "nullable": true
+              "example": "2016-01-30T23:55:00Z"
             },
             "progress": {
               "description": "Progress of the Action in percent.",
@@ -49685,8 +51623,10 @@ export const OPERATIONS: OperationDef[] = [
             },
             "error": {
               "description": "Error message for the Action if an error occurred, otherwise null.",
-              "type": "object",
-              "nullable": true,
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
                 "code": {
                   "description": "Fixed error code for machines.",
@@ -49722,6 +51662,6 @@ export const OPERATIONS: OperationDef[] = [
       ]
     },
     "returnsAction": true,
-    "isDestructive": false
+    "isDestructive": true
   }
 ] as const;

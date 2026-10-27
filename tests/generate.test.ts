@@ -141,7 +141,7 @@ const MINI_SPEC = {
       },
     },
   },
-};
+} as Parameters<typeof buildOperations>[0];
 
 describe("buildOperations", () => {
   it("emits one operation per path+method", () => {
@@ -195,12 +195,15 @@ describe("buildOperations", () => {
     )).toBe("hcloud_zone_rrset_add_records_action");
   });
 
-  it("marks DELETE and dangerous actions as destructive", () => {
+  it("marks every non-additive write as destructive (B-015)", () => {
     const ops = buildOperations(MINI_SPEC);
-    const del = ops.find((o) => o.toolName === "hcloud_delete_server")!;
-    expect(del.isDestructive).toBe(true);
-    const pw = ops.find((o) => o.toolName === "hcloud_server_poweron_action")!;
-    expect(pw.isDestructive).toBe(false); // poweron is NOT dangerous
+    const hint = (name: string) => ops.find((o) => o.toolName === name)!.isDestructive;
+    expect(hint("hcloud_delete_server")).toBe(true);
+    expect(hint("hcloud_update_zone_rrset")).toBe(true); // PUT overwrites
+    expect(hint("hcloud_list_servers_raw")).toBe(false);
+    expect(hint("hcloud_create_server")).toBe(false); // POST to a collection adds
+    expect(hint("hcloud_server_poweron_action")).toBe(false); // on the additive list
+    expect(hint("hcloud_server_attach_to_network_action")).toBe(false); // on the additive list
   });
 
   it("marks responses that include an Action object as returnsAction", () => {

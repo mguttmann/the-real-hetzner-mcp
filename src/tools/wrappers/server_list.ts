@@ -5,14 +5,14 @@ import { fetchAllPages } from "../../http/pagination.js";
 type RequestFn = <T = unknown>(
   method: HttpMethod,
   path: string,
-  options?: { query?: Record<string, unknown> },
+  options?: { query?: Record<string, unknown>; timeoutMs?: number; signal?: AbortSignal },
 ) => Promise<HttpResponse<T>>;
 
 type Server = { id: number; name: string; [k: string]: unknown };
 
 export function makeServerListTool(
   client: HetznerHttpClient,
-  limits: { maxItems: number; maxPages: number },
+  limits: { maxItems: number; maxPages: number; timeoutMs?: number },
 ): ToolDef {
   return {
     name: "hcloud_list_servers",
@@ -48,7 +48,7 @@ export function makeServerListTool(
       destructiveHint: false,
       openWorldHint: true,
     },
-    handler: async (input) => {
+    handler: async (input, ctx) => {
       const query: Record<string, unknown> = {
         sort: typeof input.sort === "string" ? input.sort : "name",
       };
@@ -64,7 +64,13 @@ export function makeServerListTool(
         "GET",
         "/servers",
         query,
-        { resourceKey: "servers", maxItems: limits.maxItems, maxPages: limits.maxPages },
+        {
+          resourceKey: "servers",
+          maxItems: limits.maxItems,
+          maxPages: limits.maxPages,
+          ...(limits.timeoutMs !== undefined ? { timeoutMs: limits.timeoutMs } : {}),
+          ...(ctx?.signal ? { signal: ctx.signal } : {}),
+        },
       );
 
       let servers = page.items;
@@ -82,6 +88,7 @@ export function makeServerListTool(
                 servers,
                 truncated: page.truncated,
                 pagination: page.pagination ?? null,
+                ...(page.note ? { note: page.note } : {}),
               },
               null,
               2,

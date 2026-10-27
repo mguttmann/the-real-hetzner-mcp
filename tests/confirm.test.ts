@@ -13,7 +13,7 @@ const destructiveTool: ToolDef = {
   },
   annotations: { readOnlyHint: false, destructiveHint: true, openWorldHint: true },
   handler: vi.fn(async (input) => ({
-    content: [{ type: "text", text: `deleted ${input.id}` }],
+    content: [{ type: "text" as const, text: `deleted ${input.id}` }],
   })),
 };
 
@@ -22,7 +22,7 @@ const readOnlyTool: ToolDef = {
   description: "list",
   inputSchema: { type: "object", properties: {}, additionalProperties: false },
   annotations: { readOnlyHint: true, destructiveHint: false, openWorldHint: true },
-  handler: vi.fn(async () => ({ content: [{ type: "text", text: "[]" }] })),
+  handler: vi.fn(async () => ({ content: [{ type: "text" as const, text: "[]" }] })),
 };
 
 describe("withConfirmGuard", () => {
@@ -40,12 +40,14 @@ describe("withConfirmGuard", () => {
   });
 
   it("passes through destructive calls with confirm:YES", async () => {
-    const handler = vi.fn(async (input: any) => ({ content: [{ type: "text", text: `ok ${input.id}` }] }));
+    const handler = vi.fn(async (input: any) => ({ content: [{ type: "text" as const, text: `ok ${input.id}` }] }));
     const tool = { ...destructiveTool, handler };
     const guarded = withConfirmGuard(tool, true);
-    const res = await guarded.handler({ id: 42, confirm: "YES" });
+    const ctx = { signal: new AbortController().signal };
+    const res = await guarded.handler({ id: 42, confirm: "YES" }, ctx);
     expect((res.content[0] as { text: string }).text).toBe("ok 42");
-    expect(handler).toHaveBeenCalledWith({ id: 42 }); // confirm stripped before forwarding
+    // confirm stripped before forwarding; the cancellation context goes along
+    expect(handler).toHaveBeenCalledWith({ id: 42 }, ctx);
   });
 
   it("never guards read-only tools, even when enabled=true", async () => {

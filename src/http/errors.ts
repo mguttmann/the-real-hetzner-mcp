@@ -51,7 +51,23 @@ export function mapErrorResponse(
   }
   const fallbackMessage =
     typeof body === "string" && body.length > 0
-      ? body
+      ? upstreamText(body)
       : `HTTP ${status}`;
   return new HetznerApiError(status, "upstream_error", fallbackMessage);
+}
+
+/** Longest part of a non-JSON error body that goes into the error message. */
+export const UPSTREAM_TEXT_MAX_CHARS = 4096;
+
+/**
+ * A non-JSON error body (an HTML page from a proxy, a plain-text 502) is not a
+ * Hetzner error message: it is quoted and marked as upstream text so a reader
+ * does not mistake it for this server's own words, and capped so a large page
+ * does not flood the tool result and the log.
+ */
+function upstreamText(body: string): string {
+  const cut = body.length - UPSTREAM_TEXT_MAX_CHARS;
+  const shown = cut > 0 ? body.slice(0, UPSTREAM_TEXT_MAX_CHARS) : body;
+  const suffix = cut > 0 ? ` [truncated, ${cut} more characters]` : "";
+  return `upstream text (non-JSON body): ${JSON.stringify(shown)}${suffix}`;
 }

@@ -1,38 +1,150 @@
 name: CI
 
-"on":
+on:
+  # Every branch, not only main, so a branch pushed for review (a release
+  # branch, for example) gets the full CI before main moves.
   push:
-    branches: [main]
+    branches: ["**"]
   pull_request:
+  # Weekly run so new advisories (npm audit) and a broken toolchain show
+  # up even when nobody pushes.
+  schedule:
+    - cron: "17 5 * * 1"
+  workflow_dispatch:
+  # release.yml runs this whole workflow on the tag commit before it
+  # builds anything, so a release passes the same gates as a branch.
+  workflow_call:
 
 permissions:
   contents: read
 
+concurrency:
+  # github.workflow is the caller's name when release.yml calls this
+  # workflow, so a release run never cancels or waits for a CI run.
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     strategy:
       fail-fast: false
       matrix:
-        node-version: [20.x, 22.x]
+        # 22 is the oldest supported line (engines >=22.12.0), 24 is the
+        # active LTS line, 26 is current.
+        node: ["22", "24", "26"]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+      - run: npm test
+      - name: The built server starts over stdio and lists the baseline tools
+        # Offline: a dummy token and a base URL nothing listens on, so the
+        # Hetzner API is never reached. The gateway baseline (the tool count
+        # must not fall, the sorted names must hash to the pinned value)
+        # comes from the file tests/tools-contract.test.ts also reads.
+        env:
+          HETZNER_API_TOKEN: dummy
+          HETZNER_API_BASE: "http://127.0.0.1:1"
+        run: npm run -s smoke -- --baseline tests/gateway-baseline.json
 
-      - name: Install dependencies
-        run: npm ci
+  node-floor:
+    # The runtime floor (engines >=22.12.0) on exactly that release line.
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22.12.x"
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+      - run: npm test
+      - name: The built server starts over stdio and lists the baseline tools
+        # Offline: a dummy token and a base URL nothing listens on, so the
+        # Hetzner API is never reached. The gateway baseline (the tool count
+        # must not fall, the sorted names must hash to the pinned value)
+        # comes from the file tests/tools-contract.test.ts also reads.
+        env:
+          HETZNER_API_TOKEN: dummy
+          HETZNER_API_BASE: "http://127.0.0.1:1"
+        run: npm run -s smoke -- --baseline tests/gateway-baseline.json
 
-      - name: Typecheck
-        run: npm run typecheck
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+          cache: npm
+      - name: Runtime dependencies must have no high or critical advisories
+        run: npm audit --omit=dev --audit-level=high
+      # Registry signatures (and provenance attestations where present)
+      # of every installed package, dev tools included.
+      - run: npm ci --ignore-scripts
+      - name: Installed packages carry valid registry signatures
+        run: npm audit signatures
 
-      - name: Build
-        run: npm run build
+  deploy-path:
+    # The install from source as README.md documents it (lockfile install,
+    # then build), on the active LTS line, then a start of the result over
+    # stdio.
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+          cache: npm
+      - name: Source install
+        run: npm ci --no-audit --no-fund && npm run build
+      - name: The built server starts over stdio and lists the baseline tools
+        # Offline: a dummy token and a base URL nothing listens on, so the
+        # Hetzner API is never reached. The gateway baseline (the tool count
+        # must not fall, the sorted names must hash to the pinned value)
+        # comes from the file tests/tools-contract.test.ts also reads.
+        env:
+          HETZNER_API_TOKEN: dummy
+          HETZNER_API_BASE: "http://127.0.0.1:1"
+        run: npm run -s smoke -- --baseline tests/gateway-baseline.json
 
-      - name: Test
-        run: npm test
+  gitleaks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GITLEAKS_VERSION: "8.30.1"
+      GITLEAKS_SHA256: "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Install gitleaks (pinned version, verified checksum)
+        run: |
+          archive="gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          curl -fsSLo "$RUNNER_TEMP/$archive" \
+            "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/${archive}"
+          echo "${GITLEAKS_SHA256}  $RUNNER_TEMP/$archive" | sha256sum --check --strict
+          tar -xzf "$RUNNER_TEMP/$archive" -C "$RUNNER_TEMP" gitleaks
+      - name: Scan the full git history
+        # Uses .gitleaks.toml from the repository.
+        run: '"$RUNNER_TEMP/gitleaks" git . --redact --no-banner --exit-code 1'

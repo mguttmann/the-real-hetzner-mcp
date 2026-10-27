@@ -1,5 +1,6 @@
 import type { ToolDef, ToolResult } from "../../types.js";
 import { runServerAction, type ServerActionDeps } from "./_server_action.js";
+import { invalidIdResult, isResourceId } from "../_validate.js";
 
 export function makeServerChangeTypeTool(deps: ServerActionDeps): ToolDef {
   return {
@@ -18,12 +19,13 @@ export function makeServerChangeTypeTool(deps: ServerActionDeps): ToolDef {
       additionalProperties: false,
     },
     annotations: { readOnlyHint: false, destructiveHint: true, openWorldHint: true },
-    handler: async (input): Promise<ToolResult> => {
-      const id = input.id as number;
+    handler: async (input, ctx): Promise<ToolResult> => {
+      const id = input.id;
+      if (!isResourceId(id)) return invalidIdResult("id", id);
       const server_type = input.server_type as string;
       const upgrade_disk = input.upgrade_disk === true;
       const wait = input.wait !== false;
-      return runServerAction(deps, id, "change_type", { server_type, upgrade_disk }, wait);
+      return runServerAction(deps, id, "change_type", { server_type, upgrade_disk }, wait, "hcloud_server_change_type", ctx?.signal);
     },
   };
 }

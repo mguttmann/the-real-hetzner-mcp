@@ -1,6 +1,7 @@
 import type { ToolDef, ToolResult } from "../../types.js";
 import type { HetznerHttpClient } from "../../http/client.js";
 import { asToolError } from "../_error.js";
+import { invalidIdResult, isResourceId } from "../_validate.js";
 
 type Server = { id: number; name: string; [k: string]: unknown };
 
@@ -25,8 +26,12 @@ export function makeServerGetTool(client: HetznerHttpClient): ToolDef {
       additionalProperties: false,
     },
     annotations: { readOnlyHint: true, destructiveHint: false, openWorldHint: true },
-    handler: async (input) => {
-      const hasId = typeof input.id === "number";
+    handler: async (input, ctx) => {
+      const signal = ctx?.signal ? { signal: ctx.signal } : {};
+      // isResourceId instead of a bare typeof: -1, 0, 1.5 and 1e21 are numbers
+      // too, and this wrapper should not depend on the central layer alone.
+      const hasId = input.id !== undefined && input.id !== null;
+      if (hasId && !isResourceId(input.id)) return invalidIdResult("id", input.id);
       const hasName = typeof input.name === "string";
       if (hasId === hasName) {
         return errorResult("Provide exactly one of `id` or `name`.");
@@ -35,7 +40,8 @@ export function makeServerGetTool(client: HetznerHttpClient): ToolDef {
       if (hasId) {
         const res = await client.request<{ server: Server }>(
           "GET",
-          `/servers/${input.id}`,
+          `/servers/${encodeURIComponent(String(input.id))}`,
+          signal,
         );
         const errResult = asToolError(res);
         if (errResult) return errResult;
@@ -50,7 +56,7 @@ export function makeServerGetTool(client: HetznerHttpClient): ToolDef {
       const res = await client.request<{ servers: Server[] }>(
         "GET",
         "/servers",
-        { query: { name: input.name as string } },
+        { query: { name: input.name as string }, ...signal },
       );
       const errResult = asToolError(res);
       if (errResult) return errResult;

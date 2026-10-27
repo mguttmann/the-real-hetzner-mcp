@@ -1,0 +1,2878 @@
+{
+  "toolCount": 202,
+  "namesSha256": "add1751bed5495326a4c7e2ac13dae4f65c24a0be99cb821615779e2fd32b3c9",
+  "tools": [
+    {
+      "name": "hcloud_apply_firewall_to_server",
+      "required": [
+        "server_id"
+      ],
+      "inputSchemaSha256": "3548f7a990a85dcd5710982a2e8bdb3adf4e0beba7665fc3157e881e5d3dfb61",
+      "inputSchemaSha256ConfirmWrites": "f447e6e563eae8f295b7c587344438f429a67b1f3b62d41dd263348d902fe238",
+      "descriptionSha256": "b7927f23c7f618146c7904d173796d12a5c1b095092b6f22645f4ee70025bda2",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_certificate_retry_action",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "e062ebb3cab740dd4a8bbc0687111c4de8477d345ad23117aabdcb41af42f973",
+      "inputSchemaSha256ConfirmWrites": "0fe042c8d58fee5339dbf1e124834e0a5938052b108ecc90647ced81bed1f645",
+      "descriptionSha256": "471eb983a17e0b0f6757fd5f2fac242d61b94bfd76e8e2998044f410ce7d28f4",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_create_certificate",
+      "required": [
+        "body"
+      ],
+      "inputSchemaSha256": "4b13ebb85ef69bac5f691de4eca43173ea77d195d79f0e56aec5de542ec66bde",
+      "inputSchemaSha256ConfirmWrites": "bc186658cbd0a16803c0bd2b4042ae3a4d00c23d4b6e34c1da7ebe057f4c9bef",
+      "descriptionSha256": "b61e3f91572bef8a43d80febc16af7f230d584d51276bd655fc84e7673ab3560",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_create_firewall",
+      "required": [
+        "body"
+      ],
+      "inputSchemaSha256": "98e81a00aacd29c1b8aea637213b103e62213dbb1a583809cdd864bfc6d8468b",
+      "inputSchemaSha256ConfirmWrites": "79b6851ce18b7518f432fb4ef6eaee8370a8e84db4076935636c76d031c4297d",
+      "descriptionSha256": "e0e94c0e79a80fafeb7fde36b8c167e5eee892db8ec6efe9d0e90fd338f6fdc0",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_create_floating_ip",
+      "required": [
+        "body"
+      ],
+      "inputSchemaSha256": "af1c150b9a23c2220b04c6124e6c29f19a93bd5d8e9daa0db32d45bb3ef06ffe",
+      "inputSchemaSha256ConfirmWrites": "8562ad4cd43f7675a65cffdcd94c89f56f2e3e0055e0532c429b3d21f0e9e1cd",
+      "descriptionSha256": "4e5f6d697cb1b7762e0be0ffc98b06f3c22c8eed6d4d21946a11aca5c383596b",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_create_load_balancer",
+      "required": [
+        "body"
+      ],
+      "inputSchemaSha256": "561d9095bd71292232223119a36ad3ec2fa1361bdac2fdca70583e2b136d6df6",
+      "inputSchemaSha256ConfirmWrites": "1baec16a457e09e5541de64b1efe70366af14d576a5e7610a3217a7bf2dced20",
+      "descriptionSha256": "2af406f087b3b1615a521dc3bc21ff6c25d15e54e4aceb938b89b3f0535dffaf",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_create_network",
+      "required": [
+        "body"
+      ],
+      "inputSchemaSha256": "632fca89215792dd1bf0bb8e2c9d795ff9deea5427e9fffaa1f0d5fba6c17f3f",
+      "inputSchemaSha256ConfirmWrites": "a3653b578de1e0deb8b003ba682e3020813c4fdb88e2166c84f7d09a53edfa9a",
+      "descriptionSha256": "2b8013a454cfd112a597d772ad9c9dc6399f48b982805f689962a1f0fc36d08e",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_create_placement_group",
+      "required": [
+        "body"
+      ],
+      "inputSchemaSha256": "4c5bf3092cb18e11a791cf0491a96b244f01624abc9e443b3d103d14ca2f6492",
+      "inputSchemaSha256ConfirmWrites": "ba09d1b2d0eed2a68123532ae523bfdfedddf838dad0d33d366fa4e08dc02a23",
+      "descriptionSha256": "55061ec11650b1a1854cbf3ead698395c9a748c19200bae55326d092083db298",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_create_primary_ip",
+      "required": [
+        "body"
+      ],
+      "inputSchemaSha256": "0fba150c6f7a8246d37d36cc0ca9a5c3cbb160ec173482cce1deb5bb1ada5aab",
+      "inputSchemaSha256ConfirmWrites": "1605b169addb7eec011751e765dfd506ca73a5e3633bd7842a444f8f37b35b6f",
+      "descriptionSha256": "d66180431594d346781d20de8a7644b201ce100dc3c3e4af063da75fe3255f30",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_create_server",
+      "required": [
+        "body"
+      ],
+      "inputSchemaSha256": "ebaab10760bcebc53b02b217911222edad1d6398e8a4123c11a0d06530080cd7",
+      "inputSchemaSha256ConfirmWrites": "fbe0804da3525fe26858beb68445a0fc4ecc014566e850482779490035393653",
+      "descriptionSha256": "b8095df55ed9d4828f9a7d6ec12a6bbc638aed987cf3f64d7360c3512492f352",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_create_ssh_key",
+      "required": [
+        "body"
+      ],
+      "inputSchemaSha256": "30536e02d3855e6d638f5abe7a012ad64ddbc3d1ea0b823647c47b1439a6a264",
+      "inputSchemaSha256ConfirmWrites": "bee04e3e4d992b79311001d44713cc0369adfc556ada812e331d724d9ffccde5",
+      "descriptionSha256": "137d1db0d131a5608013eabcf7a2fff9777ace0abb89bd7f593ee00038794f1e",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_create_volume",
+      "required": [
+        "body"
+      ],
+      "inputSchemaSha256": "b759e7d44307d125e0b749f9236b45162370011c36f944ab5a4006f7c7949488",
+      "inputSchemaSha256ConfirmWrites": "d4a31684eb2ef1fdd100db961b1ef7429130a73ef3ce716f95f18fcca924c263",
+      "descriptionSha256": "9b8be5025803d319f48cdf5386b76a78c06c4869ef9f6b08107cc0c8a38e5bbe",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_create_zone",
+      "required": [
+        "body"
+      ],
+      "inputSchemaSha256": "a833688fc1a61197ccb712197ab83b6ded3b79019b9490e3a6483362195e91d3",
+      "inputSchemaSha256ConfirmWrites": "48f8f12a08da815d75e815b234804ce29e001a2232a2928329141dccf9c063b5",
+      "descriptionSha256": "da54cb73d381a09ed5cc953f00c19d156bdfcd6a8423e2f23f0057285601dc90",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_delete_certificate",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "8a184b84cc1110f7e3beccd7afd7bdbf9ada9d77dcf3b5786ed689169d409691",
+      "inputSchemaSha256ConfirmWrites": "85334f932f34c1126769dab49fb848f4793c26eb405547662c5d93e2de2174cb",
+      "descriptionSha256": "099d98b8f78b683ba7c97071bcc14669ecf6ed381034da6c203c23e62f9ca184",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_delete_firewall",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "e2c67d1b0292076cc8ac147aff15784b55ee27e5ffcb74b566ac8350c937ff0f",
+      "inputSchemaSha256ConfirmWrites": "f67e6ab6f9f0e4dc36d3f35969efbc5f6b3807be02c59091e0f5953d68419ce9",
+      "descriptionSha256": "70e094483d95b3d4c631075a3e4d4ccd90d7e1d15e86f9da393e76fdaf70c68a",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_delete_floating_ip",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "89a058a89cffffc8f7720f0d9d09b9cfd20a1653aa9742b9b35f3935acdea63b",
+      "inputSchemaSha256ConfirmWrites": "ad0701869ac035a98565d64ce37f210c7baee056f2bdc54da65393771820ae30",
+      "descriptionSha256": "ea505b6edc19bf250b7fe87e1f67183db2773f248f44b8d63fcec36dc8a8afc0",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_delete_image",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "8aee74a800a0cda1e20c0cad475c1c549e22ec3ee4d661ed6677b980462805c3",
+      "inputSchemaSha256ConfirmWrites": "e398cc6d9a75f95b323a3943e2abd9fe7fbdf68aa0807fa7c4c2afcb96222f0a",
+      "descriptionSha256": "8ef7f268a58d0ff17303e703a85c008b82be169a017fd498931069a22801049f",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_delete_load_balancer",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "d54859cfebc98b2034f4329d8f505ba357ab7084ce971ca518b64c1cc73e021c",
+      "inputSchemaSha256ConfirmWrites": "839f96ffcca4423ec6001c8fad3bad102a6b099bc8c3c54b37b806a2c634c85f",
+      "descriptionSha256": "73fbb1fad08d8420a00426cedef9ecf71b4681325286ef361ced0cedca903668",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_delete_network",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "84eb7a3efa8d0f4f38aa1fc0a1dcb87829241d759d192746c9443f67573544dc",
+      "inputSchemaSha256ConfirmWrites": "303b7767755d05137e92fdc719bb57951602c6f52496d2477aad4c1ed234ab84",
+      "descriptionSha256": "cb310ea44a69ad722137f5da1a1266f8f4106f3a324f71a7e8f952b00cfd711b",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_delete_placement_group",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "8b31774d5a6f1356cb1bcca7bb291ee5aad3c5c332503035c09a0d8eafbc47cb",
+      "inputSchemaSha256ConfirmWrites": "886e1d26caf72922d9f05397420342e7a4b5d4372270e18cf8e65bb8fc1db067",
+      "descriptionSha256": "ae4c6a488d72b9e2e480b0fc9fcee47e7ada3a7b44270d8866e0c9e7c5b076b4",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_delete_primary_ip",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "057e4779efb103a39f5408a7fa90a61f0182ba5d5479ed0ea1c6bf0b5d7b65fd",
+      "inputSchemaSha256ConfirmWrites": "b0b5186651528511eadb37c394af5c464d5f6da4378336b0979b133d7b507c5f",
+      "descriptionSha256": "e01865027647d9f2407a8edfec01f539732943eda02cec42d63e787b057417b9",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_delete_server",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "575d92047286c381638084ce1fee02c2867dfe563789eac7281ec756742b355a",
+      "inputSchemaSha256ConfirmWrites": "a92b22ece1b8010d6a3de137b48e86f42b4f6c93cf48e148706d07a6e38f29b3",
+      "descriptionSha256": "9068142868262082dccd250f63c824cee403a3897233c029a383c324311d6444",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_delete_ssh_key",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "44ee57a5dbbc4ee219b46c748b80299c9fd3803f9eff68f67c3615529aaa6579",
+      "inputSchemaSha256ConfirmWrites": "97c17f9aab86ea64c21fc0e01204dbe03004852a0870b15ef513f590038c281f",
+      "descriptionSha256": "2de566a6e28979f83b698824d84f66d0a564a72137a8075518e776e032fd4853",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_delete_volume",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "69be4c5d5b49e8c7554c6700687f9fc66ad1276b430886bc88837aebd38f04e6",
+      "inputSchemaSha256ConfirmWrites": "0397e3d9e86a5de69e889d6e39c86110c13245dd3d921d1238d6ad8f482786cd",
+      "descriptionSha256": "f803a94e380f6487f1efa6e2b38210adbacd05b4ce26c6b968b56c0eba8e41da",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_delete_zone",
+      "required": [
+        "id_or_name"
+      ],
+      "inputSchemaSha256": "3c78bb6366fbc9f0b945400cf85681c25849be38301740bd1081e7bc89349d11",
+      "inputSchemaSha256ConfirmWrites": "444241a3336160d5f24ab8b1b3e5ee84f5ce5debfe56d7aca9bcd3a81df99047",
+      "descriptionSha256": "42e2c222c097eb9c284526478f6beb78606075ffe709f34c8f5ba72b54059774",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_delete_zone_rrset",
+      "required": [
+        "id_or_name",
+        "rr_name",
+        "rr_type"
+      ],
+      "inputSchemaSha256": "19b594c5fe2e382d37439654fa94851183ccbedb1e71382ca2d4a53ba5fbd4e2",
+      "inputSchemaSha256ConfirmWrites": "949a8e5c3b3817f8be4e63b011ef62b722f1a62ad71dc73ebf9e6122d12ec3be",
+      "descriptionSha256": "09d86aec659b07b278caf738872f8884b2e05c7e8980e280b0fab706e6a08e0d",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_firewall_apply_to_resources_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "6ecb98d4aa69e66df480af51277c3b83c001e280e4f6f7066cb1d44c3da5f554",
+      "inputSchemaSha256ConfirmWrites": "374b80904de9d9e48cf4339755024a206a97c94c3fab96d1dc592e31780dd160",
+      "descriptionSha256": "574c900f1ca2da1546e008dd03eb327c0b2477465dec2682b297a1703608b600",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_firewall_remove_from_resources_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "c82bf21fbda16d831a9470ec085e962a9d2b28f8d2bdf39e48f9e419da8a9a71",
+      "inputSchemaSha256ConfirmWrites": "fb0e1853d79becd6bee8c9ea640695e18f899810ce39250b9760e4766c595198",
+      "descriptionSha256": "7ba59569527090eb7c8abc30fcdbfb2e932441864056ada1b2a9730e93f78071",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_firewall_set_rules_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "6addf743cf5c3c35a3d76b93c9e90831dc7473cc26366a78d0c8a6116a435a28",
+      "inputSchemaSha256ConfirmWrites": "aee79549a101028f283ee838e0a5f3c3ac70c9c16dc36a8197b8620a769adf46",
+      "descriptionSha256": "7325eff1227e24cb82586504e15227a05fb87c13bacd461528e09cbbb50cde46",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_floating_ip_assign_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "5addfc5ed2eccea8290f5dbfe23a76eb55a24a8048189d46806fc70ce774d08f",
+      "inputSchemaSha256ConfirmWrites": "e50cb278d509d3c1b20ab9fb1d42561e71b576cb1e73f880800dad8ff9c272c5",
+      "descriptionSha256": "9d3826516262bd7875d6a4fa450570dc11e1bad7cc430485d61dfd18f5ea9f3b",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_floating_ip_change_dns_ptr_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "d6ad84ce826a4c2a10393b82894455d02be01798bea7567b0af1a2234dfbc2fd",
+      "inputSchemaSha256ConfirmWrites": "c87f5c7f2e2580d02d4d581958187982400374b3916199002da55f126208ecbe",
+      "descriptionSha256": "6915048f8b2a8eaafe4381b6cc1e733079863facfff0fc8a8cd75979bce5bc7f",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_floating_ip_change_protection_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "1904aa8750469f087d83876ca742938e331a219174ea3b2248f11065898770d3",
+      "inputSchemaSha256ConfirmWrites": "05c46b61e8d7ab392e30f2bb0d43839e5382cedc2b09cabb79073896e57f7d90",
+      "descriptionSha256": "22ea793d6752e5eb6e9261f7d908e85d286b899aecd78e49519670d118d99b7c",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_floating_ip_unassign_action",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "f5a2151a678b74c6cf069f76914a70088b4998fb40f813b4ed3e52343166b9e8",
+      "inputSchemaSha256ConfirmWrites": "2776e26b18089449cb19a80d4f7c287bab8922c907d5ea60db5a85165e4c9d9e",
+      "descriptionSha256": "6ce8b78a9290766adf64448d396569f71ccf4e15eebb6b37c482f9868098ef30",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_action",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "0749520f1a9423691345ddd67a87b77fad9b7a2d6a86ebf78a4594d418cc14d2",
+      "inputSchemaSha256ConfirmWrites": "0749520f1a9423691345ddd67a87b77fad9b7a2d6a86ebf78a4594d418cc14d2",
+      "descriptionSha256": "90c0a99800901a0f96704ac1e83173f3f9742b108268ce386b0159cdc125b615",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_certificate",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "8a184b84cc1110f7e3beccd7afd7bdbf9ada9d77dcf3b5786ed689169d409691",
+      "inputSchemaSha256ConfirmWrites": "8a184b84cc1110f7e3beccd7afd7bdbf9ada9d77dcf3b5786ed689169d409691",
+      "descriptionSha256": "6e2b5768e78252ccbd15649951f89a824927412fdc7973beefab3bd32772ddf1",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_certificate_action",
+      "required": [
+        "id",
+        "action_id"
+      ],
+      "inputSchemaSha256": "2a8e5e791e0d5831bccf621139b8c378ceba5fca309c07e0dae395da564ed374",
+      "inputSchemaSha256ConfirmWrites": "2a8e5e791e0d5831bccf621139b8c378ceba5fca309c07e0dae395da564ed374",
+      "descriptionSha256": "fa9e3a286d8b6efde0366796c606d5260e1ef33ba62a2f7699ab94e16180568e",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_certificates_actions",
+      "required": [],
+      "inputSchemaSha256": "762f09b69c3df8f2aa7734144bad1fbf6b71a72cac88b7ab30d3f31ef16fea7b",
+      "inputSchemaSha256ConfirmWrites": "762f09b69c3df8f2aa7734144bad1fbf6b71a72cac88b7ab30d3f31ef16fea7b",
+      "descriptionSha256": "17dd1b6a8629cbbc80bb7eeb4f4588e26ac217357e428d3eb71315777188387d",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_certificates_actions_id",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "0749520f1a9423691345ddd67a87b77fad9b7a2d6a86ebf78a4594d418cc14d2",
+      "inputSchemaSha256ConfirmWrites": "0749520f1a9423691345ddd67a87b77fad9b7a2d6a86ebf78a4594d418cc14d2",
+      "descriptionSha256": "90c0a99800901a0f96704ac1e83173f3f9742b108268ce386b0159cdc125b615",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_datacenter",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "7b1e1442019bb5b3a1a9ddeddd1c5d0b78c583e7cb7db6b7e84ccb68683b6362",
+      "inputSchemaSha256ConfirmWrites": "7b1e1442019bb5b3a1a9ddeddd1c5d0b78c583e7cb7db6b7e84ccb68683b6362",
+      "descriptionSha256": "f5fe78355695fb2650ac74a4da0539effa9c9042054528ae91fcaff0a222cad0",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_firewall",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "e2c67d1b0292076cc8ac147aff15784b55ee27e5ffcb74b566ac8350c937ff0f",
+      "inputSchemaSha256ConfirmWrites": "e2c67d1b0292076cc8ac147aff15784b55ee27e5ffcb74b566ac8350c937ff0f",
+      "descriptionSha256": "2c7b3d01bf2c28303111a85673eab26944ed52db0a06ea0bc40cb97aaeea54f5",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_firewall_action",
+      "required": [
+        "id",
+        "action_id"
+      ],
+      "inputSchemaSha256": "81d9d191ca6a2f36c6fe0c47a296a14c48118417003596c06451f8c9f08ea16a",
+      "inputSchemaSha256ConfirmWrites": "81d9d191ca6a2f36c6fe0c47a296a14c48118417003596c06451f8c9f08ea16a",
+      "descriptionSha256": "272e0e774b00e816196bac84c5a6f1662d941683e358623ad47d211a49506ab6",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_firewalls_actions",
+      "required": [],
+      "inputSchemaSha256": "762f09b69c3df8f2aa7734144bad1fbf6b71a72cac88b7ab30d3f31ef16fea7b",
+      "inputSchemaSha256ConfirmWrites": "762f09b69c3df8f2aa7734144bad1fbf6b71a72cac88b7ab30d3f31ef16fea7b",
+      "descriptionSha256": "19330b896e46c761f2633318269da59179cb43998dd78a6968923d298ce64f29",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_firewalls_actions_id",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "0749520f1a9423691345ddd67a87b77fad9b7a2d6a86ebf78a4594d418cc14d2",
+      "inputSchemaSha256ConfirmWrites": "0749520f1a9423691345ddd67a87b77fad9b7a2d6a86ebf78a4594d418cc14d2",
+      "descriptionSha256": "3dded9ea8fbcb3258c5b1fbdeb57d93ae293cd20a6d78274c508b992383dc202",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_floating_ip",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "89a058a89cffffc8f7720f0d9d09b9cfd20a1653aa9742b9b35f3935acdea63b",
+      "inputSchemaSha256ConfirmWrites": "89a058a89cffffc8f7720f0d9d09b9cfd20a1653aa9742b9b35f3935acdea63b",
+      "descriptionSha256": "6432f0cccf0628b5e1ce33a2e02188324deee9515848cc8d570645885a42a053",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_floating_ip_action",
+      "required": [
+        "id",
+        "action_id"
+      ],
+      "inputSchemaSha256": "b55c36d2d685228b4c389d86508198a10342fafbcd1d86d2df1f96138eea5fc7",
+      "inputSchemaSha256ConfirmWrites": "b55c36d2d685228b4c389d86508198a10342fafbcd1d86d2df1f96138eea5fc7",
+      "descriptionSha256": "8f4bb3f19d52cc6a9e26e1b9f564e6ea31ea60ee750af2969d517ef1991fcefc",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_floating_ips_actions",
+      "required": [],
+      "inputSchemaSha256": "762f09b69c3df8f2aa7734144bad1fbf6b71a72cac88b7ab30d3f31ef16fea7b",
+      "inputSchemaSha256ConfirmWrites": "762f09b69c3df8f2aa7734144bad1fbf6b71a72cac88b7ab30d3f31ef16fea7b",
+      "descriptionSha256": "33706094848185c31062144c73086d8d6f482b02bbe99e0aceb10a875d59aa4d",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_floating_ips_actions_id",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "0749520f1a9423691345ddd67a87b77fad9b7a2d6a86ebf78a4594d418cc14d2",
+      "inputSchemaSha256ConfirmWrites": "0749520f1a9423691345ddd67a87b77fad9b7a2d6a86ebf78a4594d418cc14d2",
+      "descriptionSha256": "c3e4590d85a1db5ea9079a6e4ae62f7c94c0755f98da979c3faf857b7ea22858",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_image",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "8aee74a800a0cda1e20c0cad475c1c549e22ec3ee4d661ed6677b980462805c3",
+      "inputSchemaSha256ConfirmWrites": "8aee74a800a0cda1e20c0cad475c1c549e22ec3ee4d661ed6677b980462805c3",
+      "descriptionSha256": "fd30791309019894ebbf5c2762c11f293c7b7f154616fb1419a4d37a7e7fb5cb",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_image_action",
+      "required": [
+        "id",
+        "action_id"
+      ],
+      "inputSchemaSha256": "886aa23c3872a60942f9b07b1ef7922a3ac8ddc7042d5ed552aa3151c004e412",
+      "inputSchemaSha256ConfirmWrites": "886aa23c3872a60942f9b07b1ef7922a3ac8ddc7042d5ed552aa3151c004e412",
+      "descriptionSha256": "dd2ebfadb31e132eab527c3db1b118de22455c72c0e63f7fb93efaed7d31cb3b",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_images_actions",
+      "required": [],
+      "inputSchemaSha256": "762f09b69c3df8f2aa7734144bad1fbf6b71a72cac88b7ab30d3f31ef16fea7b",
+      "inputSchemaSha256ConfirmWrites": "762f09b69c3df8f2aa7734144bad1fbf6b71a72cac88b7ab30d3f31ef16fea7b",
+      "descriptionSha256": "17dd1b6a8629cbbc80bb7eeb4f4588e26ac217357e428d3eb71315777188387d",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_images_actions_id",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "0749520f1a9423691345ddd67a87b77fad9b7a2d6a86ebf78a4594d418cc14d2",
+      "inputSchemaSha256ConfirmWrites": "0749520f1a9423691345ddd67a87b77fad9b7a2d6a86ebf78a4594d418cc14d2",
+      "descriptionSha256": "90c0a99800901a0f96704ac1e83173f3f9742b108268ce386b0159cdc125b615",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_iso",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "450f541f4daaf2872741c9e177320b8c735cc3cd4cd23570ea858839eb33a7d7",
+      "inputSchemaSha256ConfirmWrites": "450f541f4daaf2872741c9e177320b8c735cc3cd4cd23570ea858839eb33a7d7",
+      "descriptionSha256": "b3904697e45a34742d844b478e97c2de9edcb55edd3722191c13daeb267e630e",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_load_balancer",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "b609ae67dbc678469d687614a5f67a5a2a678b4752153b8b0088bb97eafa6aeb",
+      "inputSchemaSha256ConfirmWrites": "b609ae67dbc678469d687614a5f67a5a2a678b4752153b8b0088bb97eafa6aeb",
+      "descriptionSha256": "a823a25689f7b480439a1aa5589e65e957626b1afd4b75f5448d1cf1aa4f488e",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_load_balancer_action",
+      "required": [
+        "id",
+        "action_id"
+      ],
+      "inputSchemaSha256": "659df716d2f2c2307a5a6f82d6e75e34e746f95054a9c59b75b43be0545a4e29",
+      "inputSchemaSha256ConfirmWrites": "659df716d2f2c2307a5a6f82d6e75e34e746f95054a9c59b75b43be0545a4e29",
+      "descriptionSha256": "303ea5b0092fe63f00bcf80eeb646278eb7ea6a137853a1f8b90cbfbb29fcd53",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_load_balancer_metrics",
+      "required": [
+        "id",
+        "type",
+        "start",
+        "end"
+      ],
+      "inputSchemaSha256": "f4134fe51c1d3c27e1aae3ebc9f3efca06b0f64c3ab4234a8063ea05e16c989c",
+      "inputSchemaSha256ConfirmWrites": "f4134fe51c1d3c27e1aae3ebc9f3efca06b0f64c3ab4234a8063ea05e16c989c",
+      "descriptionSha256": "600130af85a33fb6f9a92dfef3775dd1b6838906fde09dcc2594c55c74b87b47",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_load_balancer_type",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "285481a2e5fc8863969c27815d4f06dedc984829281abd591d293f40297f7ce5",
+      "inputSchemaSha256ConfirmWrites": "285481a2e5fc8863969c27815d4f06dedc984829281abd591d293f40297f7ce5",
+      "descriptionSha256": "326e4d8d0ab94747ddfa99442cd15f33c6284c6165e81bedc606676c4757775b",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_load_balancers_actions",
+      "required": [],
+      "inputSchemaSha256": "762f09b69c3df8f2aa7734144bad1fbf6b71a72cac88b7ab30d3f31ef16fea7b",
+      "inputSchemaSha256ConfirmWrites": "762f09b69c3df8f2aa7734144bad1fbf6b71a72cac88b7ab30d3f31ef16fea7b",
+      "descriptionSha256": "17dd1b6a8629cbbc80bb7eeb4f4588e26ac217357e428d3eb71315777188387d",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_load_balancers_actions_id",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "0749520f1a9423691345ddd67a87b77fad9b7a2d6a86ebf78a4594d418cc14d2",
+      "inputSchemaSha256ConfirmWrites": "0749520f1a9423691345ddd67a87b77fad9b7a2d6a86ebf78a4594d418cc14d2",
+      "descriptionSha256": "90c0a99800901a0f96704ac1e83173f3f9742b108268ce386b0159cdc125b615",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_location",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "f468718d3696d571be5d6fb96dc6b468833050671c1c74d2f865377785f31f64",
+      "inputSchemaSha256ConfirmWrites": "f468718d3696d571be5d6fb96dc6b468833050671c1c74d2f865377785f31f64",
+      "descriptionSha256": "e788ba55d771c160409f4279dea8acd0ebb0500281bd1abac524225a8bc025ff",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_network",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "84eb7a3efa8d0f4f38aa1fc0a1dcb87829241d759d192746c9443f67573544dc",
+      "inputSchemaSha256ConfirmWrites": "84eb7a3efa8d0f4f38aa1fc0a1dcb87829241d759d192746c9443f67573544dc",
+      "descriptionSha256": "d448f2dee29267b02e1e0e519a1fb906871460469961e1b431426fcc383e274f",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_network_action",
+      "required": [
+        "id",
+        "action_id"
+      ],
+      "inputSchemaSha256": "0aa0a7622f9f062fb6f36ae209ab5c15d37d4bcb00327846ca5ff4597cd1f3b5",
+      "inputSchemaSha256ConfirmWrites": "0aa0a7622f9f062fb6f36ae209ab5c15d37d4bcb00327846ca5ff4597cd1f3b5",
+      "descriptionSha256": "59dfdfd15d959170debf8f93f47f68aa2e9c3bc83e6593334427097b2dfd673f",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_network_members",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "e5c21e9c0d0a18cdc9fcf008ff88084db57e7608b1ad31a9554a01a1fd745f0d",
+      "inputSchemaSha256ConfirmWrites": "e5c21e9c0d0a18cdc9fcf008ff88084db57e7608b1ad31a9554a01a1fd745f0d",
+      "descriptionSha256": "1e4742a02e2f4b31bcfaff5239010aed5978b0bcb91bee047abbd1e484285943",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_networks_actions",
+      "required": [],
+      "inputSchemaSha256": "762f09b69c3df8f2aa7734144bad1fbf6b71a72cac88b7ab30d3f31ef16fea7b",
+      "inputSchemaSha256ConfirmWrites": "762f09b69c3df8f2aa7734144bad1fbf6b71a72cac88b7ab30d3f31ef16fea7b",
+      "descriptionSha256": "33706094848185c31062144c73086d8d6f482b02bbe99e0aceb10a875d59aa4d",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_networks_actions_id",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "0749520f1a9423691345ddd67a87b77fad9b7a2d6a86ebf78a4594d418cc14d2",
+      "inputSchemaSha256ConfirmWrites": "0749520f1a9423691345ddd67a87b77fad9b7a2d6a86ebf78a4594d418cc14d2",
+      "descriptionSha256": "c3e4590d85a1db5ea9079a6e4ae62f7c94c0755f98da979c3faf857b7ea22858",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_placement_group",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "8b31774d5a6f1356cb1bcca7bb291ee5aad3c5c332503035c09a0d8eafbc47cb",
+      "inputSchemaSha256ConfirmWrites": "8b31774d5a6f1356cb1bcca7bb291ee5aad3c5c332503035c09a0d8eafbc47cb",
+      "descriptionSha256": "0bd04a29ac61254a7fe02b487b2167cd660750ccb00c40a2d1345c12b313873a",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_pricing",
+      "required": [],
+      "inputSchemaSha256": "f41bb2d4221c88a009dcc88b359b52e3398b3e42d8adc4b5459d3a900d01c8cc",
+      "inputSchemaSha256ConfirmWrites": "f41bb2d4221c88a009dcc88b359b52e3398b3e42d8adc4b5459d3a900d01c8cc",
+      "descriptionSha256": "58068948d8e8669528e57c1c6748327b843b64cbe7d222bad62d0e7be6077054",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_primary_ip",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "057e4779efb103a39f5408a7fa90a61f0182ba5d5479ed0ea1c6bf0b5d7b65fd",
+      "inputSchemaSha256ConfirmWrites": "057e4779efb103a39f5408a7fa90a61f0182ba5d5479ed0ea1c6bf0b5d7b65fd",
+      "descriptionSha256": "08d639252e02f6db89239f4cc074a87ff78990ab3eb809525aec4f354b416b60",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_primary_ip_action",
+      "required": [
+        "id",
+        "action_id"
+      ],
+      "inputSchemaSha256": "2f9691287dc9a6745709ac1be14c103e2ee8e5dbc7170305bc776857fe1fac3e",
+      "inputSchemaSha256ConfirmWrites": "2f9691287dc9a6745709ac1be14c103e2ee8e5dbc7170305bc776857fe1fac3e",
+      "descriptionSha256": "fddcbebfa5df9ef7bc09fa1657cf3c21e67cc85f16abc3d0b16bb9e041ba2730",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_primary_ips_actions",
+      "required": [],
+      "inputSchemaSha256": "762f09b69c3df8f2aa7734144bad1fbf6b71a72cac88b7ab30d3f31ef16fea7b",
+      "inputSchemaSha256ConfirmWrites": "762f09b69c3df8f2aa7734144bad1fbf6b71a72cac88b7ab30d3f31ef16fea7b",
+      "descriptionSha256": "33706094848185c31062144c73086d8d6f482b02bbe99e0aceb10a875d59aa4d",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_primary_ips_actions_id",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "0749520f1a9423691345ddd67a87b77fad9b7a2d6a86ebf78a4594d418cc14d2",
+      "inputSchemaSha256ConfirmWrites": "0749520f1a9423691345ddd67a87b77fad9b7a2d6a86ebf78a4594d418cc14d2",
+      "descriptionSha256": "c3e4590d85a1db5ea9079a6e4ae62f7c94c0755f98da979c3faf857b7ea22858",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_server",
+      "required": [],
+      "inputSchemaSha256": "7f73390bd98acd0ca1485a54aeb35b12a765ecd5a640b45bda7f52e4390c3efd",
+      "inputSchemaSha256ConfirmWrites": "7f73390bd98acd0ca1485a54aeb35b12a765ecd5a640b45bda7f52e4390c3efd",
+      "descriptionSha256": "f05b1450386a122d26c39f27e34bd3ad78e50cd3adb0fa8420edb8717ccf92de",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_server_action",
+      "required": [
+        "id",
+        "action_id"
+      ],
+      "inputSchemaSha256": "2cfd00b3969b3013ad0a0264563c3a70aa69fb362209fd1c77af551c65be9381",
+      "inputSchemaSha256ConfirmWrites": "2cfd00b3969b3013ad0a0264563c3a70aa69fb362209fd1c77af551c65be9381",
+      "descriptionSha256": "2aaecc169a879f0c959920d0bad58d36c645c1018c5387e2538ed37ca3d14594",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_server_metrics",
+      "required": [
+        "type"
+      ],
+      "inputSchemaSha256": "40d3d66c1767ada1ba5cf2fd2f02cb9cf2647171b9635d4ba3257a089908bd6c",
+      "inputSchemaSha256ConfirmWrites": "40d3d66c1767ada1ba5cf2fd2f02cb9cf2647171b9635d4ba3257a089908bd6c",
+      "descriptionSha256": "f781d2a6b5bf0e28788947cfb568c94ecef9c2383d95056d1f6f7e2a2498f1f4",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_server_metrics_raw",
+      "required": [
+        "id",
+        "type",
+        "start",
+        "end"
+      ],
+      "inputSchemaSha256": "b1a109728abd9c3981085fbac07517a590486b805cf5e6027bcd818e5ea3f0b3",
+      "inputSchemaSha256ConfirmWrites": "b1a109728abd9c3981085fbac07517a590486b805cf5e6027bcd818e5ea3f0b3",
+      "descriptionSha256": "9c796a4543277d01f790d85dae0dbf403df431399e23582f8f034198cd2e06f6",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_server_raw",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "529d47963e2dc9279b14301e705e7daa8505a4116c37072560d08bc33279575a",
+      "inputSchemaSha256ConfirmWrites": "529d47963e2dc9279b14301e705e7daa8505a4116c37072560d08bc33279575a",
+      "descriptionSha256": "7269500d86d788ac0ea81ac2f469e80d37b05b06031e3b1e80c2d9fd7f091c6a",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_server_type",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "39471bdea4bdae7af75052c9ce3bf4073ceab12413dcc991fdc7567660df22b1",
+      "inputSchemaSha256ConfirmWrites": "39471bdea4bdae7af75052c9ce3bf4073ceab12413dcc991fdc7567660df22b1",
+      "descriptionSha256": "ad4444279b94e1fda9d325909c9e20943f520629dca4db5319f0b10dc4917fc3",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_servers_actions",
+      "required": [],
+      "inputSchemaSha256": "762f09b69c3df8f2aa7734144bad1fbf6b71a72cac88b7ab30d3f31ef16fea7b",
+      "inputSchemaSha256ConfirmWrites": "762f09b69c3df8f2aa7734144bad1fbf6b71a72cac88b7ab30d3f31ef16fea7b",
+      "descriptionSha256": "17dd1b6a8629cbbc80bb7eeb4f4588e26ac217357e428d3eb71315777188387d",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_servers_actions_id",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "0749520f1a9423691345ddd67a87b77fad9b7a2d6a86ebf78a4594d418cc14d2",
+      "inputSchemaSha256ConfirmWrites": "0749520f1a9423691345ddd67a87b77fad9b7a2d6a86ebf78a4594d418cc14d2",
+      "descriptionSha256": "90c0a99800901a0f96704ac1e83173f3f9742b108268ce386b0159cdc125b615",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_ssh_key",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "44ee57a5dbbc4ee219b46c748b80299c9fd3803f9eff68f67c3615529aaa6579",
+      "inputSchemaSha256ConfirmWrites": "44ee57a5dbbc4ee219b46c748b80299c9fd3803f9eff68f67c3615529aaa6579",
+      "descriptionSha256": "0373314d98e45ea5d7fabd096f3a085d1df8a112bda57a3b8ddc1832338edff1",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_volume",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "69be4c5d5b49e8c7554c6700687f9fc66ad1276b430886bc88837aebd38f04e6",
+      "inputSchemaSha256ConfirmWrites": "69be4c5d5b49e8c7554c6700687f9fc66ad1276b430886bc88837aebd38f04e6",
+      "descriptionSha256": "5435b3c9e0f12aea5d80f0b1aadbbd7330ee9dd83a9d2cc989acbc92222b0129",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_volume_action",
+      "required": [
+        "id",
+        "action_id"
+      ],
+      "inputSchemaSha256": "18dfed9d5505c2e458664951b0321d04706621dc5db586c96bbf2bdc0032d9c6",
+      "inputSchemaSha256ConfirmWrites": "18dfed9d5505c2e458664951b0321d04706621dc5db586c96bbf2bdc0032d9c6",
+      "descriptionSha256": "d05522432cefa8adff769051160f476698d23fdae026caa122e2a079e188ba8f",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_volumes_actions",
+      "required": [],
+      "inputSchemaSha256": "762f09b69c3df8f2aa7734144bad1fbf6b71a72cac88b7ab30d3f31ef16fea7b",
+      "inputSchemaSha256ConfirmWrites": "762f09b69c3df8f2aa7734144bad1fbf6b71a72cac88b7ab30d3f31ef16fea7b",
+      "descriptionSha256": "17dd1b6a8629cbbc80bb7eeb4f4588e26ac217357e428d3eb71315777188387d",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_volumes_actions_id",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "0749520f1a9423691345ddd67a87b77fad9b7a2d6a86ebf78a4594d418cc14d2",
+      "inputSchemaSha256ConfirmWrites": "0749520f1a9423691345ddd67a87b77fad9b7a2d6a86ebf78a4594d418cc14d2",
+      "descriptionSha256": "90c0a99800901a0f96704ac1e83173f3f9742b108268ce386b0159cdc125b615",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_zone",
+      "required": [
+        "id_or_name"
+      ],
+      "inputSchemaSha256": "7dd0aaaff5169a4e37f55cb7807bbacbd9b2123ac4ee58c3b7b2f397e11659d8",
+      "inputSchemaSha256ConfirmWrites": "7dd0aaaff5169a4e37f55cb7807bbacbd9b2123ac4ee58c3b7b2f397e11659d8",
+      "descriptionSha256": "c18481a4dac225bbdadfd1aba768c17a349c3a8b1659fa6e03661f8f53c358e8",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_zone_action",
+      "required": [
+        "id_or_name",
+        "action_id"
+      ],
+      "inputSchemaSha256": "9f8a17a54b1aeff5602d884f53768ceb1a798c01b75b686681f479341daf4e06",
+      "inputSchemaSha256ConfirmWrites": "9f8a17a54b1aeff5602d884f53768ceb1a798c01b75b686681f479341daf4e06",
+      "descriptionSha256": "20714379ae54c2fc66e9ac27b8341431f56614598d9b76f93101929beb7a4eb3",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_zone_rrset",
+      "required": [
+        "id_or_name",
+        "rr_name",
+        "rr_type"
+      ],
+      "inputSchemaSha256": "4f48500b30cb424a0ca564d9493f63207a94bf2e2861c2027fc3944d617587bc",
+      "inputSchemaSha256ConfirmWrites": "4f48500b30cb424a0ca564d9493f63207a94bf2e2861c2027fc3944d617587bc",
+      "descriptionSha256": "181cf6d86025841df1a3cae0c3b94dade219ffc286e816d44790c8e86fcf0f49",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_zone_rrsets",
+      "required": [
+        "id_or_name"
+      ],
+      "inputSchemaSha256": "5876568635da34db86302c536dc70c3bef4fa779390653afa99fc86e69fe1b56",
+      "inputSchemaSha256ConfirmWrites": "5876568635da34db86302c536dc70c3bef4fa779390653afa99fc86e69fe1b56",
+      "descriptionSha256": "c6dd79bd653dc70cbe734502d8311fa49d4e00de667c0ea8b2e92aefa82c6026",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_zone_zonefile",
+      "required": [
+        "id_or_name"
+      ],
+      "inputSchemaSha256": "7dd0aaaff5169a4e37f55cb7807bbacbd9b2123ac4ee58c3b7b2f397e11659d8",
+      "inputSchemaSha256ConfirmWrites": "7dd0aaaff5169a4e37f55cb7807bbacbd9b2123ac4ee58c3b7b2f397e11659d8",
+      "descriptionSha256": "eb573c5224b055e37914dd6b89232fe4a8cd3176cf1488bab2277c235119cb96",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_zones_actions",
+      "required": [],
+      "inputSchemaSha256": "762f09b69c3df8f2aa7734144bad1fbf6b71a72cac88b7ab30d3f31ef16fea7b",
+      "inputSchemaSha256ConfirmWrites": "762f09b69c3df8f2aa7734144bad1fbf6b71a72cac88b7ab30d3f31ef16fea7b",
+      "descriptionSha256": "dc100886e55d4234f32ae3d9bbe4109bc4597b8337d0e187ce5a55b9a26b4b7f",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_get_zones_actions_id",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "0749520f1a9423691345ddd67a87b77fad9b7a2d6a86ebf78a4594d418cc14d2",
+      "inputSchemaSha256ConfirmWrites": "0749520f1a9423691345ddd67a87b77fad9b7a2d6a86ebf78a4594d418cc14d2",
+      "descriptionSha256": "d69ec592be416082c02bfc1195f58979c0c63c3ebfa1434bc9f3225472d1c121",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_image_change_protection_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "62b04ff86c7c2a57243d3f9e069d14c29fe1108f887544cc432626771b49acd4",
+      "inputSchemaSha256ConfirmWrites": "b710a171f5bfd92f9fcd64adc3739316e715235191f0509f06207e37e3a5dd96",
+      "descriptionSha256": "80d0d9eefc8c81b2ab68ed42e9efb970128b183ff609f4082b903f326b12f2fb",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_list_actions",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "99bc03818eb4c125cd9ae565535fbe62c78ecd2a0851da6655cae7a607d10e31",
+      "inputSchemaSha256ConfirmWrites": "99bc03818eb4c125cd9ae565535fbe62c78ecd2a0851da6655cae7a607d10e31",
+      "descriptionSha256": "222470f89c221e76852168cefd078787c07d7e92cb7ed15ea07be5a9cd67ca0c",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_list_certificate_actions",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "12e58cc6d482a0dee52fa0fe4631ebedd853fb16364eabdc2a88b099f1899b35",
+      "inputSchemaSha256ConfirmWrites": "12e58cc6d482a0dee52fa0fe4631ebedd853fb16364eabdc2a88b099f1899b35",
+      "descriptionSha256": "a0fd8b9e5470d630fe6ebc4d2ca3efe0b069673990adc733dd1d188ebea24ffa",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_list_certificates",
+      "required": [],
+      "inputSchemaSha256": "765e0a2a4bff0297a529d3a33cf964ac11ca6ba53083bccd6163754e56e21f41",
+      "inputSchemaSha256ConfirmWrites": "765e0a2a4bff0297a529d3a33cf964ac11ca6ba53083bccd6163754e56e21f41",
+      "descriptionSha256": "278009f8c051ea9e3021b62a713fdfc459f699fec4e4e8fad7737b1dfb6d6690",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_list_datacenters",
+      "required": [],
+      "inputSchemaSha256": "120da1f793a1d08f253c83a3bef11aaf8c842d0821743be450cd8dc08b18b1a2",
+      "inputSchemaSha256ConfirmWrites": "120da1f793a1d08f253c83a3bef11aaf8c842d0821743be450cd8dc08b18b1a2",
+      "descriptionSha256": "1a7868a5ce7957ff251ded9e6e3ff4db35239f2f96fc62f0dca37bbdd0124db2",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_list_firewall_actions",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "9dbbaca6adb21c1c80c247c8e870f16028dbe4db2e7b821c18248a5211b33b26",
+      "inputSchemaSha256ConfirmWrites": "9dbbaca6adb21c1c80c247c8e870f16028dbe4db2e7b821c18248a5211b33b26",
+      "descriptionSha256": "92e96a8d23d1eb87fb536b6132c34d422b31147b6518f73600543c8b03c117f2",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_list_firewalls",
+      "required": [],
+      "inputSchemaSha256": "5207dc7b942a219d8d3eb784c48d72d631f94e7cc0856c52398ccf227aad45a9",
+      "inputSchemaSha256ConfirmWrites": "5207dc7b942a219d8d3eb784c48d72d631f94e7cc0856c52398ccf227aad45a9",
+      "descriptionSha256": "c250222e1417e587966e26160ba498c3e5270552dade1b49a3accc6b400cba76",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_list_floating_ip_actions",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "7b16c05fc601e57053c8a88cb5d4c62ac3b3ff5ef0e5df9fd3c9dd55f0fcb1aa",
+      "inputSchemaSha256ConfirmWrites": "7b16c05fc601e57053c8a88cb5d4c62ac3b3ff5ef0e5df9fd3c9dd55f0fcb1aa",
+      "descriptionSha256": "d700a61867fa98a9786a219fec896f18a3174ea939882fddffdb1e3da2e5cb6d",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_list_floating_ips",
+      "required": [],
+      "inputSchemaSha256": "e73a048bc5d412905b7ef53827ecb486d177a6c1ba28580510b8673567cbb9ab",
+      "inputSchemaSha256ConfirmWrites": "e73a048bc5d412905b7ef53827ecb486d177a6c1ba28580510b8673567cbb9ab",
+      "descriptionSha256": "86b95275f71001270a3e88fd12e65dc0a2020bf2690eb21b47d49f495d31bd3c",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_list_image_actions",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "820ca92c93231ec501d2430a479d2fc855b5b2b286138bce38f8bb461f89abdd",
+      "inputSchemaSha256ConfirmWrites": "820ca92c93231ec501d2430a479d2fc855b5b2b286138bce38f8bb461f89abdd",
+      "descriptionSha256": "0276be466a59e0e6c37470256ababa2b5cf0aa26a1c91ac4945c0df02ad16002",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_list_images",
+      "required": [],
+      "inputSchemaSha256": "eb3d6ce147b5c10b9b6b472cffeada2b71fb04e61d36c83eaec9325d2aa38715",
+      "inputSchemaSha256ConfirmWrites": "eb3d6ce147b5c10b9b6b472cffeada2b71fb04e61d36c83eaec9325d2aa38715",
+      "descriptionSha256": "d24098b00af3a3794c1ef7cf6b738e3795ca3a872df3a57850e76ef407aeaf69",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_list_isos",
+      "required": [],
+      "inputSchemaSha256": "22b62ff563d723064f22bf82b989fca749c27608a37d2c003ca2f625056cc8d6",
+      "inputSchemaSha256ConfirmWrites": "22b62ff563d723064f22bf82b989fca749c27608a37d2c003ca2f625056cc8d6",
+      "descriptionSha256": "26bfda9d8f4c97a1d9847569cf50c6922fe3685633e557282e9449af54e9eded",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_list_load_balancer_actions",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "58ec08e41ddaa71d806a7abd7f0a36dad687e29faef2293019a9fe4c5ec97856",
+      "inputSchemaSha256ConfirmWrites": "58ec08e41ddaa71d806a7abd7f0a36dad687e29faef2293019a9fe4c5ec97856",
+      "descriptionSha256": "cb0735b2e236c40debb154f365fcaad37ee169d3cd73866c92718072353dcc85",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_list_load_balancer_types",
+      "required": [],
+      "inputSchemaSha256": "872314ee35614dd035065108a41be3371c88e3e560f35d2a9718a75530b7eeaf",
+      "inputSchemaSha256ConfirmWrites": "872314ee35614dd035065108a41be3371c88e3e560f35d2a9718a75530b7eeaf",
+      "descriptionSha256": "83c64f92d737bf064770b786f0ab04f2842d9b6b21bb33a3d1e283a40ffb4316",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_list_load_balancers",
+      "required": [],
+      "inputSchemaSha256": "5207dc7b942a219d8d3eb784c48d72d631f94e7cc0856c52398ccf227aad45a9",
+      "inputSchemaSha256ConfirmWrites": "5207dc7b942a219d8d3eb784c48d72d631f94e7cc0856c52398ccf227aad45a9",
+      "descriptionSha256": "d699d1b9bfba4ffba6cbde2cab711e197ccc244a45bbca00b0a633eb0e6e0ddd",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_list_locations",
+      "required": [],
+      "inputSchemaSha256": "120da1f793a1d08f253c83a3bef11aaf8c842d0821743be450cd8dc08b18b1a2",
+      "inputSchemaSha256ConfirmWrites": "120da1f793a1d08f253c83a3bef11aaf8c842d0821743be450cd8dc08b18b1a2",
+      "descriptionSha256": "356b302d47ec7b1d212280c500125ddb67f3948c5d493b245aefc7c4b92e148e",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_list_network_actions",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "30d101594582376d6cead97466808063da70d616f5a61019d3d106cfd3f0c34f",
+      "inputSchemaSha256ConfirmWrites": "30d101594582376d6cead97466808063da70d616f5a61019d3d106cfd3f0c34f",
+      "descriptionSha256": "58f93ed9c246e276b2a6d46db04c59570b209a5136e7d9f2cde57328034f7887",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_list_networks",
+      "required": [],
+      "inputSchemaSha256": "5207dc7b942a219d8d3eb784c48d72d631f94e7cc0856c52398ccf227aad45a9",
+      "inputSchemaSha256ConfirmWrites": "5207dc7b942a219d8d3eb784c48d72d631f94e7cc0856c52398ccf227aad45a9",
+      "descriptionSha256": "4eec339c349afe7ada63bd39a04b779e56d808b4cdf624b816d66ee4fac9a7e4",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_list_placement_groups",
+      "required": [],
+      "inputSchemaSha256": "7d4d0d5e012ce38db97a3139e819f9d94b823c35838ff81b61956d2c818a921d",
+      "inputSchemaSha256ConfirmWrites": "7d4d0d5e012ce38db97a3139e819f9d94b823c35838ff81b61956d2c818a921d",
+      "descriptionSha256": "cceac1160c7693da542be27c9c2b71749ae18f54e31364eb260e2a47cec75996",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_list_primary_ip_actions",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "6f0b7278b5593895de4ded557cdcff8eb574cf5bcfe296db2c5dc28766be8e8b",
+      "inputSchemaSha256ConfirmWrites": "6f0b7278b5593895de4ded557cdcff8eb574cf5bcfe296db2c5dc28766be8e8b",
+      "descriptionSha256": "52317aa6418286126fd8a271a0926507f256592f511e24dc0897b144b6ffc6dd",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_list_primary_ips",
+      "required": [],
+      "inputSchemaSha256": "e00d15fd7b7408e5609c27d5b6695f8da7f141f0afb7b6c2a1fd66cb45ef2d10",
+      "inputSchemaSha256ConfirmWrites": "e00d15fd7b7408e5609c27d5b6695f8da7f141f0afb7b6c2a1fd66cb45ef2d10",
+      "descriptionSha256": "989ac6f133c002e8e454cf62890367308937c116e28d04e3e09bb5950e52a3bc",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_list_server_actions",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "69d240a589dbe7989caac58545003d2e201d62e997d1a44e388769bdfc17ce1f",
+      "inputSchemaSha256ConfirmWrites": "69d240a589dbe7989caac58545003d2e201d62e997d1a44e388769bdfc17ce1f",
+      "descriptionSha256": "23dd8f1a5757b7562cfd2e0d2d25970b668246d30e6b0c4a2b01e7457f517d7d",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_list_server_types",
+      "required": [],
+      "inputSchemaSha256": "872314ee35614dd035065108a41be3371c88e3e560f35d2a9718a75530b7eeaf",
+      "inputSchemaSha256ConfirmWrites": "872314ee35614dd035065108a41be3371c88e3e560f35d2a9718a75530b7eeaf",
+      "descriptionSha256": "935817921357b26898bca68317b08e3510c90398a6f61e4fbb679b3a9e2e54c3",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_list_servers",
+      "required": [],
+      "inputSchemaSha256": "4f43d5d3abd187efc9f9fd6b1878c823fc05d15ebda7667bd5b2206b49db1e75",
+      "inputSchemaSha256ConfirmWrites": "4f43d5d3abd187efc9f9fd6b1878c823fc05d15ebda7667bd5b2206b49db1e75",
+      "descriptionSha256": "17a96d5d5c5c730c280ad3513c2394d90620fe4afbbf530539cea997fd324104",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_list_servers_raw",
+      "required": [],
+      "inputSchemaSha256": "1b2dd2e95e6cf46ec5ad3b8b88c0617a06e92563d5e67e0cd75246a175ff3fc7",
+      "inputSchemaSha256ConfirmWrites": "1b2dd2e95e6cf46ec5ad3b8b88c0617a06e92563d5e67e0cd75246a175ff3fc7",
+      "descriptionSha256": "8f12bf99f3fdca68f7e0fc272c2324ef42705a5fbc2086656196b5790c7c4884",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_list_ssh_keys",
+      "required": [],
+      "inputSchemaSha256": "912ad46bac932d79130b58cc0d8e621f170494919b0e111ccb5550b2f86835ee",
+      "inputSchemaSha256ConfirmWrites": "912ad46bac932d79130b58cc0d8e621f170494919b0e111ccb5550b2f86835ee",
+      "descriptionSha256": "4d4c7243eb40861e79aad6052d42e2216c80fb95a7908da6b58512fc79492109",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_list_volume_actions",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "35bf337cc199c7252d55c48503786ee0c6363a4fdf3efd0ead1915a0914e7e4f",
+      "inputSchemaSha256ConfirmWrites": "35bf337cc199c7252d55c48503786ee0c6363a4fdf3efd0ead1915a0914e7e4f",
+      "descriptionSha256": "241500da0dd1f2102f2c8abbad2419d2d7dff1980a4dab41edc4597ef127b00e",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_list_volumes",
+      "required": [],
+      "inputSchemaSha256": "8a63538ea8972ab39878ac10df60fc8cfb0958795866e02cf346e82e37f9d181",
+      "inputSchemaSha256ConfirmWrites": "8a63538ea8972ab39878ac10df60fc8cfb0958795866e02cf346e82e37f9d181",
+      "descriptionSha256": "6d250df4d32f4552d9370bda0f3d380a40388189fa4e87c632f37cdd96a2deea",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_list_zone_actions",
+      "required": [
+        "id_or_name"
+      ],
+      "inputSchemaSha256": "481ae471733c21df351ad9973bfdecdb9fc8ee3dab7baa1961a3d8e7094082e1",
+      "inputSchemaSha256ConfirmWrites": "481ae471733c21df351ad9973bfdecdb9fc8ee3dab7baa1961a3d8e7094082e1",
+      "descriptionSha256": "1b1a107c793a6a26ab2a838f8c9b8aba0dd900ca793e63c799f1b571f62ff618",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_list_zones",
+      "required": [],
+      "inputSchemaSha256": "72b18219af727617fffa0845cf8a64d54e3d2e6a9784629468f951cbed388e54",
+      "inputSchemaSha256ConfirmWrites": "72b18219af727617fffa0845cf8a64d54e3d2e6a9784629468f951cbed388e54",
+      "descriptionSha256": "f3a55e4dff98d7553b05f130cf2230c5967e81ef85c995028736120b0bdc45d1",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_load_balancer_add_service_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "44ece1c344b7dd0f5735aa6ec339b01257de113490b757b21abc0e80c70c9523",
+      "inputSchemaSha256ConfirmWrites": "1e371cf07e616ff2ef12ffcf13d74fcd9273cb2d2c6df022d273d28e60b4f0cb",
+      "descriptionSha256": "425b3a7558ca2a0d309b5b6aece13b89fb7e885a60009a1c3c9be342ae754021",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_load_balancer_add_target_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "bcac9fe7cf78bfcc13c67f16b062fbe4969290ca0310c191252a92b8a6da9f3b",
+      "inputSchemaSha256ConfirmWrites": "c0d8b71388ee2bcb0093f41854854724e13e787080d2323d00d16ef052a2af4e",
+      "descriptionSha256": "8540ded926b85405d726438b0ee6c4de4b15eb5ce66fc08edd4fcf0fcb1a2bd6",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_load_balancer_attach_to_network_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "fa63eab367173c21f3cc8b70b9882a542dd5ed27f26dc47a53bdac9b9fa4a86b",
+      "inputSchemaSha256ConfirmWrites": "1d2e59d7ee108492006018c083cb9893eec47e1dde854b6363aed332dcad6e5d",
+      "descriptionSha256": "71c78a151639a821fe29f1578c174ccbc14ca7185553f64b57949df972ccc946",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_load_balancer_change_algorithm_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "c1bf105afdac459940a82200c85b8eabec257ff1ce33210a308e9a47c2db87a6",
+      "inputSchemaSha256ConfirmWrites": "45945ed1fe174e448137a019374ad4a437e15aeb85b27c5026830063bf3ea382",
+      "descriptionSha256": "e3df3756eba17a9e26ace93a03f4f9443a8881a80df281ab849c5d44b8f331e7",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_load_balancer_change_dns_ptr_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "9b08e8011b4a136d30e759e8c816be2a377429415e5eec383f6ff7186061f05b",
+      "inputSchemaSha256ConfirmWrites": "5955072d44324d16dd7b0b84efca1a971b621fd4d979190d5b8d4124150d2df4",
+      "descriptionSha256": "5fe4918b946ad35f0b623dcc4f47772879d59d2d27c972831d9bf678aa8785fb",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_load_balancer_change_protection_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "cf67b828ef27157203a7c2aea8d8be02baba8ebd8a10ac266d819abc1c11757b",
+      "inputSchemaSha256ConfirmWrites": "3268295415de9a29ae6b2271e79f7862854dce4c64417bee14f8db6e82b1e8ee",
+      "descriptionSha256": "54192ec4e4010439ad8f3bd5efe1cde42001b59bc3ff90df6d24cf1aa61b787a",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_load_balancer_change_type_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "5c5206d03965b5192daf48fbf86f85fe02f390001fea52ec1b1facbaf0db5268",
+      "inputSchemaSha256ConfirmWrites": "6ca1dbd981b3ac038266081d1b91f54578607e2caafe4f8b637424afd6b6d7df",
+      "descriptionSha256": "86701e05376559c3d292bb18b0b5bd821efb35b3d1a9faa8247833091460aa40",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_load_balancer_delete_service_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "930b407982879f0fbac87ff04ebf8989f65b91abd7a7d91651211c135c48bbf1",
+      "inputSchemaSha256ConfirmWrites": "692cd4b25f478775b889668032d0682442d49865d57d2bee21942a5f8e2bef2b",
+      "descriptionSha256": "e625692e72b075719ecfbcc6e65ed49688ec952399f4af4b882ec3af9831c66b",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_load_balancer_detach_from_network_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "89c2c1f80f391ed204eddc51167abdba960afad489b430f7c106c1d4c73f9a85",
+      "inputSchemaSha256ConfirmWrites": "b42f113c2b41c3361844e869877987206ea70e8105aeded49adca833902cf2b7",
+      "descriptionSha256": "0f8b3802ace5a135787a7732c6644b805ffd5c304f9df403e2c1fe688018dc05",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_load_balancer_disable_public_interface_action",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "d54859cfebc98b2034f4329d8f505ba357ab7084ce971ca518b64c1cc73e021c",
+      "inputSchemaSha256ConfirmWrites": "839f96ffcca4423ec6001c8fad3bad102a6b099bc8c3c54b37b806a2c634c85f",
+      "descriptionSha256": "c7e21d38fe5a0c9c6f2c7acc25d33b79688bad59a983d4957ccd27cb7b136ba5",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_load_balancer_enable_public_interface_action",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "d54859cfebc98b2034f4329d8f505ba357ab7084ce971ca518b64c1cc73e021c",
+      "inputSchemaSha256ConfirmWrites": "839f96ffcca4423ec6001c8fad3bad102a6b099bc8c3c54b37b806a2c634c85f",
+      "descriptionSha256": "2676449bff62beb8962eb2d872d221654b72ceffd8df998ab86468c17f62c750",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_load_balancer_remove_target_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "103f3a2cf30b317ebf3beb98049f944a01e26a0410f64e2b6768c6f70b69e0f1",
+      "inputSchemaSha256ConfirmWrites": "d24161bc932a339ae2974d6dcf0de55afe85000915d27c816d4d03c984a479e2",
+      "descriptionSha256": "839b608116d80a779e99a8abbb94a3ccfa936ee66f936d5dafc4704558783992",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_load_balancer_update_service_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "34dc5999193d186295ffe51225315af9b0da8301a757a1c64a25d117c00df942",
+      "inputSchemaSha256ConfirmWrites": "e8c32408cfe9e01eefbc9e6bbb8a7e7f4d42392956f62bdcd4b20fd70766fd85",
+      "descriptionSha256": "7b7d7a3e7fd2f9281230ce761b7a8054b8b4eaaddd1f46099020e2410374d30f",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_network_add_route_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "d567055b93d4898e2d09f0809f3538f7e01bc5ffac859e541cdeb08498e4d560",
+      "inputSchemaSha256ConfirmWrites": "0c7721722796913bf3d9e510f50777454f6295bb1724b0ff22fa85dd0c789b06",
+      "descriptionSha256": "0dbb79d005b626c8d726aa4ef89c14ae458b044b12fb5bd29a26c5e5cd45d0d0",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_network_add_subnet_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "8afc863d54b77749d7ec752842fe203d7f9405ab83a171880050f7ccbe6eef78",
+      "inputSchemaSha256ConfirmWrites": "f330bbb6067d455920398ee39b4913fa9a5d295d02b2bbea57689a9777f041a8",
+      "descriptionSha256": "e51a95d20d9812cb9927231295766994860a619698af964caff762770b29d5c5",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_network_change_ip_range_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "f570ee2fab29365cefb54000e68166182ddc4ee157b52142830792065ec131c9",
+      "inputSchemaSha256ConfirmWrites": "7abf308251bb718e7756d5a654cb78e46ca8d6a2718579f56b6e8f272675a3d3",
+      "descriptionSha256": "0e6b988bec798e8219a86b81cff69355b42d2951f5ee5c1f5ab84bd4fdc2b28f",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_network_change_protection_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "3580160b50995c3a0337ce866ba09ec775cb56e051d1db852135ffa3f27336bd",
+      "inputSchemaSha256ConfirmWrites": "b95c8b31d7a1404cff7363f74f7b9d9912e6b8e724b7c9ac7059234ad0de4499",
+      "descriptionSha256": "67174ef9c735933c7eb0c6a29175cc1b819528c988924b5f58ce4304aec23d9e",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_network_delete_route_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "1bd43d9c202b27cdf14771ad49ad4899c5820d7de34e2d0d4ab913fc07ab081b",
+      "inputSchemaSha256ConfirmWrites": "956327fbb7e5a6543b80d8afb4a010602801b53a17661c53b9f46dd66dd64abc",
+      "descriptionSha256": "f73af2d0baabde3be34496e7614c526f9feb7e917799a724d93e61f3e21a5d53",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_network_delete_subnet_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "2d6bf35075616f8b2559c7003044381db25caeea5a6ae3b1230754a3e7227c90",
+      "inputSchemaSha256ConfirmWrites": "2dbf7dd956676de9d2352a4e14bf163d5a1de11d5555445109df3b9b9ca175f6",
+      "descriptionSha256": "f50a798e0e2ea437f722ddfb28ad39a8476e551574668ddbe27ea2f1418f4440",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_post_zone_rrsets",
+      "required": [
+        "id_or_name",
+        "body"
+      ],
+      "inputSchemaSha256": "4d21d2f1d5ce1ac768d1c988346285d906daee377a9c834c1160f57c523d94cf",
+      "inputSchemaSha256ConfirmWrites": "e36629b856270fba53abed96c191e1a302e07c2a7d88cc268cf4146d05fab0d7",
+      "descriptionSha256": "0fbbc6e5042f17b167f20e4f9e493ba249fccb04788391127ae8d0ea9604fd8f",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_primary_ip_assign_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "78468c41092fde2b3d191b1b64ed9823c0ec7eca76c63e9b534ed9c2c79570d8",
+      "inputSchemaSha256ConfirmWrites": "b64fbf5417cc9f50b9f473ef63faac1ef538cd45224ee798e323e70bbb08aeac",
+      "descriptionSha256": "a23e98aa1331ad960f5db99491c7b8224ebd848e5bd1bb9efa0918e5aff12c17",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_primary_ip_change_dns_ptr_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "46c8c35c2b6cd07662673fcd46fc737a1f8583a1f8672803079180a0b7bd24cb",
+      "inputSchemaSha256ConfirmWrites": "402263b422960aa2dd082b8b35c3d289cb2cd1ecdb535be77932ff1c107275bc",
+      "descriptionSha256": "f42750bb1b0590d282d6d61c8de5c87d16946a1e71d69b4ba18727aa6e74c656",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_primary_ip_change_protection_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "84333842fa53edccb6ddfe88cc4bf1f8586538be7dab95ad185e93979ce07d9a",
+      "inputSchemaSha256ConfirmWrites": "04d7cd2f04d06dba190d25067e19cd16634874b9f8d4cc2df3cd576e4714db15",
+      "descriptionSha256": "2875445f2a7e77d609d27fd6b1c9dd9676899a28086abb13effc3308b74692ce",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_primary_ip_unassign_action",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "071c128309c6d9cf466bd360e2b8d272dab1e35ea382e5d5cda0e797195daf25",
+      "inputSchemaSha256ConfirmWrites": "d0968fd0062511169bbe85c9514e47f6c12197c8b5c18e69ff864cba18752b2d",
+      "descriptionSha256": "e7c082c4d5dedd3a094fc3505b9c6b3ff534103223814fb7a1e2a134e5631fc6",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_raw_request",
+      "required": [
+        "method",
+        "path"
+      ],
+      "inputSchemaSha256": "cd4bf79490175893a69fcf39940635c6e56f3cfd173e597c892ef8749afe4a05",
+      "inputSchemaSha256ConfirmWrites": "cd4bf79490175893a69fcf39940635c6e56f3cfd173e597c892ef8749afe4a05",
+      "descriptionSha256": "ea6a82b729ddba93455d1f881609dbacf8066de9a05460645114fece0736067b",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_server_add_to_placement_group_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "5def999641919818a871439f8ed5d257f589753a5d4a19bd73080083d751cf95",
+      "inputSchemaSha256ConfirmWrites": "d941aef47d9eecb94bb0390a214d48635542c66fe11c8faef573d36e8bf6bda6",
+      "descriptionSha256": "e12b3f230d4a5169d742e4196ad43b7809e3db87bbd66d2b247fa60b840c140c",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_server_attach_iso_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "aeb1f0f03c6cdb9c973429111e8bb2144ecca3560af80f363a511e7301dcf631",
+      "inputSchemaSha256ConfirmWrites": "cdb56bef5602efe86bdbef560358a09ebe800f323d444805b9c1314dad3e8936",
+      "descriptionSha256": "88d6371878710a9e8415954a077fc957f732a05f3a242c949d2f7a5638b5b988",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_server_attach_to_network_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "4df6d40c730a8b2bb15531a2cff0743318c10388d48c49d12d2f37014250fbda",
+      "inputSchemaSha256ConfirmWrites": "61cf6e26585fb1f1a4e09a4c4cf9102ef7e6f76b940f12149a6eb5e87ec69ff0",
+      "descriptionSha256": "d9aaf098db90a2c7c5493badbff5897177b7cc130683505f1355b9eed63772e0",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_server_backup",
+      "required": [
+        "id",
+        "enable"
+      ],
+      "inputSchemaSha256": "6837732769a8e2d9cb1a002d07da1387beb6b0c1373b3767e4210149954da219",
+      "inputSchemaSha256ConfirmWrites": "55e4678ac7521a219d7c7e90af495ef44729256daac3ab7edf377d8f93ac9d06",
+      "descriptionSha256": "b18d72acb2901bc777a3b6e10b03e9358f23f5396137a7c02c577efb73699ab8",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_server_change_alias_ips_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "ec414031a00c36f68ce6ea13fd2fc38d2bd86f43c30463c9c1576236573c5abf",
+      "inputSchemaSha256ConfirmWrites": "a84d46c8dfc90fb2fdcada390014073c7c60f50b54968d59e7a4c8dcf0f77f81",
+      "descriptionSha256": "634a9636fd32b514ba50b78b797921e90e1efa225d0dc38fca8c2ea4504756a3",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_server_change_dns_ptr_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "3978ef1ca665b9febe91ee5435c08574dfce73ae4ec544fc58b90f1e2b797aae",
+      "inputSchemaSha256ConfirmWrites": "4a462ab0bf7dfacdd26304482d16f24e45947e310da6a1e8b3bbac20115c46f6",
+      "descriptionSha256": "b89848e85528e91e2492ec78f8369f4b163a21cbe238a261cc3a37038a4ed40b",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_server_change_protection_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "dbb99ec7eb4339e7487d98537cba66cbec6851be2b8f7cbc4d1126823b79a4eb",
+      "inputSchemaSha256ConfirmWrites": "1bdf9d0d70c47348df3d6ca8f2691937cf43eaf87e38d6ea21ef8212715c61c1",
+      "descriptionSha256": "d37aa281a2fb3a81e1cd49db858153fe620786d847b20347caba72748709e176",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_server_change_type",
+      "required": [
+        "id",
+        "server_type"
+      ],
+      "inputSchemaSha256": "05e5fdfee8928b72623b40f290bf647a94ec037ba64c5246d7563b3bdf08cfbe",
+      "inputSchemaSha256ConfirmWrites": "e9a01babf05d546b60c1759ecb64cee7e366147fd203ef94455a9560b21c8c11",
+      "descriptionSha256": "09c2a4426f02ef700ece6dfe576015130bc65d85792164e7ed9f8f80680cb29a",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_server_change_type_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "aa4f5567d7c6656b2c483aaf2f74c2ed724b223a7d29aa7dacddeb831100dee8",
+      "inputSchemaSha256ConfirmWrites": "0180a475eac5c5c03f886aceeb668e1cb06c75f97617cc2458bdb604fe61ef0b",
+      "descriptionSha256": "69e3a3d0c2738e973c217fbe7edaf93f0a23e08c776fa38c4389ffb5a72abe9d",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_server_create_image_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "d6c9fdd09f2036e3cd52b32f3a088ddb1ecc731a4650dbad9e4b9f724444f26d",
+      "inputSchemaSha256ConfirmWrites": "be908c36fdd441af4d01a22e658f4d8d76813c57cab1e2d4681a88e377ae35e9",
+      "descriptionSha256": "3cac13b05838a2295a79696f017eacbb2df76b41f24ceed18bb25c7c13862808",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_server_detach_from_network_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "9f3a8f2aab7c09a75b5800a898e84ab165facd85bf70c84a9145bf585558c998",
+      "inputSchemaSha256ConfirmWrites": "b70c1344e43e48ab218c11211d5103ce6fc68060b4b1251a3434806c82a75804",
+      "descriptionSha256": "315c3275bfd1a920bed745e375677d69419d896dccc39f64e0f6dcdec21d3969",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_server_detach_iso_action",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "575d92047286c381638084ce1fee02c2867dfe563789eac7281ec756742b355a",
+      "inputSchemaSha256ConfirmWrites": "a92b22ece1b8010d6a3de137b48e86f42b4f6c93cf48e148706d07a6e38f29b3",
+      "descriptionSha256": "63fd3152c3f5b40da85a8b6e63e7c2088b65e703a9988c69eb6ab2bbc77244d1",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_server_disable_backup_action",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "575d92047286c381638084ce1fee02c2867dfe563789eac7281ec756742b355a",
+      "inputSchemaSha256ConfirmWrites": "a92b22ece1b8010d6a3de137b48e86f42b4f6c93cf48e148706d07a6e38f29b3",
+      "descriptionSha256": "6783149a2d203dd0c4a79bdc1a81f5f79e1bd69649de60ed9aa63ca2ab47522d",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_server_disable_rescue_action",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "575d92047286c381638084ce1fee02c2867dfe563789eac7281ec756742b355a",
+      "inputSchemaSha256ConfirmWrites": "a92b22ece1b8010d6a3de137b48e86f42b4f6c93cf48e148706d07a6e38f29b3",
+      "descriptionSha256": "76c5213c9cc70ea15c6e4b05b946623d79bbe8c0b2c8626728712baa5407c946",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_server_enable_backup_action",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "575d92047286c381638084ce1fee02c2867dfe563789eac7281ec756742b355a",
+      "inputSchemaSha256ConfirmWrites": "a92b22ece1b8010d6a3de137b48e86f42b4f6c93cf48e148706d07a6e38f29b3",
+      "descriptionSha256": "d835b414a4481512608108558a36fda4d203c159b43fe7e3cdb655e22e7203cc",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_server_enable_rescue_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "38bde6a6654a3998e108ba87b7db68d969c92b392aec3c9dfe639d9d28588c0d",
+      "inputSchemaSha256ConfirmWrites": "8194d6e22e6288a70db3724bf615eceaa912cf5706c1c4ff8dc6c690550115b4",
+      "descriptionSha256": "73358020a94cc1299f58d262195c190165f1a36cfa54063143d59a17c0190792",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_server_power",
+      "required": [
+        "id",
+        "op"
+      ],
+      "inputSchemaSha256": "24a3eebf14c3ed75404d67be69e280a14a26129243eee3e30cf2111e90b3699f",
+      "inputSchemaSha256ConfirmWrites": "0a6bc3ce56828cec5150a6e1da5433330f32ca3710bfc865eb03fe29b1638809",
+      "descriptionSha256": "1057a499b66efce61cf681d262af704b400113bc40402b85a12769b337cebc4b",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_server_poweroff_action",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "575d92047286c381638084ce1fee02c2867dfe563789eac7281ec756742b355a",
+      "inputSchemaSha256ConfirmWrites": "a92b22ece1b8010d6a3de137b48e86f42b4f6c93cf48e148706d07a6e38f29b3",
+      "descriptionSha256": "3be0f3f6449c1177a4ae0facae31d4956a9bbbc3b96e219f0fbcc34ab6857c48",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_server_poweron_action",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "575d92047286c381638084ce1fee02c2867dfe563789eac7281ec756742b355a",
+      "inputSchemaSha256ConfirmWrites": "a92b22ece1b8010d6a3de137b48e86f42b4f6c93cf48e148706d07a6e38f29b3",
+      "descriptionSha256": "51492c6ff052b3506be82c64ddf9ac470a86b14c3f734d7fe59cf13743e6eecc",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_server_reboot_action",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "575d92047286c381638084ce1fee02c2867dfe563789eac7281ec756742b355a",
+      "inputSchemaSha256ConfirmWrites": "a92b22ece1b8010d6a3de137b48e86f42b4f6c93cf48e148706d07a6e38f29b3",
+      "descriptionSha256": "50cfe9ebef7a4dee195e161b3b7d813cb04f784bb7d1ee0bf0ff92115bf2468e",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_server_rebuild",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "446243b438fae748c3fa8343d56a3f8d1fc7463aa8ff35f037eddfe60fd999eb",
+      "inputSchemaSha256ConfirmWrites": "dcbfd76e76795344e462a164d40d304061bb0807ea5efcca907b1faf5a0e1f90",
+      "descriptionSha256": "ac4c87e3baf6424023c57ef1aff03e5ff6cb44774d5161727765da2deee9042b",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_server_rebuild_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "a867c3e1e8d7e77d44d97d36c477d8eb8e0c817313a6ad5a0e1474d38cc4e7ff",
+      "inputSchemaSha256ConfirmWrites": "bc266821e5ba58a22147ee6b095a3c64be8672676ad29948fdd561c244960c14",
+      "descriptionSha256": "73b74b652eb88dd6b9753b0c0cf984de09c7b2fd8d86d8da0e2bd73640ddb7aa",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_server_remove_from_placement_group_action",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "575d92047286c381638084ce1fee02c2867dfe563789eac7281ec756742b355a",
+      "inputSchemaSha256ConfirmWrites": "a92b22ece1b8010d6a3de137b48e86f42b4f6c93cf48e148706d07a6e38f29b3",
+      "descriptionSha256": "b74fe4b061f8bed17ada394a684d91b825660f0657ac776876746e7bfe244f27",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_server_request_console_action",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "575d92047286c381638084ce1fee02c2867dfe563789eac7281ec756742b355a",
+      "inputSchemaSha256ConfirmWrites": "a92b22ece1b8010d6a3de137b48e86f42b4f6c93cf48e148706d07a6e38f29b3",
+      "descriptionSha256": "b91588d1c7f560865d231019fcdf3d4a0837e9b38aa59eec86f667984b58d231",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_server_rescue",
+      "required": [
+        "id",
+        "enable"
+      ],
+      "inputSchemaSha256": "77756c896762e658d0f1195155e716a0c45cbd74a79a6bbd57f817b50522807c",
+      "inputSchemaSha256ConfirmWrites": "97ce056e7ab1a9deeedbb6801a802d131d94df7d4d449d1a1c64ec3a16da7040",
+      "descriptionSha256": "31cec9e8216a464dab8a4765d2c0ab5dba36f7d5a94fe54c2af83eb65851fd8d",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_server_reset_action",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "575d92047286c381638084ce1fee02c2867dfe563789eac7281ec756742b355a",
+      "inputSchemaSha256ConfirmWrites": "a92b22ece1b8010d6a3de137b48e86f42b4f6c93cf48e148706d07a6e38f29b3",
+      "descriptionSha256": "d676203af44a800cf05506838f55d37b2be2aa666436555cef4de94323f0f785",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_server_reset_password_action",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "575d92047286c381638084ce1fee02c2867dfe563789eac7281ec756742b355a",
+      "inputSchemaSha256ConfirmWrites": "a92b22ece1b8010d6a3de137b48e86f42b4f6c93cf48e148706d07a6e38f29b3",
+      "descriptionSha256": "4bf9331cc4cdbd76f87963f3fef79633e579a7d4747664dcc8fe557532571b3c",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_server_shutdown_action",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "575d92047286c381638084ce1fee02c2867dfe563789eac7281ec756742b355a",
+      "inputSchemaSha256ConfirmWrites": "a92b22ece1b8010d6a3de137b48e86f42b4f6c93cf48e148706d07a6e38f29b3",
+      "descriptionSha256": "ffa89d6bfb29786ec7f14221a1cd10675afb64523e54dc5c1e745448a0a61ee1",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_server_snapshot",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "1866815afad0b6f768d9eac006ffa28d4d8716485bb05fecb359b7faaea2fe4e",
+      "inputSchemaSha256ConfirmWrites": "af7ae0c89b9c03427f7fe6553c8841688fe40e74c264591c87c0015fddf77ac1",
+      "descriptionSha256": "b03a6f680b696d8aebe2360f02acfb4c9389b873c7d4ca97685f240c9046adb1",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_update_certificate",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "d54f1042ca801c77708c8b6028cf2c00cb032051a1841e92c0740845d45f8925",
+      "inputSchemaSha256ConfirmWrites": "0c96087091dcd64be0d5dbe7482f48cf6e8f9508de17fe7b80e45db9efa88b6d",
+      "descriptionSha256": "a420e7ce56df474642b9662cf97e1fc66427949df61ac0d57e842cf2254ccc6b",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_update_firewall",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "d3a515656a6530502bf921a9ded72e3a35193e18392d5ca62b6c499f7b32b755",
+      "inputSchemaSha256ConfirmWrites": "72d77d1cafc7e5f44341456ef8ee27dc8cf2c6d35bc969b992629bda07916e70",
+      "descriptionSha256": "aa2a36929e08d1b1dc5a00578daa3e049a3b21672c039887096d8f89c8823d2c",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_update_floating_ip",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "b14e9ce1319abd65bc7a56a0bc618bfaf68f6cc5890b62ac399d5bbae73ab139",
+      "inputSchemaSha256ConfirmWrites": "16d1c08e3db808f8836416461c04bd50ab9e32a2afa764cb08df56b4d47a3358",
+      "descriptionSha256": "b4e9faa4d75e9cee92fd223e37f5224453085e916c587a6f78b44c48516d5974",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_update_image",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "7a8afc10dcb0edaad0fc8fc7910794eccecf972e33616328e2fe6f1c97d72e28",
+      "inputSchemaSha256ConfirmWrites": "48ecb367152a8ef9c73f621f0b148477dcdd981addb255ec1757913abd5f857e",
+      "descriptionSha256": "180677d5eedc7956409c76bc316bb42da926c29585f5f68ed40459cf3b527f83",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_update_load_balancer",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "a6a3645527b9fef2e331f041aa9f7a42feba0461ba3a4f6cf9fed6ff441fba5f",
+      "inputSchemaSha256ConfirmWrites": "c4a304a5721c4da6a08e44782e8d5b875030a4d0e80129dbf8ab3a731cf84146",
+      "descriptionSha256": "de27146acd92b7d6c2111887e751bd1abb4c83fa682ddca34b5473db0f7d0e90",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_update_network",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "e2886b7be6f19e7be6566957298962c289bf0ba228e356c7c06297dd4d418e5d",
+      "inputSchemaSha256ConfirmWrites": "b48d1f337ae932a54074d0fbeae11e4b136b74af0df6feff3f9908cfaf5499dc",
+      "descriptionSha256": "de512e09cdeb9e6eac35c276f8fef1927fcc871b7f6d1d1edc6e6d47f370a1c6",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_update_placement_group",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "5a3fe0760bbfdd47d5329ebfba8ffe6be7a060cb8dcdf75cc9c9caff40c43db5",
+      "inputSchemaSha256ConfirmWrites": "c50a2699ffaf65ba96c6a4ed06193f21ccb6d34cfba748dded5cbe9901df3857",
+      "descriptionSha256": "db122cc6600528e85e60e60014fc6d0d384e856ed6c89c6c6c9b9c523208e588",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_update_primary_ip",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "b1179aabf69dc84f56c2c59166074426bdf6e73ba18b475af00a467ac0dce506",
+      "inputSchemaSha256ConfirmWrites": "9f49db2736577db80de1d2ff6ea4fb8c710244d8ba2946de11b49b40c99c64d8",
+      "descriptionSha256": "21d837d0943fdc1d9944b43bdc48186a64e8f2a1bf165b9d53ada81473c6f0bc",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_update_server",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "2d71e87dbb83aac25216dc80f63b4b68a3a87b438e96936b40ea6294cdc6fdd1",
+      "inputSchemaSha256ConfirmWrites": "72dab7bef9d16e042eb2ec3e1907ec27a267a2f8eb17a96c7725205a2d05af4f",
+      "descriptionSha256": "53f10a17649858e3f56a674e6dc5ea8504ff901ca8529e15fdebc7fb6184bbd0",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_update_ssh_key",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "ee1fbee253c4133dad883bf6f728533cfd2b309f7885abc107b5dc6d50a4c535",
+      "inputSchemaSha256ConfirmWrites": "1d87e4ef4db818a212707c05589f1fb39ebce64696551715547c30627a1c28fd",
+      "descriptionSha256": "7b094631ec0a30cc0b07d098a5cab42aa4b489fada6ca2e224ee4c4026223bfc",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_update_volume",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "87dc423dd87410f623529bbc73b38237e8eabc27567c80687fff5d753b8f4b01",
+      "inputSchemaSha256ConfirmWrites": "3896bbbd83f6cdda98783dabe2e63d4cd5fe0e063cff90e5ca76c00ae609ff82",
+      "descriptionSha256": "2643d782408ee370c77e191fb4ffcb0a05f78351585769358969382159eccd1e",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_update_zone",
+      "required": [
+        "id_or_name",
+        "body"
+      ],
+      "inputSchemaSha256": "968bfec1ec129ea6de14c0bc59a6d101b0a837cba42ee52e6d54279cbd71572f",
+      "inputSchemaSha256ConfirmWrites": "eb0e5d51cd33741aed3656703118301a6873c0374e66d00a0c92abb797788970",
+      "descriptionSha256": "4d1f9edd0c2165e69e1a07a7c314a806332ce43a8806f67a352a6ec84b551bd7",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_update_zone_rrset",
+      "required": [
+        "id_or_name",
+        "rr_name",
+        "rr_type",
+        "body"
+      ],
+      "inputSchemaSha256": "c8f486f5a9c96abf1fbc5de77f717c6d5cd3a192f55fafb1ee5daed0f6d7b0c2",
+      "inputSchemaSha256ConfirmWrites": "5c141c3beeed58bf1321f137b7031b83ee65cee7f47de18db4aaca21f7b2f22f",
+      "descriptionSha256": "ff867eaa262725889b38b0b747bf027058422bfffc3088a1d5e834fb1b64df8c",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_volume_attach_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "cdb4ee86a7ee87edef3f8e1cf5b1f8501f39fe2f18c34fce247dcb9687d2350e",
+      "inputSchemaSha256ConfirmWrites": "33b0f9ea3e9a1ea6973a6c20929af016c96cd5f6a027641e42ed292186b7b066",
+      "descriptionSha256": "7a3ba5f2f2692895501bd90c65f0005f9a1e4ebdbbb5a3295d45fb692193a899",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_volume_change_protection_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "390df18af8d35147e292aa874d05e8909fe96e08358d03acf61629d7d199c9fc",
+      "inputSchemaSha256ConfirmWrites": "3c30c5abb36ebe28d780061fd60c877421f826d53eee8c4cfd0ccdf908266f87",
+      "descriptionSha256": "3c1f7d69d3f93138282caed5bef7ecaa199b424ca8236da18313c36d693ba3e8",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_volume_detach_action",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "fefb77aa29bc3e32fcf117b0ccb5ca7b946815629d144b005beeac2b21437df2",
+      "inputSchemaSha256ConfirmWrites": "fe893f8488b601b74be987b6a071fa31317acc2cfd320c2a0656f79d2944818c",
+      "descriptionSha256": "e7bbffb0a1ae9102a93bb7ff2183e6d99f080cef2b9d7c9a57514ed7437a345c",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_volume_resize_action",
+      "required": [
+        "id",
+        "body"
+      ],
+      "inputSchemaSha256": "b82586fa6af7babe8b2455bccc94cf6490f8c53cdb974a9363de30962ea7b5d6",
+      "inputSchemaSha256ConfirmWrites": "6b6ae3f4414ae3980f01ec404786e6e5ae97542b32321ef4efca8df58d0ec461",
+      "descriptionSha256": "d40af61861938e0605fc1a2e34f72afdc64759780318d0e077addf6cf3516ba9",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_wait_action",
+      "required": [
+        "id"
+      ],
+      "inputSchemaSha256": "4ae347e0b1bf7187bf7b10856a55784fda0c7d6a89266112523f279c023af87f",
+      "inputSchemaSha256ConfirmWrites": "4ae347e0b1bf7187bf7b10856a55784fda0c7d6a89266112523f279c023af87f",
+      "descriptionSha256": "9968a3599c947a36f7315ba067fff225233aa20d8d0ca8ac8942b98251626469",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_zone_change_primary_nameservers_action",
+      "required": [
+        "id_or_name",
+        "body"
+      ],
+      "inputSchemaSha256": "e0e18c9690ea25f634c258ae37699504bde43e392526b35426ad6b3571dd2481",
+      "inputSchemaSha256ConfirmWrites": "17da88caf00d0d293458a7dd4faca3f1cf5e495a5fbe165b95fa075129d5ddb1",
+      "descriptionSha256": "aa5d7630fe8553f44d97437e03eefd90260aef51389f35f116b754cb2c883261",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_zone_change_protection_action",
+      "required": [
+        "id_or_name",
+        "body"
+      ],
+      "inputSchemaSha256": "365cec7fa13aed56ea93d7c40c428b9ffeb0b3959c79ea9c0a30de9bb8a6d979",
+      "inputSchemaSha256ConfirmWrites": "f07329586c5c27529ef3a0d95956c93b0fc6e35a941b78326bafd399ac84ebe0",
+      "descriptionSha256": "e8be20cc9d6c395d1f8fc633fb4bfffaf756cda1408e5235210a1e7df49c6ce0",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_zone_change_ttl_action",
+      "required": [
+        "id_or_name",
+        "body"
+      ],
+      "inputSchemaSha256": "b931a64b90a5f0a6909ec13ffa60d1b5b47156a0d035ba2d5a77cf0ef1afbea4",
+      "inputSchemaSha256ConfirmWrites": "df2088617e6b097dfb660748ab2da9bf66d68c1e7283734503758b6d35e94160",
+      "descriptionSha256": "ad0663cdab101f9c2caeda3509cb80de0022fb79f6dc70207c5c9a49408ded91",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_zone_import_zonefile_action",
+      "required": [
+        "id_or_name",
+        "body"
+      ],
+      "inputSchemaSha256": "994214f0c437e3aefab00c2235c35745c30be556bcef256dd99fed1e96a86c64",
+      "inputSchemaSha256ConfirmWrites": "6f92c359055f3bd496f758c4ec248d63b97bfc6e64528d027de149090138ad0c",
+      "descriptionSha256": "6e262ee4777d0cc3612a8dc8eda53bedf71b676b804258178e57af0b272855f9",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_zone_rrset_add_records_action",
+      "required": [
+        "id_or_name",
+        "rr_name",
+        "rr_type",
+        "body"
+      ],
+      "inputSchemaSha256": "60c93063b811978f0aa43cbb33e7de5735e25858d0cc28b4675eb3a81796b694",
+      "inputSchemaSha256ConfirmWrites": "2c567ed9d0b02571e0aa3bdd00a97f010bd51ac5a1d1674285c2f2eb1e05d050",
+      "descriptionSha256": "daf79e50e1d7d4e6a1d40788ee8fe4b548ed7cbdc1955551e68827ef42564ac8",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_zone_rrset_change_protection_action",
+      "required": [
+        "id_or_name",
+        "rr_name",
+        "rr_type",
+        "body"
+      ],
+      "inputSchemaSha256": "43c1d99be6e3302e80755c14c3ac0e7fc41992ce63b7977d9307e936cdb0b013",
+      "inputSchemaSha256ConfirmWrites": "6f3aa0fbbd20f4fa38380983f813bcd44b5bcf36ece1710cdda4c575ee10c7a0",
+      "descriptionSha256": "a6a3cd8b340b75ccbf8e7aad101b4ab2386d0803d2e924c8573896c1e6d979a3",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_zone_rrset_change_ttl_action",
+      "required": [
+        "id_or_name",
+        "rr_name",
+        "rr_type",
+        "body"
+      ],
+      "inputSchemaSha256": "6dcb03297bbdd5a8fead176d4010efc4fd860ba41df549684c2fe42dfa89e2ad",
+      "inputSchemaSha256ConfirmWrites": "a5f3aa71cc72432d1b7a286931d5d2a4a9e11e55b010de26b2138524f791a8ab",
+      "descriptionSha256": "f14071ed758addb8910565b90e9c3fc6e9159dfc5592c1b5e790aa2b9e138295",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_zone_rrset_remove_records_action",
+      "required": [
+        "id_or_name",
+        "rr_name",
+        "rr_type",
+        "body"
+      ],
+      "inputSchemaSha256": "b50a23e54fd664987dc811a31d91d06d2e1be14a0f39de743e6b3098cbce5b3f",
+      "inputSchemaSha256ConfirmWrites": "04768da99de4b341202d08bd9a1a58ef67c2ad6b8dcad5431593d7d0d64f217b",
+      "descriptionSha256": "7ce3a98543d147430a41746d5034fce5b98311a5d7975b45ac5161971958e502",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_zone_rrset_set_records_action",
+      "required": [
+        "id_or_name",
+        "rr_name",
+        "rr_type",
+        "body"
+      ],
+      "inputSchemaSha256": "f1134edb63231235501053d2d18d6fdaed4ec17b13d8113a21aa9a7201ca0578",
+      "inputSchemaSha256ConfirmWrites": "9d208c74595d16c6f2003d05b8364a006a1990bb07f7c07489c535d0bbb6fbf9",
+      "descriptionSha256": "cee4575ee82e71e6bdd4559779ade0627446ae53234b01299d57a2b2f8f4a0b7",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "hcloud_zone_rrset_update_records_action",
+      "required": [
+        "id_or_name",
+        "rr_name",
+        "rr_type",
+        "body"
+      ],
+      "inputSchemaSha256": "ba472ed56c260f217c3fa3c7375cf13875e883eb6dfec7d99d4615612b882c4c",
+      "inputSchemaSha256ConfirmWrites": "7dc28ff095b2bdca3d7ef6ad38bbb3d07865330171060bc064c4865c159d4d1b",
+      "descriptionSha256": "14e40c7bf4cc01bf38b3f8bccdebd840f2b279c17685a9bae75db2813a946773",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    }
+  ]
+}

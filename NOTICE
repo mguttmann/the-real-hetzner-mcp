@@ -1,0 +1,33 @@
+@mguttmann/hetzner-cloud-mcp (the-real-hetzner-mcp)
+Copyright (c) 2026 Manuel Guttmann
+
+This project is licensed under the MIT License (see LICENSE), with the
+exceptions below.
+
+Unofficial project
+------------------
+This is an unofficial, community-maintained project. It is not
+affiliated with, endorsed by, sponsored by or supported by Hetzner Online
+GmbH. Do not contact Hetzner support about this software.
+
+Hetzner Cloud API specification (not covered by the MIT License)
+----------------------------------------------------------------
+specs/cloud.spec.json is the Hetzner Cloud API specification (OpenAPI),
+as published by Hetzner Online GmbH. It is subject to the terms under
+which Hetzner publishes it. It is included unchanged except for JSON
+formatting, only for interoperability: the code generator reads it to
+build tools that call the Hetzner Cloud API. It is NOT licensed under the
+MIT License of this project, and no rights in it are granted by this
+repository. Its provenance (source URL, fetch date, SHA-256) is
+documented in specs/SOURCE.md. The specification is not part of the npm
+package.
+
+Tool names, titles, descriptions and input schemas in
+src/tools/generated/operations.ts (and the compiled tools in the npm
+package) are derived from that specification.
+
+Trademarks
+----------
+"Hetzner" is a trademark or registered trademark of Hetzner Online GmbH.
+It is used here only to identify the API this software works with.
+All other trademarks are the property of their respective owners.

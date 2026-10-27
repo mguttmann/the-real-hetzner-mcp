@@ -3,7 +3,7 @@ import { makeServerListTool } from "../../src/tools/wrappers/server_list.js";
 
 function fakeClient(servers: Array<{ id: number; name: string }>) {
   return {
-    request: vi.fn(async () => ({
+    request: vi.fn(async (..._args: unknown[]) => ({
       status: 200,
       headers: new Headers(),
       body: {

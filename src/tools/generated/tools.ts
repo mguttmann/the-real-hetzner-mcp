@@ -7,12 +7,16 @@ import type {
 } from "../../types.js";
 import type { HetznerHttpClient } from "../../http/client.js";
 import { fetchAllPages } from "../../http/pagination.js";
-import { pollAction, type PollOptions } from "../../http/action-polling.js";
+import type { pollAction, PollOptions } from "../../http/action-polling.js";
 import { asToolError } from "../_error.js";
+import { pollAfterWrite } from "../_poll-write.js";
+import { invalidPathValueResult, pathSegmentIssue } from "../_validate.js";
 
 export type BuilderLimits = {
   maxItems: number;
   maxPages: number;
+  /** Total time budget of an auto-paginated list (PAGINATION_TIMEOUT_MS). */
+  timeoutMs?: number;
   actionPoll?: PollOptions;
 };
 
@@ -63,8 +67,30 @@ function buildPath(path: string, params: Record<string, unknown>): string {
     if (v === undefined || v === null) {
       throw new Error(`Missing path parameter "${name}" for ${path}`);
     }
-    return encodeURIComponent(String(v));
+    const text = String(v);
+    // Depth guard: unreachable through a handler (invalidPathVar answers the
+    // caller first), kept so the interpolation site itself cannot be misused.
+    const issue = pathSegmentIssue(text);
+    if (issue) {
+      throw new Error(`Invalid path parameter "${name}" for ${path}: ${issue}.`);
+    }
+    return encodeURIComponent(text);
   });
+}
+
+/**
+ * Caller-facing rejection for a path parameter that would not stay inside its own
+ * segment. Encoding keeps the value in one segment as far as `new URL` is
+ * concerned, but the origin decodes "%2f" and collapses ".." - see
+ * pathSegmentIssue. Missing values stay with buildPath's own error.
+ */
+function invalidPathVar(pathVars: Record<string, unknown>): ToolResult | null {
+  for (const [key, value] of Object.entries(pathVars)) {
+    if (value === undefined || value === null) continue;
+    const issue = pathSegmentIssue(String(value));
+    if (issue) return invalidPathValueResult(key, value, issue);
+  }
+  return null;
 }
 
 function splitInput(op: OperationDef, input: Record<string, unknown>): {
@@ -82,7 +108,7 @@ function splitInput(op: OperationDef, input: Record<string, unknown>): {
   for (const [k, v] of Object.entries(input)) {
     if (k === "body" || k === "wait" || k === "auto_paginate") continue;
     const p = paramByName.get(k);
-    if (!p) continue; // ignore unknown — schema will have caught it server-side
+    if (!p) continue; // ignore unknown - schema will have caught it server-side
     if (p.in === "path") pathVars[k] = v;
     else if (p.in === "query") query[k] = v;
   }
@@ -116,6 +142,21 @@ function isListEndpoint(op: OperationDef): boolean {
   return false;
 }
 
+/**
+ * True when the endpoint is classified as a list AND its 200 response carries an
+ * array under the resource key. GET /pricing passes isListEndpoint (one static
+ * segment) but returns `pricing` as an object, so it must not be paginated. The
+ * input schema still uses isListEndpoint, so `auto_paginate` stays in the
+ * contract for /pricing.
+ */
+function paginates(op: OperationDef): boolean {
+  if (!isListEndpoint(op)) return false;
+  const props = (op.responseSchema as { properties?: Record<string, { type?: unknown }> } | undefined)
+    ?.properties;
+  if (!props) return true;
+  return props[resourceKey(op)]?.type === "array";
+}
+
 function resourceKey(op: OperationDef): string {
   const segs = op.path.split("/").filter(Boolean);
   // Use the last non-param segment as the resource key. For /servers it's "servers";
@@ -146,25 +187,39 @@ export function buildGeneratedTools(
       destructiveHint: op.isDestructive,
       openWorldHint: true,
     },
-    handler: async (rawInput): Promise<ToolResult> => {
+    handler: async (rawInput, ctx): Promise<ToolResult> => {
+      const signal = ctx?.signal;
       const { pathVars, query, body, wait, autoPaginate } = splitInput(op, rawInput);
+      const badPathVar = invalidPathVar(pathVars);
+      if (badPathVar) return badPathVar;
       const finalPath = buildPath(op.path, pathVars);
 
       // Auto-paginate list endpoints when no explicit page is given
-      if (isListEndpoint(op) && autoPaginate && query.page === undefined) {
+      if (paginates(op) && autoPaginate && query.page === undefined) {
         const merged = await fetchAllPages<unknown>(
           request as Parameters<typeof fetchAllPages>[0],
           op.method,
           finalPath,
           query,
-          { resourceKey: resourceKey(op), maxItems: limits.maxItems, maxPages: limits.maxPages },
+          {
+            resourceKey: resourceKey(op),
+            maxItems: limits.maxItems,
+            maxPages: limits.maxPages,
+            ...(limits.timeoutMs !== undefined ? { timeoutMs: limits.timeoutMs } : {}),
+            ...(signal ? { signal } : {}),
+          },
         );
         return {
           content: [
             {
               type: "text",
               text: JSON.stringify(
-                { [resourceKey(op)]: merged.items, truncated: merged.truncated, pagination: merged.pagination ?? null },
+                {
+                  [resourceKey(op)]: merged.items,
+                  truncated: merged.truncated,
+                  pagination: merged.pagination ?? null,
+                  ...(merged.note ? { note: merged.note } : {}),
+                },
                 null,
                 2,
               ),
@@ -173,10 +228,16 @@ export function buildGeneratedTools(
         };
       }
 
+      const pollOpts = limits.actionPoll ?? { timeoutMs: 45_000, intervalMs: 2_000 };
+      const startedAt = (pollOpts.now ?? Date.now)();
       const res = await request<{ action?: { id: number } } & Record<string, unknown>>(
         op.method,
         finalPath,
-        { query: query as Record<string, string | number | boolean | undefined | null>, body },
+        {
+          query: query as Record<string, string | number | boolean | undefined | null>,
+          body,
+          ...(signal ? { signal } : {}),
+        },
       );
 
       // Hetzner 4xx/5xx -> typed error -> isError:true ToolResult
@@ -185,28 +246,13 @@ export function buildGeneratedTools(
 
       // If this returns an Action and caller wants to wait, poll it
       if (op.returnsAction && wait && res.body?.action?.id) {
-        const pollOpts = limits.actionPoll ?? { timeoutMs: 60_000, intervalMs: 2_000 };
-        const result = await pollAction(
+        return pollAfterWrite(
           request as Parameters<typeof pollAction>[0],
-          res.body.action.id,
-          pollOpts,
+          { ...res.body, action: res.body.action },
+          signal ? { ...pollOpts, signal } : pollOpts,
+          startedAt,
+          op.toolName,
         );
-        return {
-          content: [
-            {
-              type: "text",
-              text: JSON.stringify(
-                {
-                  ...(res.body ?? {}),
-                  action: result.action,
-                  polling_timed_out: result.timedOut,
-                },
-                null,
-                2,
-              ),
-            },
-          ],
-        };
       }
 
       return {

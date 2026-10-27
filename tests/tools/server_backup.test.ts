@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { makeServerBackupTool } from "../../src/tools/wrappers/server_backup.js";
+import { INVALID_IDS, label } from "../_id-payloads.js";
 
 const pollOpts = { timeoutMs: 1000, intervalMs: 1, sleep: async () => {}, now: () => 0 };
 
@@ -52,5 +53,26 @@ describe("hcloud_server_backup", () => {
     expect(parsed.action.status).toBe("success");
     expect(parsed.polling_timed_out).toBe(false);
     expect(getCount).toBeGreaterThanOrEqual(2);
+  });
+});
+
+describe("server_backup - id guard (issue #54)", () => {
+  for (const [i, id] of INVALID_IDS.entries()) {
+    it(`rejects id ${label(id, i)} without issuing any request`, async () => {
+      const request = vi.fn();
+      const tool = makeServerBackupTool({ client: { request } as any, actionPoll: pollOpts });
+      const res = await tool.handler({ id, enable: true });
+      expect(res.isError).toBe(true);
+      expect((res.content[0] as { text: string }).text).toMatch(/Invalid `id`/);
+      expect(request).not.toHaveBeenCalled();
+    });
+  }
+
+  it("leaves a valid integer id byte-identical in the path (encoding is a no-op)", async () => {
+    const request = responder();
+    const tool = makeServerBackupTool({ client: { request } as any, actionPoll: pollOpts });
+    const res = await tool.handler({ id: 5, enable: true });
+    expect(res.isError).toBeFalsy();
+    expect(request).toHaveBeenCalledWith("POST", "/servers/5/actions/enable_backup", {});
   });
 });

@@ -1,5 +1,6 @@
 import type { ToolDef, ToolResult } from "../../types.js";
 import { runServerAction, type ServerActionDeps } from "./_server_action.js";
+import { invalidIdResult, isResourceId } from "../_validate.js";
 
 export function makeServerBackupTool(deps: ServerActionDeps): ToolDef {
   return {
@@ -16,12 +17,13 @@ export function makeServerBackupTool(deps: ServerActionDeps): ToolDef {
       required: ["id", "enable"],
       additionalProperties: false,
     },
-    annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: true },
-    handler: async (input): Promise<ToolResult> => {
-      const id = input.id as number;
+    annotations: { readOnlyHint: false, destructiveHint: true, openWorldHint: true },
+    handler: async (input, ctx): Promise<ToolResult> => {
+      const id = input.id;
+      if (!isResourceId(id)) return invalidIdResult("id", id);
       const action = input.enable === true ? "enable_backup" : "disable_backup";
       const wait = input.wait !== false;
-      return runServerAction(deps, id, action, undefined, wait);
+      return runServerAction(deps, id, action, undefined, wait, "hcloud_server_backup", ctx?.signal);
     },
   };
 }

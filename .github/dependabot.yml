@@ -1,0 +1,28 @@
+# Weekly, grouped version updates for npm and the pinned GitHub Actions.
+#
+# main is the release line, so updates target it. Dependabot reads this
+# file only from the default branch, and security updates always target
+# the default branch.
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    target-branch: "main"
+    schedule:
+      interval: "weekly"
+    groups:
+      npm-runtime:
+        dependency-type: "production"
+        patterns: ["*"]
+      npm-development:
+        dependency-type: "development"
+        patterns: ["*"]
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    target-branch: "main"
+    schedule:
+      interval: "weekly"
+    groups:
+      github-actions:
+        patterns: ["*"]

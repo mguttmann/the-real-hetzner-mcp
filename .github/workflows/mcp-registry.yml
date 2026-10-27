@@ -1,0 +1,162 @@
+name: MCP Registry
+
+# Publishes server.json to the official MCP Registry
+# (registry.modelcontextprotocol.io) as io.github.<owner>/the-real-hetzner-mcp.
+#
+#   workflow_call      from release.yml, after npm-publish succeeded
+#                      (stable versions only)
+#   workflow_dispatch  by hand for an existing release tag, for example to
+#                      retry a failed listing
+#
+# The only package is the npm package @mguttmann/hetzner-cloud-mcp. The
+# registry accepts it only when npm serves that version with an mcpName
+# equal to the server name, so the run checks that first:
+#   npm-published true   the caller has just published the version; the run
+#                        waits until npm serves it and fails if it never does
+#   npm-published false  npm is checked once; the run fails when npm does not
+#                        serve the version with the right mcpName
+# A registry version is permanent: when the version is already listed, the
+# run ends without publishing.
+#
+# No checkout and no install: the job holds id-token: write, so it runs no
+# repository or dependency code. server.json is read from the tag through
+# the GitHub API, and its version must already equal the tag.
+#
+# Authentication is GitHub OIDC (no secret): the registry grants the
+# io.github.<repository owner>/* namespace. mcp-publisher comes from the
+# registry's GitHub release, pinned by version and SHA-256 (asset
+# mcp-publisher_linux_amd64.tar.gz, value from that release's
+# registry_<version>_checksums.txt). To upgrade, change both together.
+
+on:
+  workflow_call:
+    inputs:
+      tag:
+        description: Release tag to list, e.g. v1.2.3
+        required: true
+        type: string
+      npm-published:
+        description: The version was just published to npm; wait for it
+        required: false
+        default: false
+        type: boolean
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing release tag to list, e.g. v1.2.3
+        required: true
+        type: string
+      npm-published:
+        description: Wait for npm to serve the version instead of checking once
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mcp-registry-${{ inputs.tag }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      TAG: ${{ inputs.tag }}
+      NPM_PUBLISHED: ${{ inputs.npm-published }}
+      MCP_PUBLISHER_VERSION: v1.8.5
+      MCP_PUBLISHER_SHA256: 2d151ac57275c9a6684d9d22b1cba81058bab195ea0a162e8fce3c6a5ec32812
+    steps:
+      - name: Read server.json of the tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          if ! [[ "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::Tag $TAG is not a stable release tag (vMAJOR.MINOR.PATCH)."
+            exit 1
+          fi
+          gh api -H "Accept: application/vnd.github.raw" \
+            "repos/${GH_REPO}/contents/server.json?ref=${TAG}" > server.json
+          version="${TAG#v}"
+          name="$(jq -r .name server.json)"
+          case "$name" in
+            "io.github.${GITHUB_REPOSITORY_OWNER}/"*) ;;
+            *)
+              echo "::error::server.json name $name is outside io.github.${GITHUB_REPOSITORY_OWNER}/."
+              exit 1
+              ;;
+          esac
+          if [ "$(jq -r '[.version] + [.packages[].version] | unique | join(" ")' server.json)" != "$version" ]; then
+            echo "::error::server.json of $TAG does not carry version $version everywhere."
+            exit 1
+          fi
+          if [ "$(jq -r '[.packages[].registryType] | join(" ")' server.json)" != "npm" ]; then
+            echo "::error::server.json must list exactly one package, the npm package."
+            exit 1
+          fi
+          cat server.json
+      - name: npm must serve the version with the right mcpName
+        run: |
+          set -euo pipefail
+          name="$(jq -r .name server.json)"
+          ident="$(jq -r '.packages[0].identifier' server.json)"
+          version="$(jq -r .version server.json)"
+          url="https://registry.npmjs.org/${ident}/${version}"
+          # mcpName of the version on npm, empty when npm does not serve it.
+          lookup() { curl --silent --fail --max-time 20 --retry 3 "$url" | jq -r '.mcpName // empty' || true; }
+          found="$(lookup)"
+          if [ "$NPM_PUBLISHED" = "true" ]; then
+            # A fresh publish can take a few minutes to show up.
+            for _ in $(seq 1 30); do
+              [ "$found" = "$name" ] && break
+              sleep 10
+              found="$(lookup)"
+            done
+          fi
+          if [ "$found" != "$name" ]; then
+            echo "::error::npm does not serve ${ident}@${version} with mcpName ${name} (got '${found}')."
+            exit 1
+          fi
+      - name: Skip a version the registry already lists
+        id: listed
+        run: |
+          set -euo pipefail
+          name="$(jq -r '.name | @uri' server.json)"
+          version="$(jq -r '.version | @uri' server.json)"
+          code="$(curl --silent --show-error --output /dev/null --write-out '%{http_code}' \
+            "https://registry.modelcontextprotocol.io/v0.1/servers/${name}/versions/${version}")"
+          case "$code" in
+            200)
+              echo "::notice::$TAG is already listed in the MCP Registry; nothing to publish."
+              echo "listed=true" >> "$GITHUB_OUTPUT"
+              ;;
+            404) echo "listed=false" >> "$GITHUB_OUTPUT" ;;
+            *)
+              echo "::error::MCP Registry lookup returned HTTP $code."
+              exit 1
+              ;;
+          esac
+      - name: Install mcp-publisher (pinned version and SHA-256)
+        if: steps.listed.outputs.listed == 'false'
+        run: |
+          set -euo pipefail
+          archive=mcp-publisher_linux_amd64.tar.gz
+          curl --fail --location --silent --show-error --output "$archive" \
+            "https://github.com/modelcontextprotocol/registry/releases/download/${MCP_PUBLISHER_VERSION}/${archive}"
+          echo "${MCP_PUBLISHER_SHA256}  ${archive}" | sha256sum --check --strict
+          tar -xzf "$archive" mcp-publisher
+          rm -f "$archive"
+          ./mcp-publisher --version
+      - name: Log in with GitHub OIDC
+        if: steps.listed.outputs.listed == 'false'
+        run: ./mcp-publisher login github-oidc
+      - name: Publish
+        if: steps.listed.outputs.listed == 'false'
+        run: ./mcp-publisher publish server.json

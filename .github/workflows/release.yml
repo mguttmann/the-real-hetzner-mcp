@@ -1,0 +1,222 @@
+name: Release
+
+# Runs only when a version tag (v1.2.3, v1.2.3-rc.1) is pushed:
+#   verify          the tag equals v + package.json version and its commit
+#                   is an ancestor of origin/main
+#   ci              the whole CI workflow (ci.yml) on the tag commit, so a
+#                   release passes every gate a branch passes
+#   build           the npm tarball, a CycloneDX SBOM of its runtime tree
+#                   and SHA256SUMS over both
+#   github-release  build provenance attestation and a new GitHub release;
+#                   an existing release is never overwritten; stays off
+#                   until the repository variable GH_RELEASE_ENABLED is
+#                   'true' (until then the assets are only a workflow artifact)
+#   npm-publish     publishes the tarball from the build job; stays off
+#                   until the repository variable NPM_PUBLISH_ENABLED is
+#                   'true' and npm trusted publishing (OIDC) is configured
+#                   for this repository and workflow on npmjs.com; needs
+#                   github-release, so it also needs GH_RELEASE_ENABLED
+#   mcp-registry    lists the version in the official MCP Registry
+#                   (mcp-registry.yml, GitHub OIDC); stable versions only,
+#                   and only after npm-publish succeeded, because the
+#                   registry entry is the npm package
+# Repository settings that complete this (rulesets, required checks,
+# variables, npm trusted publisher): docs/maintainers/repo-settings.md.
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      prerelease: ${{ steps.version.outputs.prerelease }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # All branches, so the tag commit can be checked against main.
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Tag must match package.json version
+        id: version
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          version="$(node -p "require('./package.json').version")"
+          if [ "$TAG" != "v$version" ]; then
+            echo "::error::Tag $TAG does not match package.json version $version"
+            exit 1
+          fi
+          case "$version" in
+            *-*) echo "prerelease=true" >> "$GITHUB_OUTPUT" ;;
+            *) echo "prerelease=false" >> "$GITHUB_OUTPUT" ;;
+          esac
+      - name: Tag commit must be on main
+        run: |
+          if ! git merge-base --is-ancestor "$GITHUB_SHA" origin/main; then
+            echo "::error::Tag commit $GITHUB_SHA is not an ancestor of origin/main. Release only commits that are on main."
+            exit 1
+          fi
+
+  ci:
+    needs: verify
+    uses: ./.github/workflows/ci.yml
+    permissions:
+      contents: read
+
+  build:
+    needs: [verify, ci]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run build
+      - name: The built server starts over stdio and lists the baseline tools
+        # Offline: a dummy token and a base URL nothing listens on. The
+        # gateway baseline comes from the same file as in ci.yml and
+        # tests/tools-contract.test.ts.
+        env:
+          HETZNER_API_TOKEN: dummy
+          HETZNER_API_BASE: "http://127.0.0.1:1"
+        run: npm run -s smoke -- --baseline tests/gateway-baseline.json
+      - name: npm tarball, SBOM and checksums
+        run: |
+          mkdir -p release
+          version="$(node -p "require('./package.json').version")"
+          # No prepack script: the tarball holds the dist/ built above.
+          npm pack --pack-destination release
+          # SBOM of the runtime tree the tarball installs (same lockfile).
+          # npm names the root component after the checkout folder; the
+          # script writes the package name back only when it differs and
+          # logs a notice either way (drop it once the notice says so).
+          npm sbom --sbom-format cyclonedx --omit=dev \
+            | node scripts/sbom-root-name.mjs > "release/hetzner-cloud-mcp-${version}.cdx.json"
+          cd release
+          sha256sum -- *.tgz *.cdx.json > SHA256SUMS
+          cat SHA256SUMS
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: release-assets
+          path: release/
+          if-no-files-found: error
+
+  github-release:
+    needs: [verify, build]
+    # Off until the owner sets the repository variable
+    # GH_RELEASE_ENABLED=true; a tag alone builds and checks the assets
+    # but publishes nothing. (Variable names must not start with GITHUB_.)
+    if: ${{ vars.GH_RELEASE_ENABLED == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
+    steps:
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: release-assets
+          path: release
+      - name: Build provenance attestation
+        # Artifact attestations need a public repository (or GitHub
+        # Enterprise Cloud); skipped while the repository is private.
+        if: ${{ !github.event.repository.private }}
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with:
+          subject-path: |
+            release/*.tgz
+            release/*.cdx.json
+      - name: Create the GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ github.ref_name }}
+          PRERELEASE: ${{ needs.verify.outputs.prerelease }}
+        run: |
+          # A published asset is never replaced: its checksum and
+          # attestation may already be in use. Delete the release by
+          # hand and push a new tag instead.
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "::error::Release $TAG already exists; assets are not overwritten."
+            exit 1
+          fi
+          flags=()
+          if [ "$PRERELEASE" = "true" ]; then flags+=(--prerelease); fi
+          gh release create "$TAG" release/*.tgz release/*.cdx.json release/SHA256SUMS \
+            --verify-tag --title "$TAG" --generate-notes "${flags[@]}"
+
+  npm-publish:
+    needs: [verify, build, github-release]
+    # Off until the owner sets the repository variable
+    # NPM_PUBLISH_ENABLED=true and configures trusted publishing on npm.
+    if: ${{ vars.NPM_PUBLISH_ENABLED == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      # No checkout and no install: this job holds id-token: write, so it
+      # runs no dependency code. It publishes the tarball the build job
+      # packed, the same bytes as the GitHub release asset. Publishing a
+      # tarball file runs no lifecycle script (prepublishOnly included).
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+      - name: npm must support trusted publishing (11.5.1 or newer)
+        run: |
+          node -e "
+          const [a, b, c] = process.argv[1].split('.').map(Number);
+          if (a < 11 || (a === 11 && (b < 5 || (b === 5 && c < 1)))) {
+            console.error('npm ' + process.argv[1] + ' is too old for trusted publishing');
+            process.exit(1);
+          }" "$(npm --version)"
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: release-assets
+          path: release
+      - name: Tarball must match SHA256SUMS
+        working-directory: release
+        run: grep '\.tgz$' SHA256SUMS | sha256sum --check --strict
+      - name: Publish
+        env:
+          PRERELEASE: ${{ needs.verify.outputs.prerelease }}
+        run: |
+          tag=latest
+          if [ "$PRERELEASE" = "true" ]; then tag=next; fi
+          # Trusted publishing (OIDC) needs no token and attaches provenance.
+          # The leading ./ matters: npm reads a bare "release/x.tgz" as the
+          # GitHub shorthand owner/repo, not as a file.
+          npm publish ./release/mguttmann-hetzner-cloud-mcp-*.tgz --provenance --access public --tag "$tag"
+
+  mcp-registry:
+    needs: [verify, npm-publish]
+    # Registry versions are permanent and the newest one is listed as
+    # latest, so prereleases stay out. The registry checks that npm serves
+    # the version with the matching mcpName, so this runs only after a
+    # successful npm-publish (a skipped publish lists nothing).
+    if: >-
+      ${{ !cancelled()
+      && needs.verify.outputs.prerelease != 'true'
+      && needs.npm-publish.result == 'success' }}
+    uses: ./.github/workflows/mcp-registry.yml
+    permissions:
+      contents: read
+      id-token: write
+    with:
+      tag: ${{ github.ref_name }}
+      npm-published: true

@@ -11,7 +11,7 @@ function previewResult(tool: ToolDef, input: Record<string, unknown>): ToolResul
       {
         type: "text",
         text:
-          `PREVIEW — would execute ${tool.name}\n` +
+          `PREVIEW: would execute ${tool.name}\n` +
           `Input: ${JSON.stringify(input, null, 2)}\n` +
           `To execute, retry the same call with confirm: "YES".`,
       },
@@ -40,12 +40,12 @@ export function withConfirmGuard(tool: ToolDef, enabled: boolean): ToolDef {
   return {
     ...tool,
     inputSchema,
-    handler: async (input) => {
+    handler: async (input, ctx) => {
       if (input.confirm !== "YES") {
         return previewResult(tool, input);
       }
       const { confirm: _drop, ...rest } = input;
-      return originalHandler(rest);
+      return originalHandler(rest, ctx);
     },
   };
 }

@@ -3,6 +3,9 @@ import type { HetznerHttpClient, HttpMethod } from "../http/client.js";
 
 const VALID: HttpMethod[] = ["GET", "POST", "PUT", "PATCH", "DELETE"];
 
+/** %2F, %5C and %2E in any casing. */
+const ENCODED_SEPARATOR = /%(2f|5c|2e)/i;
+
 export type RawRequestDeps = {
   client: HetznerHttpClient;
   confirmWrites: boolean;
@@ -12,7 +15,7 @@ export function makeRawRequestTool(deps: RawRequestDeps): ToolDef {
   return {
     name: "hcloud_raw_request",
     description:
-      "Escape hatch: issue an arbitrary request against the Hetzner Cloud API. Bearer auth, retries and pagination are NOT applied automatically — this is a pass-through. Use only when no dedicated tool fits.",
+      "Escape hatch: issue an arbitrary request against the Hetzner Cloud API. The configured API token is sent and the client retries a 429, and a 5xx on methods other than POST, like every other tool. Pagination and action polling are not applied, and an HTTP error comes back as { status, body } instead of an error result. Use only when no dedicated tool fits.",
     inputSchema: {
       type: "object",
       properties: {
@@ -38,7 +41,7 @@ export function makeRawRequestTool(deps: RawRequestDeps): ToolDef {
       additionalProperties: false,
     },
     annotations: { readOnlyHint: false, destructiveHint: true, openWorldHint: true },
-    handler: async (input): Promise<ToolResult> => {
+    handler: async (input, ctx): Promise<ToolResult> => {
       const method = input.method as HttpMethod;
       const path = input.path as string;
       if (!VALID.includes(method)) {
@@ -63,6 +66,19 @@ export function makeRawRequestTool(deps: RawRequestDeps): ToolDef {
           isError: true,
         };
       }
+      // The origin decodes an encoded separator or dot before routing, so inside
+      // one segment it would still change the addressed path (B-020).
+      if (ENCODED_SEPARATOR.test(path)) {
+        return {
+          content: [
+            {
+              type: "text",
+              text: `Path must not contain a percent-encoded "/", "\\" or "." (%2F, %5C, %2E), got: ${JSON.stringify(path)}.`,
+            },
+          ],
+          isError: true,
+        };
+      }
       const isWrite = method !== "GET";
       if (isWrite && deps.confirmWrites && input.confirm !== "YES") {
         const { confirm: _drop, ...preview } = input;
@@ -71,7 +87,7 @@ export function makeRawRequestTool(deps: RawRequestDeps): ToolDef {
             {
               type: "text",
               text:
-                `PREVIEW — would execute hcloud_raw_request\n` +
+                `PREVIEW: would execute hcloud_raw_request\n` +
                 `Input: ${JSON.stringify(preview, null, 2)}\n` +
                 `To execute, retry the same call with confirm: "YES".`,
             },
@@ -81,6 +97,7 @@ export function makeRawRequestTool(deps: RawRequestDeps): ToolDef {
       const res = await deps.client.request(method, path, {
         query: input.query as Record<string, string | number | boolean | undefined | null> | undefined,
         body: input.body,
+        ...(ctx?.signal ? { signal: ctx.signal } : {}),
       });
       return {
         content: [

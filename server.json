@@ -1,0 +1,60 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.mguttmann/the-real-hetzner-mcp",
+  "title": "Hetzner Cloud (unofficial)",
+  "description": "Unofficial MCP server for the Hetzner Cloud API: one typed tool per operation, read and write.",
+  "repository": {
+    "url": "https://github.com/mguttmann/the-real-hetzner-mcp",
+    "source": "github"
+  },
+  "websiteUrl": "https://github.com/mguttmann/the-real-hetzner-mcp#readme",
+  "version": "0.2.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@mguttmann/hetzner-cloud-mcp",
+      "version": "0.2.0",
+      "runtimeHint": "npx",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "HETZNER_API_TOKEN",
+          "description": "Hetzner Cloud API token from the Cloud Console (project > Security > API tokens). The server can do exactly what this token allows; use a Read token if the client only needs to read.",
+          "isRequired": true,
+          "isSecret": true,
+          "format": "string"
+        },
+        {
+          "name": "HETZNER_READ_ONLY",
+          "description": "true: every tool that is not read-only, and hcloud_raw_request with a method other than GET, returns an error without sending a request. Any value other than true, 1, yes, false, 0, no or empty stops the server at startup.",
+          "isRequired": false,
+          "format": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "HETZNER_CONFIRM_WRITES",
+          "description": "true: every tool that is not read-only returns a preview unless the call carries confirm \"YES\". Friction against mistakes, not a security boundary.",
+          "isRequired": false,
+          "format": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "HETZNER_DENY_TOOLS",
+          "description": "Comma-separated tool name globs (for example hcloud_delete_*,hcloud_raw_request) that always return an error. Deny hcloud_raw_request as well, otherwise denied endpoints stay reachable through it. A pattern that matches no tool stops the server at startup.",
+          "isRequired": false,
+          "format": "string"
+        },
+        {
+          "name": "LOG_LEVEL",
+          "description": "Log level of the JSON logs on stderr.",
+          "isRequired": false,
+          "format": "string",
+          "default": "warn",
+          "choices": ["debug", "info", "warn", "error"]
+        }
+      ]
+    }
+  ]
+}

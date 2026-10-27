@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { makeServerPowerTool } from "../../src/tools/wrappers/server_power.js";
+import { INVALID_IDS, label } from "../_id-payloads.js";
 
 function client(success = true) {
   return {
@@ -54,5 +55,35 @@ describe("hcloud_server_power", () => {
     const res = await tool.handler({ id: 42, op: "poweron" });
     const parsed = JSON.parse((res.content[0] as { text: string }).text);
     expect(parsed.action.status).toBe("success");
+  });
+});
+
+describe("server_power - id guard (issue #54)", () => {
+  for (const [i, id] of INVALID_IDS.entries()) {
+    it(`rejects id ${label(id, i)} without issuing any request`, async () => {
+      const request = vi.fn();
+      const tool = makeServerPowerTool({ client: { request } as any, actionPoll: pollOpts });
+      const res = await tool.handler({ id, op: "reboot" });
+      expect(res.isError).toBe(true);
+      expect((res.content[0] as { text: string }).text).toMatch(/Invalid `id`/);
+      expect(request).not.toHaveBeenCalled();
+    });
+  }
+
+  it("leaves a valid integer id byte-identical in the path (encoding is a no-op)", async () => {
+    const request = client().request;
+    const tool = makeServerPowerTool({ client: { request } as any, actionPoll: pollOpts });
+    const res = await tool.handler({ id: 42, op: "reboot" });
+    expect(res.isError).toBeFalsy();
+    expect(request).toHaveBeenCalledWith("POST", "/servers/42/actions/reboot", {});
+  });
+
+  it("reports the invalid id before the invalid op (security guard runs first)", async () => {
+    const request = vi.fn();
+    const tool = makeServerPowerTool({ client: { request } as any, actionPoll: pollOpts });
+    const res = await tool.handler({ id: "1/../../ssh_keys#", op: "nuke" });
+    expect(res.isError).toBe(true);
+    expect((res.content[0] as { text: string }).text).toMatch(/Invalid `id`/);
+    expect(request).not.toHaveBeenCalled();
   });
 });

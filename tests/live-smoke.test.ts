@@ -34,7 +34,7 @@ function getGenerated(tools: ToolDef[], name: string): ToolDef {
   return tool;
 }
 
-describe.runIf(!skip)("live smoke — Hetzner Cloud API (via tool handlers)", () => {
+describe.runIf(!skip)("live smoke - Hetzner Cloud API (via tool handlers)", () => {
   let client: HetznerHttpClient;
   let serverListTool: ToolDef;
   let generated: ToolDef[];

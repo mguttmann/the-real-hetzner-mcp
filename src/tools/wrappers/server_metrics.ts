@@ -1,6 +1,7 @@
 import type { ToolDef, ToolResult } from "../../types.js";
 import type { HetznerHttpClient } from "../../http/client.js";
 import { asToolError } from "../_error.js";
+import { invalidIdResult, isResourceId } from "../_validate.js";
 
 const VALID_TYPES = ["cpu", "disk", "network"] as const;
 
@@ -29,13 +30,17 @@ export function makeServerMetricsTool(deps: MetricsDeps): ToolDef {
       additionalProperties: false,
     },
     annotations: { readOnlyHint: true, destructiveHint: false, openWorldHint: true },
-    handler: async (input): Promise<ToolResult> => {
+    handler: async (input, ctx): Promise<ToolResult> => {
+      const signal = ctx?.signal ? { signal: ctx.signal } : {};
       const type = input.type as string;
       if (!VALID_TYPES.includes(type as (typeof VALID_TYPES)[number])) {
         return { content: [{ type: "text", text: `Invalid type="${type}". Use one of: ${VALID_TYPES.join(", ")}.` }], isError: true };
       }
 
-      let id: number | undefined = typeof input.id === "number" ? input.id : undefined;
+      if (input.id !== undefined && input.id !== null && !isResourceId(input.id)) {
+        return invalidIdResult("id", input.id);
+      }
+      let id: number | undefined = isResourceId(input.id) ? input.id : undefined;
       if (id === undefined) {
         if (typeof input.name !== "string") {
           return { content: [{ type: "text", text: "Provide either `id` or `name`." }], isError: true };
@@ -43,7 +48,7 @@ export function makeServerMetricsTool(deps: MetricsDeps): ToolDef {
         const lookup = await deps.client.request<{ servers: Array<{ id: number }> }>(
           "GET",
           "/servers",
-          { query: { name: input.name } },
+          { query: { name: input.name }, ...signal },
         );
         const lookupErr = asToolError(lookup);
         if (lookupErr) return lookupErr;
@@ -62,8 +67,8 @@ export function makeServerMetricsTool(deps: MetricsDeps): ToolDef {
 
       const res = await deps.client.request(
         "GET",
-        `/servers/${id}/metrics`,
-        { query: { type, start, end, step } },
+        `/servers/${encodeURIComponent(String(id))}/metrics`,
+        { query: { type, start, end, step }, ...signal },
       );
       const errResult = asToolError(res);
       if (errResult) return errResult;

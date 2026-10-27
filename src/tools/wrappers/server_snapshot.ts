@@ -1,5 +1,6 @@
 import type { ToolDef, ToolResult } from "../../types.js";
 import { runServerAction, type ServerActionDeps } from "./_server_action.js";
+import { invalidIdResult, isResourceId } from "../_validate.js";
 
 export function makeServerSnapshotTool(deps: ServerActionDeps): ToolDef {
   return {
@@ -19,15 +20,16 @@ export function makeServerSnapshotTool(deps: ServerActionDeps): ToolDef {
       additionalProperties: false,
     },
     annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: true },
-    handler: async (input): Promise<ToolResult> => {
-      const id = input.id as number;
+    handler: async (input, ctx): Promise<ToolResult> => {
+      const id = input.id;
+      if (!isResourceId(id)) return invalidIdResult("id", id);
       const body: Record<string, unknown> = {
         type: typeof input.type === "string" ? input.type : "snapshot",
       };
       if (typeof input.description === "string") body.description = input.description;
       if (input.labels && typeof input.labels === "object") body.labels = input.labels;
       const wait = input.wait !== false;
-      return runServerAction(deps, id, "create_image", body, wait);
+      return runServerAction(deps, id, "create_image", body, wait, "hcloud_server_snapshot", ctx?.signal);
     },
   };
 }
